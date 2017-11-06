@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rate_dialog_title">Oceń aplikację</string>
+    <string name="rate_dialog_message">Jeśli podoba Ci ta się aplikacja, to czy poświęcisz chwilę, aby ją ocenić? Nie zajmie Ci to dłużej niż minutę. Dziękujemy za Twoje wsparcie! </string>
+    <string name="rate_dialog_ok">Oceń teraz</string>
+    <string name="rate_dialog_cancel">Przypomnij mi później</string>
+    <string name="rate_dialog_no">Nie, dziękuję</string>
+</resources>
