@@ -7,18 +7,6 @@ AndroidRate is a library to help you promote your android app by prompting users
 
 ![screen shot](http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif)
 
-## Install
-
-You can download from maven central.
-
-${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.github.Vorlonsoft/androidrate/badge.svg)
-
-```groovy
-dependencies {
-  compile 'com.github.vorlonsoft:androidrate:{latest.version}'
-}
-```
-
 ## Usage
 
 ### Configuration
