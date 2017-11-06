@@ -1,8 +1,6 @@
 AndroidRate
 ============
 
-[![Build Status](https://travis-ci.org/Vorlonsoft/AndroidRate.png?branch=master)](https://travis-ci.org/Vorlonsoft/AndroidRate)
-
 AndroidRate is a library to help you promote your android app by prompting users to rate the app after using it for a few days. Original project [Android-Rate](https://github.com/hotchemi/Android-Rate) (The MIT License (MIT)) was developed by Shintaro Katafuchi.
 
 ![screen shot](http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif)
