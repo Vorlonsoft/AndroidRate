@@ -26,7 +26,7 @@ public final class AppRate {
 
     private final HashMap<String, Long> customEventCounts = new HashMap<>();
 
-    private int remindLaunchTimes = 0;
+    private int remindLaunchTimes = 1;
 
     private boolean isDebug = false;
 
@@ -230,7 +230,7 @@ public final class AppRate {
         return getLaunchTimes(context) >= launchTimes;
     }
 
-    private boolean isOverRemindLaunchTimes() { return remindLaunchTimes != 0 && getLaunchTimes(context) % remindLaunchTimes == 0; }
+    private boolean isOverRemindLaunchTimes() { return ((remindLaunchTimes != 0) && ((getLaunchTimes(context) % remindLaunchTimes) == 0)); }
 
     private boolean isOverInstallDate() {
         return isOverDate(getInstallDate(context), installDate);

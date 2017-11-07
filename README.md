@@ -5,6 +5,18 @@ AndroidRate is a library to help you promote your android app by prompting users
 
 ![screen shot](http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif)
 
+## Install
+
+You can download from maven central.
+
+${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.vorlonsoft/androidrate/badge.svg)
+
+```groovy
+dependencies {
+  implimplementation 'com.vorlonsoft:androidrate:{latest.version}'
+}
+```
+
 ## Usage
 
 ### Configuration
@@ -21,6 +33,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .setInstallDays(0) // default 10, 0 means install day.
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
+      .setRemindLaunchTimes(2) // default 1
       .setShowLaterButton(true) // default true
       .setDebug(false) // default false
       .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
@@ -41,9 +54,20 @@ The default conditions to show rate dialog is as below:
 1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(int)`.
 2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(int)`.
 3. App is launched more than 2 days after neutral button clicked. Change via `AppRate#setRemindInterval(int)`.
-4. App shows neutral dialog(Remind me later) by default. Change via `setShowLaterButton(boolean)`.
-5. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
-6. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only development!**.
+4. App is launched X times and X % 2 = 0. Change via `AppRate#setRemindLaunchTimes(int)`.
+5. App shows neutral dialog(Remind me later) by default. Change via `setShowLaterButton(boolean)`.
+6. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
+7. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
+
+### Optional custom event requirements for showing dialog
+
+You can add additional optional requirements for showing dialog. Each requirement can be added/referenced as a unique string. You can set a minimum count for each such event (for e.g. "action_performed" 3 times, "button_clicked" 5 times, etc.)
+
+```java
+    .setMinimumEventCount(String, long) 
+    .incrementEventCount(String)
+    .setEventCountValue(String, long)
+```
 
 ### Clear show dialog flag
 
@@ -69,6 +93,14 @@ call `AppRate#setView(View)`.
 LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
 View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
 AppRate.with(this).setView(view).monitor();
+```
+
+### Specific theme
+
+You can use a specific theme to inflate the dialog.
+
+```java
+    .setThemeResId(Integer)
 ```
 
 ### Custom dialog
