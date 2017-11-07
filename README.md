@@ -13,7 +13,7 @@ ${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-ce
 
 ```groovy
 dependencies {
-  implimplementation 'com.vorlonsoft:androidrate:{latest.version}'
+  implementation 'com.vorlonsoft:androidrate:{latest.version}'
 }
 ```
 
