@@ -16,11 +16,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         AppRate.with(this)
-                .setStoreType(StoreType.GOOGLEPLAY) //default is Google, other option is Amazon
+                .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY, other option is AMAZON
                 .setInstallDays(3) // default 10, 0 means install day.
                 .setLaunchTimes(10) // default 10 times.
                 .setRemindInterval(2) // default 1 day.
-                .setRemindLaunchTimes (4) // default 1 (always true).
+                .setRemindLaunchTimes (4) // default 1 (each launch).
                 .setShowLaterButton(true) // default true.
                 .setDebug(true) // default false.
                 .setCancelable(false) // default false.

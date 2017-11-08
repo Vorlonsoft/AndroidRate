@@ -30,10 +30,11 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   AppRate.with(this)
-      .setInstallDays(0) // default 10, 0 means install day.
+      .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY, other option is AMAZON
+      .setInstallDays(0) // default 10, 0 means install day
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
-      .setRemindLaunchTimes(2) // default 1
+      .setRemindLaunchTimes(2) // default 1 (each launch)
       .setShowLaterButton(true) // default true
       .setDebug(false) // default false
       .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
@@ -64,9 +65,9 @@ The default conditions to show rate dialog is as below:
 You can add additional optional requirements for showing dialog. Each requirement can be added/referenced as a unique string. You can set a minimum count for each such event (for e.g. "action_performed" 3 times, "button_clicked" 5 times, etc.)
 
 ```java
-    .setMinimumEventCount(String, long) 
-    .incrementEventCount(String)
-    .setEventCountValue(String, long)
+AppRate.with(this).setMinimumEventCount(String, long);
+AppRate.with(this).incrementEventCount(String);
+AppRate.with(this).setEventCountValue(String, long);
 ```
 
 ### Clear show dialog flag
@@ -100,7 +101,7 @@ AppRate.with(this).setView(view).monitor();
 You can use a specific theme to inflate the dialog.
 
 ```java
-    .setThemeResId(Integer)
+AppRate.with(this).setThemeResId(Integer);
 ```
 
 ### Custom dialog
