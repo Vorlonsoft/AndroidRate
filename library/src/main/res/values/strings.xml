@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <resources>
     <string name="app_name" translatable="false">AndroidRate</string>
     <string name="rate_dialog_title">Rate this app</string>

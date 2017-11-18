@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">給五顆星評價的鼓勵？</string>
+    <string name="rate_dialog_message">如果你喜歡這個 App，希望你能給予五顆星的評價，讓更多人下載使用它！</string>
+    <string name="rate_dialog_ok">給五顆星</string>
+    <string name="rate_dialog_cancel">稍候提醒我</string>
+    <string name="rate_dialog_no">不，謝謝</string>
+</resources>

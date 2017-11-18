@@ -1,3 +1,7 @@
+# Copyright 2017 Vorlonsoft LLC
+#
+# Licensed under The MIT License (MIT)
+
 # Proguard rules run against the test module (split since Gradle plugin v 1.1.0)
 -dontobfuscate
 -ignorewarnings

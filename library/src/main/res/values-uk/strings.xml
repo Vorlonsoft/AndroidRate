@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <resources>
     <string name="rate_dialog_title">Оцініть цей додаток</string>
     <string name="rate_dialog_message">Якщо вам подобається цей додаток - не забудьте оцінити його у Google Play, це займе лише хвилину вашого часу. Дякуємо за вашу підтримку!</string>

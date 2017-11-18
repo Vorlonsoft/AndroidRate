@@ -1,4 +1,9 @@
+# Copyright 2017 Vorlonsoft LLC
+#
+# Licensed under The MIT License (MIT)
+
 # secretKeyRingFile
 secring.gpg
 
-build/
+/build
+*.iml

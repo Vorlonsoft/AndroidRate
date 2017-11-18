@@ -1,4 +1,10 @@
-package com.vorlonsoft.androidrate;
+/*
+ * Copyright 2017 Vorlonsoft LLC
+ *
+ * Licensed under The MIT License (MIT)
+ */
+
+package com.vorlonsoft.android.rate;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,11 +13,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 
-import static com.vorlonsoft.androidrate.IntentHelper.createIntentForAmazonAppstore;
-import static com.vorlonsoft.androidrate.IntentHelper.createIntentForGooglePlay;
-import static com.vorlonsoft.androidrate.PreferenceHelper.setAgreeShowDialog;
-import static com.vorlonsoft.androidrate.PreferenceHelper.setRemindInterval;
-import static com.vorlonsoft.androidrate.Utils.getDialogBuilder;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForGooglePlay;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
+import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {
 

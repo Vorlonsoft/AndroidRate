@@ -1,11 +1,17 @@
-package com.vorlonsoft.androidrate;
+/*
+ * Copyright 2017 Vorlonsoft LLC
+ *
+ * Licensed under The MIT License (MIT)
+ */
+
+package com.vorlonsoft.android.rate;
 
 import android.content.Context;
 import android.content.Intent;
 
-import static com.vorlonsoft.androidrate.UriHelper.getGooglePlay;
-import static com.vorlonsoft.androidrate.UriHelper.getAmazonAppstore;
-import static com.vorlonsoft.androidrate.UriHelper.isPackageExists;
+import static com.vorlonsoft.android.rate.UriHelper.getGooglePlay;
+import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstore;
+import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
 
 final class IntentHelper {
 

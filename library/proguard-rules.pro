@@ -1,4 +1,5 @@
-# By default, the flags in this file are appended to flags specified
-# in C:\Android\sdk/tools/proguard/proguard-android.txt
+# Copyright 2017 Vorlonsoft LLC
+#
+# Licensed under The MIT License (MIT)
 
-# Add any project specific keep options here:
+-keep class com.vorlonsoft.android.rate.** { *; }

@@ -1,10 +1,16 @@
-package com.vorlonsoft.androidrate;
+/*
+ * Copyright 2017 Vorlonsoft LLC
+ *
+ * Licensed under The MIT License (MIT)
+ */
+
+package com.vorlonsoft.android.rate;
 
 import android.net.Uri;
 import android.test.AndroidTestCase;
 
 /**
- * Unit test for {@link com.vorlonsoft.androidrate.UriHelper}
+ * Unit test for {@link com.vorlonsoft.android.rate.UriHelper}
  */
 public class UriHelperTest extends AndroidTestCase {
 
@@ -20,7 +26,7 @@ public class UriHelperTest extends AndroidTestCase {
             assertNull(uri);
         }
         {
-            final String packageName = "com.vorlonsoft.androidrate";
+            final String packageName = "com.vorlonsoft.android.rate";
             Uri uri = UriHelper.getGooglePlay(packageName);
             assertEquals(uri.toString(), GOOGLE_PLAY + packageName);
         }
