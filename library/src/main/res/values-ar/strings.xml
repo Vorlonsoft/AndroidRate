@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <resources>
+    <!-- Tomedes - Smart Human Translations - start-->
     <string name="rate_dialog_title">قيم هذا التطبيق</string>
-    <string name="rate_dialog_message">إذا كنت تستمتع باللعب على هذا التطبيق. هل تمانع في أخذ لحظة من وقتك لتقييم هذا البرنامج؟ لن يستغرق ذلك سوى أقل من دقيقة.</string>
-    <string name="rate_dialog_ok">قيمه الآن!</string>
-    <string name="rate_dialog_cancel">أخبرني لاحقا</string>
-    <string name="rate_dialog_no">لا شكرا</string>
+    <string name="rate_dialog_message">إذا كنت تسمتع باللعب بهذا التطبيق، فما رأيك في تقييمه؟ لن يأخذ منك أكثر من دقيقة. شكرًا لك على دعمك!</string>
+    <string name="rate_dialog_ok">قيّمه الآن</string>
+    <string name="rate_dialog_cancel">ذكّرنا لاحقًا</string>
+    <string name="rate_dialog_no">لا، شكرًا</string>
+    <!-- Tomedes - Smart Human Translations - end-->
 </resources>

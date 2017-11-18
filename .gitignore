@@ -1,12 +1,20 @@
+# Copyright 2017 Vorlonsoft LLC
+#
+# Licensed under The MIT License (MIT)
+
 # project file
 .gradle
-local.properties
+/local.properties
 
 # android studio
-.idea/
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
 *.iml
 
 # mac
 .DS_Store
 
 /build
+/captures
+src/main/java/com/vorlonsoft/android/

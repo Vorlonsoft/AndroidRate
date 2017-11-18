@@ -1,14 +1,20 @@
+/*
+ * Copyright 2017 Vorlonsoft LLC
+ *
+ * Licensed under The MIT License (MIT)
+ */
+
 apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.0'
+    buildToolsVersion '27.0.1'
     defaultConfig {
-        applicationId "com.vorlonsoft.androidrate.sample"
-        minSdkVersion 9
+        applicationId "com.vorlonsoft.android.rate.sample"
+        minSdkVersion 14
         targetSdkVersion 27
-        versionCode 3
-        versionName "1.1.1"
+        versionCode 4
+        versionName "1.1.2"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -46,4 +52,6 @@ android {
 }
 dependencies {
     implementation project(':library')
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

@@ -1,10 +1,16 @@
+/*
+ * Copyright 2017 Vorlonsoft LLC
+ *
+ * Licensed under The MIT License (MIT)
+ */
+
 buildscript {
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-alpha02'
+        classpath 'com.android.tools.build:gradle:3.1.0-alpha03'
     }
 }
 

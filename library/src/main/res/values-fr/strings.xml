@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <resources>
     <string name="rate_dialog_title">Evaluation de l\'application</string>
     <string name="rate_dialog_message">Vous aimez notre application, voulez-vous prendre un moment pour l\'évaluer ? Cela ne vous prendra pas plus d\'une minute. Merci de votre soutien !</string>

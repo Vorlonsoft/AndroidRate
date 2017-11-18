@@ -7,10 +7,11 @@ AndroidRate is a library to help you promote your android app by prompting users
 
 ## Install
 
-You can download from maven central.
+You can download from Maven Central.
 
 ${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.vorlonsoft/androidrate/badge.svg)
 
+Gradle
 ```groovy
 dependencies {
   implementation 'com.vorlonsoft:androidrate:{latest.version}'
@@ -125,7 +126,7 @@ AndroidRate currently supports the following languages:
 - Arabic
 - Basque
 - Catalan
-- Chinese
+- Chinese (zh-rCN, zh-rHK, zh-rMO, zh-rSG, zh-rTW)
 - Czech
 - English
 - French
@@ -150,6 +151,16 @@ AndroidRate supports API level 9 and up.
 ## Sample
 
 Please try to move the [sample](https://github.com/Vorlonsoft/AndroidRate/tree/master/sample).
+
+## Already in use in following apps
+
+* [I Love You Pro Edition](https://play.google.com/store/apps/details?id=com.vorlonsoft.iluvu)
+
+* [I Love You Free Edition](https://play.google.com/store/apps/details?id=com.vorlonsoft.iloveyou)
+
+* [Rossiya.pro Mail](https://play.google.com/store/apps/details?id=com.vorlonsoft.rossiyapro)
+
+* ...
 
 ## Contribute
 

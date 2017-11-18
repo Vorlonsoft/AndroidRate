@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.vorlonsoft.androidrate"
-    android:versionCode="31"
-    android:versionName="1.0.3"
+    package="com.vorlonsoft.android.rate"
+    android:versionCode="32"
+    android:versionName="1.0.4"
     tools:ignore="GradleOverrides">
 
     <uses-sdk android:minSdkVersion="9" />

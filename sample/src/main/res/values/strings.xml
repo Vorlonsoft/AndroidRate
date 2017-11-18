@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <resources>
-
     <string name="app_name">AndroidRate Sample</string>
     <string name="hello_world">Hello world!</string>
 
     <string name="new_rate_dialog_title">Rate Me!</string>
+    <string name="new_rate_dialog_message">If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!</string>
     <string name="new_rate_dialog_never">Never</string>
     <string name="new_rate_dialog_later">Later</string>
     <string name="new_rate_dialog_ok">Rate</string>
-
 </resources>

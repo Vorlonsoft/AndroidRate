@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <resources>
     <string name="rate_dialog_title">به اپ امتياز دهيد</string>
     <string name="rate_dialog_message">اگر از استفاده اين اپ لذت مي بريد درصورت امكان به ما امتياز دهيد . بيشتر از چند دقيقه زمان نمي برد. ممنون از حمات شما.</string>

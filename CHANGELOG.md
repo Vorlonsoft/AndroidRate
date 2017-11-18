@@ -1,7 +1,13 @@
-# ChangeLog
+# CHANGELOG
 
-- 2017/11/07 1.0.3
-    - Second Public Version
+## 1.0.4 (released 18.11.2017)
 
-- 2017/11/06 1.0.2
-    - Initial Public Version
+- Third Public Version
+
+## 1.0.3 (released 07.11.2017)
+
+- Second Public Version
+
+## 1.0.2 (released 06.11.2017)
+
+- Initial Public Version

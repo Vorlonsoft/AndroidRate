@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2017 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
 <resources>
     <string name="rate_dialog_title">דרגו את האפלקציה</string>
     <string name="rate_dialog_message">אם אתם נהנים מהשימוש באפליקציה, מה דעתכם לדרג אותה? זה לא ייקח יותר מדקה. תודה על התמיכה!</string>

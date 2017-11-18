@@ -1,4 +1,10 @@
-package com.vorlonsoft.androidrate;
+/*
+ * Copyright 2017 Vorlonsoft LLC
+ *
+ * Licensed under The MIT License (MIT)
+ */
+
+package com.vorlonsoft.android.rate;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +14,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.vorlonsoft.androidrate.PreferenceHelper.*;
+import static com.vorlonsoft.android.rate.PreferenceHelper.*;
 
 public final class AppRate {
 
