@@ -119,6 +119,14 @@ If you want to use your own dialog labels, override string xml resources on your
 </resources>
 ```
 
+### Check that Google Play is available
+
+```java
+if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
+
+}
+```
+
 ## Language
 
 AndroidRate currently supports the following languages:

@@ -7,20 +7,20 @@
 package com.vorlonsoft.android.rate.sample;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import com.vorlonsoft.android.rate.AppRate;
 import com.vorlonsoft.android.rate.OnClickButtonListener;
 import com.vorlonsoft.android.rate.StoreType;
 
 import java.util.Locale;
-import java.util.Objects;
 
 public class MainActivity extends Activity {
     private static final String TAG = "ANDROIDRATE_SAMPLE";
@@ -55,9 +55,10 @@ public class MainActivity extends Activity {
         }
         */
 
+        StoreType storeType = StoreType.GOOGLEPLAY; // options: GOOGLEPLAY or AMAZON
 
         AppRate.with(this)
-                .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY, other option is AMAZON
+                .setStoreType(storeType) // default is GOOGLEPLAY, other option is AMAZON
                 .setInstallDays(3) // default 10, 0 means install day.
                 .setLaunchTimes(10) // default 10 times.
                 .setRemindInterval(2) // default 1 day.
@@ -81,7 +82,15 @@ public class MainActivity extends Activity {
                 .setTextRateNow(R.string.new_rate_dialog_ok)
                 .monitor();
 
-        // Show a dialog if meets conditions
-        AppRate.showRateDialogIfMeetsConditions(this);
+        if (storeType == StoreType.GOOGLEPLAY) {
+            //Check that Google Play is available
+            if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
+                // Show a dialog if meets conditions
+                AppRate.showRateDialogIfMeetsConditions(this);
+            }
+        } else {
+            // Show a dialog if meets conditions
+            AppRate.showRateDialogIfMeetsConditions(this);
+        }
     }
 }
