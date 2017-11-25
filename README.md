@@ -30,8 +30,10 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
 
+  StoreType storeType = StoreType.GOOGLEPLAY; // options: GOOGLEPLAY or AMAZON
+
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY, other option is AMAZON
+      .setStoreType(storeType) //default is GOOGLEPLAY, other option is AMAZON
       .setInstallDays(0) // default 10, 0 means install day
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
@@ -46,8 +48,16 @@ protected void onCreate(Bundle savedInstanceState) {
       })
       .monitor();
 
-  // Show a dialog if meets conditions
-  AppRate.showRateDialogIfMeetsConditions(this);
+  if (storeType == StoreType.GOOGLEPLAY) {
+      //Check that Google Play is available
+      if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
+          // Show a dialog if meets conditions
+          AppRate.showRateDialogIfMeetsConditions(this);
+      }
+  } else {
+      // Show a dialog if meets conditions
+      AppRate.showRateDialogIfMeetsConditions(this);
+  }
 }
 ```
 
