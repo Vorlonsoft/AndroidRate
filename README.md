@@ -65,9 +65,9 @@ The default conditions to show rate dialog is as below:
 
 1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(int)`.
 2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(int)`.
-3. App is launched more than 2 days after neutral button clicked. Change via `AppRate#setRemindInterval(int)`.
-4. App is launched X times and X % 2 = 0. Change via `AppRate#setRemindLaunchTimes(int)`.
-5. App shows neutral dialog(Remind me later) by default. Change via `setShowLaterButton(boolean)`.
+3. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(int)`.
+4. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(int)`.
+5. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
 6. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
 7. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
 
