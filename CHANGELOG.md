@@ -2,4 +2,4 @@
 
 ## 1.0.5 (released 28.11.2017)
 
-- First Public Release
+- First Public Kotlin Release
