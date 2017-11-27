@@ -24,7 +24,7 @@ final class PreferenceHelper {
 
     private static final String PREF_KEY_REMIND_INTERVAL = "androidrate_remind_interval";
 
-    private static final String PREF_CUSTOM_EVENT_KEY_PREFIX = "android_rate_custom_event_prefix_";
+    private static final String PREF_CUSTOM_EVENT_KEY_PREFIX = "androidrate_custom_event_prefix_";
 
     private PreferenceHelper() {
     }
