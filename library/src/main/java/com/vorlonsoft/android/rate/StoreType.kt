@@ -4,9 +4,9 @@
  * Licensed under The MIT License (MIT)
  */
 
-package com.vorlonsoft.android.rate;
+package com.vorlonsoft.android.rate
 
-public enum StoreType {
+enum class StoreType {
     GOOGLEPLAY,
     AMAZON
 }

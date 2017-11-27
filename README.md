@@ -1,7 +1,7 @@
-AndroidRate
-============
+AndroidRateKotlin
+=================
 
-AndroidRate is a library to help you promote your android app by prompting users to rate the app after using it for a few days. Original project [Android-Rate](https://github.com/hotchemi/Android-Rate) (The MIT License (MIT)) was developed by Shintaro Katafuchi.
+AndroidRateKotlin is a Kotlin library to help you promote your android app by prompting users to rate the app after using it for a few days. Original project [AndroidRate](https://github.com/Vorlonsoft/AndroidRate) (The MIT License (MIT)) was developed by Vorlonsoft LLC.
 
 ![screen shot](http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif)
 
@@ -9,12 +9,12 @@ AndroidRate is a library to help you promote your android app by prompting users
 
 You can download from Maven Central.
 
-${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.vorlonsoft/androidrate/badge.svg)
+${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.vorlonsoft/android-rate/badge.svg)
 
 Gradle
 ```groovy
 dependencies {
-  implementation 'com.vorlonsoft:androidrate:{latest.version}'
+  implementation 'com.vorlonsoft:android-rate:{latest.version}'
 }
 ```
 
@@ -22,97 +22,89 @@ dependencies {
 
 ### Configuration
 
-AndroidRate provides methods to configure its behavior.
+AndroidRateKotlin provides methods to configure its behavior.
 
-```java
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-  super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_main);
+```Kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+  super.onCreate(savedInstanceState)
+  setContentView(R.layout.activity_main)
 
-  StoreType storeType = StoreType.GOOGLEPLAY; // options: GOOGLEPLAY or AMAZON
+  val storeType = StoreType.GOOGLEPLAY // options: GOOGLEPLAY or AMAZON
 
   AppRate.with(this)
-      .setStoreType(storeType) //default is GOOGLEPLAY, other option is AMAZON
-      .setInstallDays(0) // default 10, 0 means install day
-      .setLaunchTimes(3) // default 10
-      .setRemindInterval(2) // default 1
-      .setRemindLaunchTimes(2) // default 1 (each launch)
-      .setShowLaterButton(true) // default true
-      .setDebug(false) // default false
-      .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
-          @Override
-          public void onClickButton(int which) {
-              Log.d(MainActivity.class.getName(), Integer.toString(which));
-          }
-      })
-      .monitor();
+      ?.setStoreType(storeType) //default is GOOGLEPLAY, other option is AMAZON
+      ?.setInstallDays(0) // default 10, 0 means install day
+      ?.setLaunchTimes(3) // default 10
+      ?.setRemindInterval(2) // default 1
+      ?.setRemindLaunchTimes(2) // default 1 (each launch)
+      ?.setShowLaterButton(true) // default true
+      ?.setDebug(false) // default false
+      ?.monitor()
 
   if (storeType == StoreType.GOOGLEPLAY) {
-      //Check that Google Play is available
-      if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
-          // Show a dialog if meets conditions
-          AppRate.showRateDialogIfMeetsConditions(this);
-      }
-  } else {
+    //Check that Google Play is available
+    if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
       // Show a dialog if meets conditions
-      AppRate.showRateDialogIfMeetsConditions(this);
+      AppRate.showRateDialogIfMeetsConditions(this)
+    }
+  } else {
+    // Show a dialog if meets conditions
+    AppRate.showRateDialogIfMeetsConditions(this)
   }
 }
 ```
 
 The default conditions to show rate dialog is as below:
 
-1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(int)`.
-2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(int)`.
-3. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(int)`.
-4. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(int)`.
-5. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
-6. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
-7. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
+1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(Int)`.
+2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(Int)`.
+3. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(Int)`.
+4. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(Int)`.
+5. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(Boolean)`.
+6. Setting `AppRate#setDebug(Boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
 
 ### Optional custom event requirements for showing dialog
 
 You can add additional optional requirements for showing dialog. Each requirement can be added/referenced as a unique string. You can set a minimum count for each such event (for e.g. "action_performed" 3 times, "button_clicked" 5 times, etc.)
 
-```java
-AppRate.with(this).setMinimumEventCount(String, long);
-AppRate.with(this).incrementEventCount(String);
-AppRate.with(this).setEventCountValue(String, long);
+```Kotlin
+AppRate.with(this)?.setMinimumEventCount(String, Long)
+AppRate.with(this)?.incrementEventCount(String)
+AppRate.with(this)?.setEventCountValue(String, Long)
 ```
 
 ### Clear show dialog flag
 
 When you want to show the dialog again, call `AppRate#clearAgreeShowDialog()`.
 
-```java
-AppRate.with(this).clearAgreeShowDialog();
+```Kotlin
+AppRate.with(this)?.clearAgreeShowDialog()
 ```
 
 ### When the button presses on
 
 call `AppRate#showRateDialog(Activity)`.
 
-```java
-AppRate.with(this).showRateDialog(this);
+```Kotlin
+AppRate.with(this)?.showRateDialog(this)
 ```
 
 ### Set custom view
 
 call `AppRate#setView(View)`.
 
-```java
-LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
-AppRate.with(this).setView(view).monitor();
+```Kotlin
+internal var inflater = this.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
+internal var view = inflater.inflate(R.layout.custom_dialog, findViewById(R.id.layout_root) as ViewGroup)
+AppRate.with(this)?.setView(view)?.monitor()
 ```
 
 ### Specific theme
 
 You can use a specific theme to inflate the dialog.
 
-```java
-AppRate.with(this).setThemeResId(Integer);
+```Kotlin
+AppRate.with(this)?.setThemeResId(Integer)
 ```
 
 ### Custom dialog
@@ -131,7 +123,7 @@ If you want to use your own dialog labels, override string xml resources on your
 
 ### Check that Google Play is available
 
-```java
+```Kotlin
 if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
 
 }
@@ -139,7 +131,7 @@ if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != C
 
 ## Language
 
-AndroidRate currently supports the following languages:
+AndroidRateKotlin currently supports the following languages:
 
 - Arabic
 - Basque
@@ -164,11 +156,11 @@ AndroidRate currently supports the following languages:
 
 ## Support
 
-AndroidRate supports API level 9 and up.
+AndroidRateKotlin supports API level 9 and up.
 
 ## Sample
 
-Please try to move the [sample](https://github.com/Vorlonsoft/AndroidRate/tree/master/sample).
+Please try to move the [sample](https://github.com/AlexanderLS/AndroidRateKotlin/tree/master/sample).
 
 ## Already in use in following apps
 

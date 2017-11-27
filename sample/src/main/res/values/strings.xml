@@ -5,7 +5,7 @@
   ~ // Licensed under The MIT License (MIT)
 -->
 <resources>
-    <string name="app_name">AndroidRate Sample</string>
+    <string name="app_name">AndroidRateKotlin Sample</string>
     <string name="hello_world">Hello world!</string>
 
     <string name="new_rate_dialog_title">Rate Me!</string>

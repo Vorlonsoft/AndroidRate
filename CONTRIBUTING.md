@@ -1,6 +1,6 @@
 CONTRIBUTING
 ============
-AndroidRate library is an open-source project made by developers for developers!
+AndroidRateKotlin Kotlin library is an open-source project made by developers for developers!
 
 If you would like to contribute to the project, it's really great. You can contribute in a variety of ways:
 
@@ -13,11 +13,11 @@ We do require certain guidelines to be followed so that the quality of the proje
 
 PULL requests
 -------------
-When you submit a patch or a new functionality for the project, you must open a pull request. We will get to the pull request as soon as possible, investigate what functionality or bug fixes have been added and decide whether to include it in the library or not -- for the benefit of everyone.
+When you submit a patch or a new functionality for the project, you must open a pull request. We will get to the pull request as soon as possible, investigate what functionality or bug fixes have been added and decide whether to include it in the Kotlin library or not -- for the benefit of everyone.
 
-**You agree that all contributions that you make to the library will be distributed further under the same license as the library itself (The MIT License (MIT)).**
+**You agree that all contributions that you make to the Kotlin library will be distributed further under the same license as the Kotlin library itself (The MIT License (MIT)).**
 
-Don't be discouraged if your pull request is rejected. This is not a deadline and sometimes with a proper explanation on your side, we are persuaded to merge in the request. Just remember that this is a library for everyone and as such must meet certain, generic rules that we would like to believe are following.  
+Don't be discouraged if your pull request is rejected. This is not a deadline and sometimes with a proper explanation on your side, we are persuaded to merge in the request. Just remember that this is a Kotlin library for everyone and as such must meet certain, generic rules that we would like to believe are following.
 
 ISSUES
 ---------
