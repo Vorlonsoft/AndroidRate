@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.5 (released 02.12.2017)
+
+- LIBff11202 Samsung Galaxy Apps support
+
 ## 1.0.4 (released 18.11.2017)
 
 - Chinese (zh-HK, zh-MO, zh-SG, zh-TW) added
