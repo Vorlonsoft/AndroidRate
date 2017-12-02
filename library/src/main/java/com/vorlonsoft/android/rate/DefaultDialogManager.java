@@ -15,6 +15,7 @@ import android.view.View;
 
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForGooglePlay;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSamsungGalaxyApps;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
@@ -35,8 +36,17 @@ public class DefaultDialogManager implements DialogManager {
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            final Intent intentToAppstore = options.getStoreType() == StoreType.GOOGLEPLAY ?
-                    createIntentForGooglePlay(context) : createIntentForAmazonAppstore(context);
+            final Intent intentToAppstore;
+            switch(options.getStoreType()) {
+                case AMAZON:
+                    intentToAppstore = createIntentForAmazonAppstore(context);
+                    break;
+                case SAMSUNG:
+                    intentToAppstore = createIntentForSamsungGalaxyApps(context);
+                    break;
+                default:
+                    intentToAppstore = createIntentForGooglePlay(context);
+            }
             context.startActivity(intentToAppstore);
             setAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton(which);

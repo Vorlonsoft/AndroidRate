@@ -8,5 +8,6 @@ package com.vorlonsoft.android.rate;
 
 public enum StoreType {
     GOOGLEPLAY,
-    AMAZON
+    AMAZON,
+    SAMSUNG
 }

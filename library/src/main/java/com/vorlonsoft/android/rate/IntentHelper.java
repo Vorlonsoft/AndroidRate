@@ -11,6 +11,7 @@ import android.content.Intent;
 
 import static com.vorlonsoft.android.rate.UriHelper.getGooglePlay;
 import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstore;
+import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyApps;
 import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
 
 final class IntentHelper {
@@ -32,6 +33,11 @@ final class IntentHelper {
     static Intent createIntentForAmazonAppstore(Context context) {
         String packageName = context.getPackageName();
         return new Intent(Intent.ACTION_VIEW, getAmazonAppstore(packageName));
+    }
+
+    static Intent createIntentForSamsungGalaxyApps(Context context) {
+        String packageName = context.getPackageName();
+        return new Intent(Intent.ACTION_VIEW, getSamsungGalaxyApps(packageName));
     }
 
 }
