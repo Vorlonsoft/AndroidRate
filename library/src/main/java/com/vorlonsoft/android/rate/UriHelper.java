@@ -19,6 +19,8 @@ final class UriHelper {
 
     private static final String AMAZON_APPSTORE = "amzn://apps/android?p=";
 
+    private static final String SAMSUNG_GALAXY_APPS = "samsungapps://ProductDetail/";
+
     private UriHelper() {
     }
 
@@ -28,6 +30,10 @@ final class UriHelper {
 
     static Uri getAmazonAppstore(String packageName) {
         return packageName == null ? null : Uri.parse(AMAZON_APPSTORE + packageName);
+    }
+
+    static Uri getSamsungGalaxyApps(String packageName) {
+        return packageName == null ? null : Uri.parse(SAMSUNG_GALAXY_APPS + packageName);
     }
 
     static boolean isPackageExists(Context context, String targetPackage) {

@@ -55,10 +55,12 @@ public class MainActivity extends Activity {
         }
         */
 
-        StoreType storeType = StoreType.GOOGLEPLAY; // options: GOOGLEPLAY or AMAZON
+        StoreType storeType = StoreType.GOOGLEPLAY; // GOOGLEPLAY - Google Play
+                                                    // AMAZON - Amazon Appstore
+                                                    // SAMSUNG - Samsung Galaxy Apps
 
         AppRate.with(this)
-                .setStoreType(storeType) // default is GOOGLEPLAY, other option is AMAZON
+                .setStoreType(storeType) //default is GOOGLEPLAY, other options are AMAZON and SAMSUNG
                 .setInstallDays(3) // default 10, 0 means install day.
                 .setLaunchTimes(10) // default 10 times.
                 .setRemindInterval(2) // default 1 day.
