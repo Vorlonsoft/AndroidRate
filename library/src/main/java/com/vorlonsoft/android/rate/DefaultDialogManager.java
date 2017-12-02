@@ -8,9 +8,11 @@ package com.vorlonsoft.android.rate;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
@@ -28,6 +30,8 @@ public class DefaultDialogManager implements DialogManager {
             return new DefaultDialogManager(context, options);
         }
     }
+
+    private static final String TAG = "AndroidRate";
 
     private final Context context;
     private final DialogOptions options;
@@ -47,7 +51,11 @@ public class DefaultDialogManager implements DialogManager {
                 default:
                     intentToAppstore = createIntentForGooglePlay(context);
             }
-            context.startActivity(intentToAppstore);
+            try {
+                context.startActivity(intentToAppstore);
+            } catch (ActivityNotFoundException e) {
+                Log.w(TAG, e);
+            }
             setAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton(which);
         }
