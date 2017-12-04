@@ -36,7 +36,6 @@ android {
             shrinkResources false
             minifyEnabled false
             zipAlignEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
             jniDebuggable false
             renderscriptDebuggable false
