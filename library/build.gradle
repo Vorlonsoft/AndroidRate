@@ -30,6 +30,14 @@ android {
                 testProguardFile 'proguard-project-test.pro'
             }
         }
+        debug {
+            postprocessing {
+                removeUnusedCode false
+                obfuscate false
+                optimizeCode false
+                testProguardFile 'proguard-project-test.pro'
+            }
+        }
     }
 }
 
