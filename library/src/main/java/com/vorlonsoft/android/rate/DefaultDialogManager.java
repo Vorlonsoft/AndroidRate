@@ -54,7 +54,7 @@ public class DefaultDialogManager implements DialogManager {
             try {
                 context.startActivity(intentToAppstore);
             } catch (ActivityNotFoundException e) {
-                Log.w(TAG, e);
+                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppstore, e);
             }
             setAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton(which);
