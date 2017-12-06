@@ -13,8 +13,8 @@ android {
         //noinspection MinSdkTooLow
         minSdkVersion 9
         targetSdkVersion 27
-        versionCode 33
-        versionName "1.0.5"
+        versionCode 34
+        versionName "1.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {

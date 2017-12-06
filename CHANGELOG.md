@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.6 (released 06.12.2017)
+
+- LIBcc11206 Inspection
+- LIBcc11204
+- LIBbb11202 ActivityNotFoundException
+
 ## 1.0.5 (released 02.12.2017)
 
 - LIBff11202 Samsung Galaxy Apps support
