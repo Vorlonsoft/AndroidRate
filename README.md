@@ -30,18 +30,17 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
   setContentView(R.layout.activity_main);
 
-  StoreType storeType = StoreType.GOOGLEPLAY; // GOOGLEPLAY - Google Play
-                                              // AMAZON - Amazon Appstore
-                                              // SAMSUNG - Samsung Galaxy Apps
-
   AppRate.with(this)
-      .setStoreType(storeType) //default is GOOGLEPLAY, other options are AMAZON and SAMSUNG
+      .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY (Google Play), other options are
+                                          //           AMAZON (Amazon Appstore) and
+                                          //           SAMSUNG (Samsung Galaxy Apps)
       .setInstallDays(0) // default 10, 0 means install day
       .setLaunchTimes(3) // default 10
       .setRemindInterval(2) // default 1
       .setRemindLaunchTimes(2) // default 1 (each launch)
       .setShowLaterButton(true) // default true
       .setDebug(false) // default false
+      //Java 8+: .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Integer.toString(which)))
       .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
           @Override
           public void onClickButton(int which) {
@@ -50,7 +49,7 @@ protected void onCreate(Bundle savedInstanceState) {
       })
       .monitor();
 
-  if (storeType == StoreType.GOOGLEPLAY) {
+  if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) {
       //Check that Google Play is available
       if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
           // Show a dialog if meets conditions

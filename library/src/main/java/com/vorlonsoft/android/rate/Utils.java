@@ -16,24 +16,20 @@ final class Utils {
     private Utils() {
     }
 
-    static boolean underHoneyComb() {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB;
+    private static boolean isLollipop() {
+        return ((Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) || (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1));
     }
 
-    static boolean isLollipop() {
-        return Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP || Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1;
-    }
-
-    static int getDialogTheme() {
+    private static int getDialogTheme() {
         return isLollipop() ? R.style.CustomLollipopDialogStyle : 0;
     }
 
-    @SuppressLint("NewApi")
+    @SuppressLint("ObsoleteSdkInt")
     static AlertDialog.Builder getDialogBuilder(Context context, Integer pThemeResId) {
-        if (underHoneyComb()) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             return new AlertDialog.Builder(context);
         } else {
-            return new AlertDialog.Builder(context, getDialogTheme());
+            return new AlertDialog.Builder(context, pThemeResId != null ? pThemeResId : getDialogTheme());
         }
     }
 

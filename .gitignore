@@ -12,8 +12,8 @@
 /.idea/workspace.xml
 *.iml
 
-# mac
-.DS_Store
+# mac: uncomment the line below
+# .DS_Store
 
 /build
 /captures
