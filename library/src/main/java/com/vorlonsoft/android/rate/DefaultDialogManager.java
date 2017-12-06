@@ -37,6 +37,7 @@ public class DefaultDialogManager implements DialogManager {
     private final DialogOptions options;
     private final OnClickButtonListener listener;
 
+    @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -60,6 +61,7 @@ public class DefaultDialogManager implements DialogManager {
             if (listener != null) listener.onClickButton(which);
         }
     };
+    @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener negativeListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -67,6 +69,7 @@ public class DefaultDialogManager implements DialogManager {
             if (DefaultDialogManager.this.listener != null) DefaultDialogManager.this.listener.onClickButton(which);
         }
     };
+    @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener neutralListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
@@ -75,6 +78,7 @@ public class DefaultDialogManager implements DialogManager {
         }
     };
 
+    @SuppressWarnings("WeakerAccess")
     public DefaultDialogManager(final Context context, final DialogOptions options) {
         this.context = context;
         this.options = options;

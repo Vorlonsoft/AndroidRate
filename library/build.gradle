@@ -10,6 +10,7 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.1'
     defaultConfig {
+        //noinspection MinSdkTooLow
         minSdkVersion 9
         targetSdkVersion 27
         versionCode 33

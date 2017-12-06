@@ -29,11 +29,11 @@ final class PreferenceHelper {
     private PreferenceHelper() {
     }
 
-    static SharedPreferences getPreferences(Context context) {
+    private static SharedPreferences getPreferences(Context context) {
         return context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    static Editor getPreferencesEditor(Context context) {
+    private static Editor getPreferencesEditor(Context context) {
         return getPreferences(context).edit();
     }
 

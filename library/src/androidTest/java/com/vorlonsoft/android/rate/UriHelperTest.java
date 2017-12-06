@@ -16,6 +16,7 @@ public class UriHelperTest extends AndroidTestCase {
 
     private static final String GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=";
 
+    @SuppressWarnings("ConstantConditions")
     public void testGetGooglePlayUri() {
         {
             Uri uri = UriHelper.getGooglePlay("");

@@ -36,7 +36,7 @@ final class UriHelper {
         return packageName == null ? null : Uri.parse(SAMSUNG_GALAXY_APPS + packageName);
     }
 
-    static boolean isPackageExists(Context context, String targetPackage) {
+    static boolean isPackageExists(Context context, @SuppressWarnings("SameParameterValue") String targetPackage) {
         PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(0);
         for (ApplicationInfo packageInfo : packages) {
