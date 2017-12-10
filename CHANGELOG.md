@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.7 (released 10.12.2017)
+
+- LIBff11210
+
 ## 1.0.6 (released 06.12.2017)
 
 - LIBcc11206 Inspection
