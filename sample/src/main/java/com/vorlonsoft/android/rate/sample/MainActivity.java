@@ -64,14 +64,14 @@ public class MainActivity extends Activity {
                 .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY (Google Play), other options are
                                                     //           AMAZON (Amazon Appstore) and
                                                     //           SAMSUNG (Samsung Galaxy Apps)
-                .setInstallDays(3) // default 10, 0 means install day.
-                .setLaunchTimes(10) // default 10 times.
-                .setRemindInterval(2) // default 1 day.
-                .setRemindLaunchTimes (4) // default 1 (each launch).
+                .setInstallDays((byte) 3) // default 10, 0 means install day.
+                .setLaunchTimes((byte) 10) // default 10 times.
+                .setRemindInterval((byte) 2) // default 1 day.
+                .setRemindLaunchTimes ((byte) 4) // default 1 (each launch).
                 .setShowLaterButton(true) // default true.
                 .setDebug(true) // default false.
                 .setCancelable(false) // default false.
-                .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Integer.toString(which) + ""))
+                .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which) + ""))
                 // comment to use library strings instead app strings
                 .setTitle(R.string.new_rate_dialog_title)
                 .setTextLater(R.string.new_rate_dialog_later)

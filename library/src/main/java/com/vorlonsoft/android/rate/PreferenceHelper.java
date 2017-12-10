@@ -105,15 +105,15 @@ final class PreferenceHelper {
      * Add a prefix for the key for each custom event,
      * so that there is no clash with existing keys (PREF_KEY_LAUNCH_TIME, PREF_KEY_INSTALL_DATE, etc.)
      */
-    static long getCustomEventCount(Context context, String eventName) {
+    static short getCustomEventCount(Context context, String eventName) {
         String eventKey = PREF_CUSTOM_EVENT_KEY_PREFIX + eventName;
-        return getPreferences(context).getLong(eventKey, 0);
+        return (short) getPreferences(context).getInt(eventKey, 0);
     }
 
-    static void setCustomEventCount(Context context, String eventName, long eventCount) {
+    static void setCustomEventCount(Context context, String eventName, short eventCount) {
         String eventKey = PREF_CUSTOM_EVENT_KEY_PREFIX + eventName;
         SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putLong(eventKey, eventCount);
+        editor.putInt(eventKey, eventCount);
         editor.apply();
     }
 }

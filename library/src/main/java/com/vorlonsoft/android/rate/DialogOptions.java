@@ -36,7 +36,7 @@ final class DialogOptions {
 
     private String titleText = null;
 
-    private Integer themeResId;
+    private int themeResId;
 
     private String messageText = null;
 
@@ -240,7 +240,7 @@ final class DialogOptions {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void setThemeResId(Integer themeResId) {
+    public void setThemeResId(int themeResId) {
         this.themeResId = themeResId;
     }
 }

@@ -26,15 +26,15 @@ public final class AppRate {
 
     private final DialogOptions options = new DialogOptions();
 
-    private int installDate = 10;
+    private byte installDate = 10;
 
-    private int launchTimes = 10;
+    private byte launchTimes = 10;
 
-    private int remindInterval = 1;
+    private byte remindInterval = 1;
 
-    private final HashMap<String, Long> customEventCounts = new HashMap<>();
+    private final HashMap<String, Short> customEventCounts = new HashMap<>();
 
-    private int remindLaunchTimes = 1;
+    private byte remindLaunchTimes = 1;
 
     private boolean isDebug = false;
 
@@ -64,32 +64,32 @@ public final class AppRate {
         return isMeetsConditions;
     }
 
-    private static boolean isOverDate(long targetDate, int threshold) {
+    private static boolean isOverDate(long targetDate, byte threshold) {
         return new Date().getTime() - targetDate >= threshold * 24 * 60 * 60 * 1000;
     }
 
-    public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") int launchTimes) {
+    public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte launchTimes) {
         this.launchTimes = launchTimes;
         return this;
     }
 
-    public AppRate setInstallDays(@SuppressWarnings("SameParameterValue") int installDate) {
+    public AppRate setInstallDays(@SuppressWarnings("SameParameterValue") byte installDate) {
         this.installDate = installDate;
         return this;
     }
 
-    public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") int remindInterval) {
+    public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") byte remindInterval) {
         this.remindInterval = remindInterval;
         return this;
     }
 
     @SuppressWarnings("unused")
-    public AppRate setMinimumEventCount(String eventName, long minimumCount) {
+    public AppRate setMinimumEventCount(String eventName, short minimumCount) {
         this.customEventCounts.put(eventName, minimumCount);
         return this;
     }
 
-    public AppRate setRemindLaunchTimes(@SuppressWarnings("SameParameterValue") int remindLaunchTimes) {
+    public AppRate setRemindLaunchTimes(@SuppressWarnings("SameParameterValue") byte remindLaunchTimes) {
         this.remindLaunchTimes = remindLaunchTimes;
         return this;
     }
@@ -213,17 +213,17 @@ public final class AppRate {
 
     @SuppressWarnings("unused")
     public AppRate incrementEventCount(String eventName) {
-        return setEventCountValue(eventName, getCustomEventCount(context,eventName) + 1);
+        return setEventCountValue(eventName, (short) (getCustomEventCount(context,eventName) + 1));
     }
 
     @SuppressWarnings("WeakerAccess")
-    public AppRate setEventCountValue(String eventName, long countValue) {
+    public AppRate setEventCountValue(String eventName, short countValue) {
         setCustomEventCount(context, eventName, countValue);
         return this;
     }
 
     @SuppressWarnings("unused")
-    public AppRate setThemeResId(Integer pThemeResId){
+    public AppRate setThemeResId(int pThemeResId){
         options.setThemeResId(pThemeResId);
         return this;
     }
@@ -273,8 +273,8 @@ public final class AppRate {
     }
 
     private boolean isOverCustomEventRequirements() {
-        for(Map.Entry<String, Long> eventRequirement : customEventCounts.entrySet()) {
-            Long currentCount = getCustomEventCount(context, eventRequirement.getKey());
+        for(Map.Entry<String, Short> eventRequirement : customEventCounts.entrySet()) {
+            Short currentCount = getCustomEventCount(context, eventRequirement.getKey());
             if(currentCount < eventRequirement.getValue()) {
                 return false;
             }
