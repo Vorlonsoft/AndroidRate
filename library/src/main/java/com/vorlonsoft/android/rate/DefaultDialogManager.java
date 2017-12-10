@@ -31,7 +31,7 @@ public class DefaultDialogManager implements DialogManager {
         }
     }
 
-    private static final String TAG = "AndroidRate";
+    private static final String TAG = "ANDROIDRATE";
 
     private final Context context;
     private final DialogOptions options;
@@ -58,7 +58,7 @@ public class DefaultDialogManager implements DialogManager {
                 Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppstore, e);
             }
             setAgreeShowDialog(context, false);
-            if (listener != null) listener.onClickButton(which);
+            if (listener != null) listener.onClickButton((byte) which);
         }
     };
     @SuppressWarnings("WeakerAccess")
@@ -66,7 +66,7 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             setAgreeShowDialog(context, false);
-            if (DefaultDialogManager.this.listener != null) DefaultDialogManager.this.listener.onClickButton(which);
+            if (DefaultDialogManager.this.listener != null) DefaultDialogManager.this.listener.onClickButton((byte) which);
         }
     };
     @SuppressWarnings("WeakerAccess")
@@ -74,7 +74,7 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             setRemindInterval(context);
-            if (listener != null) listener.onClickButton(which);
+            if (listener != null) listener.onClickButton((byte) which);
         }
     };
 

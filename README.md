@@ -34,17 +34,17 @@ protected void onCreate(Bundle savedInstanceState) {
       .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY (Google Play), other options are
                                           //           AMAZON (Amazon Appstore) and
                                           //           SAMSUNG (Samsung Galaxy Apps)
-      .setInstallDays(0) // default 10, 0 means install day
-      .setLaunchTimes(3) // default 10
-      .setRemindInterval(2) // default 1
-      .setRemindLaunchTimes(2) // default 1 (each launch)
+      .setInstallDays((byte) 0) // default 10, 0 means install day
+      .setLaunchTimes((byte) 3) // default 10
+      .setRemindInterval((byte) 2) // default 1
+      .setRemindLaunchTimes((byte) 2) // default 1 (each launch)
       .setShowLaterButton(true) // default true
       .setDebug(false) // default false
-      //Java 8+: .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Integer.toString(which)))
+      //Java 8+: .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which)))
       .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
           @Override
-          public void onClickButton(int which) {
-              Log.d(MainActivity.class.getName(), Integer.toString(which));
+          public void onClickButton(byte which) {
+              Log.d(MainActivity.class.getName(), Byte.toString(which));
           }
       })
       .monitor();
@@ -64,10 +64,10 @@ protected void onCreate(Bundle savedInstanceState) {
 
 The default conditions to show rate dialog is as below:
 
-1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(int)`.
-2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(int)`.
-3. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(int)`.
-4. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(int)`.
+1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(byte)`.
+2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
+3. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
+4. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(byte)`.
 5. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
 6. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
 7. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
@@ -77,9 +77,9 @@ The default conditions to show rate dialog is as below:
 You can add additional optional requirements for showing dialog. Each requirement can be added/referenced as a unique string. You can set a minimum count for each such event (for e.g. "action_performed" 3 times, "button_clicked" 5 times, etc.)
 
 ```java
-AppRate.with(this).setMinimumEventCount(String, long);
+AppRate.with(this).setMinimumEventCount(String, short);
 AppRate.with(this).incrementEventCount(String);
-AppRate.with(this).setEventCountValue(String, long);
+AppRate.with(this).setEventCountValue(String, short);
 ```
 
 ### Clear show dialog flag
@@ -113,7 +113,7 @@ AppRate.with(this).setView(view).monitor();
 You can use a specific theme to inflate the dialog.
 
 ```java
-AppRate.with(this).setThemeResId(Integer);
+AppRate.with(this).setThemeResId(int);
 ```
 
 ### Custom dialog
