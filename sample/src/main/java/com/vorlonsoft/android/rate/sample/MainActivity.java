@@ -59,7 +59,6 @@ public class MainActivity extends Activity {
          */
 
         // callback listener.
-        // callback listener.
         AppRate.with(this)
                 .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY (Google Play), other options are
                                                     //           AMAZON (Amazon Appstore) and
