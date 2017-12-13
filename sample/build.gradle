@@ -22,25 +22,33 @@ android {
     }
     buildTypes {
         release {
-            shrinkResources true
-            minifyEnabled true
+            initWith debug
+            applicationIdSuffix ""
             zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
-            jniDebuggable false
-            renderscriptDebuggable false
-            renderscriptOptimLevel 3
-            embedMicroApp false
+            postprocessing {
+                removeUnusedCode true
+                removeUnusedResources true
+                obfuscate true
+                optimizeCode true
+                proguardFile 'proguard-rules.pro'
+            }
         }
         debug {
-            shrinkResources false
-            minifyEnabled false
+            applicationIdSuffix ".debug"
             zipAlignEnabled false
             debuggable true
             jniDebuggable false
             renderscriptDebuggable false
             renderscriptOptimLevel 3
             embedMicroApp false
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+            }
+            matchingFallbacks = ['release']
         }
     }
     applicationVariants.all { variant ->
