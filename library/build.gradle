@@ -15,7 +15,6 @@ android {
         targetSdkVersion 27
         versionCode 35
         versionName "1.0.7"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -29,7 +28,6 @@ android {
                 obfuscate false
                 optimizeCode true
                 proguardFile 'proguard-rules.pro'
-                testProguardFile 'proguard-project-test.pro'
             }
         }
         debug {
@@ -38,7 +36,6 @@ android {
                 removeUnusedResources false
                 obfuscate false
                 optimizeCode false
-                testProguardFile 'proguard-project-test.pro'
             }
         }
     }
@@ -46,9 +43,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
 
 apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
