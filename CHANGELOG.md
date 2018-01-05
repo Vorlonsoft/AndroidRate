@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.0.8 (released 05.01.2018)
+
+- LIBbb10105
+- LIBff10105 Indonesian translation
+- LIBcc10105
+- LIBcc11217
+- LIBcc11213
+
 ## 1.0.7 (released 10.12.2017)
 
 - LIBff11210
