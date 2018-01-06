@@ -11,6 +11,7 @@ import android.os.Process;
 
 import com.squareup.leakcanary.LeakCanary;
 
+@SuppressWarnings("WeakerAccess")
 public class SampleApplication extends Application {
 
     public SampleApplication() {
