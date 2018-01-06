@@ -4,8 +4,8 @@
   ~ //
   ~ // Licensed under The MIT License (MIT)
 -->
-<resources>
-    <string name="app_name" translatable="false">AndroidRate</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false" tools:ignore="MissingTranslation">AndroidRate</string>
     <string name="rate_dialog_title">Rate this app</string>
     <string name="rate_dialog_message">If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!</string>
     <string name="rate_dialog_ok">Rate It Now</string>
