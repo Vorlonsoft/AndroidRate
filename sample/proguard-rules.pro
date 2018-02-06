@@ -7,3 +7,5 @@
     public static int v(...);
     public static int d(...);
 }
+
+-dontwarn java.lang.invoke.**
