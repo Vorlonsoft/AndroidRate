@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">রেটিং করুন</string>
+    <string name="rate_dialog_message">এপ্লিকেশনটি আপনার ভালো লাগলে অনুগ্রহ করে রেটিং করুন। রেটিং করতে এক মিনিটের বেশী সময় লাগবে না। আপনার সহযোগিতার জন্য ধন্যবাদ!</string>
+    <string name="rate_dialog_ok">রেটিং করুন</string>
+    <string name="rate_dialog_cancel">পরবর্তীতে মনে করিয়ে দিন</string>
+    <string name="rate_dialog_no">না, ধন্যবাদ</string>
+</resources>
