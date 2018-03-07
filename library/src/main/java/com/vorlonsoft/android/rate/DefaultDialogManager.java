@@ -12,6 +12,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 
@@ -56,6 +57,16 @@ public class DefaultDialogManager implements DialogManager {
                 context.startActivity(intentToAppstore);
             } catch (ActivityNotFoundException e) {
                 Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppstore, e);
+                switch(options.getStoreType()) {
+                    case AMAZON:
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/gp/mas/dl/android?p=" + context.getPackageName())));
+                        break;
+                    case SAMSUNG:
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.samsungapps.com/appquery/appDetail.as?appId=" + context.getPackageName())));
+                        break;
+                    default:
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + context.getPackageName())));
+                }
             }
             setAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton((byte) which);
