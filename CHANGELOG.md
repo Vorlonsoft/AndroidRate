@@ -1,5 +1,16 @@
 # CHANGELOG
 
+## 1.0.9 (released 09.03.2018)
+
+- LIBcc10307 Copyright update
+- LIBbb10309 If setRemindInterval is set to 25 or more, the number of days is not set correctly
+- LIBcc10309
+- LIBcc20307 CODE_OF_CONDUCT.md
+- LIBff20307 Bengali translation
+- LIBff10307
+- LIBcc10206
+- LIBcc10106
+
 ## 1.0.8 (released 05.01.2018)
 
 - LIBbb10105
