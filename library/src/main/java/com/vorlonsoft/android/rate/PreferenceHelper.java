@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Vorlonsoft LLC
+ * Copyright 2017 - 2018 Vorlonsoft LLC
  *
  * Licensed under The MIT License (MIT)
  */
