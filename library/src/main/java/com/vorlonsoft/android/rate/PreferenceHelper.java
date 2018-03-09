@@ -24,6 +24,10 @@ final class PreferenceHelper {
 
     private static final String PREF_KEY_REMIND_INTERVAL = "androidrate_remind_interval";
 
+    /**
+     * The key prefix for each custom event,
+     * so that there is no clash with existing keys (PREF_KEY_LAUNCH_TIMES, PREF_KEY_INSTALL_DATE, etc.)
+     */
     private static final String PREF_CUSTOM_EVENT_KEY_PREFIX = "androidrate_custom_event_prefix_";
 
     private PreferenceHelper() {
@@ -68,7 +72,6 @@ final class PreferenceHelper {
 
     static void setRemindInterval(Context context) {
         SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.remove(PREF_KEY_REMIND_INTERVAL);
         editor.putLong(PREF_KEY_REMIND_INTERVAL, new Date().getTime());
         editor.apply();
     }
@@ -87,24 +90,20 @@ final class PreferenceHelper {
         return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0);
     }
 
-    static void setLaunchTimes(Context context, int launchTimes) {
+    static void setLaunchTimes(Context context, short launchTimes) {
         SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putInt(PREF_KEY_LAUNCH_TIMES, launchTimes);
         editor.apply();
     }
 
-    static int getLaunchTimes(Context context) {
-        return getPreferences(context).getInt(PREF_KEY_LAUNCH_TIMES, 0);
+    static short getLaunchTimes(Context context) {
+        return (short) getPreferences(context).getInt(PREF_KEY_LAUNCH_TIMES, 0);
     }
 
     static boolean isFirstLaunch(Context context) {
         return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0) == 0L;
     }
 
-    /**
-     * Add a prefix for the key for each custom event,
-     * so that there is no clash with existing keys (PREF_KEY_LAUNCH_TIME, PREF_KEY_INSTALL_DATE, etc.)
-     */
     static short getCustomEventCount(Context context, String eventName) {
         String eventKey = PREF_CUSTOM_EVENT_KEY_PREFIX + eventName;
         return (short) getPreferences(context).getInt(eventKey, 0);

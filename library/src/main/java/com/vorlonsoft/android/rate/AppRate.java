@@ -238,7 +238,7 @@ public final class AppRate {
         if (isFirstLaunch(context)) {
             setInstallDate(context);
         }
-        PreferenceHelper.setLaunchTimes(context, getLaunchTimes(context) + 1);
+        PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
     }
 
     @SuppressWarnings("WeakerAccess")
