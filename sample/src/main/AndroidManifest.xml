@@ -7,8 +7,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.vorlonsoft.android.rate.sample"
-    android:versionCode="8"
-    android:versionName="1.1.6"
+    android:versionCode="9"
+    android:versionName="1.1.7"
     tools:ignore="GradleOverrides">
 
     <uses-sdk android:minSdkVersion="14" />
