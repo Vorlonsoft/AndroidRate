@@ -2,18 +2,41 @@
 #
 # Licensed under The MIT License (MIT)
 
-# project file
+# Built files
+*.aar
+*.ap_
+*.apk
+*.jar
+
+# Files for the Dalvik/Android Runtime (ART)
+*.dex
+*.odex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+
+# Local configuration file (sdk/ndk path, etc)
+local.properties
+
+# Windows thumbnail cache
+Thumbs.db
+
+# macOS
+.DS_Store
+
+# Android Studio
 .gradle
-/local.properties
-
-# android studio
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
+.idea
+.navigation
+build/
+captures/
 *.iml
+output.json
 
-# mac: uncomment the line below
-# .DS_Store
-
-/build
-/captures
+# NDK
+.externalNativeBuild
+obj/
