@@ -2,8 +2,5 @@
 #
 # Licensed under The MIT License (MIT)
 
-# secretKeyRingFile
+# Secret Key ring file
 secring.gpg
-
-/build
-*.iml
