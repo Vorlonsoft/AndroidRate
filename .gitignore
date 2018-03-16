@@ -2,11 +2,17 @@
 #
 # Licensed under The MIT License (MIT)
 
-# Built files
-*.aar
+# Built application files
 *.ap_
 *.apk
-*.jar
+
+# uilt library files
+*.aar
+*.jarB
+
+# Built native files
+*.o
+*.so
 
 # Files for the Dalvik/Android Runtime (ART)
 *.dex
@@ -18,6 +24,11 @@
 # Generated files
 bin/
 gen/
+out/
+
+# Gradle files
+.gradle/
+build/
 
 # Local configuration file (sdk/ndk path, etc)
 local.properties
@@ -26,17 +37,38 @@ local.properties
 Thumbs.db
 
 # macOS
-.DS_Store
+.DS_Store/
+
+# Log Files
+*.log
 
 # Android Studio
-.gradle
-.idea
-.navigation
-build/
+.navigation/
 captures/
-*.iml
 output.json
 
 # NDK
-.externalNativeBuild
+.externalNativeBuild/
 obj/
+
+# IntelliJ
+## User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+## Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+## Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+## VCS
+.idea/vcs.xml
+## Module files
+*.iml
+## File-based project format
+*.iws
