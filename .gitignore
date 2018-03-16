@@ -8,7 +8,7 @@
 
 # uilt library files
 *.aar
-*.jarB
+*.jar
 
 # Built native files
 *.o
