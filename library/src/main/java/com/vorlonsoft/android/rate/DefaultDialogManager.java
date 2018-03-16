@@ -42,21 +42,21 @@ public class DefaultDialogManager implements DialogManager {
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            final Intent intentToAppstore;
+            final Intent intentToAppStore;
             switch(options.getStoreType()) {
                 case AMAZON:
-                    intentToAppstore = createIntentForAmazonAppstore(context);
+                    intentToAppStore = createIntentForAmazonAppstore(context);
                     break;
                 case SAMSUNG:
-                    intentToAppstore = createIntentForSamsungGalaxyApps(context);
+                    intentToAppStore = createIntentForSamsungGalaxyApps(context);
                     break;
                 default:
-                    intentToAppstore = createIntentForGooglePlay(context);
+                    intentToAppStore = createIntentForGooglePlay(context);
             }
             try {
-                context.startActivity(intentToAppstore);
+                context.startActivity(intentToAppStore);
             } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppstore, e);
+                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, e);
                 switch(options.getStoreType()) {
                     case AMAZON:
                         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/gp/mas/dl/android?p=" + context.getPackageName())));

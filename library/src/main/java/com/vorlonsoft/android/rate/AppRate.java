@@ -202,8 +202,8 @@ public final class AppRate {
         return this;
     }
 
-    public AppRate setStoreType(@SuppressWarnings("SameParameterValue") StoreType appstore) {
-        options.setStoreType(appstore);
+    public AppRate setStoreType(@SuppressWarnings("SameParameterValue") StoreType appStore) {
+        options.setStoreType(appStore);
         return this;
     }
 

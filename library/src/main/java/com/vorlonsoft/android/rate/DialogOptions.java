@@ -96,8 +96,8 @@ final class DialogOptions {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void setStoreType( StoreType appstore ) {
-        storeType = appstore;
+    public void setStoreType( StoreType appStore ) {
+        storeType = appStore;
     }
 
     @SuppressWarnings("unused")
