@@ -6,7 +6,7 @@
 *.ap_
 *.apk
 
-# uilt library files
+# Built library files
 *.aar
 *.jar
 
