@@ -10,19 +10,24 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
     defaultConfig {
-        applicationId "com.vorlonsoft.android.rate.sample"
+        applicationId 'com.vorlonsoft.android.rate.sample'
         minSdkVersion 14
         targetSdkVersion 27
         versionCode 9
-        versionName "1.1.7"
+        versionName '1.1.7'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
+        all {
+            jniDebuggable false
+            renderscriptDebuggable false
+            renderscriptOptimLevel 3
+            embedMicroApp false
+        }
         release {
-            initWith debug
             applicationIdSuffix ""
             zipAlignEnabled true
             debuggable false
@@ -38,10 +43,6 @@ android {
             applicationIdSuffix ".debug"
             zipAlignEnabled false
             debuggable true
-            jniDebuggable false
-            renderscriptDebuggable false
-            renderscriptOptimLevel 3
-            embedMicroApp false
             postprocessing {
                 removeUnusedCode false
                 removeUnusedResources false
@@ -59,7 +60,7 @@ android {
 }
 dependencies {
     implementation project(':library')
-    implementation 'com.google.android.gms:play-services-base:11.8.0'
+    implementation 'com.google.android.gms:play-services-base:12.0.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }
