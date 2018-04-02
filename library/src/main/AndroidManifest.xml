@@ -11,8 +11,6 @@
     android:versionName="1.0.9"
     tools:ignore="GradleOverrides">
 
-    <uses-sdk android:minSdkVersion="9" />
-
     <application/>
 
 </manifest>
