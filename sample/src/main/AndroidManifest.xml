@@ -11,8 +11,6 @@
     android:versionName="1.1.7"
     tools:ignore="GradleOverrides">
 
-    <uses-sdk android:minSdkVersion="14" />
-
     <application
         android:name=".SampleApplication"
         android:allowBackup="false"
