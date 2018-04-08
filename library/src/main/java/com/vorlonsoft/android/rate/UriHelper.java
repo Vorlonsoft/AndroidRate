@@ -15,7 +15,7 @@ import java.util.List;
 
 final class UriHelper {
 
-    private static final String GOOGLE_PLAY = "https://play.google.com/store/apps/details?id=";
+    private static final String GOOGLE_PLAY = "market://details?id=";
 
     private static final String AMAZON_APPSTORE = "amzn://apps/android?p=";
 
