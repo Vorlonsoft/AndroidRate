@@ -31,15 +31,18 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY (Google Play), other options are
-                                          //           AMAZON (Amazon Appstore) and
-                                          //           SAMSUNG (Samsung Galaxy Apps)
-      .setInstallDays((byte) 0) // default 10, 0 means install day
-      .setLaunchTimes((byte) 3) // default 10
-      .setRemindInterval((byte) 2) // default 1
-      .setRemindLaunchTimes((byte) 2) // default 1 (each launch)
-      .setShowLaterButton(true) // default true
-      .setDebug(false) // default false
+      .setStoreType(StoreType.GOOGLEPLAY) // default is GOOGLEPLAY (Google Play), other options are
+                                          //           AMAZON (Amazon Appstore),
+                                          //           MI (Mi Appstore),
+                                          //           SAMSUNG (Samsung Galaxy Apps),
+                                          //           TENCENT (Tencent App Store) and
+                                          //           OTHER (Any Other Store)
+      .setInstallDays((byte) 0)           // default 10, 0 means install day
+      .setLaunchTimes((byte) 3)           // default 10
+      .setRemindInterval((byte) 2)        // default 1
+      .setRemindLaunchTimes((byte) 2)     // default 1 (each launch)
+      .setShowLaterButton(true)           // default true
+      .setDebug(false)                    // default false
       //Java 8+: .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which)))
       .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
           @Override
@@ -92,7 +95,7 @@ AppRate.with(this).clearAgreeShowDialog();
 
 ### When the button presses on
 
-call `AppRate#showRateDialog(Activity)`.
+Call `AppRate#showRateDialog(Activity)`.
 
 ```java
 AppRate.with(this).showRateDialog(this);
@@ -100,7 +103,7 @@ AppRate.with(this).showRateDialog(this);
 
 ### Set custom view
 
-call `AppRate#setView(View)`.
+Call `AppRate#setView(View)`.
 
 ```java
 LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -128,6 +131,24 @@ If you want to use your own dialog labels, override string xml resources on your
     <string name="rate_dialog_cancel">Remind Me Later</string>
     <string name="rate_dialog_no">No, Thanks</string>
 </resources>
+```
+
+### Other appstores
+
+```java
+AppRate.with(this).setStoreType(StoreType.GOOGLEPLAY);    // Google Play
+AppRate.with(this).setStoreType(StoreType.AMAZON);        // Amazon Appstore
+AppRate.with(this).setStoreType(StoreType.MI);            // Mi Appstore
+AppRate.with(this).setStoreType(StoreType.SAMSUNG);       // Samsung Galaxy Apps
+AppRate.with(this).setStoreType(StoreType.TENCENT);       // Tencent App Store
+```
+
+Any other store
+
+```java
+AppRate.with(this).setStoreType(StoreType.OTHER, String); // Any other store,
+                                                          // String - url to your app
+                                                          // e. g. "https://app.com/app?id=com.yourapp"
 ```
 
 ### Check that Google Play is available
