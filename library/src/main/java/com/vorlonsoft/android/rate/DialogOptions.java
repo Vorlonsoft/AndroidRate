@@ -7,6 +7,7 @@
 package com.vorlonsoft.android.rate;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 
 import java.lang.ref.Reference;
@@ -23,6 +24,8 @@ final class DialogOptions {
     private boolean cancelable = false;
 
     private StoreType storeType = StoreType.GOOGLEPLAY;
+
+    private Uri otherStoreUri = null;
 
     private int titleResId = R.string.rate_dialog_title;
 
@@ -96,8 +99,21 @@ final class DialogOptions {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void setStoreType( StoreType appStore ) {
+    public Uri getOtherStoreUri() {
+        return otherStoreUri;
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public void setStoreType(StoreType appStore) {
         storeType = appStore;
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public void setStoreType(StoreType appStore, String url) {
+        storeType = appStore;
+        if (appStore == StoreType.OTHER) {
+            otherStoreUri = Uri.parse(url);
+        }
     }
 
     @SuppressWarnings("unused")

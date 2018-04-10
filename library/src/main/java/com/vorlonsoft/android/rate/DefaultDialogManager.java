@@ -12,15 +12,24 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 
+import static com.vorlonsoft.android.rate.IntentHelper.AMAZON_APPSTORE_PACKAGE_NAME;
+import static com.vorlonsoft.android.rate.IntentHelper.GOOGLE_PLAY_PACKAGE_NAME;
+import static com.vorlonsoft.android.rate.IntentHelper.SAMSUNG_GALAXY_APPS_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForGooglePlay;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForMiAppstore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForOther;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSamsungGalaxyApps;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForTencentAppStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
+import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
+import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
+import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
+import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {
@@ -47,8 +56,17 @@ public class DefaultDialogManager implements DialogManager {
                 case AMAZON:
                     intentToAppStore = createIntentForAmazonAppstore(context);
                     break;
+                case MI:
+                    intentToAppStore = createIntentForMiAppstore(context);
+                    break;
+                case OTHER:
+                    intentToAppStore = createIntentForOther(options.getOtherStoreUri());
+                    break;
                 case SAMSUNG:
                     intentToAppStore = createIntentForSamsungGalaxyApps(context);
+                    break;
+                case TENCENT:
+                    intentToAppStore = createIntentForTencentAppStore(context);
                     break;
                 default:
                     intentToAppStore = createIntentForGooglePlay(context);
@@ -59,13 +77,20 @@ public class DefaultDialogManager implements DialogManager {
                 Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, e);
                 switch(options.getStoreType()) {
                     case AMAZON:
-                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.amazon.com/gp/mas/dl/android?p=" + context.getPackageName())));
+                        if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(context.getPackageName())));
+                        }
+                        break;
+                    case GOOGLEPLAY:
+                        if (isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(context.getPackageName())));
+                        }
                         break;
                     case SAMSUNG:
-                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.samsungapps.com/appquery/appDetail.as?appId=" + context.getPackageName())));
+                        if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, getSamsungGalaxyAppsWeb(context.getPackageName())));
+                        }
                         break;
-                    default:
-                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + context.getPackageName())));
                 }
             }
             setAgreeShowDialog(context, false);

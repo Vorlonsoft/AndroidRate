@@ -7,7 +7,10 @@
 package com.vorlonsoft.android.rate;
 
 public enum StoreType {
-    GOOGLEPLAY,
-    AMAZON,
-    SAMSUNG
+    AMAZON,      // Amazon Appstore
+    GOOGLEPLAY,  // Google Play
+    MI,          // Mi Appstore
+    OTHER,       // Any Other Store
+    SAMSUNG,     // Samsung Galaxy Apps
+    TENCENT      // Tencent App Store
 }

@@ -60,16 +60,19 @@ public class MainActivity extends Activity {
 
         // callback listener.
         AppRate.with(this)
-                .setStoreType(StoreType.GOOGLEPLAY) //default is GOOGLEPLAY (Google Play), other options are
-                                                    //           AMAZON (Amazon Appstore) and
-                                                    //           SAMSUNG (Samsung Galaxy Apps)
-                .setInstallDays((byte) 3) // default 10, 0 means install day.
-                .setLaunchTimes((byte) 10) // default 10 times.
-                .setRemindInterval((byte) 2) // default 1 day.
-                .setRemindLaunchTimes ((byte) 4) // default 1 (each launch).
-                .setShowLaterButton(true) // default true.
-                .setDebug(true) // default false.
-                .setCancelable(false) // default false.
+                .setStoreType(StoreType.GOOGLEPLAY) // default is GOOGLEPLAY (Google Play), other options are
+                                                    //           AMAZON (Amazon Appstore),
+                                                    //           MI (Mi Appstore),
+                                                    //           SAMSUNG (Samsung Galaxy Apps),
+                                                    //           TENCENT (Tencent App Store) and
+                                                    //           OTHER (Any Other Store)
+                .setInstallDays((byte) 3)           // default 10, 0 means install day.
+                .setLaunchTimes((byte) 10)          // default 10 times.
+                .setRemindInterval((byte) 2)        // default 1 day.
+                .setRemindLaunchTimes ((byte) 4)    // default 1 (each launch).
+                .setShowLaterButton(true)           // default true.
+                .setDebug(true)                     // default false.
+                .setCancelable(false)               // default false.
                 .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which) + ""))
                 // comment to use library strings instead app strings
                 .setTitle(R.string.new_rate_dialog_title)
