@@ -210,6 +210,7 @@ public final class AppRate {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public AppRate setStoreType(@SuppressWarnings("SameParameterValue") StoreType appStore, String url) {
         options.setStoreType(appStore, url);
         return this;
