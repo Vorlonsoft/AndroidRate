@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## 1.1.0 (released 11.04.2018)
+
+- LIBcc10411
+- LIBff10411 Appstores
+- LIBcc10410
+- LIBbb10408
+- LIBcc10402
+- LIBbb20401
+- LIBbb10401
+- LIBbb10331
+- LIBff10331
+- LIBff10330
+- LIBcc10330
+- LIBcc30327
+- LIBff10327
+- LIBcc20327
+- LIBcc10327
+- LIBbb10322
+- LIBcc10322
+- LIBcc10320
+- LIBcc20316 Inspection
+- LIBcc10316
+- LIBcc10313
+
 ## 1.0.9 (released 09.03.2018)
 
 - LIBcc10307 Copyright update
