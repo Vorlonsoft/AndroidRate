@@ -203,15 +203,19 @@ public final class AppRate {
     }
 
     public AppRate setStoreType(@SuppressWarnings("SameParameterValue") StoreType appStore) {
-        if (appStore == StoreType.OTHER) {
-            throw new IllegalStateException("For StoreType.OTHER you must use setStoreType(StoreType appStore, String url), NOT setStoreType(StoreType appStore)!");
-        }
-        options.setStoreType(appStore);
-        return this;
+        return setStoreType(appStore, null);
     }
 
     @SuppressWarnings("unused")
-    public AppRate setStoreType(@SuppressWarnings("SameParameterValue") StoreType appStore, String url) {
+    public AppRate setStoreType(String url) {
+        return setStoreType(StoreType.OTHER, url);
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public AppRate setStoreType(StoreType appStore, String url) {
+        if ((appStore == StoreType.OTHER)&&(url == null)) {
+            throw new IllegalArgumentException("For StoreType.OTHER you must use setStoreType(String url) and 'url' must be != null");
+        }
         options.setStoreType(appStore, url);
         return this;
     }

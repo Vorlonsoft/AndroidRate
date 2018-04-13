@@ -9,12 +9,12 @@ AndroidRate is a library to help you promote your android app by prompting users
 
 You can download from Maven Central.
 
-${latest.version} is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.vorlonsoft/androidrate/badge.svg)
+$latestVersion is ![Maven Badges](https://maven-badges.herokuapp.com/maven-central/com.vorlonsoft/androidrate/badge.svg)
 
 Gradle
 ```groovy
 dependencies {
-  implementation 'com.vorlonsoft:androidrate:{latest.version}'
+  implementation 'com.vorlonsoft:androidrate:$latestVersion'
 }
 ```
 
@@ -32,11 +32,9 @@ protected void onCreate(Bundle savedInstanceState) {
 
   AppRate.with(this)
       .setStoreType(StoreType.GOOGLEPLAY) // default is GOOGLEPLAY (Google Play), other options are
-                                          //           AMAZON (Amazon Appstore),
-                                          //           MI (Mi Appstore),
-                                          //           SAMSUNG (Samsung Galaxy Apps),
-                                          //           TENCENT (Tencent App Store) and
-                                          //           OTHER (Any Other Store)
+                                          //            AMAZON (Amazon Appstore), MI (Mi Appstore),
+                                          //            SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store) and
+                                          //            OTHER (Any Other Store)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
       .setLaunchTimes((byte) 3)           // default 10
       .setRemindInterval((byte) 2)        // default 1
@@ -146,9 +144,9 @@ AppRate.with(this).setStoreType(StoreType.TENCENT);       // Tencent App Store
 Any other store
 
 ```java
-AppRate.with(this).setStoreType(StoreType.OTHER, String); // Any other store,
-                                                          // String - url to your app
-                                                          // e. g. "https://app.com/app?id=com.yourapp"
+AppRate.with(this).setStoreType(String); // Any other store,
+                                         // String - url to your app
+                                         // e. g. "https://app.com/app?id=com.yourapp"
 ```
 
 ### Check that Google Play is available

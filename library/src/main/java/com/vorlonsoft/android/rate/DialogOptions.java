@@ -103,7 +103,7 @@ final class DialogOptions {
         return otherStoreUri;
     }
 
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings("WeakerAccess, unused")
     public void setStoreType(StoreType appStore) {
         storeType = appStore;
     }
