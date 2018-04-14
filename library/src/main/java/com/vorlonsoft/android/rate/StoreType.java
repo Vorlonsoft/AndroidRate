@@ -8,6 +8,7 @@ package com.vorlonsoft.android.rate;
 
 public enum StoreType {
     AMAZON,      // Amazon Appstore
+    BAZAAR,      // Cafe Bazaar
     BLACKBERRY,  // BlackBerry World
     GOOGLEPLAY,  // Google Play
     MI,          // Mi Appstore

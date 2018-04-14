@@ -31,7 +31,7 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), MI (Mi Appstore),
+      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar), MI (Mi Appstore),
                                           //         SLIDEME (SlideME), SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store),
                                           //         setStoreType(int) (BlackBerry World, int - your application ID) and
                                           //         setStoreType(String) (Any other store, String - an full URI to your app)
@@ -140,6 +140,7 @@ You can use a different Appstores.
 ```java
 AppRate.with(this).setStoreType(StoreType.GOOGLEPLAY); // Google Play
 AppRate.with(this).setStoreType(StoreType.AMAZON);     // Amazon Appstore
+AppRate.with(this).setStoreType(StoreType.BAZAAR);     // Cafe Bazaar
 AppRate.with(this).setStoreType(StoreType.MI);         // Mi Appstore
 AppRate.with(this).setStoreType(StoreType.SAMSUNG);    // Samsung Galaxy Apps
 AppRate.with(this).setStoreType(StoreType.SLIDEME);    // SlideME

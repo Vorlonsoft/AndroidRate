@@ -14,6 +14,8 @@ import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstore;
 import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorld;
 import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorldWeb;
+import static com.vorlonsoft.android.rate.UriHelper.getCafeBazaar;
+import static com.vorlonsoft.android.rate.UriHelper.getCafeBazaarWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getGooglePlay;
 import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getMiAppstore;
@@ -28,6 +30,7 @@ final class IntentHelper {
 
     static final String AMAZON_APPSTORE_PACKAGE_NAME = "com.amazon.venezia";
     static final String BLACKBERRY_WORLD_PACKAGE_NAME = "net.rim.bb.appworld";
+    static final String CAFE_BAZAAR_PACKAGE_NAME = "com.farsitel.bazaar";
     static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
     static final String SAMSUNG_GALAXY_APPS_PACKAGE_NAME = "com.sec.android.app.samsungapps";
     static final String SLIDEME_PACKAGE_NAME = "com.slideme.sam.manager";
@@ -68,6 +71,25 @@ final class IntentHelper {
             intent.setPackage(BLACKBERRY_WORLD_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(applicationId));
+        }
+        return intent;
+    }
+
+    static Intent createIntentForCafeBazaar(Context context) {
+        Intent intent;
+        String packageName = context.getPackageName();
+        if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
+            intent = new Intent(Intent.ACTION_VIEW, getCafeBazaar(packageName));
+            // Make sure it DOESN'T open in the stack of packageName activity
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // Task reparenting if needed
+            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+            // If the Amazon Appstore was already open in a search result
+            // this make sure it still go to the app page you requested
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setPackage(CAFE_BAZAAR_PACKAGE_NAME);
+        } else {
+            intent = new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(packageName));
         }
         return intent;
     }
