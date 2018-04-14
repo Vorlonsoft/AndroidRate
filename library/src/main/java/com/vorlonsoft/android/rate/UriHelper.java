@@ -33,6 +33,10 @@ final class UriHelper {
 
     private static final String SAMSUNG_GALAXY_APPS_WEB = "https://www.samsungapps.com/appquery/appDetail.as?appId=";
 
+    private static final String SLIDEME = "sam://details?id=";
+
+    private static final String SLIDEME_WEB = "http://slideme.org/app/";
+
     private static final String TENCENT_APP_STORE = "http://android.myapp.com/myapp/detail.htm?apkName=";
 
     private UriHelper() {
@@ -72,6 +76,14 @@ final class UriHelper {
 
     static Uri getSamsungGalaxyAppsWeb(String packageName) {
         return packageName == null ? null : Uri.parse(SAMSUNG_GALAXY_APPS_WEB + packageName);
+    }
+
+    static Uri getSlideME(String packageName) {
+        return packageName == null ? null : Uri.parse(SLIDEME + packageName);
+    }
+
+    static Uri getSlideMEWeb(String packageName) {
+        return packageName == null ? null : Uri.parse(SLIDEME_WEB + packageName);
     }
 
     static Uri getTencentAppStore(String packageName) {

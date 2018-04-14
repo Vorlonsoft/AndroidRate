@@ -13,5 +13,6 @@ public enum StoreType {
     MI,          // Mi Appstore
     OTHER,       // Any Other Store
     SAMSUNG,     // Samsung Galaxy Apps
+    SLIDEME,     // SlideME
     TENCENT      // Tencent App Store
 }

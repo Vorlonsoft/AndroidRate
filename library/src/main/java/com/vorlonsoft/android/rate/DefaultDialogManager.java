@@ -19,12 +19,14 @@ import static com.vorlonsoft.android.rate.IntentHelper.AMAZON_APPSTORE_PACKAGE_N
 import static com.vorlonsoft.android.rate.IntentHelper.BLACKBERRY_WORLD_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.GOOGLE_PLAY_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.SAMSUNG_GALAXY_APPS_PACKAGE_NAME;
+import static com.vorlonsoft.android.rate.IntentHelper.SLIDEME_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForBlackBerryWorld;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForGooglePlay;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForMiAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForOther;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSamsungGalaxyApps;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSlideME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForTencentAppStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
@@ -32,6 +34,7 @@ import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorldWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
+import static com.vorlonsoft.android.rate.UriHelper.getSlideMEWeb;
 import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
@@ -71,6 +74,9 @@ public class DefaultDialogManager implements DialogManager {
                 case SAMSUNG:
                     intentToAppStore = createIntentForSamsungGalaxyApps(context);
                     break;
+                case SLIDEME:
+                    intentToAppStore = createIntentForSlideME(context);
+                    break;
                 case TENCENT:
                     intentToAppStore = createIntentForTencentAppStore(context);
                     break;
@@ -100,6 +106,11 @@ public class DefaultDialogManager implements DialogManager {
                     case SAMSUNG:
                         if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
                             context.startActivity(new Intent(Intent.ACTION_VIEW, getSamsungGalaxyAppsWeb(context.getPackageName())));
+                        }
+                        break;
+                    case SLIDEME:
+                        if (isPackageExists(context, SLIDEME_PACKAGE_NAME)) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, getSlideMEWeb(context.getPackageName())));
                         }
                         break;
                 }
