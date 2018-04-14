@@ -31,10 +31,10 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) // default is GOOGLEPLAY (Google Play), other options are
-                                          //            AMAZON (Amazon Appstore), MI (Mi Appstore),
-                                          //            SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store) and
-                                          //            OTHER (Any Other Store)
+      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore),
+                                          //         MI (Mi Appstore), SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store),
+                                          //         setStoreType(int) (BlackBerry World, int - your application ID) and
+                                          //         setStoreType(String) (Any other store, String - an full URI to your app)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
       .setLaunchTimes((byte) 3)           // default 10
       .setRemindInterval((byte) 2)        // default 1
@@ -104,8 +104,8 @@ AppRate.with(this).showRateDialog(this);
 Call `AppRate#setView(View)`.
 
 ```java
-LayoutInflater inflater = (LayoutInflater)this.getSystemService(LAYOUT_INFLATER_SERVICE);
-View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup)findViewById(R.id.layout_root));
+LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
+View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.layout_root));
 AppRate.with(this).setView(view).monitor();
 ```
 
@@ -131,22 +131,35 @@ If you want to use your own dialog labels, override string xml resources on your
 </resources>
 ```
 
-### Other appstores
+### Appstores
+
+You can use a different Appstores.
+
+#### Google Play, Amazon Appstore, Mi Appstore, Samsung Galaxy Apps, Tencent App Store
 
 ```java
-AppRate.with(this).setStoreType(StoreType.GOOGLEPLAY);    // Google Play
-AppRate.with(this).setStoreType(StoreType.AMAZON);        // Amazon Appstore
-AppRate.with(this).setStoreType(StoreType.MI);            // Mi Appstore
-AppRate.with(this).setStoreType(StoreType.SAMSUNG);       // Samsung Galaxy Apps
-AppRate.with(this).setStoreType(StoreType.TENCENT);       // Tencent App Store
+AppRate.with(this).setStoreType(StoreType.GOOGLEPLAY); // Google Play
+AppRate.with(this).setStoreType(StoreType.AMAZON);     // Amazon Appstore
+AppRate.with(this).setStoreType(StoreType.MI);         // Mi Appstore
+AppRate.with(this).setStoreType(StoreType.SAMSUNG);    // Samsung Galaxy Apps
+AppRate.with(this).setStoreType(StoreType.TENCENT);    // Tencent App Store
 ```
 
-Any other store
+#### BlackBerry World
+
+```java
+AppRate.with(this).setStoreType(int); // BlackBerry World,
+                                      // int - your BlackBerry World application ID
+                                      // e. g. 50777 for Facebook
+```
+
+#### Other store
 
 ```java
 AppRate.with(this).setStoreType(String); // Any other store,
-                                         // String - url to your app
-                                         // e. g. "https://app.com/app?id=com.yourapp"
+                                         // String - an RFC 2396-compliant URI to your app
+                                         // e. g. "https://otherstore.com/app?id=com.yourapp"
+                                         // or "otherstore://apps/com.yourapp"
 ```
 
 ### Check that Google Play is available
