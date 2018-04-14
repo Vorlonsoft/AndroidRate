@@ -25,11 +25,11 @@ final class Utils {
     }
 
     @SuppressLint("ObsoleteSdkInt")
-    static AlertDialog.Builder getDialogBuilder(Context context, Integer pThemeResId) {
+    static AlertDialog.Builder getDialogBuilder(Context context, int themeResId) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             return new AlertDialog.Builder(context);
         } else {
-            return new AlertDialog.Builder(context, pThemeResId != null ? pThemeResId : getDialogTheme());
+            return new AlertDialog.Builder(context, themeResId != 0 ? themeResId : getDialogTheme());
         }
     }
 

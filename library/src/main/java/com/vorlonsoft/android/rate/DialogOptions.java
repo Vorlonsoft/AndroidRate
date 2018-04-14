@@ -15,43 +15,45 @@ import java.lang.ref.WeakReference;
 
 final class DialogOptions {
 
-    private boolean showNeutralButton = true;
+    private boolean cancelable = false;
 
     private boolean showNegativeButton = true;
 
+    private boolean showNeutralButton = true;
+
     private boolean showTitle = true;
 
-    private boolean cancelable = false;
+    private int textMessageResId = R.string.rate_dialog_message;
+
+    private int textNegativeResId = R.string.rate_dialog_no;
+
+    private int textNeutralResId = R.string.rate_dialog_cancel;
+
+    private int textPositiveResId = R.string.rate_dialog_ok;
+
+    private int textTitleResId = R.string.rate_dialog_title;
+
+    private int themeResId = 0;
+
+    private String blackBerryWorldApplicationId = null;
+
+    private String messageText = null;
+
+    private String negativeText = null;
+
+    private String neutralText = null;
+
+    private String positiveText = null;
+
+    private String titleText = null;
 
     private StoreType storeType = StoreType.GOOGLEPLAY;
 
     private Uri otherStoreUri = null;
 
-    private int titleResId = R.string.rate_dialog_title;
+    private View view = null;
 
-    private int messageResId = R.string.rate_dialog_message;
-
-    private int textPositiveResId = R.string.rate_dialog_ok;
-
-    private int textNeutralResId = R.string.rate_dialog_cancel;
-
-    private int textNegativeResId = R.string.rate_dialog_no;
-
-    private String titleText = null;
-
-    private int themeResId;
-
-    private String messageText = null;
-
-    private String positiveText = null;
-
-    private String neutralText = null;
-
-    private String negativeText = null;
-
-    private View view;
-
-    private Reference<OnClickButtonListener> listener;
+    private Reference<OnClickButtonListener> listener = null;
 
     @SuppressWarnings("WeakerAccess")
     public boolean shouldShowNeutralButton() {
@@ -99,41 +101,56 @@ final class DialogOptions {
     }
 
     @SuppressWarnings("WeakerAccess")
+    public String getBlackBerryWorldApplicationId() {
+        return blackBerryWorldApplicationId;
+    }
+
+    @SuppressWarnings("WeakerAccess")
     public Uri getOtherStoreUri() {
         return otherStoreUri;
     }
 
     @SuppressWarnings("WeakerAccess, unused")
     public void setStoreType(StoreType appStore) {
-        storeType = appStore;
+        setStoreType(appStore, null);
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void setStoreType(StoreType appStore, String url) {
+    public void setStoreType(StoreType appStore, String param) {
         storeType = appStore;
-        if (appStore == StoreType.OTHER) {
-            otherStoreUri = Uri.parse(url);
+        if (appStore == StoreType.BLACKBERRY) {
+            if (param == null) {
+                throw new IllegalArgumentException("For StoreType.BLACKBERRY you must use setStoreType(StoreType appStore, String applicationId) and 'applicationId' must be != null");
+            } else {
+                blackBerryWorldApplicationId = param;
+            }
+        } else if (appStore == StoreType.OTHER) {
+            if (param == null) {
+                throw new IllegalArgumentException("For StoreType.OTHER you must use setStoreType(StoreType appStore, String uri) and 'uri' must be != null");
+            } else {
+                otherStoreUri = Uri.parse(param);
+            }
         }
     }
 
     @SuppressWarnings("unused")
     public int getTitleResId() {
-        return titleResId;
+        return textTitleResId;
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void setTitleResId(int titleResId) {
-        this.titleResId = titleResId;
+    public void setTitleResId(int textTitleResId) {
+        this.textTitleResId = textTitleResId;
     }
 
     @SuppressWarnings("unused")
     public int getMessageResId() {
-        return messageResId;
+        return textMessageResId;
     }
 
     @SuppressWarnings("WeakerAccess")
-    public void setMessageResId(int messageResId) {
-        this.messageResId = messageResId;
+    public void setMessageResId(int textMessageResId) {
+        this.textMessageResId = textMessageResId;
     }
 
     @SuppressWarnings("unused")
@@ -188,7 +205,7 @@ final class DialogOptions {
     @SuppressWarnings("WeakerAccess")
     public String getTitleText(Context context) {
         if (titleText == null) {
-            return context.getString(titleResId);
+            return context.getString(textTitleResId);
         }
         return titleText;
     }
@@ -201,7 +218,7 @@ final class DialogOptions {
     @SuppressWarnings("WeakerAccess")
     public String getMessageText(Context context) {
         if (messageText == null) {
-            return context.getString(messageResId);
+            return context.getString(textMessageResId);
         }
         return messageText;
     }
@@ -251,7 +268,7 @@ final class DialogOptions {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public Integer getThemeResId() {
+    public int getThemeResId() {
         return themeResId;
     }
 

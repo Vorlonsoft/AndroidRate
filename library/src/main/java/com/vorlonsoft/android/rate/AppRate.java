@@ -207,16 +207,23 @@ public final class AppRate {
     }
 
     @SuppressWarnings("unused")
-    public AppRate setStoreType(String url) {
-        return setStoreType(StoreType.OTHER, url);
+    public AppRate setStoreType(int applicationID) {
+        return setStoreType(StoreType.BLACKBERRY, String.valueOf(applicationID));
+    }
+
+    @SuppressWarnings("unused")
+    public AppRate setStoreType(String uri) {
+        return setStoreType(StoreType.OTHER, uri);
     }
 
     @SuppressWarnings("WeakerAccess")
-    public AppRate setStoreType(StoreType appStore, String url) {
-        if ((appStore == StoreType.OTHER)&&(url == null)) {
-            throw new IllegalArgumentException("For StoreType.OTHER you must use setStoreType(String url) and 'url' must be != null");
+    public AppRate setStoreType(StoreType appStore, String param) {
+        if ((appStore == StoreType.BLACKBERRY)&&(param == null)) {
+            throw new IllegalArgumentException("For StoreType.BLACKBERRY you must use setStoreType(int applicationID)");
+        } else if ((appStore == StoreType.OTHER)&&(param == null)) {
+            throw new IllegalArgumentException("For StoreType.OTHER you must use setStoreType(String uri) and 'uri' must be != null");
         }
-        options.setStoreType(appStore, url);
+        options.setStoreType(appStore, param);
         return this;
     }
 
@@ -236,8 +243,8 @@ public final class AppRate {
     }
 
     @SuppressWarnings("unused")
-    public AppRate setThemeResId(int pThemeResId){
-        options.setThemeResId(pThemeResId);
+    public AppRate setThemeResId(int themeResId){
+        options.setThemeResId(themeResId);
         return this;
     }
 

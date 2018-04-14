@@ -60,10 +60,10 @@ public class MainActivity extends Activity {
 
         // callback listener.
         AppRate.with(this)
-                .setStoreType(StoreType.GOOGLEPLAY) // default is GOOGLEPLAY (Google Play), other options are
-                                                    //            AMAZON (Amazon Appstore), MI (Mi Appstore),
-                                                    //            SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store) and
-                                                    //            OTHER (Any Other Store)
+                .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore),
+                                                    //         MI (Mi Appstore), SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store),
+                                                    //         setStoreType(int) (BlackBerry World, int - your application ID) and
+                                                    //         setStoreType(String) (Any other store, String - an full URI to your app)
                 .setInstallDays((byte) 3)           // default 10, 0 means install day.
                 .setLaunchTimes((byte) 10)          // default 10 times.
                 .setRemindInterval((byte) 2)        // default 1 day.
