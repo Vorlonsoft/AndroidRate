@@ -31,8 +31,8 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore),
-                                          //         MI (Mi Appstore), SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store),
+      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), MI (Mi Appstore),
+                                          //         SLIDEME (SlideME), SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store),
                                           //         setStoreType(int) (BlackBerry World, int - your application ID) and
                                           //         setStoreType(String) (Any other store, String - an full URI to your app)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
@@ -142,6 +142,7 @@ AppRate.with(this).setStoreType(StoreType.GOOGLEPLAY); // Google Play
 AppRate.with(this).setStoreType(StoreType.AMAZON);     // Amazon Appstore
 AppRate.with(this).setStoreType(StoreType.MI);         // Mi Appstore
 AppRate.with(this).setStoreType(StoreType.SAMSUNG);    // Samsung Galaxy Apps
+AppRate.with(this).setStoreType(StoreType.SLIDEME);    // SlideME
 AppRate.with(this).setStoreType(StoreType.TENCENT);    // Tencent App Store
 ```
 
