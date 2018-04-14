@@ -17,11 +17,13 @@ import android.view.View;
 
 import static com.vorlonsoft.android.rate.IntentHelper.AMAZON_APPSTORE_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.BLACKBERRY_WORLD_PACKAGE_NAME;
+import static com.vorlonsoft.android.rate.IntentHelper.CAFE_BAZAAR_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.GOOGLE_PLAY_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.SAMSUNG_GALAXY_APPS_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.SLIDEME_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForBlackBerryWorld;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForCafeBazaar;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForGooglePlay;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForMiAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForOther;
@@ -32,6 +34,7 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
 import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorldWeb;
+import static com.vorlonsoft.android.rate.UriHelper.getCafeBazaarWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getSlideMEWeb;
@@ -62,6 +65,9 @@ public class DefaultDialogManager implements DialogManager {
                 case AMAZON:
                     intentToAppStore = createIntentForAmazonAppstore(context);
                     break;
+                case BAZAAR:
+                    intentToAppStore = createIntentForCafeBazaar(context);
+                    break;
                 case BLACKBERRY:
                     intentToAppStore = createIntentForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
                     break;
@@ -91,6 +97,11 @@ public class DefaultDialogManager implements DialogManager {
                     case AMAZON:
                         if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
                             context.startActivity(new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(context.getPackageName())));
+                        }
+                        break;
+                    case BAZAAR:
+                        if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(context.getPackageName())));
                         }
                         break;
                     case BLACKBERRY:

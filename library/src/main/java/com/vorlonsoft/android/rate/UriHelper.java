@@ -23,6 +23,10 @@ final class UriHelper {
 
     private static final String BLACKBERRY_WORLD_WEB = "https://appworld.blackberry.com/webstore/content/";
 
+    private static final String CAFE_BAZAAR = "bazaar://details?id=";
+
+    private static final String CAFE_BAZAAR_WEB = "https://cafebazaar.ir/app/";
+
     private static final String GOOGLE_PLAY = "market://details?id=";
 
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
@@ -56,6 +60,14 @@ final class UriHelper {
 
     static Uri getBlackBerryWorldWeb(String applicationId) {
         return applicationId == null ? null : Uri.parse(BLACKBERRY_WORLD_WEB + applicationId);
+    }
+
+    static Uri getCafeBazaar(String packageName) {
+        return packageName == null ? null : Uri.parse(CAFE_BAZAAR + packageName);
+    }
+
+    static Uri getCafeBazaarWeb(String packageName) {
+        return packageName == null ? null : Uri.parse(CAFE_BAZAAR_WEB + packageName);
     }
 
     static Uri getGooglePlay(String packageName) {
