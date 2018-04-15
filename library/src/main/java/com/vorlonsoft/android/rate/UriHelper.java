@@ -35,7 +35,7 @@ final class UriHelper {
 
     private static final String SAMSUNG_GALAXY_APPS = "samsungapps://ProductDetail/";
 
-    private static final String SAMSUNG_GALAXY_APPS_WEB = "https://www.samsungapps.com/appquery/appDetail.as?appId=";
+    private static final String SAMSUNG_GALAXY_APPS_WEB = "https://apps.samsung.com/appquery/appDetail.as?appId=";
 
     private static final String SLIDEME = "sam://details?id=";
 
