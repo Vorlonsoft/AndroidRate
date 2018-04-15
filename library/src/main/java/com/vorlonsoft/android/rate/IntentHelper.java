@@ -65,7 +65,7 @@ final class IntentHelper {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             // Task reparenting if needed
             intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Amazon Appstore was already open in a search result
+            // If the BlackBerry World was already open in a search result
             // this make sure it still go to the app page you requested
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setPackage(BLACKBERRY_WORLD_PACKAGE_NAME);
@@ -84,7 +84,7 @@ final class IntentHelper {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             // Task reparenting if needed
             intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Amazon Appstore was already open in a search result
+            // If the Cafe Bazaar was already open in a search result
             // this make sure it still go to the app page you requested
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setPackage(CAFE_BAZAAR_PACKAGE_NAME);
@@ -150,7 +150,7 @@ final class IntentHelper {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             // Task reparenting if needed
             intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Samsung Galaxy Apps was already open in a search result
+            // If the SlideME was already open in a search result
             // this make sure it still go to the app page you requested
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setPackage(SLIDEME_PACKAGE_NAME);
