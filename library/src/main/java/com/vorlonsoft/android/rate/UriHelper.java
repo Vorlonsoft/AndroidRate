@@ -43,6 +43,10 @@ final class UriHelper {
 
     private static final String TENCENT_APP_STORE = "http://android.myapp.com/myapp/detail.htm?apkName=";
 
+    private static final String YANDEX_STORE = "yastore://details?id=";
+
+    private static final String YANDEX_STORE_WEB = "https://store.yandex.com/apps/details?id=";
+
     private UriHelper() {
     }
 
@@ -100,6 +104,14 @@ final class UriHelper {
 
     static Uri getTencentAppStore(String packageName) {
         return packageName == null ? null : Uri.parse(TENCENT_APP_STORE + packageName);
+    }
+
+    static Uri getYandexStore(String packageName) {
+        return packageName == null ? null : Uri.parse(YANDEX_STORE + packageName);
+    }
+
+    static Uri getYandexStoreWeb(String packageName) {
+        return packageName == null ? null : Uri.parse(YANDEX_STORE_WEB + packageName);
     }
 
     static boolean isPackageExists(Context context, @SuppressWarnings("SameParameterValue") String targetPackage) {

@@ -32,9 +32,9 @@ protected void onCreate(Bundle savedInstanceState) {
 
   AppRate.with(this)
       .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar), MI (Mi Appstore),
-                                          //         SLIDEME (SlideME), SAMSUNG (Samsung Galaxy Apps), TENCENT (Tencent App Store),
+                                          //         SAMSUNG (Samsung Galaxy Apps), SLIDEME (SlideME), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
                                           //         setStoreType(int) (BlackBerry World, int - your application ID) and
-                                          //         setStoreType(String) (Any other store, String - an full URI to your app)
+                                          //         setStoreType(String) (Any other store, String - a full URI to your app)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
       .setLaunchTimes((byte) 3)           // default 10
       .setRemindInterval((byte) 2)        // default 1
@@ -145,6 +145,7 @@ AppRate.with(this).setStoreType(StoreType.MI);         // Mi Appstore
 AppRate.with(this).setStoreType(StoreType.SAMSUNG);    // Samsung Galaxy Apps
 AppRate.with(this).setStoreType(StoreType.SLIDEME);    // SlideME
 AppRate.with(this).setStoreType(StoreType.TENCENT);    // Tencent App Store
+AppRate.with(this).setStoreType(StoreType.YANDEX);     // Yandex.Store
 ```
 
 #### BlackBerry World
