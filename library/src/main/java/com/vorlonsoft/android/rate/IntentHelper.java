@@ -20,7 +20,6 @@ import static com.vorlonsoft.android.rate.UriHelper.getGooglePlay;
 import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getMiAppstore;
 import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyApps;
-import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getSlideME;
 import static com.vorlonsoft.android.rate.UriHelper.getSlideMEWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getTencentAppStore;
@@ -138,7 +137,7 @@ final class IntentHelper {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setPackage(SAMSUNG_GALAXY_APPS_PACKAGE_NAME);
         } else {
-            intent = new Intent(Intent.ACTION_VIEW, getSamsungGalaxyAppsWeb(packageName));
+            intent = null;
         }
         return intent;
     }
