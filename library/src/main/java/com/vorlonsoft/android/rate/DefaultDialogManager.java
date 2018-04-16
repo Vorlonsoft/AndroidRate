@@ -21,6 +21,7 @@ import static com.vorlonsoft.android.rate.IntentHelper.CAFE_BAZAAR_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.GOOGLE_PLAY_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.SAMSUNG_GALAXY_APPS_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.SLIDEME_PACKAGE_NAME;
+import static com.vorlonsoft.android.rate.IntentHelper.YANDEX_STORE_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForBlackBerryWorld;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForCafeBazaar;
@@ -30,6 +31,7 @@ import static com.vorlonsoft.android.rate.IntentHelper.createIntentForOther;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSamsungGalaxyApps;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSlideME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForTencentAppStore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentForYandexStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
 import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
@@ -38,6 +40,7 @@ import static com.vorlonsoft.android.rate.UriHelper.getCafeBazaarWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getSlideMEWeb;
+import static com.vorlonsoft.android.rate.UriHelper.getYandexStoreWeb;
 import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
@@ -86,42 +89,80 @@ public class DefaultDialogManager implements DialogManager {
                 case TENCENT:
                     intentToAppStore = createIntentForTencentAppStore(context);
                     break;
+                case YANDEX:
+                    intentToAppStore = createIntentForYandexStore(context);
+                    break;
                 default:
                     intentToAppStore = createIntentForGooglePlay(context);
             }
             try {
-                context.startActivity(intentToAppStore);
+                if (intentToAppStore != null) {
+                    context.startActivity(intentToAppStore);
+                }
             } catch (ActivityNotFoundException e) {
                 Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, e);
                 switch(options.getStoreType()) {
                     case AMAZON:
                         if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(context.getPackageName())));
+                            try {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(context.getPackageName())));
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                            }
                         }
                         break;
                     case BAZAAR:
                         if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(context.getPackageName())));
+                            try {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(context.getPackageName())));
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                            }
                         }
                         break;
                     case BLACKBERRY:
                         if (isPackageExists(context, BLACKBERRY_WORLD_PACKAGE_NAME)) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(options.getBlackBerryWorldApplicationId())));
+                            try {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(options.getBlackBerryWorldApplicationId())));
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                            }
                         }
                         break;
                     case GOOGLEPLAY:
                         if (isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(context.getPackageName())));
+                            try {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(context.getPackageName())));
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                            }
                         }
                         break;
                     case SAMSUNG:
                         if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, getSamsungGalaxyAppsWeb(context.getPackageName())));
+                            try {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, getSamsungGalaxyAppsWeb(context.getPackageName())));
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                            }
                         }
                         break;
                     case SLIDEME:
                         if (isPackageExists(context, SLIDEME_PACKAGE_NAME)) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, getSlideMEWeb(context.getPackageName())));
+                            try {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, getSlideMEWeb(context.getPackageName())));
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                            }
+                        }
+                        break;
+                    case YANDEX:
+                        if (isPackageExists(context, YANDEX_STORE_PACKAGE_NAME)) {
+                            try {
+                                context.startActivity(new Intent(Intent.ACTION_VIEW, getYandexStoreWeb(context.getPackageName())));
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                            }
                         }
                         break;
                 }

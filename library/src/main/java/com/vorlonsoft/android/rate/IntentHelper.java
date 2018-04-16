@@ -24,6 +24,7 @@ import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getSlideME;
 import static com.vorlonsoft.android.rate.UriHelper.getSlideMEWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getTencentAppStore;
+import static com.vorlonsoft.android.rate.UriHelper.getYandexStore;
 import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
 
 final class IntentHelper {
@@ -34,6 +35,7 @@ final class IntentHelper {
     static final String GOOGLE_PLAY_PACKAGE_NAME = "com.android.vending";
     static final String SAMSUNG_GALAXY_APPS_PACKAGE_NAME = "com.sec.android.app.samsungapps";
     static final String SLIDEME_PACKAGE_NAME = "com.slideme.sam.manager";
+    static final String YANDEX_STORE_PACKAGE_NAME = "com.yandex.store";
 
     private IntentHelper() {
     }
@@ -163,6 +165,25 @@ final class IntentHelper {
     static Intent createIntentForTencentAppStore(Context context) {
         String packageName = context.getPackageName();
         return new Intent(Intent.ACTION_VIEW, getTencentAppStore(packageName));
+    }
+
+    static Intent createIntentForYandexStore(Context context) {
+        Intent intent;
+        String packageName = context.getPackageName();
+        if (isPackageExists(context, YANDEX_STORE_PACKAGE_NAME)) {
+            intent = new Intent(Intent.ACTION_VIEW, getYandexStore(packageName));
+            // Make sure it DOESN'T open in the stack of packageName activity
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // Task reparenting if needed
+            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+            // If the Yandex.Store was already open in a search result
+            // this make sure it still go to the app page you requested
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.setPackage(YANDEX_STORE_PACKAGE_NAME);
+        } else {
+            intent = null;
+        }
+        return intent;
     }
 
 }

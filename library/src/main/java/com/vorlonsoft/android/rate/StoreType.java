@@ -15,5 +15,6 @@ public enum StoreType {
     OTHER,       // Any Other Store
     SAMSUNG,     // Samsung Galaxy Apps
     SLIDEME,     // SlideME
-    TENCENT      // Tencent App Store
+    TENCENT,     // Tencent App Store
+    YANDEX       // Yandex.Store
 }
