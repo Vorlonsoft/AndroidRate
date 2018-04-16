@@ -41,7 +41,9 @@ final class UriHelper {
 
     private static final String SLIDEME_WEB = "http://slideme.org/app/";
 
-    private static final String TENCENT_APP_STORE = "http://android.myapp.com/myapp/detail.htm?apkName=";
+    private static final String TENCENT_APP_STORE = "market://details?id=";
+
+    private static final String TENCENT_APP_STORE_WEB = "http://android.myapp.com/myapp/detail.htm?apkName=";
 
     private static final String YANDEX_STORE = "yastore://details?id=";
 
@@ -104,6 +106,10 @@ final class UriHelper {
 
     static Uri getTencentAppStore(String packageName) {
         return packageName == null ? null : Uri.parse(TENCENT_APP_STORE + packageName);
+    }
+
+    static Uri getTencentAppStoreWeb(String packageName) {
+        return packageName == null ? null : Uri.parse(TENCENT_APP_STORE_WEB + packageName);
     }
 
     static Uri getYandexStore(String packageName) {
