@@ -31,8 +31,9 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar), MI (Mi Appstore),
-                                          //         SAMSUNG (Samsung Galaxy Apps), SLIDEME (SlideME), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
+      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
+                                          //         CHINESESTORES (19 chinese app stores), MI (Mi Appstore), SAMSUNG (Samsung Galaxy Apps),
+                                          //         SLIDEME (SlideME), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
                                           //         setStoreType(int) (BlackBerry World, int - your application ID) and
                                           //         setStoreType(String) (Any other store, String - a full URI to your app)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
@@ -135,7 +136,7 @@ If you want to use your own dialog labels, override string xml resources on your
 
 You can use a different Appstores.
 
-#### Google Play, Amazon Appstore, Mi Appstore, Samsung Galaxy Apps, Tencent App Store
+#### Google Play, Amazon Appstore, Cafe Bazaar, Mi Appstore, Samsung Galaxy Apps, SlideME, Tencent App Store, Yandex.Store
 
 ```java
 AppRate.with(this).setStoreType(StoreType.GOOGLEPLAY); // Google Play
@@ -154,6 +155,16 @@ AppRate.with(this).setStoreType(StoreType.YANDEX);     // Yandex.Store
 AppRate.with(this).setStoreType(int); // BlackBerry World,
                                       // int - your BlackBerry World application ID
                                       // e. g. 50777 for Facebook
+```
+
+#### Chinese app stores
+
+Your application will use 1st of the Chinese app stores that it can find on the user device, but remember that the Library doesn't check the availability of your application in the app store.
+
+```java
+AppRate.with(this).setStoreType(StoreType.CHINESESTORES); // 19 chinese app stores: 腾讯应用宝, 360手机助手,
+// 小米应用商店, 华为应用商店, 百度手机助手, OPPO应用商店, 中兴应用商店, VIVO应用商店, 豌豆荚, PP手机助手, 安智应用商店,
+// 91手机助手, 应用汇, QQ手机管家, 机锋应用市场, GO市场, 宇龙Coolpad应用商店, 联想应用商店, cool市场
 ```
 
 #### Other store

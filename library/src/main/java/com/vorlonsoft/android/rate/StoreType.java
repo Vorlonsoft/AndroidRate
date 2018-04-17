@@ -7,14 +7,15 @@
 package com.vorlonsoft.android.rate;
 
 public enum StoreType {
-    AMAZON,      // Amazon Appstore
-    BAZAAR,      // Cafe Bazaar
-    BLACKBERRY,  // BlackBerry World
-    GOOGLEPLAY,  // Google Play
-    MI,          // Mi Appstore
-    OTHER,       // Any Other Store
-    SAMSUNG,     // Samsung Galaxy Apps
-    SLIDEME,     // SlideME
-    TENCENT,     // Tencent App Store
-    YANDEX       // Yandex.Store
+    AMAZON,        // Amazon Appstore
+    BAZAAR,        // Cafe Bazaar
+    BLACKBERRY,    // BlackBerry World
+    CHINESESTORES, // 19 chinese app stores
+    GOOGLEPLAY,    // Google Play
+    MI,            // Mi Appstore
+    OTHER,         // Any Other Store
+    SAMSUNG,       // Samsung Galaxy Apps
+    SLIDEME,       // SlideME
+    TENCENT,       // Tencent App Store
+    YANDEX         // Yandex.Store
 }

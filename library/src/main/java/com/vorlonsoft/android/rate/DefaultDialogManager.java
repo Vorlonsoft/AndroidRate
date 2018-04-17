@@ -16,14 +16,6 @@ import android.util.Log;
 import android.view.View;
 
 import static com.vorlonsoft.android.rate.AppRate.TAG;
-import static com.vorlonsoft.android.rate.IntentHelper.AMAZON_APPSTORE_PACKAGE_NAME;
-import static com.vorlonsoft.android.rate.IntentHelper.BLACKBERRY_WORLD_PACKAGE_NAME;
-import static com.vorlonsoft.android.rate.IntentHelper.CAFE_BAZAAR_PACKAGE_NAME;
-import static com.vorlonsoft.android.rate.IntentHelper.GOOGLE_PLAY_PACKAGE_NAME;
-import static com.vorlonsoft.android.rate.IntentHelper.SAMSUNG_GALAXY_APPS_PACKAGE_NAME;
-import static com.vorlonsoft.android.rate.IntentHelper.SLIDEME_PACKAGE_NAME;
-import static com.vorlonsoft.android.rate.IntentHelper.TENCENT_PACKAGE_NAME;
-import static com.vorlonsoft.android.rate.IntentHelper.YANDEX_STORE_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForBlackBerryWorld;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForCafeBazaar;
@@ -34,17 +26,12 @@ import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSamsungGal
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSlideME;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForTencentAppStore;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentForYandexStore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForChineseStores;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
-import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorldWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getCafeBazaarWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getSlideMEWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getTencentAppStoreWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getYandexStoreWeb;
-import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
+import static com.vorlonsoft.android.rate.StoreType.CHINESESTORES;
+import static com.vorlonsoft.android.rate.StoreType.MI;
+import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {
@@ -64,123 +51,72 @@ public class DefaultDialogManager implements DialogManager {
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            final Intent intentToAppStore;
+            final Intent[] intentsToAppStores;
             final String packageName = context.getPackageName();
             if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
                 switch(options.getStoreType()) {
                     case AMAZON:
-                        intentToAppStore = createIntentForAmazonAppstore(context, packageName);
+                        intentsToAppStores = createIntentForAmazonAppstore(context, packageName);
                         break;
                     case BAZAAR:
-                        intentToAppStore = createIntentForCafeBazaar(context, packageName);
+                        intentsToAppStores = createIntentForCafeBazaar(context, packageName);
                         break;
                     case BLACKBERRY:
-                        intentToAppStore = createIntentForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
+                        intentsToAppStores = createIntentForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
+                        break;
+                    case CHINESESTORES:
+                        intentsToAppStores = createIntentsForChineseStores(context, packageName);
                         break;
                     case MI:
-                        intentToAppStore = createIntentForMiAppstore(packageName);
+                        intentsToAppStores = createIntentForMiAppstore(packageName);
                         break;
                     case OTHER:
-                        intentToAppStore = createIntentForOther(options.getOtherStoreUri());
+                        intentsToAppStores = createIntentForOther(options.getOtherStoreUri());
                         break;
                     case SAMSUNG:
-                        intentToAppStore = createIntentForSamsungGalaxyApps(context, packageName);
+                        intentsToAppStores = createIntentForSamsungGalaxyApps(context, packageName);
                         break;
                     case SLIDEME:
-                        intentToAppStore = createIntentForSlideME(context, packageName);
+                        intentsToAppStores = createIntentForSlideME(context, packageName);
                         break;
                     case TENCENT:
-                        intentToAppStore = createIntentForTencentAppStore(context, packageName);
+                        intentsToAppStores = createIntentForTencentAppStore(context, packageName);
                         break;
                     case YANDEX:
-                        intentToAppStore = createIntentForYandexStore(context, packageName);
+                        intentsToAppStores = createIntentForYandexStore(context, packageName);
                         break;
                     default:
-                        intentToAppStore = createIntentForGooglePlay(context, packageName);
+                        intentsToAppStores = createIntentForGooglePlay(context, packageName);
                 }
             } else {
                 Log.w(TAG, "Failed to rate app, can't get context.getPackageName()");
-                intentToAppStore = null;
+                intentsToAppStores = null;
             }
             try {
-                if (intentToAppStore != null) {
-                    context.startActivity(intentToAppStore);
+                if (intentsToAppStores != null) {
+                    context.startActivity(intentsToAppStores[0]);
                 }
             } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, e);
-                switch(options.getStoreType()) {
-                    case AMAZON:
-                        if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
+                Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
+                if ((options.getStoreType() != OTHER) &&
+                    (options.getStoreType() != MI) &&
+                    (options.getStoreType() != CHINESESTORES) &&
+                    (intentsToAppStores.length > 1)) {
+                    try {
+                        context.startActivity(intentsToAppStores[1]);
+                    } catch (ActivityNotFoundException ex) {
+                        Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[1], ex);
+                    }
+                } else if (options.getStoreType() == CHINESESTORES) {
+                    if (intentsToAppStores.length > 1) {
+                        for (byte i = 1; i < intentsToAppStores.length; i++) {
                             try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(context.getPackageName())));
+                                context.startActivity(intentsToAppStores[i]);
                             } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[i], ex);
                             }
                         }
-                        break;
-                    case BAZAAR:
-                        if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
-                            try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(context.getPackageName())));
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
-                            }
-                        }
-                        break;
-                    case BLACKBERRY:
-                        if (isPackageExists(context, BLACKBERRY_WORLD_PACKAGE_NAME)) {
-                            try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(options.getBlackBerryWorldApplicationId())));
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
-                            }
-                        }
-                        break;
-                    case GOOGLEPLAY:
-                        if (isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
-                            try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(context.getPackageName())));
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
-                            }
-                        }
-                        break;
-                    case SAMSUNG:
-                        if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
-                            try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getSamsungGalaxyAppsWeb(context.getPackageName())));
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
-                            }
-                        }
-                        break;
-                    case SLIDEME:
-                        if (isPackageExists(context, SLIDEME_PACKAGE_NAME)) {
-                            try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getSlideMEWeb(context.getPackageName())));
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
-                            }
-                        }
-                        break;
-                    case TENCENT:
-                        if (isPackageExists(context, TENCENT_PACKAGE_NAME)) {
-                            try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getTencentAppStoreWeb(context.getPackageName())));
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
-                            }
-                        }
-                        break;
-                    case YANDEX:
-                        if (isPackageExists(context, YANDEX_STORE_PACKAGE_NAME)) {
-                            try {
-                                context.startActivity(new Intent(Intent.ACTION_VIEW, getYandexStoreWeb(context.getPackageName())));
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentToAppStore, ex);
-                            }
-                        }
-                        break;
+                    }
                 }
             }
             setAgreeShowDialog(context, false);
