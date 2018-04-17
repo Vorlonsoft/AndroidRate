@@ -52,9 +52,8 @@ final class IntentHelper {
         return intent;
     }
 
-    static Intent createIntentForAmazonAppstore(Context context) {
+    static Intent createIntentForAmazonAppstore(Context context, String packageName) {
         Intent intent;
-        String packageName = context.getPackageName();
         if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getAmazonAppstore(packageName));
             intent = setIntentForStore(intent);
@@ -77,9 +76,8 @@ final class IntentHelper {
         return intent;
     }
 
-    static Intent createIntentForCafeBazaar(Context context) {
+    static Intent createIntentForCafeBazaar(Context context, String packageName) {
         Intent intent;
-        String packageName = context.getPackageName();
         if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getCafeBazaar(packageName));
             intent = setIntentForStore(intent);
@@ -90,9 +88,8 @@ final class IntentHelper {
         return intent;
     }
 
-    static Intent createIntentForGooglePlay(Context context) {
+    static Intent createIntentForGooglePlay(Context context, String packageName) {
         Intent intent;
-        String packageName = context.getPackageName();
         if (isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getGooglePlay(packageName));
             intent = setIntentForStore(intent);
@@ -103,8 +100,7 @@ final class IntentHelper {
         return intent;
     }
 
-    static Intent createIntentForMiAppstore(Context context) {
-        String packageName = context.getPackageName();
+    static Intent createIntentForMiAppstore(String packageName) {
         return new Intent(Intent.ACTION_VIEW, getMiAppstore(packageName));
     }
 
@@ -112,9 +108,8 @@ final class IntentHelper {
         return new Intent(Intent.ACTION_VIEW, uri);
     }
 
-    static Intent createIntentForSamsungGalaxyApps(Context context) {
+    static Intent createIntentForSamsungGalaxyApps(Context context, String packageName) {
         Intent intent;
-        String packageName = context.getPackageName();
         if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getSamsungGalaxyApps(packageName));
             intent = setIntentForStore(intent);
@@ -125,9 +120,8 @@ final class IntentHelper {
         return intent;
     }
 
-    static Intent createIntentForSlideME(Context context) {
+    static Intent createIntentForSlideME(Context context, String packageName) {
         Intent intent;
-        String packageName = context.getPackageName();
         if (isPackageExists(context, SLIDEME_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getSlideME(packageName));
             intent = setIntentForStore(intent);
@@ -138,9 +132,8 @@ final class IntentHelper {
         return intent;
     }
 
-    static Intent createIntentForTencentAppStore(Context context) {
+    static Intent createIntentForTencentAppStore(Context context, String packageName) {
         Intent intent;
-        String packageName = context.getPackageName();
         if (isPackageExists(context, TENCENT_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getTencentAppStore(packageName));
             intent = setIntentForStore(intent);
@@ -151,9 +144,8 @@ final class IntentHelper {
         return intent;
     }
 
-    static Intent createIntentForYandexStore(Context context) {
+    static Intent createIntentForYandexStore(Context context, String packageName) {
         Intent intent;
-        String packageName = context.getPackageName();
         if (isPackageExists(context, YANDEX_STORE_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getYandexStore(packageName));
             intent = setIntentForStore(intent);

@@ -66,36 +66,41 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             final Intent intentToAppStore;
-            switch(options.getStoreType()) {
-                case AMAZON:
-                    intentToAppStore = createIntentForAmazonAppstore(context);
-                    break;
-                case BAZAAR:
-                    intentToAppStore = createIntentForCafeBazaar(context);
-                    break;
-                case BLACKBERRY:
-                    intentToAppStore = createIntentForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
-                    break;
-                case MI:
-                    intentToAppStore = createIntentForMiAppstore(context);
-                    break;
-                case OTHER:
-                    intentToAppStore = createIntentForOther(options.getOtherStoreUri());
-                    break;
-                case SAMSUNG:
-                    intentToAppStore = createIntentForSamsungGalaxyApps(context);
-                    break;
-                case SLIDEME:
-                    intentToAppStore = createIntentForSlideME(context);
-                    break;
-                case TENCENT:
-                    intentToAppStore = createIntentForTencentAppStore(context);
-                    break;
-                case YANDEX:
-                    intentToAppStore = createIntentForYandexStore(context);
-                    break;
-                default:
-                    intentToAppStore = createIntentForGooglePlay(context);
+            final String packageName = context.getPackageName();
+            if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
+                switch(options.getStoreType()) {
+                    case AMAZON:
+                        intentToAppStore = createIntentForAmazonAppstore(context, packageName);
+                        break;
+                    case BAZAAR:
+                        intentToAppStore = createIntentForCafeBazaar(context, packageName);
+                        break;
+                    case BLACKBERRY:
+                        intentToAppStore = createIntentForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
+                        break;
+                    case MI:
+                        intentToAppStore = createIntentForMiAppstore(packageName);
+                        break;
+                    case OTHER:
+                        intentToAppStore = createIntentForOther(options.getOtherStoreUri());
+                        break;
+                    case SAMSUNG:
+                        intentToAppStore = createIntentForSamsungGalaxyApps(context, packageName);
+                        break;
+                    case SLIDEME:
+                        intentToAppStore = createIntentForSlideME(context, packageName);
+                        break;
+                    case TENCENT:
+                        intentToAppStore = createIntentForTencentAppStore(context, packageName);
+                        break;
+                    case YANDEX:
+                        intentToAppStore = createIntentForYandexStore(context, packageName);
+                        break;
+                    default:
+                        intentToAppStore = createIntentForGooglePlay(context, packageName);
+                }
+            } else {
+                intentToAppStore = null;
             }
             try {
                 if (intentToAppStore != null) {
