@@ -41,18 +41,23 @@ final class IntentHelper {
     private IntentHelper() {
     }
 
+    private static Intent setIntent(Intent intent) {
+        // Make sure it DOESN'T open in the stack of appPackageName activity
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        // Task reparenting if needed
+        intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        // If the Store was already open in a search result
+        // this make sure it still go to the app page you requested
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        return intent;
+    }
+
     static Intent createIntentForAmazonAppstore(Context context) {
         Intent intent;
         String packageName = context.getPackageName();
         if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getAmazonAppstore(packageName));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Amazon Appstore was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(AMAZON_APPSTORE_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(packageName));
@@ -64,13 +69,7 @@ final class IntentHelper {
         Intent intent;
         if (isPackageExists(context, BLACKBERRY_WORLD_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getBlackBerryWorld(applicationId));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the BlackBerry World was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(BLACKBERRY_WORLD_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(applicationId));
@@ -83,13 +82,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getCafeBazaar(packageName));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Cafe Bazaar was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(CAFE_BAZAAR_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(packageName));
@@ -102,13 +95,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getGooglePlay(packageName));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Google Play was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(packageName));
@@ -130,13 +117,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getSamsungGalaxyApps(packageName));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Samsung Galaxy Apps was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(SAMSUNG_GALAXY_APPS_PACKAGE_NAME);
         } else {
             intent = null;
@@ -149,13 +130,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, SLIDEME_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getSlideME(packageName));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the SlideME was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(SLIDEME_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getSlideMEWeb(packageName));
@@ -168,13 +143,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, TENCENT_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getTencentAppStore(packageName));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Tencent App Store was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(TENCENT_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getTencentAppStoreWeb(packageName));
@@ -187,13 +156,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, YANDEX_STORE_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getYandexStore(packageName));
-            // Make sure it DOESN'T open in the stack of packageName activity
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Task reparenting if needed
-            intent.addFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-            // If the Yandex.Store was already open in a search result
-            // this make sure it still go to the app page you requested
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent = setIntent(intent);
             intent.setPackage(YANDEX_STORE_PACKAGE_NAME);
         } else {
             intent = null;
