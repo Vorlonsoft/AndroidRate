@@ -43,7 +43,7 @@ final class UriHelper {
 
     private static final String TENCENT_APP_STORE = "market://details?id=";
 
-    private static final String TENCENT_APP_STORE_WEB = "http://android.myapp.com/myapp/detail.htm?apkName=";
+    private static final String TENCENT_APP_STORE_WEB = "http://a.app.qq.com/o/simple.jsp?pkgname=";
 
     private static final String YANDEX_STORE = "yastore://details?id=";
 
