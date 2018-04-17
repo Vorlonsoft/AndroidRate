@@ -1,5 +1,24 @@
 # CHANGELOG
 
+## 1.1.5 (released 18.04.2018)
+
+- LIBcc10418
+- LIBff10417 Chinese app stores
+- LIBcc30417 Inspection
+- LIBbb20417
+- LIBcc20417
+- LIBbb10417 Tencent App Store URI update
+- LIBcc10417 Inspection
+- LIBff20416 Tencent App Store App
+- LIBbb10416 You can't get Samsung Galaxy Apps in the browser
+- LIBff10416 Yandex.Store
+- LIBcc10415
+- LIBbb10415 Samsung Galaxy Apps uri update
+- LIBff10415 Cafe Bazaar
+- LIBff20414 SlideME
+- LIBff10414 BlackBerry World
+- LIBff10413
+
 ## 1.1.0 (released 11.04.2018)
 
 - LIBcc10411
