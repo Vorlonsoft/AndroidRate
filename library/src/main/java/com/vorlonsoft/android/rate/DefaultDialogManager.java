@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 
+import static com.vorlonsoft.android.rate.AppRate.TAG;
 import static com.vorlonsoft.android.rate.IntentHelper.AMAZON_APPSTORE_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.BLACKBERRY_WORLD_PACKAGE_NAME;
 import static com.vorlonsoft.android.rate.IntentHelper.CAFE_BAZAAR_PACKAGE_NAME;
@@ -54,8 +55,6 @@ public class DefaultDialogManager implements DialogManager {
             return new DefaultDialogManager(context, options);
         }
     }
-
-    private static final String TAG = "ANDROIDRATE";
 
     private final Context context;
     private final DialogOptions options;
@@ -100,6 +99,7 @@ public class DefaultDialogManager implements DialogManager {
                         intentToAppStore = createIntentForGooglePlay(context, packageName);
                 }
             } else {
+                Log.w(TAG, "Failed to rate app, can't get context.getPackageName()");
                 intentToAppStore = null;
             }
             try {

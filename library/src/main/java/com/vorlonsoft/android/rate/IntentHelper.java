@@ -9,7 +9,9 @@ package com.vorlonsoft.android.rate;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 
+import static com.vorlonsoft.android.rate.AppRate.TAG;
 import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstore;
 import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
 import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorld;
@@ -115,6 +117,7 @@ final class IntentHelper {
             intent = setIntentForStore(intent);
             intent.setPackage(SAMSUNG_GALAXY_APPS_PACKAGE_NAME);
         } else {
+            Log.w(TAG, "Failed to rate app, com.sec.android.app.samsungapps doesn't exist");
             intent = null;
         }
         return intent;
@@ -151,6 +154,7 @@ final class IntentHelper {
             intent = setIntentForStore(intent);
             intent.setPackage(YANDEX_STORE_PACKAGE_NAME);
         } else {
+            Log.w(TAG, "Failed to rate app, com.yandex.store doesn't exist");
             intent = null;
         }
         return intent;

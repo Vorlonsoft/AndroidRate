@@ -19,6 +19,8 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.*;
 
 public final class AppRate {
 
+    static final String TAG = "ANDROIDRATE";
+
     @SuppressLint("StaticFieldLeak")
     private static AppRate singleton;
 
