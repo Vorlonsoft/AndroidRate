@@ -41,7 +41,7 @@ final class IntentHelper {
     private IntentHelper() {
     }
 
-    private static Intent setIntent(Intent intent) {
+    private static Intent setIntentForStore(Intent intent) {
         // Make sure it DOESN'T open in the stack of appPackageName activity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         // Task reparenting if needed
@@ -57,7 +57,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getAmazonAppstore(packageName));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(AMAZON_APPSTORE_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(packageName));
@@ -69,7 +69,7 @@ final class IntentHelper {
         Intent intent;
         if (isPackageExists(context, BLACKBERRY_WORLD_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getBlackBerryWorld(applicationId));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(BLACKBERRY_WORLD_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(applicationId));
@@ -82,7 +82,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getCafeBazaar(packageName));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(CAFE_BAZAAR_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(packageName));
@@ -95,7 +95,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getGooglePlay(packageName));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(GOOGLE_PLAY_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(packageName));
@@ -117,7 +117,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getSamsungGalaxyApps(packageName));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(SAMSUNG_GALAXY_APPS_PACKAGE_NAME);
         } else {
             intent = null;
@@ -130,7 +130,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, SLIDEME_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getSlideME(packageName));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(SLIDEME_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getSlideMEWeb(packageName));
@@ -143,7 +143,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, TENCENT_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getTencentAppStore(packageName));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(TENCENT_PACKAGE_NAME);
         } else {
             intent = new Intent(Intent.ACTION_VIEW, getTencentAppStoreWeb(packageName));
@@ -156,7 +156,7 @@ final class IntentHelper {
         String packageName = context.getPackageName();
         if (isPackageExists(context, YANDEX_STORE_PACKAGE_NAME)) {
             intent = new Intent(Intent.ACTION_VIEW, getYandexStore(packageName));
-            intent = setIntent(intent);
+            intent = setIntentForStore(intent);
             intent.setPackage(YANDEX_STORE_PACKAGE_NAME);
         } else {
             intent = null;
