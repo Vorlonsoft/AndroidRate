@@ -60,8 +60,9 @@ public class MainActivity extends Activity {
 
         // callback listener.
         AppRate.with(this)
-                .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar), MI (Mi Appstore),
-                                                    //         SAMSUNG (Samsung Galaxy Apps), SLIDEME (SlideME), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
+                .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
+                                                    //         CHINESESTORES (19 chinese app stores), MI (Mi Appstore), SAMSUNG (Samsung Galaxy Apps),
+                                                    //         SLIDEME (SlideME), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
                                                     //         setStoreType(int) (BlackBerry World, int - your application ID) and
                                                     //         setStoreType(String) (Any other store, String - a full URI to your app)
                 .setInstallDays((byte) 3)           // default 10, 0 means install day.

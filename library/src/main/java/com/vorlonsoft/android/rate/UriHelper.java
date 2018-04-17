@@ -11,6 +11,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
+import java.util.ArrayList;
 import java.util.List;
 
 final class UriHelper {
@@ -26,6 +27,8 @@ final class UriHelper {
     private static final String CAFE_BAZAAR = "bazaar://details?id=";
 
     private static final String CAFE_BAZAAR_WEB = "https://cafebazaar.ir/app/";
+
+    private static final String CHINESE_STORES = "market://details?id=";
 
     private static final String GOOGLE_PLAY = "market://details?id=";
 
@@ -76,6 +79,10 @@ final class UriHelper {
         return packageName == null ? null : Uri.parse(CAFE_BAZAAR_WEB + packageName);
     }
 
+    static Uri getChineseStores(String packageName) {
+        return packageName == null ? null : Uri.parse(CHINESE_STORES + packageName);
+    }
+
     static Uri getGooglePlay(String packageName) {
         return packageName == null ? null : Uri.parse(GOOGLE_PLAY + packageName);
     }
@@ -120,14 +127,21 @@ final class UriHelper {
         return packageName == null ? null : Uri.parse(YANDEX_STORE_WEB + packageName);
     }
 
-    static boolean isPackageExists(Context context, @SuppressWarnings("SameParameterValue") String targetPackage) {
-        PackageManager pm = context.getPackageManager();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(0);
-        for (ApplicationInfo packageInfo : packages) {
-            if (packageInfo.packageName.equals(targetPackage)) {
-                return true;
+    static boolean isPackageExists(Context context, String targetPackage) {
+        return isPackagesExists(context, new String[]{targetPackage}).size() > 0;
+    }
+
+    static ArrayList<String> isPackagesExists(Context context, String[] targetPackages) {
+        final PackageManager packageManager = context.getPackageManager();
+        ArrayList<String> packageNames = new ArrayList<>();
+        List<ApplicationInfo> applicationInfo = packageManager.getInstalledApplications(0);
+        for (String aTargetPackage : targetPackages) {
+            for (ApplicationInfo aApplicationInfo : applicationInfo) {
+                if (aApplicationInfo.packageName.equals(aTargetPackage)) {
+                    packageNames.add(aApplicationInfo.packageName);
+                }
             }
         }
-        return false;
+        return packageNames;
     }
 }
