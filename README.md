@@ -159,7 +159,7 @@ AppRate.with(this).setStoreType(int); // BlackBerry World,
 
 #### Chinese app stores
 
-Your application will use 1st of the Chinese app stores that it can find on the user device, but remember that the Library doesn't check the availability of your application in the app store.
+The first Chinese app store found on the user device will be used. The Library doesn't check the availability of your application on the app store.
 
 ```java
 AppRate.with(this).setStoreType(StoreType.CHINESESTORES); // 19 chinese app stores: 腾讯应用宝, 360手机助手,
@@ -176,7 +176,7 @@ AppRate.with(this).setStoreType(String); // Any other store,
                                          // or "otherstore://apps/com.yourapp"
 ```
 
-### Check that Google Play is available
+### Check the availability of Google Play
 
 ```java
 if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
