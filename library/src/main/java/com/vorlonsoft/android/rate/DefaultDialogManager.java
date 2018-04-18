@@ -16,22 +16,19 @@ import android.util.Log;
 import android.view.View;
 
 import static com.vorlonsoft.android.rate.AppRate.TAG;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForAmazonAppstore;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForBlackBerryWorld;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForCafeBazaar;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForGooglePlay;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForMiAppstore;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForOther;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSamsungGalaxyApps;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForSlideME;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForTencentAppStore;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentForYandexStore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForAmazonAppstore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForBlackBerryWorld;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForCafeBazaar;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForChineseStores;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForGooglePlay;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForMiAppstore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForOther;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForSamsungGalaxyApps;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForSlideME;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForTencentAppStore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForYandexStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
-import static com.vorlonsoft.android.rate.StoreType.CHINESESTORES;
-import static com.vorlonsoft.android.rate.StoreType.MI;
-import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {
@@ -56,37 +53,37 @@ public class DefaultDialogManager implements DialogManager {
             if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
                 switch(options.getStoreType()) {
                     case AMAZON:
-                        intentsToAppStores = createIntentForAmazonAppstore(context, packageName);
+                        intentsToAppStores = createIntentsForAmazonAppstore(context, packageName);
                         break;
                     case BAZAAR:
-                        intentsToAppStores = createIntentForCafeBazaar(context, packageName);
+                        intentsToAppStores = createIntentsForCafeBazaar(context, packageName);
                         break;
                     case BLACKBERRY:
-                        intentsToAppStores = createIntentForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
+                        intentsToAppStores = createIntentsForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
                         break;
                     case CHINESESTORES:
                         intentsToAppStores = createIntentsForChineseStores(context, packageName);
                         break;
                     case MI:
-                        intentsToAppStores = createIntentForMiAppstore(packageName);
+                        intentsToAppStores = createIntentsForMiAppstore(packageName);
                         break;
                     case OTHER:
-                        intentsToAppStores = createIntentForOther(options.getOtherStoreUri());
+                        intentsToAppStores = createIntentsForOther(options.getOtherStoreUri());
                         break;
                     case SAMSUNG:
-                        intentsToAppStores = createIntentForSamsungGalaxyApps(context, packageName);
+                        intentsToAppStores = createIntentsForSamsungGalaxyApps(context, packageName);
                         break;
                     case SLIDEME:
-                        intentsToAppStores = createIntentForSlideME(context, packageName);
+                        intentsToAppStores = createIntentsForSlideME(context, packageName);
                         break;
                     case TENCENT:
-                        intentsToAppStores = createIntentForTencentAppStore(context, packageName);
+                        intentsToAppStores = createIntentsForTencentAppStore(context, packageName);
                         break;
                     case YANDEX:
-                        intentsToAppStores = createIntentForYandexStore(context, packageName);
+                        intentsToAppStores = createIntentsForYandexStore(context, packageName);
                         break;
                     default:
-                        intentsToAppStores = createIntentForGooglePlay(context, packageName);
+                        intentsToAppStores = createIntentsForGooglePlay(context, packageName);
                 }
             } else {
                 Log.w(TAG, "Failed to rate app, can't get context.getPackageName()");
@@ -94,26 +91,31 @@ public class DefaultDialogManager implements DialogManager {
             }
             try {
                 if (intentsToAppStores != null) {
-                    context.startActivity(intentsToAppStores[0]);
+                    if (intentsToAppStores.length == 0) {
+                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
+                    } else if (intentsToAppStores[0] == null) {
+                        throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
+                    } else {
+                        context.startActivity(intentsToAppStores[0]);
+                    }
                 }
             } catch (ActivityNotFoundException e) {
                 Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
-                if ((options.getStoreType() != OTHER) &&
-                    (options.getStoreType() != MI) &&
-                    (options.getStoreType() != CHINESESTORES) &&
-                    (intentsToAppStores.length > 1)) {
-                    try {
-                        context.startActivity(intentsToAppStores[1]);
-                    } catch (ActivityNotFoundException ex) {
-                        Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[1], ex);
-                    }
-                } else if (options.getStoreType() == CHINESESTORES) {
-                    if (intentsToAppStores.length > 1) {
-                        for (byte i = 1; i < intentsToAppStores.length; i++) {
-                            try {
+                if (intentsToAppStores.length > 1) {
+                    for (byte i = 1; i < intentsToAppStores.length; i++) { // intentsToAppStores[1] - second intent in the array
+                        boolean isCatch = false;
+                        try {
+                            if (intentsToAppStores[i] == null) {
+                                throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + i + "] == null)");
+                            } else {
                                 context.startActivity(intentsToAppStores[i]);
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[i], ex);
+                            }
+                        } catch (ActivityNotFoundException ex) {
+                            Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[i], ex);
+                            isCatch = true;
+                        } finally {
+                            if (!isCatch) {
+                                i = (byte) intentsToAppStores.length;
                             }
                         }
                     }
@@ -123,6 +125,7 @@ public class DefaultDialogManager implements DialogManager {
             if (listener != null) listener.onClickButton((byte) which);
         }
     };
+
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener negativeListener = new DialogInterface.OnClickListener() {
         @Override

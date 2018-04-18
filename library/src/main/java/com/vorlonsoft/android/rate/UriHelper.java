@@ -10,9 +10,12 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.vorlonsoft.android.rate.AppRate.TAG;
 
 final class UriHelper {
 
@@ -128,20 +131,39 @@ final class UriHelper {
     }
 
     static boolean isPackageExists(Context context, String targetPackage) {
-        return isPackagesExists(context, new String[]{targetPackage}).size() > 0;
+        return isPackagesExists(context, new String[]{targetPackage}).length > 0;
     }
 
-    static ArrayList<String> isPackagesExists(Context context, String[] targetPackages) {
+    static String[] isPackagesExists(Context context, String[] targetPackages) {
+        final String[] EMPTY_STRING_ARRAY = new String[0];
+
+        if (context == null) {
+            Log.i(TAG, "Can't get context.getPackageManager()");
+            return EMPTY_STRING_ARRAY;
+        } else if ((targetPackages == null) || (targetPackages.length == 0)) {
+            return EMPTY_STRING_ARRAY;
+        }
+
         final PackageManager packageManager = context.getPackageManager();
-        ArrayList<String> packageNames = new ArrayList<>();
         List<ApplicationInfo> applicationInfo = packageManager.getInstalledApplications(0);
-        for (String aTargetPackage : targetPackages) {
+        if (targetPackages.length == 1) {
             for (ApplicationInfo aApplicationInfo : applicationInfo) {
-                if (aApplicationInfo.packageName.equals(aTargetPackage)) {
-                    packageNames.add(aApplicationInfo.packageName);
+                if (aApplicationInfo.packageName.equals(targetPackages[0])) {
+                    return new String[]{targetPackages[0]};
                 }
             }
+            return EMPTY_STRING_ARRAY;
+        } else {
+            ArrayList<String> packageNames = new ArrayList<>();
+            for (String aTargetPackage : targetPackages) {
+                for (ApplicationInfo aApplicationInfo : applicationInfo) {
+                    if (aApplicationInfo.packageName.equals(aTargetPackage)) {
+                        packageNames.add(aTargetPackage);
+                        break;
+                    }
+                }
+            }
+            return packageNames.toArray(new String[0]);
         }
-        return packageNames;
     }
 }
