@@ -34,7 +34,8 @@ protected void onCreate(Bundle savedInstanceState) {
       .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
                                           //         CHINESESTORES (19 chinese app stores), MI (Mi Appstore), SAMSUNG (Samsung Galaxy Apps),
                                           //         SLIDEME (SlideME), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
-                                          //         setStoreType(int) (BlackBerry World, int - your application ID) and
+                                          //         setStoreType(int) (BlackBerry World, int - your application ID),
+                                          //         setStoreType(String) (Apple App Store, String - a full URI (only http/https)) and
                                           //         setStoreType(String) (Any other store, String - a full URI to your app)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
       .setLaunchTimes((byte) 3)           // default 10
@@ -165,6 +166,14 @@ The first Chinese app store found on the user device will be used. The Library d
 AppRate.with(this).setStoreType(StoreType.CHINESESTORES); // 19 chinese app stores: 腾讯应用宝, 360手机助手,
 // 小米应用商店, 华为应用商店, 百度手机助手, OPPO应用商店, 中兴应用商店, VIVO应用商店, 豌豆荚, PP手机助手, 安智应用商店,
 // 91手机助手, 应用汇, QQ手机管家, 机锋应用市场, GO市场, 宇龙Coolpad应用商店, 联想应用商店, cool市场
+```
+
+#### Apple App Store
+
+```java
+AppRate.with(this).setStoreType(String); // Apple App Store,
+                                         // String - an RFC 2396-compliant URI (only http/https) to your app
+                                         // e. g. "https://itunes.apple.com/app/facebook/id284882215" for Facebook
 ```
 
 #### Other store
