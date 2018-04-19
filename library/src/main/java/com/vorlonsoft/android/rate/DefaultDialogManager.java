@@ -68,7 +68,7 @@ public class DefaultDialogManager implements DialogManager {
                         intentsToAppStores = createIntentsForMiAppstore(packageName);
                         break;
                     case OTHER:
-                        intentsToAppStores = createIntentsForOther(options.getOtherStoreUri());
+                        intentsToAppStores = createIntentsForOther(context, options.getOtherStoreUri());
                         break;
                     case SAMSUNG:
                         intentsToAppStores = createIntentsForSamsungGalaxyApps(context, packageName);

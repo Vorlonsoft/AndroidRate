@@ -46,24 +46,35 @@ final class IntentHelper {
 
     private static final String[] CHINESE_STORES_PACKAGE_NAMES = {
             "com.tencent.android.qqdownloader", //腾讯应用宝
-            "com.qihoo.appstore", //360手机助手
-            "com.xiaomi.market", //小米应用商店
-            "com.huawei.appmarket", //华为应用商店
-            "com.baidu.appsearch", //百度手机助手
-            "com.oppo.market", //OPPO应用商店
-            "zte.com.market", //中兴应用商店
-            "com.bbk.appstore", //VIVO应用商店
-            "com.wandoujia.phoenix2", //豌豆荚
-            "com.pp.assistant", //PP手机助手
-            "com.hiapk.marketpho", //安智应用商店
-            "com.dragon.android.pandaspace", //91手机助手
-            "com.yingyonghui.market", //应用汇
-            "com.tencent.qqpimsecure", //QQ手机管家
-            "com.mappn.gfan", //机锋应用市场
-            "cn.goapk.market", //GO市场
-            "com.yulong.android.coolmart", //宇龙Coolpad应用商店
-            "com.lenovo.leos.appstore", //联想应用商店
-            "com.coolapk.market", //cool市场
+            "com.qihoo.appstore",               //360手机助手
+            "com.xiaomi.market",                //小米应用商店
+            "com.huawei.appmarket",             //华为应用商店
+            "com.baidu.appsearch",              //百度手机助手
+            "com.oppo.market",                  //OPPO应用商店
+            "zte.com.market",                   //中兴应用商店
+            "com.bbk.appstore",                 //VIVO应用商店
+            "com.wandoujia.phoenix2",           //豌豆荚
+            "com.pp.assistant",                 //PP手机助手
+            "com.hiapk.marketpho",              //安智应用商店
+            "com.dragon.android.pandaspace",    //91手机助手
+            "com.yingyonghui.market",           //应用汇
+            "com.tencent.qqpimsecure",          //QQ手机管家
+            "com.mappn.gfan",                   //机锋应用市场
+            "cn.goapk.market",                  //GO市场
+            "com.yulong.android.coolmart",      //宇龙Coolpad应用商店
+            "com.lenovo.leos.appstore",         //联想应用商店
+            "com.coolapk.market"                //cool市场
+    };
+
+    private static final String[] BROWSERS_PACKAGE_NAMES = {
+            "com.android.chrome",
+            "org.mozilla.firefox",
+            "com.opera.browser",
+            "com.opera.mini.native",
+            "com.sec.android.app.sbrowser",
+            "com.UCMobile.intl",
+            "com.tencent.mtt",
+            "com.android.browser"
     };
 
     private IntentHelper() {
@@ -155,8 +166,19 @@ final class IntentHelper {
         return new Intent[]{new Intent(Intent.ACTION_VIEW, getMiAppstore(packageName))};
     }
 
-    static Intent[] createIntentsForOther(Uri uri) {
-        return new Intent[]{new Intent(Intent.ACTION_VIEW, uri)};
+    static Intent[] createIntentsForOther(Context context, Uri uri) {
+        if ((uri.toString().contains("itunes.com")) ||
+            (uri.toString().contains("appstore.com")) ||
+            (uri.toString().contains("itunes.apple.com"))) {
+            final Intent[] intents = {new Intent(Intent.ACTION_VIEW, uri)};
+            final String[] storesPackagesNames = isPackagesExists(context, BROWSERS_PACKAGE_NAMES);
+            if (storesPackagesNames.length > 0) {
+                intents[0].setPackage(storesPackagesNames[0]);
+            }
+            return intents;
+        } else {
+            return new Intent[]{new Intent(Intent.ACTION_VIEW, uri)};
+        }
     }
 
     static Intent[] createIntentsForSamsungGalaxyApps(Context context, String packageName) {
