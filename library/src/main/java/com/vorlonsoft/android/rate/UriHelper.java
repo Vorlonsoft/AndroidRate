@@ -118,10 +118,10 @@ final class UriHelper {
     }
 
     static Uri getStoreUri(final StoreType appStore, final String paramName) {
-        return getStoreUri(appStore, paramName, false);
+        return paramName == null ? null : getStoreUri(appStore, paramName, false);
     }
 
     static Uri getStoreWebUri(final StoreType appStore, final String paramName) {
-        return getStoreUri(appStore, paramName, true);
+        return paramName == null ? null : getStoreUri(appStore, paramName, true);
     }
 }
