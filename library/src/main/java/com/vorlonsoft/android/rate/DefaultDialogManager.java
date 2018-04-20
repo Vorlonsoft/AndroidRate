@@ -150,6 +150,7 @@ public class DefaultDialogManager implements DialogManager {
         this.listener = options.getListener();
     }
 
+    @Override
     public Dialog createDialog() {
         AlertDialog.Builder builder = getDialogBuilder(context, options.getThemeResId());
         builder.setMessage(options.getMessageText(context));

@@ -6,7 +6,6 @@
 
 package com.vorlonsoft.android.rate;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Build;
@@ -24,8 +23,7 @@ final class Utils {
         return isLollipop() ? R.style.CustomLollipopDialogStyle : 0;
     }
 
-    @SuppressLint("ObsoleteSdkInt")
-    static AlertDialog.Builder getDialogBuilder(Context context, int themeResId) {
+    static AlertDialog.Builder getDialogBuilder(final Context context, final int themeResId) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             return new AlertDialog.Builder(context);
         } else {

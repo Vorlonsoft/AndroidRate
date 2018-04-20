@@ -273,11 +273,11 @@ public final class AppRate {
     @SuppressWarnings("WeakerAccess")
     public boolean shouldShowRateDialog() {
         return getIsAgreeShowDialog(context) &&
-                isOverLaunchTimes() &&
-                isOverRemindLaunchTimes() &&
-                isOverInstallDate() &&
-                isOverRemindDate() &&
-                isOverCustomEventRequirements();
+               isOverLaunchTimes() &&
+               isOverRemindLaunchTimes() &&
+               isOverInstallDate() &&
+               isOverRemindDate() &&
+               isOverCustomEventRequirements();
     }
 
     private boolean isOverLaunchTimes() {

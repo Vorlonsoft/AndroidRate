@@ -6,16 +6,7 @@
 
 package com.vorlonsoft.android.rate;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.vorlonsoft.android.rate.AppRate.TAG;
 
 final class UriHelper {
 
@@ -37,7 +28,7 @@ final class UriHelper {
 
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
 
-    private static final String MI_APPSTORE = "http://app.mi.com/details?id=";
+    private static final String MI_APPSTORE_WEB = "http://app.mi.com/details?id=";
 
     private static final String SAMSUNG_GALAXY_APPS = "samsungapps://ProductDetail/";
 
@@ -58,112 +49,79 @@ final class UriHelper {
     private UriHelper() {
     }
 
-    static Uri getAmazonAppstore(String packageName) {
-        return packageName == null ? null : Uri.parse(AMAZON_APPSTORE + packageName);
-    }
-
-    static Uri getAmazonAppstoreWeb(String packageName) {
-        return packageName == null ? null : Uri.parse(AMAZON_APPSTORE_WEB + packageName);
-    }
-
-    static Uri getBlackBerryWorld(String applicationId) {
-        return applicationId == null ? null : Uri.parse(BLACKBERRY_WORLD + applicationId);
-    }
-
-    static Uri getBlackBerryWorldWeb(String applicationId) {
-        return applicationId == null ? null : Uri.parse(BLACKBERRY_WORLD_WEB + applicationId);
-    }
-
-    static Uri getCafeBazaar(String packageName) {
-        return packageName == null ? null : Uri.parse(CAFE_BAZAAR + packageName);
-    }
-
-    static Uri getCafeBazaarWeb(String packageName) {
-        return packageName == null ? null : Uri.parse(CAFE_BAZAAR_WEB + packageName);
-    }
-
-    static Uri getChineseStores(String packageName) {
-        return packageName == null ? null : Uri.parse(CHINESE_STORES + packageName);
-    }
-
-    static Uri getGooglePlay(String packageName) {
-        return packageName == null ? null : Uri.parse(GOOGLE_PLAY + packageName);
-    }
-
-    static Uri getGooglePlayWeb(String packageName) {
-        return packageName == null ? null : Uri.parse(GOOGLE_PLAY_WEB + packageName);
-    }
-
-    static Uri getMiAppstore(String packageName) {
-        return packageName == null ? null : Uri.parse(MI_APPSTORE + packageName);
-    }
-
-    static Uri getSamsungGalaxyApps(String packageName) {
-        return packageName == null ? null : Uri.parse(SAMSUNG_GALAXY_APPS + packageName);
-    }
-
-    static Uri getSamsungGalaxyAppsWeb(String packageName) {
-        return packageName == null ? null : Uri.parse(SAMSUNG_GALAXY_APPS_WEB + packageName);
-    }
-
-    static Uri getSlideME(String packageName) {
-        return packageName == null ? null : Uri.parse(SLIDEME + packageName);
-    }
-
-    static Uri getSlideMEWeb(String packageName) {
-        return packageName == null ? null : Uri.parse(SLIDEME_WEB + packageName);
-    }
-
-    static Uri getTencentAppStore(String packageName) {
-        return packageName == null ? null : Uri.parse(TENCENT_APP_STORE + packageName);
-    }
-
-    static Uri getTencentAppStoreWeb(String packageName) {
-        return packageName == null ? null : Uri.parse(TENCENT_APP_STORE_WEB + packageName);
-    }
-
-    static Uri getYandexStore(String packageName) {
-        return packageName == null ? null : Uri.parse(YANDEX_STORE + packageName);
-    }
-
-    static Uri getYandexStoreWeb(String packageName) {
-        return packageName == null ? null : Uri.parse(YANDEX_STORE_WEB + packageName);
-    }
-
-    static boolean isPackageExists(Context context, String targetPackage) {
-        return isPackagesExists(context, new String[]{targetPackage}).length > 0;
-    }
-
-    static String[] isPackagesExists(Context context, String[] targetPackages) {
-        final String[] EMPTY_STRING_ARRAY = new String[0];
-
-        if (context == null) {
-            Log.i(TAG, "Can't get context.getPackageManager()");
-            return EMPTY_STRING_ARRAY;
-        } else if ((targetPackages == null) || (targetPackages.length == 0)) {
-            return EMPTY_STRING_ARRAY;
-        }
-
-        final PackageManager packageManager = context.getPackageManager();
-        List<ApplicationInfo> applicationInfo = packageManager.getInstalledApplications(0);
-        if (targetPackages.length == 1) {
-            for (ApplicationInfo aApplicationInfo : applicationInfo) {
-                if (aApplicationInfo.packageName.equals(targetPackages[0])) {
-                    return new String[]{targetPackages[0]};
-                }
+    private static Uri getStoreUri(final StoreType appStore, final String paramName, final boolean isWebUri) {
+        String baseStoreUri;
+        if (isWebUri) {
+            switch(appStore) {
+                case AMAZON:
+                    baseStoreUri = AMAZON_APPSTORE_WEB;
+                    break;
+                case BAZAAR:
+                    baseStoreUri = CAFE_BAZAAR_WEB;
+                    break;
+                case BLACKBERRY:
+                    baseStoreUri = BLACKBERRY_WORLD_WEB;
+                    break;
+                case CHINESESTORES:
+                    return null;
+                case MI:
+                    baseStoreUri = MI_APPSTORE_WEB;
+                    break;
+                case SAMSUNG:
+                    baseStoreUri = SAMSUNG_GALAXY_APPS_WEB;
+                    break;
+                case SLIDEME:
+                    baseStoreUri = SLIDEME_WEB;
+                    break;
+                case TENCENT:
+                    baseStoreUri = TENCENT_APP_STORE_WEB;
+                    break;
+                case YANDEX:
+                    baseStoreUri = YANDEX_STORE_WEB;
+                    break;
+                default:
+                    baseStoreUri = GOOGLE_PLAY_WEB;
             }
-            return EMPTY_STRING_ARRAY;
         } else {
-            ArrayList<String> packageNames = new ArrayList<>();
-            for (String aTargetPackage : targetPackages) {
-                for (ApplicationInfo aApplicationInfo : applicationInfo) {
-                    if (aApplicationInfo.packageName.equals(aTargetPackage)) {
-                        packageNames.add(aTargetPackage);
-                        break;
-                    }
-                }
+            switch(appStore) {
+                case AMAZON:
+                    baseStoreUri = AMAZON_APPSTORE;
+                    break;
+                case BAZAAR:
+                    baseStoreUri = CAFE_BAZAAR;
+                    break;
+                case BLACKBERRY:
+                    baseStoreUri = BLACKBERRY_WORLD;
+                    break;
+                case CHINESESTORES:
+                    baseStoreUri = CHINESE_STORES;
+                    break;
+                case MI:
+                    return null;
+                case SAMSUNG:
+                    baseStoreUri = SAMSUNG_GALAXY_APPS;
+                    break;
+                case SLIDEME:
+                    baseStoreUri = SLIDEME;
+                    break;
+                case TENCENT:
+                    baseStoreUri = TENCENT_APP_STORE;
+                    break;
+                case YANDEX:
+                    baseStoreUri = YANDEX_STORE;
+                    break;
+                default:
+                    baseStoreUri = GOOGLE_PLAY;
             }
-            return packageNames.toArray(new String[0]);
         }
+        return Uri.parse(baseStoreUri + paramName);
+    }
+
+    static Uri getStoreUri(final StoreType appStore, final String paramName) {
+        return getStoreUri(appStore, paramName, false);
+    }
+
+    static Uri getStoreWebUri(final StoreType appStore, final String paramName) {
+        return getStoreUri(appStore, paramName, true);
     }
 }
