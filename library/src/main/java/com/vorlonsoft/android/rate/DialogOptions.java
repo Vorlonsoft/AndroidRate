@@ -55,68 +55,56 @@ final class DialogOptions {
 
     private Reference<OnClickButtonListener> listener = null;
 
-    @SuppressWarnings("WeakerAccess")
-    public boolean shouldShowNeutralButton() {
+    boolean shouldShowNeutralButton() {
         return showNeutralButton;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setShowNeutralButton(boolean showNeutralButton) {
+    void setShowNeutralButton(boolean showNeutralButton) {
         this.showNeutralButton = showNeutralButton;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public boolean shouldShowNegativeButton() {
+    boolean shouldShowNegativeButton() {
         return showNegativeButton;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setShowNegativeButton(boolean showNegativeButton) {
+    void setShowNegativeButton(boolean showNegativeButton) {
         this.showNegativeButton = showNegativeButton;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public boolean shouldShowTitle() {
+    boolean shouldShowTitle() {
         return showTitle;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setShowTitle(boolean showTitle) {
+    void setShowTitle(boolean showTitle) {
         this.showTitle = showTitle;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public boolean getCancelable() {
+    boolean getCancelable() {
         return cancelable;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setCancelable(boolean cancelable) {
+    void setCancelable(boolean cancelable) {
         this.cancelable = cancelable;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public StoreType getStoreType() {
+    StoreType getStoreType() {
         return storeType;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getBlackBerryWorldApplicationId() {
+    String getBlackBerryWorldApplicationId() {
         return blackBerryWorldApplicationId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public Uri getOtherStoreUri() {
+    Uri getOtherStoreUri() {
         return otherStoreUri;
     }
 
-    @SuppressWarnings("WeakerAccess, unused")
-    public void setStoreType(StoreType appStore) {
+    @SuppressWarnings("unused")
+    void setStoreType(StoreType appStore) {
         setStoreType(appStore, null);
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setStoreType(StoreType appStore, String param) {
+    void setStoreType(StoreType appStore, String param) {
         storeType = appStore;
         if (appStore == StoreType.BLACKBERRY) {
             if (param == null) {
@@ -134,146 +122,125 @@ final class DialogOptions {
     }
 
     @SuppressWarnings("unused")
-    public int getTitleResId() {
+    int getTitleResId() {
         return textTitleResId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setTitleResId(int textTitleResId) {
+    void setTitleResId(int textTitleResId) {
         this.textTitleResId = textTitleResId;
     }
 
     @SuppressWarnings("unused")
-    public int getMessageResId() {
+    int getMessageResId() {
         return textMessageResId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setMessageResId(int textMessageResId) {
+    void setMessageResId(int textMessageResId) {
         this.textMessageResId = textMessageResId;
     }
 
     @SuppressWarnings("unused")
-    public int getTextPositiveResId() {
+    int getTextPositiveResId() {
         return textPositiveResId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setTextPositiveResId(int textPositiveResId) {
+    void setTextPositiveResId(int textPositiveResId) {
         this.textPositiveResId = textPositiveResId;
     }
 
     @SuppressWarnings("unused")
-    public int getTextNeutralResId() {
+    int getTextNeutralResId() {
         return textNeutralResId;
     }
-    @SuppressWarnings("WeakerAccess")
-    public void setTextNeutralResId(int textNeutralResId) {
+    void setTextNeutralResId(int textNeutralResId) {
         this.textNeutralResId = textNeutralResId;
     }
 
     @SuppressWarnings("unused")
-    public int getTextNegativeResId() {
+    int getTextNegativeResId() {
         return textNegativeResId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setTextNegativeResId(int textNegativeResId) {
+    void setTextNegativeResId(int textNegativeResId) {
         this.textNegativeResId = textNegativeResId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public View getView() {
+    View getView() {
         return view;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setView(View view) {
+    void setView(View view) {
         this.view = view;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public OnClickButtonListener getListener() {
+    OnClickButtonListener getListener() {
         return listener != null ? listener.get() : null;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setListener(OnClickButtonListener listener) {
+    void setListener(OnClickButtonListener listener) {
         this.listener = new WeakReference<>(listener);
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getTitleText(Context context) {
+    String getTitleText(Context context) {
         if (titleText == null) {
             return context.getString(textTitleResId);
         }
         return titleText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setTitleText(String titleText) {
+    void setTitleText(String titleText) {
         this.titleText = titleText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getMessageText(Context context) {
+    String getMessageText(Context context) {
         if (messageText == null) {
             return context.getString(textMessageResId);
         }
         return messageText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setMessageText(String messageText) {
+    void setMessageText(String messageText) {
         this.messageText = messageText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getPositiveText(Context context) {
+    String getPositiveText(Context context) {
         if (positiveText == null) {
             return context.getString(textPositiveResId);
         }
         return positiveText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setPositiveText(String positiveText) {
+    void setPositiveText(String positiveText) {
         this.positiveText = positiveText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getNeutralText(Context context) {
+    String getNeutralText(Context context) {
         if (neutralText == null) {
             return context.getString(textNeutralResId);
         }
         return neutralText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setNeutralText(String neutralText) {
+    void setNeutralText(String neutralText) {
         this.neutralText = neutralText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public String getNegativeText(Context context) {
+    String getNegativeText(Context context) {
         if (negativeText == null) {
             return context.getString(textNegativeResId);
         }
         return negativeText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setNegativeText(String negativeText) {
+    void setNegativeText(String negativeText) {
         this.negativeText = negativeText;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public int getThemeResId() {
+    int getThemeResId() {
         return themeResId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    public void setThemeResId(int themeResId) {
+    void setThemeResId(int themeResId) {
         this.themeResId = themeResId;
     }
 }

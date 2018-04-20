@@ -8,30 +8,17 @@ package com.vorlonsoft.android.rate;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.vorlonsoft.android.rate.AppRate.TAG;
-import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstore;
-import static com.vorlonsoft.android.rate.UriHelper.getAmazonAppstoreWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorld;
-import static com.vorlonsoft.android.rate.UriHelper.getBlackBerryWorldWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getCafeBazaar;
-import static com.vorlonsoft.android.rate.UriHelper.getCafeBazaarWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getChineseStores;
-import static com.vorlonsoft.android.rate.UriHelper.getGooglePlay;
-import static com.vorlonsoft.android.rate.UriHelper.getGooglePlayWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getMiAppstore;
-import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyApps;
-import static com.vorlonsoft.android.rate.UriHelper.getSamsungGalaxyAppsWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getSlideME;
-import static com.vorlonsoft.android.rate.UriHelper.getSlideMEWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getTencentAppStore;
-import static com.vorlonsoft.android.rate.UriHelper.getTencentAppStoreWeb;
-import static com.vorlonsoft.android.rate.UriHelper.getYandexStore;
-import static com.vorlonsoft.android.rate.UriHelper.getYandexStoreWeb;
-import static com.vorlonsoft.android.rate.UriHelper.isPackageExists;
-import static com.vorlonsoft.android.rate.UriHelper.isPackagesExists;
+import static com.vorlonsoft.android.rate.UriHelper.getStoreUri;
+import static com.vorlonsoft.android.rate.UriHelper.getStoreWebUri;
 
 final class IntentHelper {
 
@@ -80,6 +67,43 @@ final class IntentHelper {
     private IntentHelper() {
     }
 
+    private static boolean isPackageExists(Context context, String targetPackage) {
+        return isPackagesExists(context, new String[]{targetPackage}).length > 0;
+    }
+
+    private static String[] isPackagesExists(Context context, String[] targetPackages) {
+        final String[] EMPTY_STRING_ARRAY = new String[0];
+
+        if (context == null) {
+            Log.i(TAG, "Can't get context.getPackageManager()");
+            return EMPTY_STRING_ARRAY;
+        } else if ((targetPackages == null) || (targetPackages.length == 0)) {
+            return EMPTY_STRING_ARRAY;
+        }
+
+        final PackageManager packageManager = context.getPackageManager();
+        List<ApplicationInfo> applicationInfo = packageManager.getInstalledApplications(0);
+        if (targetPackages.length == 1) {
+            for (ApplicationInfo aApplicationInfo : applicationInfo) {
+                if (aApplicationInfo.packageName.equals(targetPackages[0])) {
+                    return new String[]{targetPackages[0]};
+                }
+            }
+            return EMPTY_STRING_ARRAY;
+        } else {
+            ArrayList<String> packageNames = new ArrayList<>();
+            for (String aTargetPackage : targetPackages) {
+                for (ApplicationInfo aApplicationInfo : applicationInfo) {
+                    if (aApplicationInfo.packageName.equals(aTargetPackage)) {
+                        packageNames.add(aTargetPackage);
+                        break;
+                    }
+                }
+            }
+            return packageNames.toArray(new String[0]);
+        }
+    }
+
     private static Intent setIntentForStore(Intent intent) {
         // Make sure it DOESN'T open in the stack of appPackageName activity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -94,12 +118,12 @@ final class IntentHelper {
     static Intent[] createIntentsForAmazonAppstore(Context context, String packageName) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, AMAZON_APPSTORE_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getAmazonAppstore(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.AMAZON, packageName));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(AMAZON_APPSTORE_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(packageName));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.AMAZON, packageName));
         } else {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getAmazonAppstoreWeb(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.AMAZON, packageName));
         }
         return intents;
     }
@@ -107,12 +131,12 @@ final class IntentHelper {
     static Intent[] createIntentsForBlackBerryWorld(Context context, String applicationId) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, BLACKBERRY_WORLD_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getBlackBerryWorld(applicationId));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.BLACKBERRY, applicationId));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(BLACKBERRY_WORLD_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(applicationId));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.BLACKBERRY, applicationId));
         } else {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getBlackBerryWorldWeb(applicationId));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.BLACKBERRY, applicationId));
         }
         return intents;
     }
@@ -120,12 +144,12 @@ final class IntentHelper {
     static Intent[] createIntentsForCafeBazaar(Context context, String packageName) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, CAFE_BAZAAR_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getCafeBazaar(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.BAZAAR, packageName));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(CAFE_BAZAAR_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(packageName));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.BAZAAR, packageName));
         } else {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getCafeBazaarWeb(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.BAZAAR, packageName));
         }
         return intents;
     }
@@ -138,7 +162,7 @@ final class IntentHelper {
         if (storesPackagesNumber > 0) {
             intents = new Intent[storesPackagesNumber];
             for (byte i = 0; i < storesPackagesNumber; i++) {
-                intents[i] = new Intent(Intent.ACTION_VIEW, getChineseStores(packageName));
+                intents[i] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.CHINESESTORES, packageName));
                 intents[i] = setIntentForStore(intents[i]);
                 intents[i].setPackage(storesPackagesNames[i]);
             }
@@ -152,24 +176,22 @@ final class IntentHelper {
     static Intent[] createIntentsForGooglePlay(Context context, String packageName) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, GOOGLE_PLAY_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getGooglePlay(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.GOOGLEPLAY, packageName));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(GOOGLE_PLAY_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(packageName));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.GOOGLEPLAY, packageName));
         } else {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getGooglePlayWeb(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.GOOGLEPLAY, packageName));
         }
         return intents;
     }
 
     static Intent[] createIntentsForMiAppstore(String packageName) {
-        return new Intent[]{new Intent(Intent.ACTION_VIEW, getMiAppstore(packageName))};
+        return new Intent[]{new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.MI, packageName))};
     }
 
     static Intent[] createIntentsForOther(Context context, Uri uri) {
-        if ((uri.toString().contains("itunes.com")) ||
-            (uri.toString().contains("appstore.com")) ||
-            (uri.toString().contains("itunes.apple.com"))) {
+        if (uri.getHost().endsWith("itunes.apple.com")) {
             final Intent[] intents = {new Intent(Intent.ACTION_VIEW, uri)};
             final String[] storesPackagesNames = isPackagesExists(context, BROWSERS_PACKAGE_NAMES);
             if (storesPackagesNames.length > 0) {
@@ -184,10 +206,10 @@ final class IntentHelper {
     static Intent[] createIntentsForSamsungGalaxyApps(Context context, String packageName) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, SAMSUNG_GALAXY_APPS_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getSamsungGalaxyApps(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.SAMSUNG, packageName));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(SAMSUNG_GALAXY_APPS_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getSamsungGalaxyAppsWeb(packageName));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.SAMSUNG, packageName));
         } else {
             Log.w(TAG, "Failed to rate app, com.sec.android.app.samsungapps doesn't exist");
             return null;
@@ -198,12 +220,12 @@ final class IntentHelper {
     static Intent[] createIntentsForSlideME(Context context, String packageName) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, SLIDEME_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getSlideME(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.SLIDEME, packageName));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(SLIDEME_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getSlideMEWeb(packageName));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.SLIDEME, packageName));
         } else {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getSlideMEWeb(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.SLIDEME, packageName));
         }
         return intents;
     }
@@ -211,12 +233,12 @@ final class IntentHelper {
     static Intent[] createIntentsForTencentAppStore(Context context, String packageName) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, TENCENT_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getTencentAppStore(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.TENCENT, packageName));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(TENCENT_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getTencentAppStoreWeb(packageName));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.TENCENT, packageName));
         } else {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getTencentAppStoreWeb(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.TENCENT, packageName));
         }
         return intents;
     }
@@ -224,10 +246,10 @@ final class IntentHelper {
     static Intent[] createIntentsForYandexStore(Context context, String packageName) {
         final Intent[] intents = new Intent[2];
         if (isPackageExists(context, YANDEX_STORE_PACKAGE_NAME)) {
-            intents[0] = new Intent(Intent.ACTION_VIEW, getYandexStore(packageName));
+            intents[0] = new Intent(Intent.ACTION_VIEW, getStoreUri(StoreType.YANDEX, packageName));
             intents[0] = setIntentForStore(intents[0]);
             intents[0].setPackage(YANDEX_STORE_PACKAGE_NAME);
-            intents[1] = new Intent(Intent.ACTION_VIEW, getYandexStoreWeb(packageName));
+            intents[1] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(StoreType.YANDEX, packageName));
         } else {
             Log.w(TAG, "Failed to rate app, com.yandex.store doesn't exist");
             return null;
