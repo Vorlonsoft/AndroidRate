@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.1.6 (released 24.04.2018)
+
+- LIBff10424
+- LIBcc20420
+- LIBbb10420 Unit test for com.vorlonsoft.android.rate.UriHelper
+- LIBcc10420
+- LIBff10419 Apple App Store
+- LIBcc20418 Inspection
+
 ## 1.1.5 (released 18.04.2018)
 
 - LIBcc10418
