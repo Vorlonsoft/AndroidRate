@@ -8,6 +8,6 @@ package com.vorlonsoft.android.rate;
 
 public interface OnClickButtonListener {
 
-    void onClickButton(byte which);
+    void onClickButton(final byte which);
 
 }

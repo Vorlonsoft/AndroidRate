@@ -8,7 +8,11 @@ package com.vorlonsoft.android.rate;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 
 import java.util.Date;
@@ -16,6 +20,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.vorlonsoft.android.rate.PreferenceHelper.*;
+import static com.vorlonsoft.android.rate.StoreType.AMAZON;
+import static com.vorlonsoft.android.rate.StoreType.APPLE;
+import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
+import static com.vorlonsoft.android.rate.StoreType.INTENT;
+import static com.vorlonsoft.android.rate.StoreType.OTHER;
+import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 
 public final class AppRate {
 
@@ -204,32 +214,46 @@ public final class AppRate {
         return this;
     }
 
-    public AppRate setStoreType(@SuppressWarnings("SameParameterValue") StoreType appStore) {
-        return setStoreType(appStore, null);
-    }
-
-    @SuppressWarnings("unused")
-    public AppRate setStoreType(int applicationID) {
-        return setStoreType(StoreType.BLACKBERRY, String.valueOf(applicationID));
-    }
-
-    @SuppressWarnings("unused")
-    public AppRate setStoreType(String uri) {
-        return setStoreType(StoreType.OTHER, uri);
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public AppRate setStoreType(StoreType appStore, String param) {
-        if ((appStore == StoreType.BLACKBERRY)&&(param == null)) {
-            throw new IllegalArgumentException("For StoreType.BLACKBERRY you must use setStoreType(int applicationID)");
-        } else if ((appStore == StoreType.OTHER)&&(param == null)) {
-            throw new IllegalArgumentException("For StoreType.OTHER you must use setStoreType(String uri) and 'uri' must be != null");
+    public AppRate setStoreType(@StoreType.Store final int storeType) {
+        if ((storeType == APPLE) || (storeType == BLACKBERRY)) {
+            throw new IllegalArgumentException("For StoreType.APPLE/StoreType.BLACKBERRY you must use setStoreType(StoreType.APPLE/StoreType.BLACKBERRY, long applicationId)");
+        } else if ((storeType < AMAZON) || (storeType > YANDEX)) {
+            throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
         }
-        options.setStoreType(appStore, param);
+        return setStoreType((byte) storeType, null, null);
+    }
+
+    @SuppressWarnings("unused")
+    public AppRate setStoreType(@StoreType.StoreWithId final int storeType, final long applicationId) {
+        if ((storeType < AMAZON) || (storeType > YANDEX)) {
+            throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
+        }
+        return ((storeType != APPLE) && (storeType != BLACKBERRY)) ? setStoreType((byte) storeType, null, null) : setStoreType((byte) storeType, String.valueOf(applicationId), null);
+    }
+
+    @SuppressWarnings("unused ConstantConditions")
+    public AppRate setStoreType(@NonNull final String uri) {
+        if (uri == null) {
+            throw new IllegalArgumentException("setStoreType(String uri): 'uri' must be != null");
+        }
+        return setStoreType(OTHER, uri, null);
+    }
+
+    @SuppressWarnings({"ConstantConditions", "unused"})
+    public AppRate setStoreType(@NonNull final Intent[] intents) {
+        if (intents == null) {
+            throw new IllegalArgumentException("setStoreType(Intent[] intents): 'intents' must be != null");
+        }
+        return setStoreType(INTENT, null, intents);
+    }
+
+    private AppRate setStoreType(final byte storeType, final String stringParam, final Intent[] intentParaam) {
+        options.setStoreType(storeType, stringParam, intentParaam);
         return this;
     }
 
-    public StoreType getStoreType() {
+    @StoreType.Return
+    public int getStoreType() {
         return options.getStoreType();
     }
 
@@ -266,7 +290,12 @@ public final class AppRate {
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
         if (!activity.isFinishing()) {
-            dialogManagerFactory.createDialogManager(activity, options).createDialog().show();
+            Dialog dialog = dialogManagerFactory.createDialogManager(activity, options).createDialog();
+            if (dialog != null) {
+                dialog.show();
+            } else {
+                Log.w(TAG, "Failed to rate app, can't create rate dialog");
+            }
         }
     }
 
