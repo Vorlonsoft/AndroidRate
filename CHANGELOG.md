@@ -15,7 +15,7 @@
 - LIBcc10415
 - LIBbb10415 Samsung Galaxy Apps uri update
 - LIBff10415 Cafe Bazaar
-- LIBff20414 SlideME
+- LIBff20414 SlideME Marketplace
 - LIBff10414 BlackBerry World
 - LIBff10413
 

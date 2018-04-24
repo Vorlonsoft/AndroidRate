@@ -43,5 +43,7 @@ android {
         }
     }
 }
-
+dependencies {
+    api 'com.android.support:support-annotations:27.1.1'
+}
 apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'

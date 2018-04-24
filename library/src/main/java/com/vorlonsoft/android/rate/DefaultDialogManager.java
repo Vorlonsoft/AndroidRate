@@ -16,19 +16,23 @@ import android.util.Log;
 import android.view.View;
 
 import static com.vorlonsoft.android.rate.AppRate.TAG;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForAmazonAppstore;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForBlackBerryWorld;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForCafeBazaar;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForChineseStores;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForGooglePlay;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForMiAppstore;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForOther;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForSamsungGalaxyApps;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForSlideME;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForTencentAppStore;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForYandexStore;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForOtherStores;
+import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
+import static com.vorlonsoft.android.rate.StoreType.AMAZON;
+import static com.vorlonsoft.android.rate.StoreType.APPLE;
+import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
+import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
+import static com.vorlonsoft.android.rate.StoreType.CHINESESTORES;
+import static com.vorlonsoft.android.rate.StoreType.GOOGLEPLAY;
+import static com.vorlonsoft.android.rate.StoreType.INTENT;
+import static com.vorlonsoft.android.rate.StoreType.MI;
+import static com.vorlonsoft.android.rate.StoreType.OTHER;
+import static com.vorlonsoft.android.rate.StoreType.SAMSUNG;
+import static com.vorlonsoft.android.rate.StoreType.SLIDEME;
+import static com.vorlonsoft.android.rate.StoreType.TENCENT;
+import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {
@@ -47,52 +51,61 @@ public class DefaultDialogManager implements DialogManager {
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
-        public void onClick(DialogInterface dialog, int which) {
+        public void onClick(final DialogInterface dialog, final int which) {
             final Intent[] intentsToAppStores;
             final String packageName = context.getPackageName();
             if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
                 switch(options.getStoreType()) {
                     case AMAZON:
-                        intentsToAppStores = createIntentsForAmazonAppstore(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, AMAZON, packageName);
+                        break;
+                    case APPLE:
+                        intentsToAppStores = createIntentsForStore(context, APPLE, options.getApplicationId());
                         break;
                     case BAZAAR:
-                        intentsToAppStores = createIntentsForCafeBazaar(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, BAZAAR, packageName);
                         break;
                     case BLACKBERRY:
-                        intentsToAppStores = createIntentsForBlackBerryWorld(context, options.getBlackBerryWorldApplicationId());
+                        intentsToAppStores = createIntentsForStore(context, BLACKBERRY, options.getApplicationId());
                         break;
                     case CHINESESTORES:
-                        intentsToAppStores = createIntentsForChineseStores(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, CHINESESTORES, packageName);
+                        break;
+                    case INTENT:
+                        intentsToAppStores = options.getIntents();
                         break;
                     case MI:
-                        intentsToAppStores = createIntentsForMiAppstore(packageName);
+                        intentsToAppStores = createIntentsForStore(context, MI, packageName);
                         break;
                     case OTHER:
-                        intentsToAppStores = createIntentsForOther(context, options.getOtherStoreUri());
+                        intentsToAppStores = createIntentsForOtherStores(options.getOtherStoreUri());
                         break;
                     case SAMSUNG:
-                        intentsToAppStores = createIntentsForSamsungGalaxyApps(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, SAMSUNG, packageName);
                         break;
                     case SLIDEME:
-                        intentsToAppStores = createIntentsForSlideME(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, SLIDEME, packageName);
                         break;
                     case TENCENT:
-                        intentsToAppStores = createIntentsForTencentAppStore(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, TENCENT, packageName);
                         break;
                     case YANDEX:
-                        intentsToAppStores = createIntentsForYandexStore(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, YANDEX, packageName);
                         break;
                     default:
-                        intentsToAppStores = createIntentsForGooglePlay(context, packageName);
+                        intentsToAppStores = createIntentsForStore(context, GOOGLEPLAY, packageName);
+                }
+                if (intentsToAppStores == null) {
+                    Log.w(TAG, "Failed to rate app, can't create intents for store");
                 }
             } else {
-                Log.w(TAG, "Failed to rate app, can't get context.getPackageName()");
+                Log.w(TAG, "Failed to rate app, can't get app package name");
                 intentsToAppStores = null;
             }
             try {
                 if (intentsToAppStores != null) {
                     if (intentsToAppStores.length == 0) {
-                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
+                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == null)");
                     } else if (intentsToAppStores[0] == null) {
                         throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
                     } else {
@@ -129,7 +142,7 @@ public class DefaultDialogManager implements DialogManager {
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener negativeListener = new DialogInterface.OnClickListener() {
         @Override
-        public void onClick(DialogInterface dialog, int which) {
+        public void onClick(final DialogInterface dialog, final int which) {
             setAgreeShowDialog(context, false);
             if (DefaultDialogManager.this.listener != null) DefaultDialogManager.this.listener.onClickButton((byte) which);
         }
@@ -137,7 +150,7 @@ public class DefaultDialogManager implements DialogManager {
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener neutralListener = new DialogInterface.OnClickListener() {
         @Override
-        public void onClick(DialogInterface dialog, int which) {
+        public void onClick(final DialogInterface dialog, final int which) {
             setRemindInterval(context);
             if (listener != null) listener.onClickButton((byte) which);
         }
@@ -153,6 +166,9 @@ public class DefaultDialogManager implements DialogManager {
     @Override
     public Dialog createDialog() {
         AlertDialog.Builder builder = getDialogBuilder(context, options.getThemeResId());
+
+        if (builder == null) return null;
+
         builder.setMessage(options.getMessageText(context));
 
         if (options.shouldShowTitle()) builder.setTitle(options.getTitleText(context));

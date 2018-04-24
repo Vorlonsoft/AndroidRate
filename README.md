@@ -32,10 +32,10 @@ protected void onCreate(Bundle savedInstanceState) {
 
   AppRate.with(this)
       .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
-                                          //         CHINESESTORES (19 chinese app stores), MI (Mi Appstore), SAMSUNG (Samsung Galaxy Apps),
-                                          //         SLIDEME (SlideME), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
-                                          //         setStoreType(int) (BlackBerry World, int - your application ID),
-                                          //         setStoreType(String) (Apple App Store, String - a full URI (only http/https)) and
+                                          //         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
+                                          //         SLIDEME (SlideME Marketplace), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
+                                          //         setStoreType(BLACKBERRY, long) (BlackBerry World, long - your application ID),
+                                          //         setStoreType(APPLE, long) (Apple App Store, long - your application ID) and
                                           //         setStoreType(String) (Any other store, String - a full URI to your app)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
       .setLaunchTimes((byte) 3)           // default 10
@@ -43,13 +43,15 @@ protected void onCreate(Bundle savedInstanceState) {
       .setRemindLaunchTimes((byte) 2)     // default 1 (each launch)
       .setShowLaterButton(true)           // default true
       .setDebug(false)                    // default false
-      //Java 8+: .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which)))
-      .setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
-          @Override
-          public void onClickButton(byte which) {
-              Log.d(MainActivity.class.getName(), Byte.toString(which));
-          }
-      })
+      .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which)))
+      /* Java 7- start */
+      //.setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
+      //    @Override
+      //    public void onClickButton(final byte which) {
+      //        Log.d(MainActivity.class.getName(), Byte.toString(which));
+      //    }
+      //})
+      /* Java 7- end */
       .monitor();
 
   if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) {
@@ -135,27 +137,37 @@ If you want to use your own dialog labels, override string xml resources on your
 
 ### Appstores
 
-You can use a different Appstores.
+You can use different app stores.
 
-#### Google Play, Amazon Appstore, Cafe Bazaar, Mi Appstore, Samsung Galaxy Apps, SlideME, Tencent App Store, Yandex.Store
+#### Google Play, Amazon Appstore, Cafe Bazaar, Mi Appstore (Xiaomi Market), Samsung Galaxy Apps, SlideME Marketplace, Tencent App Store, Yandex.Store
 
 ```java
 AppRate.with(this).setStoreType(StoreType.GOOGLEPLAY); // Google Play
 AppRate.with(this).setStoreType(StoreType.AMAZON);     // Amazon Appstore
 AppRate.with(this).setStoreType(StoreType.BAZAAR);     // Cafe Bazaar
-AppRate.with(this).setStoreType(StoreType.MI);         // Mi Appstore
+AppRate.with(this).setStoreType(StoreType.MI);         // Mi Appstore (Xiaomi Market)
 AppRate.with(this).setStoreType(StoreType.SAMSUNG);    // Samsung Galaxy Apps
-AppRate.with(this).setStoreType(StoreType.SLIDEME);    // SlideME
+AppRate.with(this).setStoreType(StoreType.SLIDEME);    // SlideME Marketplace
 AppRate.with(this).setStoreType(StoreType.TENCENT);    // Tencent App Store
 AppRate.with(this).setStoreType(StoreType.YANDEX);     // Yandex.Store
+```
+
+#### Apple App Store
+
+```java
+AppRate.with(this).setStoreType(StoreType.APPLE, long); // Apple App Store,
+                                                        // long - your Apple App Store application ID
+                                                        // e. g. 284882215 for Facebook
+                                                        // (https://itunes.apple.com/app/id284882215)
 ```
 
 #### BlackBerry World
 
 ```java
-AppRate.with(this).setStoreType(int); // BlackBerry World,
-                                      // int - your BlackBerry World application ID
-                                      // e. g. 50777 for Facebook
+AppRate.with(this).setStoreType(StoreType.BLACKBERRY, long); // BlackBerry World,
+                                                             // long - your BlackBerry World application ID
+                                                             // e. g. 50777 for Facebook
+                                                             // (https://appworld.blackberry.com/webstore/content/50777)
 ```
 
 #### Chinese app stores
@@ -168,14 +180,6 @@ AppRate.with(this).setStoreType(StoreType.CHINESESTORES); // 19 chinese app stor
 // 91手机助手, 应用汇, QQ手机管家, 机锋应用市场, GO市场, 宇龙Coolpad应用商店, 联想应用商店, cool市场
 ```
 
-#### Apple App Store
-
-```java
-AppRate.with(this).setStoreType(String); // Apple App Store,
-                                         // String - an RFC 2396-compliant URI (only http/https) to your app
-                                         // e. g. "https://itunes.apple.com/app/facebook/id284882215" for Facebook
-```
-
 #### Other store
 
 ```java
@@ -183,6 +187,16 @@ AppRate.with(this).setStoreType(String); // Any other store,
                                          // String - an RFC 2396-compliant URI to your app
                                          // e. g. "https://otherstore.com/app?id=com.yourapp"
                                          // or "otherstore://apps/com.yourapp"
+```
+
+#### Сustom Intents
+
+You can set custom action to the Rate button. For example, you want to open your custom RateActivity when the Rate button clicked.
+
+```java
+AppRate.with(this).setStoreType(Intent[]); // Any custom intents, Intent[] - array of intents,
+                                           // first will be executed (startActivity(intents[0])),
+                                           // if first fails, second will be executed (startActivity(intents[1])), etc.
 ```
 
 ### Check the availability of Google Play

@@ -9,6 +9,9 @@ package com.vorlonsoft.android.rate;
 import android.net.Uri;
 import android.test.AndroidTestCase;
 
+import static com.vorlonsoft.android.rate.StoreType.CHINESESTORES;
+import static com.vorlonsoft.android.rate.StoreType.GOOGLEPLAY;
+
 /**
  * Unit test for {@link com.vorlonsoft.android.rate.UriHelper}
  */
@@ -23,29 +26,29 @@ public class UriHelperTest extends AndroidTestCase {
     @SuppressWarnings("ConstantConditions")
     public void testGetStoreUri() {
         {
-            Uri uri = UriHelper.getStoreUri(StoreType.CHINESESTORES,"");
+            Uri uri = UriHelper.getStoreUri(CHINESESTORES,"");
             assertEquals(uri.toString(), CHINESE_STORES);
         }
         {
-            Uri uri = UriHelper.getStoreUri(StoreType.GOOGLEPLAY,"");
+            Uri uri = UriHelper.getStoreUri(GOOGLEPLAY,"");
             assertEquals(uri.toString(), GOOGLE_PLAY);
         }
         {
-            Uri uri = UriHelper.getStoreUri(StoreType.CHINESESTORES,null);
+            Uri uri = UriHelper.getStoreUri(CHINESESTORES,null);
             assertNull(uri);
         }
         {
-            Uri uri = UriHelper.getStoreUri(StoreType.GOOGLEPLAY,null);
+            Uri uri = UriHelper.getStoreUri(GOOGLEPLAY,null);
             assertNull(uri);
         }
         {
             final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreUri(StoreType.CHINESESTORES, paramName);
+            Uri uri = UriHelper.getStoreUri(CHINESESTORES, paramName);
             assertEquals(uri.toString(), CHINESE_STORES + paramName);
         }
         {
             final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreUri(StoreType.GOOGLEPLAY, paramName);
+            Uri uri = UriHelper.getStoreUri(GOOGLEPLAY, paramName);
             assertEquals(uri.toString(), GOOGLE_PLAY + paramName);
         }
     }
@@ -53,29 +56,29 @@ public class UriHelperTest extends AndroidTestCase {
     @SuppressWarnings("ConstantConditions")
     public void testGetStoreWebUri() {
         {
-            Uri uri = UriHelper.getStoreWebUri(StoreType.CHINESESTORES,"");
+            Uri uri = UriHelper.getStoreWebUri(CHINESESTORES,"");
             assertNull(uri);
         }
         {
-            Uri uri = UriHelper.getStoreWebUri(StoreType.GOOGLEPLAY,"");
+            Uri uri = UriHelper.getStoreWebUri(GOOGLEPLAY,"");
             assertEquals(uri.toString(), GOOGLE_PLAY_WEB);
         }
         {
-            Uri uri = UriHelper.getStoreWebUri(StoreType.CHINESESTORES,null);
+            Uri uri = UriHelper.getStoreWebUri(CHINESESTORES,null);
             assertNull(uri);
         }
         {
-            Uri uri = UriHelper.getStoreWebUri(StoreType.GOOGLEPLAY,null);
-            assertNull(uri);
-        }
-        {
-            final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreWebUri(StoreType.CHINESESTORES, paramName);
+            Uri uri = UriHelper.getStoreWebUri(GOOGLEPLAY,null);
             assertNull(uri);
         }
         {
             final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreWebUri(StoreType.GOOGLEPLAY, paramName);
+            Uri uri = UriHelper.getStoreWebUri(CHINESESTORES, paramName);
+            assertNull(uri);
+        }
+        {
+            final String paramName = "com.vorlonsoft.android.rate";
+            Uri uri = UriHelper.getStoreWebUri(GOOGLEPLAY, paramName);
             assertEquals(uri.toString(), GOOGLE_PLAY_WEB + paramName);
         }
     }

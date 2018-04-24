@@ -7,11 +7,18 @@
 package com.vorlonsoft.android.rate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.View;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+
+import static com.vorlonsoft.android.rate.StoreType.APPLE;
+import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
+import static com.vorlonsoft.android.rate.StoreType.GOOGLEPLAY;
+import static com.vorlonsoft.android.rate.StoreType.INTENT;
+import static com.vorlonsoft.android.rate.StoreType.OTHER;
 
 final class DialogOptions {
 
@@ -22,6 +29,8 @@ final class DialogOptions {
     private boolean showNeutralButton = true;
 
     private boolean showTitle = true;
+
+    private byte storeType = GOOGLEPLAY;
 
     private int textMessageResId = R.string.rate_dialog_message;
 
@@ -35,7 +44,7 @@ final class DialogOptions {
 
     private int themeResId = 0;
 
-    private String blackBerryWorldApplicationId = null;
+    private String applicationId = null;
 
     private String messageText = null;
 
@@ -47,11 +56,11 @@ final class DialogOptions {
 
     private String titleText = null;
 
-    private StoreType storeType = StoreType.GOOGLEPLAY;
-
     private Uri otherStoreUri = null;
 
     private View view = null;
+
+    private Intent[] intents = null;
 
     private Reference<OnClickButtonListener> listener = null;
 
@@ -87,37 +96,49 @@ final class DialogOptions {
         this.cancelable = cancelable;
     }
 
-    StoreType getStoreType() {
-        return storeType;
+    String getApplicationId() {
+        return applicationId;
     }
 
-    String getBlackBerryWorldApplicationId() {
-        return blackBerryWorldApplicationId;
+    @SuppressWarnings("WeakerAccess")
+    void setApplicationId(String applicationId) {
+        this.applicationId = applicationId;
     }
 
     Uri getOtherStoreUri() {
         return otherStoreUri;
     }
 
-    @SuppressWarnings("unused")
-    void setStoreType(StoreType appStore) {
-        setStoreType(appStore, null);
+    @SuppressWarnings("WeakerAccess")
+    void setOtherStoreUri(Uri otherStoreUri) {
+        this.otherStoreUri = otherStoreUri;
     }
 
-    void setStoreType(StoreType appStore, String param) {
-        storeType = appStore;
-        if (appStore == StoreType.BLACKBERRY) {
-            if (param == null) {
-                throw new IllegalArgumentException("For StoreType.BLACKBERRY you must use setStoreType(StoreType appStore, String applicationId) and 'applicationId' must be != null");
-            } else {
-                blackBerryWorldApplicationId = param;
-            }
-        } else if (appStore == StoreType.OTHER) {
-            if (param == null) {
-                throw new IllegalArgumentException("For StoreType.OTHER you must use setStoreType(StoreType appStore, String uri) and 'uri' must be != null");
-            } else {
-                otherStoreUri = Uri.parse(param);
-            }
+    Intent[] getIntents() {
+        return intents;
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    void setIntents(Intent[] intents) {
+        this.intents = intents;
+    }
+
+    byte getStoreType() {
+        return storeType;
+    }
+
+    void setStoreType(final byte storeType, final String stringParam, final Intent[] intentParaam) {
+        this.storeType = storeType;
+        switch(storeType) {
+            case APPLE:
+            case BLACKBERRY:
+                setApplicationId(stringParam);
+                break;
+            case INTENT:
+                setIntents(intentParaam);
+                break;
+            case OTHER:
+                setOtherStoreUri(stringParam == null ? null : Uri.parse(stringParam));
         }
     }
 

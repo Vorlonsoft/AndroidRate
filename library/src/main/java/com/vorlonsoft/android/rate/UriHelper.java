@@ -7,12 +7,26 @@
 package com.vorlonsoft.android.rate;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
+
+import static com.vorlonsoft.android.rate.StoreType.AMAZON;
+import static com.vorlonsoft.android.rate.StoreType.APPLE;
+import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
+import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
+import static com.vorlonsoft.android.rate.StoreType.CHINESESTORES;
+import static com.vorlonsoft.android.rate.StoreType.MI;
+import static com.vorlonsoft.android.rate.StoreType.SAMSUNG;
+import static com.vorlonsoft.android.rate.StoreType.SLIDEME;
+import static com.vorlonsoft.android.rate.StoreType.TENCENT;
+import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 
 final class UriHelper {
 
     private static final String AMAZON_APPSTORE = "amzn://apps/android?p=";
 
     private static final String AMAZON_APPSTORE_WEB = "https://www.amazon.com/gp/mas/dl/android?p=";
+
+    private static final String APPLE_APP_STORE_WEB = "https://itunes.apple.com/app/id";
 
     private static final String BLACKBERRY_WORLD = "appworld://content/";
 
@@ -28,15 +42,17 @@ final class UriHelper {
 
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
 
-    private static final String MI_APPSTORE_WEB = "http://app.mi.com/details?id=";
+    private static final String MI_APPSTORE = "market://details?id=";
+
+    private static final String MI_APPSTORE_WEB = "http://app.xiaomi.com/details?id=";
 
     private static final String SAMSUNG_GALAXY_APPS = "samsungapps://ProductDetail/";
 
     private static final String SAMSUNG_GALAXY_APPS_WEB = "https://apps.samsung.com/appquery/appDetail.as?appId=";
 
-    private static final String SLIDEME = "sam://details?id=";
+    private static final String SLIDEME_MARKETPLACE = "sam://details?id=";
 
-    private static final String SLIDEME_WEB = "http://slideme.org/app/";
+    private static final String SLIDEME_MARKETPLACE_WEB = "http://slideme.org/app/";
 
     private static final String TENCENT_APP_STORE = "market://details?id=";
 
@@ -49,12 +65,15 @@ final class UriHelper {
     private UriHelper() {
     }
 
-    private static Uri getStoreUri(final StoreType appStore, final String paramName, final boolean isWebUri) {
-        String baseStoreUri;
+    private static Uri getStoreUri(final byte appStore, final String paramName, final boolean isWebUri) {
+        final String baseStoreUri;
         if (isWebUri) {
             switch(appStore) {
                 case AMAZON:
                     baseStoreUri = AMAZON_APPSTORE_WEB;
+                    break;
+                case APPLE:
+                    baseStoreUri = APPLE_APP_STORE_WEB;
                     break;
                 case BAZAAR:
                     baseStoreUri = CAFE_BAZAAR_WEB;
@@ -71,7 +90,7 @@ final class UriHelper {
                     baseStoreUri = SAMSUNG_GALAXY_APPS_WEB;
                     break;
                 case SLIDEME:
-                    baseStoreUri = SLIDEME_WEB;
+                    baseStoreUri = SLIDEME_MARKETPLACE_WEB;
                     break;
                 case TENCENT:
                     baseStoreUri = TENCENT_APP_STORE_WEB;
@@ -87,6 +106,8 @@ final class UriHelper {
                 case AMAZON:
                     baseStoreUri = AMAZON_APPSTORE;
                     break;
+                case APPLE:
+                    return null;
                 case BAZAAR:
                     baseStoreUri = CAFE_BAZAAR;
                     break;
@@ -97,12 +118,13 @@ final class UriHelper {
                     baseStoreUri = CHINESE_STORES;
                     break;
                 case MI:
-                    return null;
+                    baseStoreUri = MI_APPSTORE;
+                    break;
                 case SAMSUNG:
                     baseStoreUri = SAMSUNG_GALAXY_APPS;
                     break;
                 case SLIDEME:
-                    baseStoreUri = SLIDEME;
+                    baseStoreUri = SLIDEME_MARKETPLACE;
                     break;
                 case TENCENT:
                     baseStoreUri = TENCENT_APP_STORE;
@@ -117,11 +139,13 @@ final class UriHelper {
         return Uri.parse(baseStoreUri + paramName);
     }
 
-    static Uri getStoreUri(final StoreType appStore, final String paramName) {
+    @SuppressWarnings("ConstantConditions")
+    static Uri getStoreUri(final byte appStore, @NonNull final String paramName) {
         return paramName == null ? null : getStoreUri(appStore, paramName, false);
     }
 
-    static Uri getStoreWebUri(final StoreType appStore, final String paramName) {
+    @SuppressWarnings("ConstantConditions")
+    static Uri getStoreWebUri(final byte appStore, @NonNull final String paramName) {
         return paramName == null ? null : getStoreUri(appStore, paramName, true);
     }
 }
