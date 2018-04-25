@@ -12,6 +12,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 
@@ -39,7 +40,7 @@ public class DefaultDialogManager implements DialogManager {
 
     static class Factory implements DialogManager.Factory {
         @Override
-        public DialogManager createDialogManager(Context context, DialogOptions options) {
+        public DialogManager createDialogManager(final Context context, final DialogOptions options) {
             return new DefaultDialogManager(context, options);
         }
     }
@@ -105,7 +106,7 @@ public class DefaultDialogManager implements DialogManager {
             try {
                 if (intentsToAppStores != null) {
                     if (intentsToAppStores.length == 0) {
-                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == null)");
+                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
                     } else if (intentsToAppStores[0] == null) {
                         throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
                     } else {
@@ -114,22 +115,23 @@ public class DefaultDialogManager implements DialogManager {
                 }
             } catch (ActivityNotFoundException e) {
                 Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
-                if (intentsToAppStores.length > 1) {
-                    for (byte i = 1; i < intentsToAppStores.length; i++) { // intentsToAppStores[1] - second intent in the array
-                        boolean isCatch = false;
+                byte intentsToAppStoresNumber = (byte) intentsToAppStores.length;
+                if (intentsToAppStoresNumber > 1) {
+                    boolean isCatch;
+                    for (byte b = 1; b < intentsToAppStoresNumber; b++) { // intentsToAppStores[1] - second intent in the array
                         try {
-                            if (intentsToAppStores[i] == null) {
-                                throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + i + "] == null)");
+                            if (intentsToAppStores[b] == null) {
+                                throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + b + "] == null)");
                             } else {
-                                context.startActivity(intentsToAppStores[i]);
+                                context.startActivity(intentsToAppStores[b]);
                             }
+                            isCatch = false;
                         } catch (ActivityNotFoundException ex) {
-                            Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[i], ex);
+                            Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[b], ex);
                             isCatch = true;
-                        } finally {
-                            if (!isCatch) {
-                                i = (byte) intentsToAppStores.length;
-                            }
+                        }
+                        if (!isCatch) {
+                            break;
                         }
                     }
                 }
@@ -144,9 +146,10 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             setAgreeShowDialog(context, false);
-            if (DefaultDialogManager.this.listener != null) DefaultDialogManager.this.listener.onClickButton((byte) which);
+            if (listener != null) listener.onClickButton((byte) which);
         }
     };
+
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener neutralListener = new DialogInterface.OnClickListener() {
         @Override
@@ -163,6 +166,7 @@ public class DefaultDialogManager implements DialogManager {
         this.listener = options.getListener();
     }
 
+    @Nullable
     @Override
     public Dialog createDialog() {
         AlertDialog.Builder builder = getDialogBuilder(context, options.getThemeResId());

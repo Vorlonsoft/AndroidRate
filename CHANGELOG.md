@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1.6 (released 24.04.2018)
+## 1.1.6 (released 25.04.2018)
 
 - LIBff10424
 - LIBcc20420

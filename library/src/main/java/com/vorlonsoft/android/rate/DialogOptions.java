@@ -9,6 +9,7 @@ package com.vorlonsoft.android.rate;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import java.lang.ref.Reference;
@@ -63,6 +64,9 @@ final class DialogOptions {
     private Intent[] intents = null;
 
     private Reference<OnClickButtonListener> listener = null;
+
+    DialogOptions() {
+    }
 
     boolean shouldShowNeutralButton() {
         return showNeutralButton;
@@ -173,6 +177,7 @@ final class DialogOptions {
     int getTextNeutralResId() {
         return textNeutralResId;
     }
+
     void setTextNeutralResId(int textNeutralResId) {
         this.textNeutralResId = textNeutralResId;
     }
@@ -194,6 +199,7 @@ final class DialogOptions {
         this.view = view;
     }
 
+    @Nullable
     OnClickButtonListener getListener() {
         return listener != null ? listener.get() : null;
     }

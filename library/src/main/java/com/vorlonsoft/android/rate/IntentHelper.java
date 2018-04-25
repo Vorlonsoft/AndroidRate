@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.Arrays;
@@ -96,10 +97,12 @@ final class IntentHelper {
     }
 
     @SuppressWarnings("ConstantConditions")
+    @Nullable
     static Intent[] createIntentsForOtherStores(@NonNull final Uri uri) {
         return uri == null ? null : new Intent[]{new Intent(Intent.ACTION_VIEW, uri)};
     }
 
+    @Nullable
     static Intent[] createIntentsForStore(@NonNull final Context context, final byte appStore, @NonNull final String paramName) {
 
         //noinspection ConstantConditions
@@ -158,15 +161,11 @@ final class IntentHelper {
         deviceStoresPackagesNumber = deviceStoresPackagesNames == null ? 0 : (byte) deviceStoresPackagesNames.length;
 
         if (deviceStoresPackagesNumber > 0) {
-            if (hasWebUriIntent) {
-                intents = new Intent[deviceStoresPackagesNumber + 1];
-            } else {
-                intents = new Intent[deviceStoresPackagesNumber];
-            }
-            for (byte i = 0; i < deviceStoresPackagesNumber; i++) {
-                intents[i] = new Intent(Intent.ACTION_VIEW, getStoreUri(appStore, paramName));
-                setIntentForStore(intents[i]);
-                intents[i].setPackage(storesPackagesNames[i]);
+            intents = hasWebUriIntent ? new Intent[deviceStoresPackagesNumber + 1] : new Intent[deviceStoresPackagesNumber];
+            for (byte b = 0; b < deviceStoresPackagesNumber; b++) {
+                intents[b] = new Intent(Intent.ACTION_VIEW, getStoreUri(appStore, paramName));
+                setIntentForStore(intents[b]);
+                intents[b].setPackage(deviceStoresPackagesNames[b]);
             }
             if (hasWebUriIntent) {
                 intents[deviceStoresPackagesNumber] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(appStore, paramName));
@@ -181,10 +180,10 @@ final class IntentHelper {
                     }
                 }
             } else {
-                if (!hasWebUriIntent) {
-                    Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and app store (" + appStore + ") hasn't web (http/https) uri");
-                } else {
+                if (hasWebUriIntent) {
                     Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and device can't start app store web (http/https) uri activity without it");
+                } else {
+                    Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and app store (" + appStore + ") hasn't web (http/https) uri");
                 }
                 return null;
             }

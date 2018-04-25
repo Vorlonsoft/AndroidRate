@@ -8,7 +8,6 @@ package com.vorlonsoft.android.rate;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 
 import java.util.Date;
 
@@ -37,7 +36,7 @@ final class PreferenceHelper {
         return context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
     }
 
-    private static Editor getPreferencesEditor(final Context context) {
+    private static SharedPreferences.Editor getPreferencesEditor(final Context context) {
         return getPreferences(context).edit();
     }
 
@@ -54,7 +53,7 @@ final class PreferenceHelper {
     }
 
     /**
-     * Set agree flag about show dialog.<br/>
+     * Set agree flag about show dialog.<br>
      * If it is false, rate dialog will never shown unless data is cleared.
      *
      * @param context context
@@ -77,7 +76,7 @@ final class PreferenceHelper {
     }
 
     static long getRemindInterval(final Context context) {
-        return getPreferences(context).getLong(PREF_KEY_REMIND_INTERVAL, 0);
+        return getPreferences(context).getLong(PREF_KEY_REMIND_INTERVAL, 0L);
     }
 
     static void setInstallDate(final Context context) {
@@ -87,7 +86,7 @@ final class PreferenceHelper {
     }
 
     static long getInstallDate(final Context context) {
-        return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0);
+        return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0L);
     }
 
     static void setLaunchTimes(final Context context, final short launchTimes) {
@@ -101,7 +100,7 @@ final class PreferenceHelper {
     }
 
     static boolean isFirstLaunch(final Context context) {
-        return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0) == 0L;
+        return getPreferences(context).getLong(PREF_KEY_INSTALL_DATE, 0L) == 0L;
     }
 
     static short getCustomEventCount(final Context context, final String eventName) {

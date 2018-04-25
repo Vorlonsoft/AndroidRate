@@ -8,6 +8,7 @@ package com.vorlonsoft.android.rate;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
@@ -65,6 +66,7 @@ final class UriHelper {
     private UriHelper() {
     }
 
+    @Nullable
     private static Uri getStoreUri(final byte appStore, final String paramName, final boolean isWebUri) {
         final String baseStoreUri;
         if (isWebUri) {
@@ -140,11 +142,13 @@ final class UriHelper {
     }
 
     @SuppressWarnings("ConstantConditions")
+    @Nullable
     static Uri getStoreUri(final byte appStore, @NonNull final String paramName) {
         return paramName == null ? null : getStoreUri(appStore, paramName, false);
     }
 
     @SuppressWarnings("ConstantConditions")
+    @Nullable
     static Uri getStoreWebUri(final byte appStore, @NonNull final String paramName) {
         return paramName == null ? null : getStoreUri(appStore, paramName, true);
     }
