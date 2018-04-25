@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
                 .setShowLaterButton(true)           // default true.
                 .setDebug(true)                     // default false.
                 .setCancelable(false)               // default false.
-                .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which) + ""))
+                .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which)))
                 // comment to use library strings instead app strings
                 .setTitle(R.string.new_rate_dialog_title)
                 .setTextLater(R.string.new_rate_dialog_later)
@@ -83,7 +83,6 @@ public class MainActivity extends Activity {
                 .setTextRateNow(R.string.new_rate_dialog_ok)
                 .monitor();
 
-        //noinspection ConstantConditions
         if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) {
             //Check that Google Play is available
             if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {

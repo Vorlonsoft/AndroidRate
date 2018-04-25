@@ -23,62 +23,74 @@ public class UriHelperTest extends AndroidTestCase {
 
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
 
-    @SuppressWarnings("ConstantConditions")
+    @SuppressWarnings({"ConstantConditions", "UnnecessaryLocalVariable"})
     public void testGetStoreUri() {
         {
-            Uri uri = UriHelper.getStoreUri(CHINESESTORES,"");
+            final byte appStore = CHINESESTORES;
+            Uri uri = UriHelper.getStoreUri(appStore,"");
             assertEquals(uri.toString(), CHINESE_STORES);
         }
         {
-            Uri uri = UriHelper.getStoreUri(GOOGLEPLAY,"");
+            final byte appStore = GOOGLEPLAY;
+            Uri uri = UriHelper.getStoreUri(appStore,"");
             assertEquals(uri.toString(), GOOGLE_PLAY);
         }
         {
-            Uri uri = UriHelper.getStoreUri(CHINESESTORES,null);
+            final byte appStore = CHINESESTORES;
+            Uri uri = UriHelper.getStoreUri(appStore,null);
             assertNull(uri);
         }
         {
-            Uri uri = UriHelper.getStoreUri(GOOGLEPLAY,null);
+            final byte appStore = GOOGLEPLAY;
+            Uri uri = UriHelper.getStoreUri(appStore,null);
             assertNull(uri);
         }
         {
+            final byte appStore = CHINESESTORES;
             final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreUri(CHINESESTORES, paramName);
+            Uri uri = UriHelper.getStoreUri(appStore, paramName);
             assertEquals(uri.toString(), CHINESE_STORES + paramName);
         }
         {
+            final byte appStore = GOOGLEPLAY;
             final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreUri(GOOGLEPLAY, paramName);
+            Uri uri = UriHelper.getStoreUri(appStore, paramName);
             assertEquals(uri.toString(), GOOGLE_PLAY + paramName);
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
+    @SuppressWarnings({"ConstantConditions", "UnnecessaryLocalVariable"})
     public void testGetStoreWebUri() {
         {
-            Uri uri = UriHelper.getStoreWebUri(CHINESESTORES,"");
+            final byte appStore = CHINESESTORES;
+            Uri uri = UriHelper.getStoreWebUri(appStore,"");
             assertNull(uri);
         }
         {
-            Uri uri = UriHelper.getStoreWebUri(GOOGLEPLAY,"");
+            final byte appStore = GOOGLEPLAY;
+            Uri uri = UriHelper.getStoreWebUri(appStore,"");
             assertEquals(uri.toString(), GOOGLE_PLAY_WEB);
         }
         {
-            Uri uri = UriHelper.getStoreWebUri(CHINESESTORES,null);
+            final byte appStore = CHINESESTORES;
+            Uri uri = UriHelper.getStoreWebUri(appStore,null);
             assertNull(uri);
         }
         {
-            Uri uri = UriHelper.getStoreWebUri(GOOGLEPLAY,null);
+            final byte appStore = GOOGLEPLAY;
+            Uri uri = UriHelper.getStoreWebUri(appStore,null);
             assertNull(uri);
         }
         {
+            final byte appStore = CHINESESTORES;
             final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreWebUri(CHINESESTORES, paramName);
+            Uri uri = UriHelper.getStoreWebUri(appStore, paramName);
             assertNull(uri);
         }
         {
+            final byte appStore = GOOGLEPLAY;
             final String paramName = "com.vorlonsoft.android.rate";
-            Uri uri = UriHelper.getStoreWebUri(GOOGLEPLAY, paramName);
+            Uri uri = UriHelper.getStoreWebUri(appStore, paramName);
             assertEquals(uri.toString(), GOOGLE_PLAY_WEB + paramName);
         }
     }

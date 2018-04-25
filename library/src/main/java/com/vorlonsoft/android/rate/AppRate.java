@@ -19,34 +19,42 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.vorlonsoft.android.rate.PreferenceHelper.*;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getInstallDate;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getLaunchTimes;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindInterval;
+import static com.vorlonsoft.android.rate.PreferenceHelper.isFirstLaunch;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setCustomEventCount;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setInstallDate;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
 import static com.vorlonsoft.android.rate.StoreType.INTENT;
 import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
+import static com.vorlonsoft.android.rate.Utils.DAY_IN_MILLIS;
 
 public final class AppRate {
 
     static final String TAG = "ANDROIDRATE";
 
     @SuppressLint("StaticFieldLeak")
-    private static AppRate singleton;
+    private static volatile AppRate singleton = null;
 
     private final Context context;
 
     private final DialogOptions options = new DialogOptions();
 
-    private byte installDate = 10;
+    private byte installDate = (byte) 10;
 
-    private byte launchTimes = 10;
+    private byte launchTimes = (byte) 10;
 
-    private byte remindInterval = 1;
+    private byte remindInterval = (byte) 1;
 
     private final HashMap<String, Short> customEventCounts = new HashMap<>();
 
-    private byte remindLaunchTimes = 1;
+    private byte remindLaunchTimes = (byte) 1;
 
     private boolean isDebug = false;
 
@@ -69,7 +77,7 @@ public final class AppRate {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
-        boolean isMeetsConditions = singleton.isDebug || singleton.shouldShowRateDialog();
+        boolean isMeetsConditions = singleton.isDebug() || singleton.shouldShowRateDialog();
         if (isMeetsConditions) {
             singleton.showRateDialog(activity);
         }
@@ -77,7 +85,7 @@ public final class AppRate {
     }
 
     private static boolean isOverDate(long targetDate, byte threshold) {
-        return new Date().getTime() - targetDate >= (long) (threshold) * 24 * 60 * 60 * 1000;
+        return new Date().getTime() - targetDate >= threshold * DAY_IN_MILLIS;
     }
 
     public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte launchTimes) {
@@ -214,7 +222,7 @@ public final class AppRate {
         return this;
     }
 
-    public AppRate setStoreType(@StoreType.Store final int storeType) {
+    public AppRate setStoreType(@StoreType.StoreWithoutApplicationId final int storeType) {
         if ((storeType == APPLE) || (storeType == BLACKBERRY)) {
             throw new IllegalArgumentException("For StoreType.APPLE/StoreType.BLACKBERRY you must use setStoreType(StoreType.APPLE/StoreType.BLACKBERRY, long applicationId)");
         } else if ((storeType < AMAZON) || (storeType > YANDEX)) {
@@ -224,7 +232,7 @@ public final class AppRate {
     }
 
     @SuppressWarnings("unused")
-    public AppRate setStoreType(@StoreType.StoreWithId final int storeType, final long applicationId) {
+    public AppRate setStoreType(@StoreType.StoreWithApplicationId final int storeType, final long applicationId) {
         if ((storeType < AMAZON) || (storeType > YANDEX)) {
             throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
         }
@@ -252,7 +260,7 @@ public final class AppRate {
         return this;
     }
 
-    @StoreType.Return
+    @StoreType.AnyStoreType
     public int getStoreType() {
         return options.getStoreType();
     }
@@ -313,7 +321,9 @@ public final class AppRate {
         return getLaunchTimes(context) >= launchTimes;
     }
 
-    private boolean isOverRemindLaunchTimes() { return ((remindLaunchTimes != 0) && ((getLaunchTimes(context) % remindLaunchTimes) == 0)); }
+    private boolean isOverRemindLaunchTimes() {
+        return ((remindLaunchTimes != 0) && ((getLaunchTimes(context) % remindLaunchTimes) == 0));
+    }
 
     private boolean isOverInstallDate() {
         return isOverDate(getInstallDate(context), installDate);
@@ -333,7 +343,7 @@ public final class AppRate {
         return true;
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public boolean isDebug() {
         return isDebug;
     }

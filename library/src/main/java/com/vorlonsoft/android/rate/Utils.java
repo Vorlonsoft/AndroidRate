@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -20,6 +21,17 @@ import java.util.List;
 import static com.vorlonsoft.android.rate.AppRate.TAG;
 
 final class Utils {
+
+    @SuppressWarnings("WeakerAccess")
+    static final long SECOND_IN_MILLIS = 1000;
+
+    @SuppressWarnings("WeakerAccess")
+    static final long MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
+
+    @SuppressWarnings("WeakerAccess")
+    static final long HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
+
+    static final long DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
 
     private Utils() {
     }
@@ -34,6 +46,7 @@ final class Utils {
 
     @SuppressLint("ObsoleteSdkInt")
     @SuppressWarnings("ConstantConditions")
+    @Nullable
     static AlertDialog.Builder getDialogBuilder(@NonNull final Context context, final int themeResId) {
         if (context == null) {
             Log.i(TAG, "Failed to create AlertDialog.Builder");
@@ -41,11 +54,12 @@ final class Utils {
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             return new AlertDialog.Builder(context);
         } else {
-            return new AlertDialog.Builder(context, themeResId != 0 ? themeResId : getDialogTheme());
+            return new AlertDialog.Builder(context, themeResId == 0 ? getDialogTheme() : themeResId);
         }
     }
 
     @SuppressWarnings("ConstantConditions")
+    @Nullable
     static String[] isPackagesExists(@NonNull final Context context, @NonNull final String[] targetPackages) {
         final String[] EMPTY_STRING_ARRAY = new String[0];
         final String EMPTY_STRING = "";
@@ -71,7 +85,7 @@ final class Utils {
             }
             return EMPTY_STRING_ARRAY;
         } else {
-            ArrayList<String> packageNames = new ArrayList<>();
+            final ArrayList<String> packageNames = new ArrayList<>();
             for (String aTargetPackage : targetPackages) {
                 if ((aTargetPackage != null) && (aTargetPackage.hashCode() != EMPTY_STRING.hashCode())) {
                     for (ApplicationInfo anApplicationInfo : applicationInfo) {
