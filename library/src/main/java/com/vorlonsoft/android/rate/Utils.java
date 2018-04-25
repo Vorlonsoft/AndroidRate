@@ -22,14 +22,11 @@ import static com.vorlonsoft.android.rate.AppRate.TAG;
 
 final class Utils {
 
-    @SuppressWarnings("WeakerAccess")
-    static final long SECOND_IN_MILLIS = 1000;
+    private static final long SECOND_IN_MILLIS = 1000;
 
-    @SuppressWarnings("WeakerAccess")
-    static final long MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
+    private static final long MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
 
-    @SuppressWarnings("WeakerAccess")
-    static final long HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
+    private static final long HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
 
     static final long DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
 

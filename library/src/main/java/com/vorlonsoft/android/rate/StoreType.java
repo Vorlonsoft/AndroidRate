@@ -46,16 +46,43 @@ public final class StoreType {
 
     @SuppressWarnings("WeakerAccess")
     @Retention(RUNTIME)
-    @IntDef({AMAZON, BAZAAR, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX})
+    @IntDef({
+            AMAZON,
+            BAZAAR,
+            CHINESESTORES,
+            GOOGLEPLAY,
+            MI,
+            SAMSUNG,
+            SLIDEME,
+            TENCENT,
+            YANDEX
+    })
     public @interface StoreWithoutApplicationId {}
 
     @SuppressWarnings("WeakerAccess")
     @Retention(RUNTIME)
-    @IntDef({APPLE, BLACKBERRY})
+    @IntDef({
+            APPLE,
+            BLACKBERRY
+    })
     public @interface StoreWithApplicationId {}
 
     @SuppressWarnings("WeakerAccess")
     @Retention(RUNTIME)
-    @IntDef({AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, INTENT, MI, OTHER, SAMSUNG, SLIDEME, TENCENT, YANDEX})
+    @IntDef({
+            AMAZON,
+            APPLE,
+            BAZAAR,
+            BLACKBERRY,
+            CHINESESTORES,
+            GOOGLEPLAY,
+            INTENT,
+            MI,
+            OTHER,
+            SAMSUNG,
+            SLIDEME,
+            TENCENT,
+            YANDEX
+    })
     public @interface AnyStoreType {}
 }
