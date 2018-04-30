@@ -16,7 +16,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 
-import static com.vorlonsoft.android.rate.AppRate.TAG;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForOtherStores;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
@@ -34,6 +33,7 @@ import static com.vorlonsoft.android.rate.StoreType.SAMSUNG;
 import static com.vorlonsoft.android.rate.StoreType.SLIDEME;
 import static com.vorlonsoft.android.rate.StoreType.TENCENT;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
+import static com.vorlonsoft.android.rate.Utils.TAG;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {

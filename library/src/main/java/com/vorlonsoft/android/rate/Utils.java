@@ -18,8 +18,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.vorlonsoft.android.rate.AppRate.TAG;
-
 final class Utils {
 
     private static final long SECOND_IN_MILLIS = 1000;
@@ -29,6 +27,8 @@ final class Utils {
     private static final long HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
 
     static final long DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
+
+    static final String TAG = "ANDROIDRATE";
 
     private Utils() {
     }

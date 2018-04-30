@@ -15,7 +15,6 @@ import android.util.Log;
 
 import java.util.Arrays;
 
-import static com.vorlonsoft.android.rate.AppRate.TAG;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
@@ -28,6 +27,7 @@ import static com.vorlonsoft.android.rate.StoreType.TENCENT;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 import static com.vorlonsoft.android.rate.UriHelper.getStoreUri;
 import static com.vorlonsoft.android.rate.UriHelper.getStoreWebUri;
+import static com.vorlonsoft.android.rate.Utils.TAG;
 import static com.vorlonsoft.android.rate.Utils.isPackagesExists;
 
 final class IntentHelper {

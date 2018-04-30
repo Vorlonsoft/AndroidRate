@@ -19,7 +19,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.content.ContentValues.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getInstallDate;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
@@ -35,6 +34,7 @@ import static com.vorlonsoft.android.rate.StoreType.INTENT;
 import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 import static com.vorlonsoft.android.rate.Utils.DAY_IN_MILLIS;
+import static com.vorlonsoft.android.rate.Utils.TAG;
 
 public final class AppRate {
 
