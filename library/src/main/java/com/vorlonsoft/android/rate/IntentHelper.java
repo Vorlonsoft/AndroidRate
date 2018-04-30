@@ -103,7 +103,7 @@ final class IntentHelper {
     }
 
     @Nullable
-    static Intent[] createIntentsForStore(@NonNull final Context context, final byte appStore, @NonNull final String paramName) {
+    static Intent[] createIntentsForStore(@NonNull final Context context, final int appStore, @NonNull final String paramName) {
 
         //noinspection ConstantConditions
         if ((context == null) || (paramName == null)) {

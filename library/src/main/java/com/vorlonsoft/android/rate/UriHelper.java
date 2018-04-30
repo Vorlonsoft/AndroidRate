@@ -67,7 +67,7 @@ final class UriHelper {
     }
 
     @Nullable
-    private static Uri getStoreUri(final byte appStore, final String paramName, final boolean isWebUri) {
+    private static Uri getStoreUri(final int appStore, final String paramName, final boolean isWebUri) {
         final String baseStoreUri;
         if (isWebUri) {
             switch(appStore) {
@@ -143,13 +143,13 @@ final class UriHelper {
 
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    static Uri getStoreUri(final byte appStore, @NonNull final String paramName) {
+    static Uri getStoreUri(final int appStore, @NonNull final String paramName) {
         return paramName == null ? null : getStoreUri(appStore, paramName, false);
     }
 
     @SuppressWarnings("ConstantConditions")
     @Nullable
-    static Uri getStoreWebUri(final byte appStore, @NonNull final String paramName) {
+    static Uri getStoreWebUri(final int appStore, @NonNull final String paramName) {
         return paramName == null ? null : getStoreUri(appStore, paramName, true);
     }
 }

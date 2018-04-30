@@ -161,6 +161,7 @@ public final class AppRate {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public AppRate setTitle(@SuppressWarnings("SameParameterValue") int resourceId) {
         options.setTitleResId(resourceId);
         return this;
@@ -184,6 +185,7 @@ public final class AppRate {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public AppRate setTextRateNow(@SuppressWarnings("SameParameterValue") int resourceId) {
         options.setTextPositiveResId(resourceId);
         return this;
@@ -195,6 +197,7 @@ public final class AppRate {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public AppRate setTextLater(@SuppressWarnings("SameParameterValue") int resourceId) {
         options.setTextNeutralResId(resourceId);
         return this;
@@ -206,6 +209,7 @@ public final class AppRate {
         return this;
     }
 
+    @SuppressWarnings("unused")
     public AppRate setTextNever(@SuppressWarnings("SameParameterValue") int resourceId) {
         options.setTextNegativeResId(resourceId);
         return this;
@@ -255,7 +259,7 @@ public final class AppRate {
         return setStoreType(INTENT, null, intents);
     }
 
-    private AppRate setStoreType(final byte storeType, final String stringParam, final Intent[] intentParaam) {
+    private AppRate setStoreType(final int storeType, final String stringParam, final Intent[] intentParaam) {
         options.setStoreType(storeType, stringParam, intentParaam);
         return this;
     }
