@@ -19,6 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.content.ContentValues.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getInstallDate;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
@@ -36,8 +37,6 @@ import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 import static com.vorlonsoft.android.rate.Utils.DAY_IN_MILLIS;
 
 public final class AppRate {
-
-    static final String TAG = "ANDROIDRATE";
 
     @SuppressLint("StaticFieldLeak")
     private static volatile AppRate singleton = null;

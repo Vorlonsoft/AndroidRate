@@ -46,7 +46,7 @@ final class PreferenceHelper {
      * @param context context
      */
     static void clearSharedPreferences(final Context context) {
-        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.clear();
         editor.apply();
     }
@@ -59,7 +59,7 @@ final class PreferenceHelper {
      * @param isAgree agree with showing rate dialog
      */
     static void setAgreeShowDialog(final Context context,final boolean isAgree) {
-        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree);
         editor.apply();
     }
@@ -69,7 +69,7 @@ final class PreferenceHelper {
     }
 
     static void setRemindInterval(final Context context) {
-        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putLong(PREF_KEY_REMIND_INTERVAL, new Date().getTime());
         editor.apply();
     }
@@ -79,7 +79,7 @@ final class PreferenceHelper {
     }
 
     static void setInstallDate(final Context context) {
-        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putLong(PREF_KEY_INSTALL_DATE, new Date().getTime());
         editor.apply();
     }
@@ -89,7 +89,7 @@ final class PreferenceHelper {
     }
 
     static void setLaunchTimes(final Context context, final short launchTimes) {
-        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putInt(PREF_KEY_LAUNCH_TIMES, launchTimes);
         editor.apply();
     }
@@ -103,13 +103,13 @@ final class PreferenceHelper {
     }
 
     static short getCustomEventCount(final Context context, final String eventName) {
-        String eventKey = PREF_KEY_CUSTOM_EVENT_PREFIX + eventName;
+        final String eventKey = PREF_KEY_CUSTOM_EVENT_PREFIX + eventName;
         return (short) getPreferences(context).getInt(eventKey, 0);
     }
 
     static void setCustomEventCount(final Context context, final String eventName, final short eventCount) {
-        String eventKey = PREF_KEY_CUSTOM_EVENT_PREFIX + eventName;
-        SharedPreferences.Editor editor = getPreferencesEditor(context);
+        final String eventKey = PREF_KEY_CUSTOM_EVENT_PREFIX + eventName;
+        final SharedPreferences.Editor editor = getPreferencesEditor(context);
         editor.putInt(eventKey, eventCount);
         editor.apply();
     }
