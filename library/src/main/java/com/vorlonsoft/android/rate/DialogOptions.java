@@ -31,7 +31,7 @@ final class DialogOptions {
 
     private boolean showTitle = true;
 
-    private byte storeType = GOOGLEPLAY;
+    private int storeType = GOOGLEPLAY;
 
     private int textMessageResId = R.string.rate_dialog_message;
 
@@ -127,11 +127,11 @@ final class DialogOptions {
         this.intents = intents;
     }
 
-    byte getStoreType() {
+    int getStoreType() {
         return storeType;
     }
 
-    void setStoreType(final byte storeType, final String stringParam, final Intent[] intentParaam) {
+    void setStoreType(final int storeType, final String stringParam, final Intent[] intentParaam) {
         this.storeType = storeType;
         switch(storeType) {
             case APPLE:

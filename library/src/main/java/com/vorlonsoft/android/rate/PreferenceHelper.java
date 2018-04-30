@@ -41,7 +41,7 @@ final class PreferenceHelper {
     }
 
     /**
-     * Clear data in shared preferences.
+     * Clear data in shared preferences.<br>
      *
      * @param context context
      */
