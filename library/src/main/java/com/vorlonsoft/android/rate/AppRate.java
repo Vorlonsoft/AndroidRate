@@ -139,7 +139,6 @@ public final class AppRate {
 
     @SuppressWarnings("unused")
     public AppRate clearSettingsParam() {
-        PreferenceHelper.setAgreeShowDialog(context, true);
         PreferenceHelper.clearSharedPreferences(context);
         return this;
     }
