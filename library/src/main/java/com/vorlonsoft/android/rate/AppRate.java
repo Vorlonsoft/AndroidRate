@@ -44,7 +44,9 @@ public final class AppRate {
 
     private final Context context;
 
-    private final DialogOptions options = new DialogOptions();
+    private final DialogOptions dialogOptions = new DialogOptions();
+
+    private final StoreOptions storeOptions = new StoreOptions();
 
     private byte installDate = (byte) 10;
 
@@ -115,19 +117,19 @@ public final class AppRate {
     }
 
     public AppRate setShowLaterButton(@SuppressWarnings("SameParameterValue") boolean isShowNeutralButton) {
-        options.setShowNeutralButton(isShowNeutralButton);
+        dialogOptions.setShowNeutralButton(isShowNeutralButton);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setShowNeverButton(boolean isShowNeverButton) {
-        options.setShowNegativeButton(isShowNeverButton);
+        dialogOptions.setShowNegativeButton(isShowNeverButton);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setShowTitle(boolean isShowTitle) {
-        options.setShowTitle(isShowTitle);
+        dialogOptions.setShowTitle(isShowTitle);
         return this;
     }
 
@@ -151,77 +153,77 @@ public final class AppRate {
 
     @SuppressWarnings("unused")
     public AppRate setView(View view) {
-        options.setView(view);
+        dialogOptions.setView(view);
         return this;
     }
 
     public AppRate setOnClickButtonListener(OnClickButtonListener listener) {
-        options.setListener(listener);
+        dialogOptions.setListener(listener);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTitle(@SuppressWarnings("SameParameterValue") int resourceId) {
-        options.setTitleResId(resourceId);
+        dialogOptions.setTitleResId(resourceId);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTitle(String title) {
-        options.setTitleText(title);
+        dialogOptions.setTitleText(title);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setMessage(int resourceId) {
-        options.setMessageResId(resourceId);
+        dialogOptions.setMessageResId(resourceId);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setMessage(String message) {
-        options.setMessageText(message);
+        dialogOptions.setMessageText(message);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTextRateNow(@SuppressWarnings("SameParameterValue") int resourceId) {
-        options.setTextPositiveResId(resourceId);
+        dialogOptions.setTextPositiveResId(resourceId);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTextRateNow(String positiveText) {
-        options.setPositiveText(positiveText);
+        dialogOptions.setPositiveText(positiveText);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTextLater(@SuppressWarnings("SameParameterValue") int resourceId) {
-        options.setTextNeutralResId(resourceId);
+        dialogOptions.setTextNeutralResId(resourceId);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTextLater(String neutralText) {
-        options.setNeutralText(neutralText);
+        dialogOptions.setNeutralText(neutralText);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTextNever(@SuppressWarnings("SameParameterValue") int resourceId) {
-        options.setTextNegativeResId(resourceId);
+        dialogOptions.setTextNegativeResId(resourceId);
         return this;
     }
 
     @SuppressWarnings("unused")
     public AppRate setTextNever(String negativeText) {
-        options.setNegativeText(negativeText);
+        dialogOptions.setNegativeText(negativeText);
         return this;
     }
 
     public AppRate setCancelable(@SuppressWarnings("SameParameterValue") boolean cancelable) {
-        options.setCancelable(cancelable);
+        dialogOptions.setCancelable(cancelable);
         return this;
     }
 
@@ -259,13 +261,13 @@ public final class AppRate {
     }
 
     private AppRate setStoreType(final int storeType, final String stringParam, final Intent[] intentParaam) {
-        options.setStoreType(storeType, stringParam, intentParaam);
+        storeOptions.setStoreType(storeType, stringParam, intentParaam);
         return this;
     }
 
     @StoreType.AnyStoreType
     public int getStoreType() {
-        return options.getStoreType();
+        return storeOptions.getStoreType();
     }
 
     @SuppressWarnings("unused")
@@ -281,7 +283,7 @@ public final class AppRate {
 
     @SuppressWarnings("unused")
     public AppRate setThemeResId(int themeResId){
-        options.setThemeResId(themeResId);
+        dialogOptions.setThemeResId(themeResId);
         return this;
     }
 
@@ -302,7 +304,7 @@ public final class AppRate {
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
         if (!activity.isFinishing()) {
-            Dialog dialog = dialogManagerFactory.createDialogManager(activity, options).createDialog();
+            Dialog dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
             if (dialog != null) {
                 dialog.show();
             } else {

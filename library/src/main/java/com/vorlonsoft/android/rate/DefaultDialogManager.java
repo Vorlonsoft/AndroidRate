@@ -40,13 +40,14 @@ public class DefaultDialogManager implements DialogManager {
 
     static class Factory implements DialogManager.Factory {
         @Override
-        public DialogManager createDialogManager(final Context context, final DialogOptions options) {
-            return new DefaultDialogManager(context, options);
+        public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
+            return new DefaultDialogManager(context, dialogOptions, storeOptions);
         }
     }
 
     private final Context context;
-    private final DialogOptions options;
+    private final DialogOptions dialogOptions;
+    private final StoreOptions storeOptions;
     private final OnClickButtonListener listener;
 
     @SuppressWarnings("WeakerAccess")
@@ -56,30 +57,30 @@ public class DefaultDialogManager implements DialogManager {
             final Intent[] intentsToAppStores;
             final String packageName = context.getPackageName();
             if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
-                switch(options.getStoreType()) {
+                switch(storeOptions.getStoreType()) {
                     case AMAZON:
                         intentsToAppStores = createIntentsForStore(context, AMAZON, packageName);
                         break;
                     case APPLE:
-                        intentsToAppStores = createIntentsForStore(context, APPLE, options.getApplicationId());
+                        intentsToAppStores = createIntentsForStore(context, APPLE, storeOptions.getApplicationId());
                         break;
                     case BAZAAR:
                         intentsToAppStores = createIntentsForStore(context, BAZAAR, packageName);
                         break;
                     case BLACKBERRY:
-                        intentsToAppStores = createIntentsForStore(context, BLACKBERRY, options.getApplicationId());
+                        intentsToAppStores = createIntentsForStore(context, BLACKBERRY, storeOptions.getApplicationId());
                         break;
                     case CHINESESTORES:
                         intentsToAppStores = createIntentsForStore(context, CHINESESTORES, packageName);
                         break;
                     case INTENT:
-                        intentsToAppStores = options.getIntents();
+                        intentsToAppStores = storeOptions.getIntents();
                         break;
                     case MI:
                         intentsToAppStores = createIntentsForStore(context, MI, packageName);
                         break;
                     case OTHER:
-                        intentsToAppStores = createIntentsForOtherStores(options.getOtherStoreUri());
+                        intentsToAppStores = createIntentsForOtherStores(storeOptions.getOtherStoreUri());
                         break;
                     case SAMSUNG:
                         intentsToAppStores = createIntentsForStore(context, SAMSUNG, packageName);
@@ -160,36 +161,37 @@ public class DefaultDialogManager implements DialogManager {
     };
 
     @SuppressWarnings("WeakerAccess")
-    public DefaultDialogManager(final Context context, final DialogOptions options) {
+    public DefaultDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
         this.context = context;
-        this.options = options;
-        this.listener = options.getListener();
+        this.dialogOptions = dialogOptions;
+        this.storeOptions = storeOptions;
+        this.listener = dialogOptions.getListener();
     }
 
     @Nullable
     @Override
     public Dialog createDialog() {
-        AlertDialog.Builder builder = getDialogBuilder(context, options.getThemeResId());
+        AlertDialog.Builder builder = getDialogBuilder(context, dialogOptions.getThemeResId());
 
         if (builder == null) return null;
 
-        builder.setMessage(options.getMessageText(context));
+        builder.setMessage(dialogOptions.getMessageText(context));
 
-        if (options.shouldShowTitle()) builder.setTitle(options.getTitleText(context));
+        if (dialogOptions.shouldShowTitle()) builder.setTitle(dialogOptions.getTitleText(context));
 
-        builder.setCancelable(options.getCancelable());
+        builder.setCancelable(dialogOptions.getCancelable());
 
-        View view = options.getView();
+        View view = dialogOptions.getView();
         if (view != null) builder.setView(view);
 
-        builder.setPositiveButton(options.getPositiveText(context), positiveListener);
+        builder.setPositiveButton(dialogOptions.getPositiveText(context), positiveListener);
 
-        if (options.shouldShowNeutralButton()) {
-            builder.setNeutralButton(options.getNeutralText(context), neutralListener);
+        if (dialogOptions.shouldShowNeutralButton()) {
+            builder.setNeutralButton(dialogOptions.getNeutralText(context), neutralListener);
         }
 
-        if (options.shouldShowNegativeButton()) {
-            builder.setNegativeButton(options.getNegativeText(context), negativeListener);
+        if (dialogOptions.shouldShowNegativeButton()) {
+            builder.setNegativeButton(dialogOptions.getNegativeText(context), negativeListener);
         }
 
         return builder.create();

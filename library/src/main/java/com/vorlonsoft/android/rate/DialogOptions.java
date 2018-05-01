@@ -7,19 +7,11 @@
 package com.vorlonsoft.android.rate;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.view.View;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
-
-import static com.vorlonsoft.android.rate.StoreType.APPLE;
-import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
-import static com.vorlonsoft.android.rate.StoreType.GOOGLEPLAY;
-import static com.vorlonsoft.android.rate.StoreType.INTENT;
-import static com.vorlonsoft.android.rate.StoreType.OTHER;
 
 final class DialogOptions {
 
@@ -30,8 +22,6 @@ final class DialogOptions {
     private boolean showNeutralButton = true;
 
     private boolean showTitle = true;
-
-    private int storeType = GOOGLEPLAY;
 
     private int textMessageResId = R.string.rate_dialog_message;
 
@@ -45,8 +35,6 @@ final class DialogOptions {
 
     private int themeResId = 0;
 
-    private String applicationId = null;
-
     private String messageText = null;
 
     private String negativeText = null;
@@ -57,11 +45,7 @@ final class DialogOptions {
 
     private String titleText = null;
 
-    private Uri otherStoreUri = null;
-
     private View view = null;
-
-    private Intent[] intents = null;
 
     private Reference<OnClickButtonListener> listener = null;
 
@@ -98,52 +82,6 @@ final class DialogOptions {
 
     void setCancelable(boolean cancelable) {
         this.cancelable = cancelable;
-    }
-
-    String getApplicationId() {
-        return applicationId;
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
-    }
-
-    Uri getOtherStoreUri() {
-        return otherStoreUri;
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    void setOtherStoreUri(Uri otherStoreUri) {
-        this.otherStoreUri = otherStoreUri;
-    }
-
-    Intent[] getIntents() {
-        return intents;
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    void setIntents(Intent[] intents) {
-        this.intents = intents;
-    }
-
-    int getStoreType() {
-        return storeType;
-    }
-
-    void setStoreType(final int storeType, final String stringParam, final Intent[] intentParaam) {
-        this.storeType = storeType;
-        switch(storeType) {
-            case APPLE:
-            case BLACKBERRY:
-                setApplicationId(stringParam);
-                break;
-            case INTENT:
-                setIntents(intentParaam);
-                break;
-            case OTHER:
-                setOtherStoreUri(stringParam == null ? null : Uri.parse(stringParam));
-        }
     }
 
     @SuppressWarnings("unused")
