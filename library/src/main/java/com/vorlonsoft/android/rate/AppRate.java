@@ -233,7 +233,7 @@ public final class AppRate {
         } else if ((storeType < AMAZON) || (storeType > YANDEX)) {
             throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
         }
-        return setStoreType((byte) storeType, null, null);
+        return setStoreType(storeType, null, null);
     }
 
     @SuppressWarnings("unused")
@@ -241,18 +241,34 @@ public final class AppRate {
         if ((storeType < AMAZON) || (storeType > YANDEX)) {
             throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
         }
-        return ((storeType != APPLE) && (storeType != BLACKBERRY)) ? setStoreType((byte) storeType, null, null) : setStoreType((byte) storeType, String.valueOf(applicationId), null);
+        return ((storeType != APPLE) && (storeType != BLACKBERRY)) ? setStoreType(storeType, null, null) : setStoreType(storeType, new String[]{String.valueOf(applicationId)}, null);
     }
 
-    @SuppressWarnings("unused ConstantConditions")
+    @SuppressWarnings({"unused", "ConstantConditions"})
     public AppRate setStoreType(@NonNull final String uri) {
         if (uri == null) {
             throw new IllegalArgumentException("setStoreType(String uri): 'uri' must be != null");
         }
-        return setStoreType(OTHER, uri, null);
+        return setStoreType(new String[]{uri});
+    }
+
+    @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
+    public AppRate setStoreType(@NonNull final String[] uris) {
+        if (uris == null) {
+            throw new IllegalArgumentException("setStoreType(String[] uris): 'uris' must be != null");
+        }
+        return setStoreType(OTHER, uris, null);
     }
 
     @SuppressWarnings({"ConstantConditions", "unused"})
+    public AppRate setStoreType(@NonNull final Intent intent) {
+        if (intent == null) {
+            throw new IllegalArgumentException("setStoreType(Intent intent): 'intent' must be != null");
+        }
+        return setStoreType(new Intent[]{intent});
+    }
+
+    @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
     public AppRate setStoreType(@NonNull final Intent[] intents) {
         if (intents == null) {
             throw new IllegalArgumentException("setStoreType(Intent[] intents): 'intents' must be != null");
@@ -260,7 +276,7 @@ public final class AppRate {
         return setStoreType(INTENT, null, intents);
     }
 
-    private AppRate setStoreType(final int storeType, final String stringParam, final Intent[] intentParaam) {
+    private AppRate setStoreType(final int storeType, final String[] stringParam, final Intent[] intentParaam) {
         storeOptions.setStoreType(storeType, stringParam, intentParaam);
         return this;
     }
