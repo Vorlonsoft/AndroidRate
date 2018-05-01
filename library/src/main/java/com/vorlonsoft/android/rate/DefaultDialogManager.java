@@ -18,7 +18,7 @@ import android.view.View;
 
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForOtherStores;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreeShowDialog;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
@@ -136,7 +136,7 @@ public class DefaultDialogManager implements DialogManager {
                     }
                 }
             }
-            setAgreeShowDialog(context, false);
+            setIsAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton((byte) which);
         }
     };
@@ -145,7 +145,7 @@ public class DefaultDialogManager implements DialogManager {
     protected final DialogInterface.OnClickListener negativeListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
-            setAgreeShowDialog(context, false);
+            setIsAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton((byte) which);
         }
     };
