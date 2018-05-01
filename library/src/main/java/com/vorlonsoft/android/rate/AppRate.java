@@ -26,7 +26,8 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.getLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindInterval;
 import static com.vorlonsoft.android.rate.PreferenceHelper.isFirstLaunch;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setCustomEventCount;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setInstallDate;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setFirstLaunchSharedPreferences;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
@@ -132,7 +133,7 @@ public final class AppRate {
 
     @SuppressWarnings("unused")
     public AppRate clearAgreeShowDialog() {
-        PreferenceHelper.setAgreeShowDialog(context, true);
+        setIsAgreeShowDialog(context, true);
         return this;
     }
 
@@ -143,8 +144,8 @@ public final class AppRate {
     }
 
     @SuppressWarnings("unused")
-    public AppRate setAgreeShowDialog(boolean clear) {
-        PreferenceHelper.setAgreeShowDialog(context, clear);
+    public AppRate setAgreeShowDialog(boolean isAgree) {
+        setIsAgreeShowDialog(context, isAgree);
         return this;
     }
 
@@ -292,9 +293,10 @@ public final class AppRate {
 
     public void monitor() {
         if (isFirstLaunch(context)) {
-            setInstallDate(context);
+            setFirstLaunchSharedPreferences(context);
+        } else {
+            PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
         }
-        PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
     }
 
     @SuppressWarnings("WeakerAccess")
