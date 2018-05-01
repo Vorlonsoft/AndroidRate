@@ -8,7 +8,6 @@ package com.vorlonsoft.android.rate;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -94,12 +93,6 @@ final class IntentHelper {
         // If the Store was already open in a search result
         // this make sure it still go to the app page you requested
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @Nullable
-    static Intent[] createIntentsForOtherStores(@NonNull final Uri uri) {
-        return uri == null ? null : new Intent[]{new Intent(Intent.ACTION_VIEW, uri)};
     }
 
     @Nullable

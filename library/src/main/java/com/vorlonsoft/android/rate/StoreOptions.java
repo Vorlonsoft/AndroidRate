@@ -21,8 +21,6 @@ final class StoreOptions {
 
     private String applicationId = null;
 
-    private Uri otherStoreUri = null;
-
     private Intent[] intents = null;
 
     StoreOptions() {
@@ -35,15 +33,6 @@ final class StoreOptions {
     @SuppressWarnings("WeakerAccess")
     void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
-    }
-
-    Uri getOtherStoreUri() {
-        return otherStoreUri;
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    void setOtherStoreUri(Uri otherStoreUri) {
-        this.otherStoreUri = otherStoreUri;
     }
 
     Intent[] getIntents() {
@@ -59,18 +48,28 @@ final class StoreOptions {
         return storeType;
     }
 
-    void setStoreType(final int storeType, final String stringParam, final Intent[] intentParaam) {
+    void setStoreType(final int storeType, final String[] stringParam, final Intent[] intentParaam) {
         this.storeType = storeType;
         switch(storeType) {
             case APPLE:
             case BLACKBERRY:
-                setApplicationId(stringParam);
+                setApplicationId(stringParam[0]);
                 break;
             case INTENT:
                 setIntents(intentParaam);
                 break;
             case OTHER:
-                setOtherStoreUri(stringParam == null ? null : Uri.parse(stringParam));
+                final Intent[] intents;
+                if (stringParam == null){
+                    intents = null;
+                } else {
+                    int length = stringParam.length;
+                    intents = new Intent[length];
+                    for (int i = 0; i < length; i++){
+                        intents[i] = new Intent(Intent.ACTION_VIEW, Uri.parse(stringParam[i]));
+                    }
+                }
+                setIntents(intents);
         }
     }
 

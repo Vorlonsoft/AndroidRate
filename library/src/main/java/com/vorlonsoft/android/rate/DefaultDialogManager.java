@@ -16,7 +16,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForOtherStores;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
@@ -73,14 +72,8 @@ public class DefaultDialogManager implements DialogManager {
                     case CHINESESTORES:
                         intentsToAppStores = createIntentsForStore(context, CHINESESTORES, packageName);
                         break;
-                    case INTENT:
-                        intentsToAppStores = storeOptions.getIntents();
-                        break;
                     case MI:
                         intentsToAppStores = createIntentsForStore(context, MI, packageName);
-                        break;
-                    case OTHER:
-                        intentsToAppStores = createIntentsForOtherStores(storeOptions.getOtherStoreUri());
                         break;
                     case SAMSUNG:
                         intentsToAppStores = createIntentsForStore(context, SAMSUNG, packageName);
@@ -93,6 +86,10 @@ public class DefaultDialogManager implements DialogManager {
                         break;
                     case YANDEX:
                         intentsToAppStores = createIntentsForStore(context, YANDEX, packageName);
+                        break;
+                    case INTENT:
+                    case OTHER:
+                        intentsToAppStores = storeOptions.getIntents();
                         break;
                     default:
                         intentsToAppStores = createIntentsForStore(context, GOOGLEPLAY, packageName);
