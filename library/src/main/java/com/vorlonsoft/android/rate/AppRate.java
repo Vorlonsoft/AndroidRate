@@ -11,7 +11,9 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 
@@ -54,13 +56,21 @@ public final class AppRate {
 
     private byte remindInterval = (byte) 1;
 
-    private final HashMap<String, Short> customEventCounts = new HashMap<>();
+    private final Map<String, Short> customEventsCounts;
 
     private byte remindLaunchTimes = (byte) 1;
 
     private boolean isDebug = false;
 
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
+
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            customEventsCounts = new ArrayMap<>();
+        } else {
+            customEventsCounts = new HashMap<>();
+        }
+    }
 
     private AppRate(Context context) {
         this.context = context.getApplicationContext();
@@ -107,7 +117,7 @@ public final class AppRate {
 
     @SuppressWarnings("unused")
     public AppRate setMinimumEventCount(String eventName, short minimumCount) {
-        this.customEventCounts.put(eventName, minimumCount);
+        this.customEventsCounts.put(eventName, minimumCount);
         return this;
     }
 
@@ -336,7 +346,7 @@ public final class AppRate {
                isOverRemindLaunchTimes() &&
                isOverInstallDate() &&
                isOverRemindDate() &&
-               isOverCustomEventRequirements();
+               isOverCustomEventsRequirements();
     }
 
     private boolean isOverLaunchTimes() {
@@ -355,8 +365,8 @@ public final class AppRate {
         return isOverDate(getRemindInterval(context), remindInterval);
     }
 
-    private boolean isOverCustomEventRequirements() {
-        for(Map.Entry<String, Short> eventRequirement : customEventCounts.entrySet()) {
+    private boolean isOverCustomEventsRequirements() {
+        for(Map.Entry<String, Short> eventRequirement : customEventsCounts.entrySet()) {
             Short currentCount = getCustomEventCount(context, eventRequirement.getKey());
             if(currentCount < eventRequirement.getValue()) {
                 return false;
