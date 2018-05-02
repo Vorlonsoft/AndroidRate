@@ -83,6 +83,7 @@ final class IntentHelper {
     };
 
     private IntentHelper() {
+        throw new AssertionError();
     }
 
     private static void setIntentForStore(final Intent intent) {

@@ -30,6 +30,7 @@ final class PreferenceHelper {
     private static final String PREF_KEY_REMIND_INTERVAL = "androidrate_remind_interval";
 
     private PreferenceHelper() {
+        throw new AssertionError();
     }
 
     private static SharedPreferences getPreferences(final Context context) {
