@@ -42,6 +42,7 @@ public final class StoreType {
     public static final int OTHER = 12;               // Any Other Store
 
     private StoreType() {
+        throw new AssertionError();
     }
 
     @SuppressWarnings("WeakerAccess")

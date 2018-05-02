@@ -31,6 +31,7 @@ final class Utils {
     static final String TAG = "ANDROIDRATE";
 
     private Utils() {
+        throw new AssertionError();
     }
 
     private static boolean isLollipop() {
