@@ -11,15 +11,23 @@ import android.content.SharedPreferences;
 
 import java.util.Date;
 
+import static com.vorlonsoft.android.rate.Utils.DAY_IN_MILLIS;
+import static com.vorlonsoft.android.rate.Utils.YEAR_IN_MILLIS;
+import static java.lang.Math.pow;
+
 final class PreferenceHelper {
 
     private static final String PREF_FILE_NAME = "androidrate_pref_file";
+
+    private static final String PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES = "androidrate_365_day_period_dialog_launch_times";
 
     /**
      * The key prefix for each custom event,
      * so that there is no clash with existing keys (PREF_KEY_INSTALL_DATE etc.)
      */
     private static final String PREF_KEY_CUSTOM_EVENT_PREFIX = "androidrate_custom_event_prefix_";
+
+    private static final String PREF_KEY_DIALOG_FIRST_LAUNCH_TIME = "androidrate_dialog_first_launch_time";
 
     private static final String PREF_KEY_INSTALL_DATE = "androidrate_install_date";
 
@@ -41,15 +49,44 @@ final class PreferenceHelper {
         return getPreferences(context).edit();
     }
 
+    private static void setCurrentDayDialogLaunchTimes(final Context context,
+                                                       String dialogLaunchTimes,
+                                                       final short currentDay,
+                                                       final short currentDayCount){
+        if (dialogLaunchTimes.contains(":" + String.valueOf(currentDay) + "-")) {
+            final String[] dialogLaunchTimesSplit = dialogLaunchTimes.split(":" + String.valueOf(currentDay) + "-[0-9][0-9]*:");
+            switch (dialogLaunchTimesSplit.length) {
+                case 0:
+                    dialogLaunchTimes = ":" + String.valueOf(currentDay) + "-" + String.valueOf(currentDayCount) + ":";
+                    break;
+                case 1:
+                    if (dialogLaunchTimes.charAt(0) == ':') {
+                        dialogLaunchTimes = dialogLaunchTimesSplit[0] + ":" + String.valueOf(currentDay) + "-" + String.valueOf(currentDayCount) + ":";
+                    } else {
+                        dialogLaunchTimes = ":" + dialogLaunchTimesSplit[0] + String.valueOf(currentDay) + "-" + String.valueOf(currentDayCount) + ":";
+                    }
+                    break;
+                case 2:
+                    dialogLaunchTimes = dialogLaunchTimesSplit[0] + ":" + dialogLaunchTimesSplit[1] + String.valueOf(currentDay) + "-" + String.valueOf(currentDayCount) + ":";
+            }
+        } else {
+            dialogLaunchTimes = dialogLaunchTimes + String.valueOf(currentDay) + "-" + String.valueOf(currentDayCount) + ":";
+        }
+
+        getPreferencesEditor(context)
+                .putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, dialogLaunchTimes)
+                .apply();
+    }
+
     /**
      * Clear data in shared preferences.<br>
      *
      * @param context context
      */
     static void clearSharedPreferences(final Context context) {
-        final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.clear();
-        editor.apply();
+        getPreferencesEditor(context)
+                .clear()
+                .apply();
     }
 
     static boolean isFirstLaunch(final Context context) {
@@ -57,33 +94,85 @@ final class PreferenceHelper {
     }
 
     static void setFirstLaunchSharedPreferences(final Context context) {
-        final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putLong(PREF_KEY_INSTALL_DATE, new Date().getTime());
+        final SharedPreferences.Editor preferencesEditor = getPreferencesEditor(context);
+        preferencesEditor.putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0-0:");
+        preferencesEditor.putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, 0L);
+        preferencesEditor.putLong(PREF_KEY_INSTALL_DATE, new Date().getTime());
         if (getIsAgreeShowDialog(context)) {                          //if (get() == true) set(true); - NOT error!
-            editor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
+            preferencesEditor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
         }
-        editor.putInt(PREF_KEY_LAUNCH_TIMES, 1);
-        editor.putLong(PREF_KEY_REMIND_INTERVAL, 0);
-        editor.apply();
+        preferencesEditor.putInt(PREF_KEY_LAUNCH_TIMES, 1);
+        preferencesEditor.putLong(PREF_KEY_REMIND_INTERVAL, 0L);
+        preferencesEditor.apply();
+    }
+
+    static void increment365DayPeriodDialogLaunchTimes(final Context context){
+        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context))/DAY_IN_MILLIS);
+        String currentDialogLaunchTimes = getPreferences(context).getString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0-0:");
+
+        if (currentDay > 364) {
+            final String yearPrefix = "y" + String.valueOf(currentDay / 365) + ":";
+            if (!currentDialogLaunchTimes.contains(yearPrefix)) {
+                currentDialogLaunchTimes = currentDialogLaunchTimes + yearPrefix;
+            }
+            currentDay = (short) (currentDay % 365);
+        }
+
+        if (currentDialogLaunchTimes.matches("(.*):" + String.valueOf(currentDay) + "-[0-9][0-9]*:")) {
+            final short length = (short) currentDialogLaunchTimes.length();
+            short currentDayCount = (short) Character.digit(currentDialogLaunchTimes.charAt(length-2), 10);
+            for(short s = (short) (length - 3); s > 0; s--) {
+                if (Character.isDigit(currentDialogLaunchTimes.charAt(s))) {
+                    currentDayCount = (short) (currentDayCount + pow(10, length - s - 2) *
+                            Character.digit(currentDialogLaunchTimes.charAt(s), 10));
+                } else {
+                    break;
+                }
+            }
+            currentDayCount++;
+            setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentDay, currentDayCount);
+        } else {
+            setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentDay, (short) 1);
+        }
+    }
+
+    static short get365DayPeriodDialogLaunchTimes(final Context context){
+        String dialogLaunchTimes = getPreferences(context).getString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0-0:");
+        byte currentYear = (byte) ((new Date().getTime() - getDialogFirstLaunchTime(context))/YEAR_IN_MILLIS);
+
+        for (byte b = 0; b < currentYear; b++) {
+            dialogLaunchTimes = dialogLaunchTimes.replace("y" + Byte.toString((byte) (b + 1)) + ":", "");
+        }
+        dialogLaunchTimes = dialogLaunchTimes.substring(0, dialogLaunchTimes.length()-1);
+
+        short dialogLaunchTimesCount = 0;
+        final String[] dialogLaunchTimesSplit = dialogLaunchTimes.split(":[0-9][0-9]*-");
+        for (String aDialogLaunchTimesSplit : dialogLaunchTimesSplit) {
+            dialogLaunchTimesCount = (short) (dialogLaunchTimesCount + Short.valueOf(aDialogLaunchTimesSplit));
+        }
+
+        return dialogLaunchTimesCount;
     }
 
     static void setCustomEventCount(final Context context, final String eventName, final short eventCount) {
-        final String eventKey = PREF_KEY_CUSTOM_EVENT_PREFIX + eventName;
-        final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putInt(eventKey, eventCount);
-        editor.apply();
+        getPreferencesEditor(context)
+                .putInt(PREF_KEY_CUSTOM_EVENT_PREFIX + eventName, eventCount)
+                .apply();
     }
 
     static short getCustomEventCount(final Context context, final String eventName) {
-        final String eventKey = PREF_KEY_CUSTOM_EVENT_PREFIX + eventName;
-        return (short) getPreferences(context).getInt(eventKey, 0);
+        return (short) getPreferences(context).getInt(PREF_KEY_CUSTOM_EVENT_PREFIX + eventName, 0);
     }
 
-    @SuppressWarnings("unused")
-    static void setInstallDate(final Context context) {
-        final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putLong(PREF_KEY_INSTALL_DATE, new Date().getTime());
-        editor.apply();
+
+    static void setDialogFirstLaunchTime(final Context context){
+        getPreferencesEditor(context)
+                .putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, new Date().getTime())
+                .apply();
+    }
+
+    static long getDialogFirstLaunchTime(final Context context){
+        return getPreferences(context).getLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, 0L);
     }
 
     static long getInstallDate(final Context context) {
@@ -98,9 +187,9 @@ final class PreferenceHelper {
      * @param isAgree agree with showing rate dialog
      */
     static void setIsAgreeShowDialog(final Context context, final boolean isAgree) {
-        final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree);
-        editor.apply();
+        getPreferencesEditor(context)
+                .putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree)
+                .apply();
     }
 
     static boolean getIsAgreeShowDialog(final Context context) {
@@ -108,20 +197,19 @@ final class PreferenceHelper {
     }
 
     static void setLaunchTimes(final Context context, final short launchTimes) {
-        final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putInt(PREF_KEY_LAUNCH_TIMES, launchTimes);
-        editor.apply();
+        getPreferencesEditor(context)
+                .putInt(PREF_KEY_LAUNCH_TIMES, launchTimes)
+                .apply();
     }
 
     static short getLaunchTimes(final Context context) {
         return (short) getPreferences(context).getInt(PREF_KEY_LAUNCH_TIMES, 0);
     }
 
-
     static void setRemindInterval(final Context context) {
-        final SharedPreferences.Editor editor = getPreferencesEditor(context);
-        editor.putLong(PREF_KEY_REMIND_INTERVAL, new Date().getTime());
-        editor.apply();
+        getPreferencesEditor(context)
+                .putLong(PREF_KEY_REMIND_INTERVAL, new Date().getTime())
+                .apply();
     }
 
     static long getRemindInterval(final Context context) {

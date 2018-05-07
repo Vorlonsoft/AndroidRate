@@ -28,6 +28,8 @@ final class Utils {
 
     static final long DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
 
+    static final long YEAR_IN_MILLIS = DAY_IN_MILLIS * 365;
+
     static final String TAG = "ANDROIDRATE";
 
     private Utils() {
