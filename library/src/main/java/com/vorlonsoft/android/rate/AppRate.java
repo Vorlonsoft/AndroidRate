@@ -21,13 +21,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getInstallDate;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindInterval;
+import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.isFirstLaunch;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setCustomEventCount;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setFirstLaunchSharedPreferences;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
@@ -41,6 +45,23 @@ import static com.vorlonsoft.android.rate.Utils.TAG;
 
 public final class AppRate {
 
+    private boolean isDebug = false;
+
+    private byte installDate = (byte) 10;
+
+    private byte appLaunchTimes = (byte) 10;
+
+    private byte remindInterval = (byte) 1;
+
+    private byte remindLaunchTimes = (byte) 1;
+
+    /**
+     * Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period
+     */
+    private short dialogLaunchTimes = Short.MAX_VALUE;
+
+    private final Map<String, Short> customEventsCounts;
+
     @SuppressLint("StaticFieldLeak")
     private static volatile AppRate singleton = null;
 
@@ -49,18 +70,6 @@ public final class AppRate {
     private final DialogOptions dialogOptions = new DialogOptions();
 
     private final StoreOptions storeOptions = new StoreOptions();
-
-    private byte installDate = (byte) 10;
-
-    private byte launchTimes = (byte) 10;
-
-    private byte remindInterval = (byte) 1;
-
-    private final Map<String, Short> customEventsCounts;
-
-    private byte remindLaunchTimes = (byte) 1;
-
-    private boolean isDebug = false;
 
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
@@ -100,8 +109,20 @@ public final class AppRate {
         return new Date().getTime() - targetDate >= threshold * DAY_IN_MILLIS;
     }
 
-    public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte launchTimes) {
-        this.launchTimes = launchTimes;
+    private boolean isBelow365DayPeriodMaxNumberDialogLaunchTimes() {
+        return ((get365DayPeriodDialogLaunchTimes(context) < dialogLaunchTimes) || (dialogLaunchTimes == Short.MAX_VALUE));
+    }
+
+    /**
+     *  Set Short.MAX_VALUE for unlimited occurrences of the display of the dialog within a 365-day period
+     */
+    public AppRate set365DayPeriodMaxNumberDialogLaunchTimes(short dialogLaunchTimes){
+        this.dialogLaunchTimes = dialogLaunchTimes;
+        return this;
+    }
+
+    public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte appLaunchTimes) {
+        this.appLaunchTimes = appLaunchTimes;
         return this;
     }
 
@@ -332,6 +353,10 @@ public final class AppRate {
         if (!activity.isFinishing()) {
             Dialog dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
             if (dialog != null) {
+                if (getDialogFirstLaunchTime(context) == 0L){
+                    setDialogFirstLaunchTime(context);
+                }
+                increment365DayPeriodDialogLaunchTimes(context);
                 dialog.show();
             } else {
                 Log.w(TAG, "Failed to rate app, can't create rate dialog");
@@ -346,11 +371,12 @@ public final class AppRate {
                isOverRemindLaunchTimes() &&
                isOverInstallDate() &&
                isOverRemindDate() &&
-               isOverCustomEventsRequirements();
+               isOverCustomEventsRequirements() &&
+               isBelow365DayPeriodMaxNumberDialogLaunchTimes();
     }
 
     private boolean isOverLaunchTimes() {
-        return getLaunchTimes(context) >= launchTimes;
+        return getLaunchTimes(context) >= appLaunchTimes;
     }
 
     private boolean isOverRemindLaunchTimes() {
@@ -366,8 +392,9 @@ public final class AppRate {
     }
 
     private boolean isOverCustomEventsRequirements() {
+        Short currentCount;
         for(Map.Entry<String, Short> eventRequirement : customEventsCounts.entrySet()) {
-            Short currentCount = getCustomEventCount(context, eventRequirement.getKey());
+            currentCount = getCustomEventCount(context, eventRequirement.getKey());
             if(currentCount < eventRequirement.getValue()) {
                 return false;
             }
