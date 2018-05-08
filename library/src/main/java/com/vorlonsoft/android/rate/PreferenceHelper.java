@@ -129,7 +129,9 @@ final class PreferenceHelper {
             }
         }
         dialogLaunchTimes = dialogLaunchTimes.replaceAll(":[0-9][0-9]*y[0-9][0-9]*-[0-9][0-9]*:",":");
-        dialogLaunchTimes = dialogLaunchTimes.substring(1, dialogLaunchTimes.length()-1);
+        if (dialogLaunchTimes.length() > 2) {
+            dialogLaunchTimes = dialogLaunchTimes.substring(1, dialogLaunchTimes.length() - 1);
+        }
 
         short dialogLaunchTimesCount = 0;
         final String[] dialogLaunchTimesSplit = dialogLaunchTimes.split(":");

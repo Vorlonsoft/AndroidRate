@@ -1,7 +1,7 @@
 AndroidRate
 ============
 
-AndroidRate is a library to help you promote your android app by prompting users to rate the app after using it for a few days. Original project [Android-Rate](https://github.com/hotchemi/Android-Rate) (The MIT License (MIT)) was developed by Shintaro Katafuchi.
+AndroidRate is a library to help you promote your android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
 
 ![screen shot](http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif)
 
@@ -19,6 +19,23 @@ dependencies {
 ```
 
 ## Usage
+
+### Simple Configuration
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+
+  AppRate.with(this)
+      .setInstallDays((byte) 0)           // default 10, 0 means install day
+      .setLaunchTimes((byte) 3)           // default 10
+      .monitor();
+
+  AppRate.showRateDialogIfMeetsConditions(this);
+}
+```
 
 ### Configuration
 
@@ -172,7 +189,7 @@ AppRate.with(this).setStoreType(StoreType.BLACKBERRY, long); // BlackBerry World
 
 #### Chinese app stores
 
-The first Chinese app store found on the user device will be used. The Library doesn't check the availability of your application on the app store.
+The first Chinese app store found on the user device will be used, if first fails, second will be used, etc. The Library doesn't check the availability of your application on the app store.
 
 ```java
 AppRate.with(this).setStoreType(StoreType.CHINESESTORES); // 19 chinese app stores: 腾讯应用宝, 360手机助手,
@@ -183,20 +200,20 @@ AppRate.with(this).setStoreType(StoreType.CHINESESTORES); // 19 chinese app stor
 #### Other store
 
 ```java
-AppRate.with(this).setStoreType(String); // Any other store,
-                                         // String - an RFC 2396-compliant URI to your app
-                                         // e. g. "https://otherstore.com/app?id=com.yourapp"
-                                         // or "otherstore://apps/com.yourapp"
+AppRate.with(this).setStoreType(String...); // Any other store/stores,
+                                            // String... - an RFC 2396-compliant URI or array of URIs to your app,
+                                            // e. g. "https://otherstore.com/app?id=com.yourapp"
+                                            // or "otherstore://apps/com.yourapp"
 ```
 
-#### Сustom Intents
+### Сustom Intents
 
 You can set custom action to the Rate button. For example, you want to open your custom RateActivity when the Rate button clicked.
 
 ```java
-AppRate.with(this).setStoreType(Intent[]); // Any custom intents, Intent[] - array of intents,
-                                           // first will be executed (startActivity(intents[0])),
-                                           // if first fails, second will be executed (startActivity(intents[1])), etc.
+AppRate.with(this).setStoreType(Intent...); // Any custom intents, Intent... - intent or array of intents,
+                                            // first will be executed (startActivity(intents[0])),
+                                            // if first fails, second will be executed (startActivity(intents[1])), etc.
 ```
 
 ### Check the availability of Google Play
@@ -205,6 +222,12 @@ AppRate.with(this).setStoreType(Intent[]); // Any custom intents, Intent[] - arr
 if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
 
 }
+```
+
+### Maximum number of the display of the dialog within a 365-day period
+
+```java
+AppRate.with(this).set365DayPeriodMaxNumberDialogLaunchTimes(short);
 ```
 
 ## Language

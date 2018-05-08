@@ -275,34 +275,18 @@ public final class AppRate {
         return ((storeType != APPLE) && (storeType != BLACKBERRY)) ? setStoreType(storeType, null, null) : setStoreType(storeType, new String[]{String.valueOf(applicationId)}, null);
     }
 
-    @SuppressWarnings({"unused", "ConstantConditions"})
-    public AppRate setStoreType(@NonNull final String uri) {
-        if (uri == null) {
-            throw new IllegalArgumentException("setStoreType(String uri): 'uri' must be != null");
-        }
-        return setStoreType(new String[]{uri});
-    }
-
     @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
-    public AppRate setStoreType(@NonNull final String[] uris) {
+    public AppRate setStoreType(@NonNull final String... uris) {
         if (uris == null) {
-            throw new IllegalArgumentException("setStoreType(String[] uris): 'uris' must be != null");
+            throw new IllegalArgumentException("setStoreType(String... uris): 'uris' must be != null");
         }
         return setStoreType(OTHER, uris, null);
     }
 
-    @SuppressWarnings({"ConstantConditions", "unused"})
-    public AppRate setStoreType(@NonNull final Intent intent) {
-        if (intent == null) {
-            throw new IllegalArgumentException("setStoreType(Intent intent): 'intent' must be != null");
-        }
-        return setStoreType(new Intent[]{intent});
-    }
-
     @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
-    public AppRate setStoreType(@NonNull final Intent[] intents) {
+    public AppRate setStoreType(@NonNull final Intent... intents) {
         if (intents == null) {
-            throw new IllegalArgumentException("setStoreType(Intent[] intents): 'intents' must be != null");
+            throw new IllegalArgumentException("setStoreType(Intent... intents): 'intents' must be != null");
         }
         return setStoreType(INTENT, null, intents);
     }
