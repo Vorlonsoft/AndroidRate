@@ -53,8 +53,10 @@ final class PreferenceHelper {
                                                        final byte currentYear,
                                                        final short currentDay,
                                                        final short currentDayCount){
-        if (dialogLaunchTimes.contains(":" + currentDay + "y")) {
-            dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y[0-9][0-9]*-[0-9][0-9]*:",":");
+        if (currentYear > 1) {
+            for (byte b = 0; b < currentYear - 1; b++){
+                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + b + "-[0-9][0-9]*:",":");
+            }
         }
         dialogLaunchTimes = dialogLaunchTimes + currentDay + "y" + currentYear + "-" + currentDayCount + ":";
 
@@ -124,7 +126,7 @@ final class PreferenceHelper {
         dialogLaunchTimes = dialogLaunchTimes.replaceAll(":[0-9][0-9]*" + "y" + currentYear + "-",":");
         if (currentYear > 0) {
             currentDay = (short) (currentDay % YEAR_IN_DAYS);
-            for (short s = (short) (currentDay + 1); s < YEAR_IN_DAYS; s++) {
+            for (short s = currentDay; s < YEAR_IN_DAYS; s++) {
                 dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + s + "y" + String.valueOf(currentYear-1) + "-",":");
             }
         }
