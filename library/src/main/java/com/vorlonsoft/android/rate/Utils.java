@@ -20,15 +20,9 @@ import java.util.List;
 
 final class Utils {
 
-    private static final long SECOND_IN_MILLIS = 1000;
+    static final long DAY_IN_MILLIS = 86400000L;
 
-    private static final long MINUTE_IN_MILLIS = SECOND_IN_MILLIS * 60;
-
-    private static final long HOUR_IN_MILLIS = MINUTE_IN_MILLIS * 60;
-
-    static final long DAY_IN_MILLIS = HOUR_IN_MILLIS * 24;
-
-    static final long YEAR_IN_MILLIS = DAY_IN_MILLIS * 365;
+    static final short YEAR_IN_DAYS = (short) 365;
 
     static final String TAG = "ANDROIDRATE";
 
