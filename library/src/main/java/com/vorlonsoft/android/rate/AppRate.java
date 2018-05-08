@@ -116,6 +116,7 @@ public final class AppRate {
     /**
      *  Set Short.MAX_VALUE for unlimited occurrences of the display of the dialog within a 365-day period
      */
+    @SuppressWarnings({"unused"})
     public AppRate set365DayPeriodMaxNumberDialogLaunchTimes(short dialogLaunchTimes){
         this.dialogLaunchTimes = dialogLaunchTimes;
         return this;
@@ -275,7 +276,7 @@ public final class AppRate {
         return ((storeType != APPLE) && (storeType != BLACKBERRY)) ? setStoreType(storeType, null, null) : setStoreType(storeType, new String[]{String.valueOf(applicationId)}, null);
     }
 
-    @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
+    @SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
     public AppRate setStoreType(@NonNull final String... uris) {
         if (uris == null) {
             throw new IllegalArgumentException("setStoreType(String... uris): 'uris' must be != null");
@@ -283,7 +284,7 @@ public final class AppRate {
         return setStoreType(OTHER, uris, null);
     }
 
-    @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
+    @SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
     public AppRate setStoreType(@NonNull final Intent... intents) {
         if (intents == null) {
             throw new IllegalArgumentException("setStoreType(Intent... intents): 'intents' must be != null");
