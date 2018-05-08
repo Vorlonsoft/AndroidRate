@@ -98,7 +98,7 @@ public final class AppRate {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
-        boolean isMeetsConditions = singleton.isDebug() || singleton.shouldShowRateDialog();
+        boolean isMeetsConditions = (singleton.isDebug() || singleton.shouldShowRateDialog());
         if (isMeetsConditions) {
             singleton.showRateDialog(activity);
         }
@@ -110,7 +110,7 @@ public final class AppRate {
     }
 
     private boolean isBelow365DayPeriodMaxNumberDialogLaunchTimes() {
-        return ((get365DayPeriodDialogLaunchTimes(context) < dialogLaunchTimes) || (dialogLaunchTimes == Short.MAX_VALUE));
+        return ((dialogLaunchTimes == Short.MAX_VALUE) || (get365DayPeriodDialogLaunchTimes(context) < dialogLaunchTimes));
     }
 
     /**
@@ -361,30 +361,34 @@ public final class AppRate {
     }
 
     private boolean isOverLaunchTimes() {
-        return getLaunchTimes(context) >= appLaunchTimes;
+        return ((appLaunchTimes == 0) || (getLaunchTimes(context) >= appLaunchTimes));
     }
 
     private boolean isOverRemindLaunchTimes() {
-        return ((remindLaunchTimes != 0) && ((getLaunchTimes(context) % remindLaunchTimes) == 0));
+        return ((remindLaunchTimes == 1) || ((remindLaunchTimes != 0) && ((getLaunchTimes(context) % remindLaunchTimes) == 0)));
     }
 
     private boolean isOverInstallDate() {
-        return isOverDate(getInstallDate(context), installDate);
+        return ((installDate == 0) || isOverDate(getInstallDate(context), installDate));
     }
 
     private boolean isOverRemindDate() {
-        return isOverDate(getRemindInterval(context), remindInterval);
+        return ((remindInterval == 0) || isOverDate(getRemindInterval(context), remindInterval));
     }
 
     private boolean isOverCustomEventsRequirements() {
-        Short currentCount;
-        for(Map.Entry<String, Short> eventRequirement : customEventsCounts.entrySet()) {
-            currentCount = getCustomEventCount(context, eventRequirement.getKey());
-            if(currentCount < eventRequirement.getValue()) {
-                return false;
+        if (customEventsCounts.isEmpty()) {
+            return true;
+        } else {
+            Short currentCount;
+            for(Map.Entry<String, Short> eventRequirement : customEventsCounts.entrySet()) {
+                currentCount = getCustomEventCount(context, eventRequirement.getKey());
+                if(currentCount < eventRequirement.getValue()) {
+                    return false;
+                }
             }
+            return true;
         }
-        return true;
     }
 
     @SuppressWarnings({"unused", "WeakerAccess"})
