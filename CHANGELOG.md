@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.1.7 (released 08.05.2018)
+
+- LIBcc10508
+- LIBff10507 Ability to limit the display of the dialog within a 365-day period
+- LIBcc10503
+- LIBff10503
+- LIBff10501
+- LIBbb20501
+- LIBcc10501
+- LIBbb10501
+- LIBcc20430
+- LIBbb10430 Fix for AppRate.with(this).clearSettingsParam();
+- LIBcc10430
+- LIBcc10426
+
 ## 1.1.6 (released 25.04.2018)
 
 - LIBff10424
