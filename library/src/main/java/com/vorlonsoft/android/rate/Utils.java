@@ -11,12 +11,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 final class Utils {
 
