@@ -7,11 +7,12 @@
 package com.vorlonsoft.android.rate;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.view.View;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+
+import androidx.annotation.Nullable;
 
 final class DialogOptions {
 

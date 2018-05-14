@@ -12,7 +12,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +19,8 @@ import android.view.View;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
 
 import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
