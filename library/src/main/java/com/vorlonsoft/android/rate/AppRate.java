@@ -33,8 +33,8 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriod
 import static com.vorlonsoft.android.rate.PreferenceHelper.isFirstLaunch;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setCustomEventCount;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setFirstLaunchSharedPreferences;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
@@ -46,32 +46,21 @@ import static com.vorlonsoft.android.rate.Utils.TAG;
 
 public final class AppRate {
 
+    @SuppressLint("StaticFieldLeak")
+    private static volatile AppRate singleton = null;
+    private final Map<String, Short> customEventsCounts;
+    private final Context context;
+    private final DialogOptions dialogOptions = new DialogOptions();
+    private final StoreOptions storeOptions = new StoreOptions();
     private boolean isDebug = false;
-
     private byte installDate = (byte) 10;
-
     private byte appLaunchTimes = (byte) 10;
-
     private byte remindInterval = (byte) 1;
-
     private byte remindLaunchTimes = (byte) 1;
-
     /**
      * Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period
      */
     private short dialogLaunchTimes = Short.MAX_VALUE;
-
-    private final Map<String, Short> customEventsCounts;
-
-    @SuppressLint("StaticFieldLeak")
-    private static volatile AppRate singleton = null;
-
-    private final Context context;
-
-    private final DialogOptions dialogOptions = new DialogOptions();
-
-    private final StoreOptions storeOptions = new StoreOptions();
-
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
     {
@@ -115,10 +104,10 @@ public final class AppRate {
     }
 
     /**
-     *  Set Short.MAX_VALUE for unlimited occurrences of the display of the dialog within a 365-day period
+     * Set Short.MAX_VALUE for unlimited occurrences of the display of the dialog within a 365-day period
      */
     @SuppressWarnings({"unused"})
-    public AppRate set365DayPeriodMaxNumberDialogLaunchTimes(short dialogLaunchTimes){
+    public AppRate set365DayPeriodMaxNumberDialogLaunchTimes(short dialogLaunchTimes) {
         this.dialogLaunchTimes = dialogLaunchTimes;
         return this;
     }
@@ -285,14 +274,6 @@ public final class AppRate {
         return setStoreType(OTHER, uris, null);
     }
 
-    @SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
-    public AppRate setStoreType(@NonNull final Intent... intents) {
-        if (intents == null) {
-            throw new IllegalArgumentException("setStoreType(Intent... intents): 'intents' must be != null");
-        }
-        return setStoreType(INTENT, null, intents);
-    }
-
     private AppRate setStoreType(final int storeType, final String[] stringParam, final Intent[] intentParaam) {
         storeOptions.setStoreType(storeType, stringParam, intentParaam);
         return this;
@@ -303,9 +284,17 @@ public final class AppRate {
         return storeOptions.getStoreType();
     }
 
+    @SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
+    public AppRate setStoreType(@NonNull final Intent... intents) {
+        if (intents == null) {
+            throw new IllegalArgumentException("setStoreType(Intent... intents): 'intents' must be != null");
+        }
+        return setStoreType(INTENT, null, intents);
+    }
+
     @SuppressWarnings("unused")
     public AppRate incrementEventCount(String eventName) {
-        return setEventCountValue(eventName, (short) (getCustomEventCount(context,eventName) + 1));
+        return setEventCountValue(eventName, (short) (getCustomEventCount(context, eventName) + 1));
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -315,7 +304,7 @@ public final class AppRate {
     }
 
     @SuppressWarnings("unused")
-    public AppRate setThemeResId(int themeResId){
+    public AppRate setThemeResId(int themeResId) {
         dialogOptions.setThemeResId(themeResId);
         return this;
     }
@@ -339,7 +328,7 @@ public final class AppRate {
         if (!activity.isFinishing()) {
             Dialog dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
             if (dialog != null) {
-                if (getDialogFirstLaunchTime(context) == 0L){
+                if (getDialogFirstLaunchTime(context) == 0L) {
                     setDialogFirstLaunchTime(context);
                 }
                 increment365DayPeriodDialogLaunchTimes(context);
@@ -353,12 +342,12 @@ public final class AppRate {
     @SuppressWarnings("WeakerAccess")
     public boolean shouldShowRateDialog() {
         return getIsAgreeShowDialog(context) &&
-               isOverLaunchTimes() &&
-               isOverRemindLaunchTimes() &&
-               isOverInstallDate() &&
-               isOverRemindDate() &&
-               isOverCustomEventsRequirements() &&
-               isBelow365DayPeriodMaxNumberDialogLaunchTimes();
+                isOverLaunchTimes() &&
+                isOverRemindLaunchTimes() &&
+                isOverInstallDate() &&
+                isOverRemindDate() &&
+                isOverCustomEventsRequirements() &&
+                isBelow365DayPeriodMaxNumberDialogLaunchTimes();
     }
 
     private boolean isOverLaunchTimes() {
@@ -382,9 +371,9 @@ public final class AppRate {
             return true;
         } else {
             Short currentCount;
-            for(Map.Entry<String, Short> eventRequirement : customEventsCounts.entrySet()) {
+            for (Map.Entry<String, Short> eventRequirement : customEventsCounts.entrySet()) {
                 currentCount = getCustomEventCount(context, eventRequirement.getKey());
-                if(currentCount < eventRequirement.getValue()) {
+                if (currentCount < eventRequirement.getValue()) {
                     return false;
                 }
             }

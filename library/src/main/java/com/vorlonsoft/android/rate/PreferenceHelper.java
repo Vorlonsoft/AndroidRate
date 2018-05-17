@@ -52,10 +52,10 @@ final class PreferenceHelper {
                                                        String dialogLaunchTimes,
                                                        final byte currentYear,
                                                        final short currentDay,
-                                                       final short currentDayCount){
+                                                       final short currentDayCount) {
         if (currentYear > 1) {
-            for (byte b = 0; b < currentYear - 1; b++){
-                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + b + "-[0-9][0-9]*:",":");
+            for (byte b = 0; b < currentYear - 1; b++) {
+                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + b + "-[0-9][0-9]*:", ":");
             }
         }
         dialogLaunchTimes = dialogLaunchTimes + currentDay + "y" + currentYear + "-" + currentDayCount + ":";
@@ -93,8 +93,8 @@ final class PreferenceHelper {
         preferencesEditor.apply();
     }
 
-    static void increment365DayPeriodDialogLaunchTimes(final Context context){
-        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context))/DAY_IN_MILLIS);
+    static void increment365DayPeriodDialogLaunchTimes(final Context context) {
+        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context)) / DAY_IN_MILLIS);
         final byte currentYear = (byte) (currentDay / YEAR_IN_DAYS);
         final String currentDialogLaunchTimes = getPreferences(context).getString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0y0-0:");
 
@@ -104,8 +104,8 @@ final class PreferenceHelper {
 
         if (currentDialogLaunchTimes.matches("(.*):" + currentDay + "y" + currentYear + "-[0-9][0-9]*:")) {
             final short length = (short) currentDialogLaunchTimes.length();
-            String currentDayCount = "" + currentDialogLaunchTimes.charAt(length-2);
-            for(short s = (short) (length - 3); s > 0; s--) {
+            String currentDayCount = "" + currentDialogLaunchTimes.charAt(length - 2);
+            for (short s = (short) (length - 3); s > 0; s--) {
                 if (Character.isDigit(currentDialogLaunchTimes.charAt(s))) {
                     currentDayCount = currentDialogLaunchTimes.charAt(s) + currentDayCount;
                 } else {
@@ -118,19 +118,19 @@ final class PreferenceHelper {
         }
     }
 
-    static short get365DayPeriodDialogLaunchTimes(final Context context){
-        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context))/DAY_IN_MILLIS);
+    static short get365DayPeriodDialogLaunchTimes(final Context context) {
+        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context)) / DAY_IN_MILLIS);
         final byte currentYear = (byte) (currentDay / YEAR_IN_DAYS);
         String dialogLaunchTimes = getPreferences(context).getString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0y0-0:");
 
-        dialogLaunchTimes = dialogLaunchTimes.replaceAll(":[0-9][0-9]*" + "y" + currentYear + "-",":");
+        dialogLaunchTimes = dialogLaunchTimes.replaceAll(":[0-9][0-9]*" + "y" + currentYear + "-", ":");
         if (currentYear > 0) {
             currentDay = (short) (currentDay % YEAR_IN_DAYS);
             for (short s = currentDay; s < YEAR_IN_DAYS; s++) {
-                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + s + "y" + String.valueOf(currentYear-1) + "-",":");
+                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + s + "y" + String.valueOf(currentYear - 1) + "-", ":");
             }
         }
-        dialogLaunchTimes = dialogLaunchTimes.replaceAll(":[0-9][0-9]*y[0-9][0-9]*-[0-9][0-9]*:",":");
+        dialogLaunchTimes = dialogLaunchTimes.replaceAll(":[0-9][0-9]*y[0-9][0-9]*-[0-9][0-9]*:", ":");
         if (dialogLaunchTimes.length() > 2) {
             dialogLaunchTimes = dialogLaunchTimes.substring(1, dialogLaunchTimes.length() - 1);
         }
@@ -155,13 +155,13 @@ final class PreferenceHelper {
     }
 
 
-    static void setDialogFirstLaunchTime(final Context context){
+    static void setDialogFirstLaunchTime(final Context context) {
         getPreferencesEditor(context)
                 .putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, new Date().getTime())
                 .apply();
     }
 
-    static long getDialogFirstLaunchTime(final Context context){
+    static long getDialogFirstLaunchTime(final Context context) {
         return getPreferences(context).getLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, 0L);
     }
 

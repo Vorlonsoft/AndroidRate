@@ -58,7 +58,8 @@ public final class StoreType {
             TENCENT,
             YANDEX
     })
-    public @interface StoreWithoutApplicationId {}
+    public @interface StoreWithoutApplicationId {
+    }
 
     @SuppressWarnings("WeakerAccess")
     @Retention(SOURCE)
@@ -66,7 +67,8 @@ public final class StoreType {
             APPLE,
             BLACKBERRY
     })
-    public @interface StoreWithApplicationId {}
+    public @interface StoreWithApplicationId {
+    }
 
     @SuppressWarnings("WeakerAccess")
     @Retention(SOURCE)
@@ -85,5 +87,6 @@ public final class StoreType {
             TENCENT,
             YANDEX
     })
-    public @interface AnyStoreType {}
+    public @interface AnyStoreType {
+    }
 }

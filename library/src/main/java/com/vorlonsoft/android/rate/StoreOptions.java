@@ -50,7 +50,7 @@ final class StoreOptions {
 
     void setStoreType(final int storeType, final String[] stringParam, final Intent[] intentParaam) {
         this.storeType = storeType;
-        switch(storeType) {
+        switch (storeType) {
             case APPLE:
             case BLACKBERRY:
                 setApplicationId(stringParam[0]);
@@ -60,12 +60,12 @@ final class StoreOptions {
                 break;
             case OTHER:
                 final Intent[] intents;
-                if (stringParam == null){
+                if (stringParam == null) {
                     intents = null;
                 } else {
                     int length = stringParam.length;
                     intents = new Intent[length];
-                    for (int i = 0; i < length; i++){
+                    for (int i = 0; i < length; i++) {
                         intents[i] = new Intent(Intent.ACTION_VIEW, Uri.parse(stringParam[i]));
                     }
                 }

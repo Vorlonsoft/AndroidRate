@@ -38,18 +38,10 @@ import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {
 
-    static class Factory implements DialogManager.Factory {
-        @Override
-        public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
-            return new DefaultDialogManager(context, dialogOptions, storeOptions);
-        }
-    }
-
     private final Context context;
     private final DialogOptions dialogOptions;
     private final StoreOptions storeOptions;
     private final OnClickButtonListener listener;
-
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
@@ -57,7 +49,7 @@ public class DefaultDialogManager implements DialogManager {
             final Intent[] intentsToAppStores;
             final String packageName = context.getPackageName();
             if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
-                switch(storeOptions.getStoreType()) {
+                switch (storeOptions.getStoreType()) {
                     case AMAZON:
                         intentsToAppStores = createIntentsForStore(context, AMAZON, packageName);
                         break;
@@ -139,7 +131,6 @@ public class DefaultDialogManager implements DialogManager {
             if (listener != null) listener.onClickButton((byte) which);
         }
     };
-
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener negativeListener = new DialogInterface.OnClickListener() {
         @Override
@@ -148,7 +139,6 @@ public class DefaultDialogManager implements DialogManager {
             if (listener != null) listener.onClickButton((byte) which);
         }
     };
-
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener neutralListener = new DialogInterface.OnClickListener() {
         @Override
@@ -193,6 +183,13 @@ public class DefaultDialogManager implements DialogManager {
         }
 
         return builder.create();
+    }
+
+    static class Factory implements DialogManager.Factory {
+        @Override
+        public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
+            return new DefaultDialogManager(context, dialogOptions, storeOptions);
+        }
     }
 
 }

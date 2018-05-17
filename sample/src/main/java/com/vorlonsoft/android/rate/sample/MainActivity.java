@@ -7,8 +7,7 @@
 package com.vorlonsoft.android.rate.sample;
 
 import android.app.Activity;
-// uncomment to test other locales
-/*
+/* uncomment to test other locales
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -22,8 +21,9 @@ import com.google.android.gms.common.GoogleApiAvailability;
 import com.vorlonsoft.android.rate.AppRate;
 import com.vorlonsoft.android.rate.StoreType;
 
-// uncomment to test other locales
-// import java.util.Locale;
+/* uncomment to test other locales
+import java.util.Locale;
+ */
 
 public class MainActivity extends Activity {
     private static final String TAG = "ANDROIDRATE_SAMPLE";
@@ -34,8 +34,7 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        // uncomment to test other locales
-        /*
+        /* uncomment to test other locales
         if ((Build.VERSION.SDK_INT >= 17)&&(Build.VERSION.SDK_INT < 25)) {
             String mLang = "fr";    // change to your test language
             String mCountry = "FR"; // change to your test country
@@ -68,7 +67,7 @@ public class MainActivity extends Activity {
                 .setInstallDays((byte) 3)           // default 10, 0 means install day.
                 .setLaunchTimes((byte) 10)          // default 10 times.
                 .setRemindInterval((byte) 2)        // default 1 day.
-                .setRemindLaunchTimes ((byte) 4)    // default 1 (each launch).
+                .setRemindLaunchTimes((byte) 4)    // default 1 (each launch).
                 .setShowLaterButton(true)           // default true.
                 .setDebug(true)                     // default false.
                 .setCancelable(false)               // default false.

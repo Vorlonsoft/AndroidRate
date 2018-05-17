@@ -11,9 +11,9 @@ import android.content.Context;
 
 public interface DialogManager {
 
+    Dialog createDialog();
+
     interface Factory {
         DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions);
     }
-
-    Dialog createDialog();
 }

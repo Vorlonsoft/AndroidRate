@@ -72,7 +72,7 @@ final class UriHelper {
     private static Uri getStoreUri(final int appStore, final String paramName, final boolean isWebUri) {
         final String baseStoreUri;
         if (isWebUri) {
-            switch(appStore) {
+            switch (appStore) {
                 case AMAZON:
                     baseStoreUri = AMAZON_APPSTORE_WEB;
                     break;
@@ -106,7 +106,7 @@ final class UriHelper {
                     baseStoreUri = GOOGLE_PLAY_WEB;
             }
         } else {
-            switch(appStore) {
+            switch (appStore) {
                 case AMAZON:
                     baseStoreUri = AMAZON_APPSTORE;
                     break;

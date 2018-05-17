@@ -113,7 +113,7 @@ final class IntentHelper {
         boolean needStorePackage = false;
         boolean hasWebUriIntent = true;
 
-        switch(appStore) {
+        switch (appStore) {
             case AMAZON:
                 storesPackagesNames = new String[]{AMAZON_APPSTORE_PACKAGE_NAME};
                 break;
