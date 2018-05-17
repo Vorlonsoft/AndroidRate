@@ -11,6 +11,6 @@
     android:versionName="1.1.7"
     tools:ignore="GradleOverrides">
 
-    <application/>
+    <application />
 
 </manifest>

@@ -27,22 +27,22 @@ public class UriHelperTest extends AndroidTestCase {
     public void testGetStoreUri() {
         {
             final int appStore = CHINESESTORES;
-            Uri uri = UriHelper.getStoreUri(appStore,"");
+            Uri uri = UriHelper.getStoreUri(appStore, "");
             assertEquals(uri.toString(), CHINESE_STORES);
         }
         {
             final int appStore = GOOGLEPLAY;
-            Uri uri = UriHelper.getStoreUri(appStore,"");
+            Uri uri = UriHelper.getStoreUri(appStore, "");
             assertEquals(uri.toString(), GOOGLE_PLAY);
         }
         {
             final int appStore = CHINESESTORES;
-            Uri uri = UriHelper.getStoreUri(appStore,null);
+            Uri uri = UriHelper.getStoreUri(appStore, null);
             assertNull(uri);
         }
         {
             final int appStore = GOOGLEPLAY;
-            Uri uri = UriHelper.getStoreUri(appStore,null);
+            Uri uri = UriHelper.getStoreUri(appStore, null);
             assertNull(uri);
         }
         {
@@ -63,22 +63,22 @@ public class UriHelperTest extends AndroidTestCase {
     public void testGetStoreWebUri() {
         {
             final int appStore = CHINESESTORES;
-            Uri uri = UriHelper.getStoreWebUri(appStore,"");
+            Uri uri = UriHelper.getStoreWebUri(appStore, "");
             assertNull(uri);
         }
         {
             final int appStore = GOOGLEPLAY;
-            Uri uri = UriHelper.getStoreWebUri(appStore,"");
+            Uri uri = UriHelper.getStoreWebUri(appStore, "");
             assertEquals(uri.toString(), GOOGLE_PLAY_WEB);
         }
         {
             final int appStore = CHINESESTORES;
-            Uri uri = UriHelper.getStoreWebUri(appStore,null);
+            Uri uri = UriHelper.getStoreWebUri(appStore, null);
             assertNull(uri);
         }
         {
             final int appStore = GOOGLEPLAY;
-            Uri uri = UriHelper.getStoreWebUri(appStore,null);
+            Uri uri = UriHelper.getStoreWebUri(appStore, null);
             assertNull(uri);
         }
         {
