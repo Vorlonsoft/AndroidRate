@@ -4,6 +4,7 @@
 
 # Built application files
 *.ap_
+*.aab
 *.apk
 
 # Built library files
@@ -57,6 +58,7 @@ obj/
 .idea/**/workspace.xml
 .idea/dictionaries
 ## Sensitive or high-churn files
+.idea/**/build_file_checksums.ser
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
@@ -66,8 +68,9 @@ obj/
 ## Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+.idea/**/modules.xml
 ## VCS
-.idea/vcs.xml
+.idea/**/vcs.xml
 ## Module files
 *.iml
 ## File-based project format
