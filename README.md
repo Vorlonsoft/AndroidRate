@@ -48,19 +48,21 @@ protected void onCreate(Bundle savedInstanceState) {
   setContentView(R.layout.activity_main);
 
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) // default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
-                                          //         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
-                                          //         SLIDEME (SlideME Marketplace), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
-                                          //         setStoreType(BLACKBERRY, long) (BlackBerry World, long - your application ID),
-                                          //         setStoreType(APPLE, long) (Apple App Store, long - your application ID) and
-                                          //         setStoreType(String) (Any other store, String - a full URI to your app)
+      .setStoreType(StoreType.GOOGLEPLAY) /* default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
+                                           *         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
+                                           *         SLIDEME (SlideME Marketplace), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
+                                           *         setStoreType(BLACKBERRY, long) (BlackBerry World, long - your application ID),
+                                           *         setStoreType(APPLE, long) (Apple App Store, long - your application ID) and
+                                           *         setStoreType(String) (Any other store, String - a full URI to your app) */
       .setInstallDays((byte) 0)           // default 10, 0 means install day
       .setLaunchTimes((byte) 3)           // default 10
       .setRemindInterval((byte) 2)        // default 1
       .setRemindLaunchTimes((byte) 2)     // default 1 (each launch)
       .setShowLaterButton(true)           // default true
       .setDebug(false)                    // default false
+      /* Java 8+ start */
       .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which)))
+      /* Java 8+ end */
       /* Java 7- start */
       //.setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
       //    @Override
@@ -72,7 +74,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .monitor();
 
   if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) {
-      //Check that Google Play is available
+      // Check that Google Play is available
       if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
           // Show a dialog if meets conditions
           AppRate.showRateDialogIfMeetsConditions(this);
@@ -127,7 +129,7 @@ Call `AppRate#setView(View)`.
 ```java
 LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
 View view = inflater.inflate(R.layout.custom_dialog, (ViewGroup) findViewById(R.id.layout_root));
-AppRate.with(this).setView(view).monitor();
+AppRate.with(this).setView(view);
 ```
 
 ### Specific theme
@@ -172,19 +174,17 @@ AppRate.with(this).setStoreType(StoreType.YANDEX);     // Yandex.Store
 #### Apple App Store
 
 ```java
-AppRate.with(this).setStoreType(StoreType.APPLE, long); // Apple App Store,
-                                                        // long - your Apple App Store application ID
-                                                        // e. g. 284882215 for Facebook
-                                                        // (https://itunes.apple.com/app/id284882215)
+/* Apple App Store, long - your Apple App Store application ID
+ * e. g. 284882215 for Facebook (https://itunes.apple.com/app/id284882215) */
+AppRate.with(this).setStoreType(StoreType.APPLE, long);
 ```
 
 #### BlackBerry World
 
 ```java
-AppRate.with(this).setStoreType(StoreType.BLACKBERRY, long); // BlackBerry World,
-                                                             // long - your BlackBerry World application ID
-                                                             // e. g. 50777 for Facebook
-                                                             // (https://appworld.blackberry.com/webstore/content/50777)
+/* BlackBerry World, long - your BlackBerry World application ID
+ * e. g. 50777 for Facebook (https://appworld.blackberry.com/webstore/content/50777) */
+AppRate.with(this).setStoreType(StoreType.BLACKBERRY, long);
 ```
 
 #### Chinese app stores
@@ -192,18 +192,20 @@ AppRate.with(this).setStoreType(StoreType.BLACKBERRY, long); // BlackBerry World
 The first Chinese app store found on the user device will be used, if first fails, second will be used, etc. The Library doesn't check the availability of your application on the app store.
 
 ```java
-AppRate.with(this).setStoreType(StoreType.CHINESESTORES); // 19 chinese app stores: 腾讯应用宝, 360手机助手,
-// 小米应用商店, 华为应用商店, 百度手机助手, OPPO应用商店, 中兴应用商店, VIVO应用商店, 豌豆荚, PP手机助手, 安智应用商店,
-// 91手机助手, 应用汇, QQ手机管家, 机锋应用市场, GO市场, 宇龙Coolpad应用商店, 联想应用商店, cool市场
+/* 19 chinese app stores: 腾讯应用宝, 360手机助手, 小米应用商店, 华为应用商店, 百度手机助手,
+ * OPPO应用商店, 中兴应用商店, VIVO应用商店, 豌豆荚, PP手机助手, 安智应用商店, 91手机助手,
+ * 应用汇, QQ手机管家, 机锋应用市场, GO市场, 宇龙Coolpad应用商店, 联想应用商店, cool市场 */
+AppRate.with(this).setStoreType(StoreType.CHINESESTORES);
 ```
 
 #### Other store
 
 ```java
-AppRate.with(this).setStoreType(String...); // Any other store/stores,
-                                            // String... - an RFC 2396-compliant URI or array of URIs to your app,
-                                            // e. g. "https://otherstore.com/app?id=com.yourapp"
-                                            // or "otherstore://apps/com.yourapp"
+/* Any other store/stores,
+ * String... - an RFC 2396-compliant URI or array of URIs to your app,
+ * e. g. "https://otherstore.com/app?id=com.yourapp"
+ * or "otherstore://apps/com.yourapp" */
+AppRate.with(this).setStoreType(String...);
 ```
 
 ### Сustom Intents
@@ -211,16 +213,17 @@ AppRate.with(this).setStoreType(String...); // Any other store/stores,
 You can set custom action to the Rate button. For example, you want to open your custom RateActivity when the Rate button clicked.
 
 ```java
-AppRate.with(this).setStoreType(Intent...); // Any custom intents, Intent... - intent or array of intents,
-                                            // first will be executed (startActivity(intents[0])),
-                                            // if first fails, second will be executed (startActivity(intents[1])), etc.
+/* Any custom intents, Intent... - intent or array of intents,
+ * first will be executed (startActivity(intents[0])), if first fails,
+ * second will be executed (startActivity(intents[1])), etc. */
+AppRate.with(this).setStoreType(Intent...);
 ```
 
 ### Check the availability of Google Play
 
 ```java
 if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
-
+    // ...
 }
 ```
 
@@ -240,7 +243,7 @@ AndroidRate currently supports the following languages:
 - Catalan
 - Chinese (zh-CN, zh-HK, zh-MO, zh-SG, zh-TW)
 - Czech
-- English
+- English (en-US, en-UK)
 - French
 - German
 - Hebrew
@@ -250,9 +253,9 @@ AndroidRate currently supports the following languages:
 - Korean
 - Persian
 - Polish
-- Portuguese
+- Portuguese (pt-PT, pt-BR)
 - Russian
-- Spanish
+- Spanish (es-ES, es-419)
 - Turkish
 - Ukrainian
 - Vietnamese
