@@ -4,11 +4,42 @@
   ~ //
   ~ // Licensed under The MIT License (MIT)
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name" translatable="false" tools:ignore="MissingTranslation">AndroidRate</string>
-    <string name="rate_dialog_title">Rate this app</string>
-    <string name="rate_dialog_message">If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!</string>
-    <string name="rate_dialog_ok">Rate It Now</string>
-    <string name="rate_dialog_cancel">Remind Me Later</string>
-    <string name="rate_dialog_no">No, Thanks</string>
+<resources>
+    <string name="rate_dialog_title">@string/rate_dialog_title_en</string>
+    <string name="rate_dialog_message">@string/rate_dialog_message_en</string>
+    <string name="rate_dialog_ok">@string/rate_dialog_ok_en</string>
+    <string name="rate_dialog_cancel">@string/rate_dialog_cancel_en</string>
+    <string name="rate_dialog_no">@string/rate_dialog_no_en</string>
+
+    <string name="rate_dialog_title_en" translatable="false">Rate this app</string>
+    <string name="rate_dialog_message_en" translatable="false">If you enjoy playing this app, would you mind taking a moment to rate it? It won\'t take more than a minute. Thanks for your support!</string>
+    <string name="rate_dialog_ok_en" translatable="false">Rate It Now</string>
+    <string name="rate_dialog_cancel_en" translatable="false">Remind Me Later</string>
+    <string name="rate_dialog_no_en" translatable="false">No, Thanks</string>
+
+    <string name="rate_dialog_title_es" translatable="false">Valorar la aplicación</string>
+    <string name="rate_dialog_message_es" translatable="false">Si te ha gustado la aplicación, ¿te importaría valorar la aplicación? No te llevará más de un minuto. ¡Gracias por tu apoyo!</string>
+    <string name="rate_dialog_ok_es" translatable="false">Valorar ahora</string>
+    <string name="rate_dialog_cancel_es" translatable="false">Recuérdamelo más tarde</string>
+    <string name="rate_dialog_no_es" translatable="false">¡No, gracias!</string>
+
+    <string name="rate_dialog_title_pt" translatable="false">Avaliar a aplicação</string>
+    <string name="rate_dialog_message_pt" translatable="false">Gosta da aplicação? Então não se importaria de a avaliar? Não demora mais do que um minuto. Obrigado pelo seu apoio!</string>
+    <string name="rate_dialog_ok_pt" translatable="false">Avaliar agora</string>
+    <string name="rate_dialog_cancel_pt" translatable="false">Mais tarde</string>
+    <string name="rate_dialog_no_pt" translatable="false">Não, Obrigado</string>
+
+    <string name="rate_dialog_title_zh_cn" translatable="false">给五颗星评价的鼓励？</string>
+    <string name="rate_dialog_message_zh_cn" translatable="false">如果你喜欢这个 App，希望你能给予五颗星的评价，让更多人下载使用它！</string>
+    <string name="rate_dialog_ok_zh_cn" translatable="false">给五颗星</string>
+    <string name="rate_dialog_cancel_zh_cn" translatable="false">稍候提醒我</string>
+    <string name="rate_dialog_no_zh_cn" translatable="false">不，谢谢</string>
+
+    <string name="rate_dialog_title_zh_tw" translatable="false">給五顆星評價的鼓勵？</string>
+    <string name="rate_dialog_message_zh_tw" translatable="false">如果你喜歡這個 App，希望你能給予五顆星的評價，讓更多人下載使用它！</string>
+    <string name="rate_dialog_ok_zh_tw" translatable="false">給五顆星</string>
+    <string name="rate_dialog_cancel_zh_tw" translatable="false">稍候提醒我</string>
+    <string name="rate_dialog_no_zh_tw" translatable="false">不，謝謝</string>
+
+    <string name="app_name" translatable="false">AndroidRate</string>
 </resources>

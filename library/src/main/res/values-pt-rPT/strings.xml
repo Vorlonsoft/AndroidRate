@@ -5,9 +5,9 @@
   ~ // Licensed under The MIT License (MIT)
 -->
 <resources>
-    <string name="rate_dialog_title">Avaliar a aplicação</string>
-    <string name="rate_dialog_message">Gosta da aplicação? Então não se importaria de a avaliar? Não demora mais do que um minuto. Obrigado pelo seu apoio!</string>
-    <string name="rate_dialog_ok">Avaliar agora</string>
-    <string name="rate_dialog_cancel">Mais tarde</string>
-    <string name="rate_dialog_no">Não, Obrigado</string>
+    <string name="rate_dialog_title">@string/rate_dialog_title_pt</string>
+    <string name="rate_dialog_message">@string/rate_dialog_message_pt</string>
+    <string name="rate_dialog_ok">@string/rate_dialog_ok_pt</string>
+    <string name="rate_dialog_cancel">@string/rate_dialog_cancel_pt</string>
+    <string name="rate_dialog_no">@string/rate_dialog_no_pt</string>
 </resources>
