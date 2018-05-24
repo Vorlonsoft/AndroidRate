@@ -1,3 +1,6 @@
+![152px](https://user-images.githubusercontent.com/38810169/40379140-3279fdd8-5e17-11e8-8c73-be80f02e2338.png)
+
+
 AndroidRate
 ============
 
