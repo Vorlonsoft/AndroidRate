@@ -7,12 +7,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '28.0.0-rc2'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.0'
     defaultConfig {
         applicationId 'com.vorlonsoft.android.rate.sample'
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 13
         versionName '1.1.11'
     }
@@ -39,7 +39,7 @@ android {
             embedMicroApp false
         }
         release {
-            applicationIdSuffix ""
+            applicationIdSuffix ''
             zipAlignEnabled true
             debuggable false
             postprocessing {
@@ -51,7 +51,7 @@ android {
             }
         }
         debug {
-            applicationIdSuffix ".debug"
+            applicationIdSuffix '.debug'
             zipAlignEnabled false
             debuggable true
             postprocessing {
