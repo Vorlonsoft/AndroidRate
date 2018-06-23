@@ -1,5 +1,4 @@
-![152px](https://user-images.githubusercontent.com/38810169/40379140-3279fdd8-5e17-11e8-8c73-be80f02e2338.png)
-
+![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/192px.png)
 
 AndroidRate
 ============
@@ -244,9 +243,9 @@ AndroidRate currently supports the following languages:
 - Basque
 - Benqali
 - Catalan
-- Chinese (zh-CN, zh-HK, zh-MO, zh-SG, zh-TW)
+- Chinese (zh-CN, zh-TW)
 - Czech
-- English (en-US, en-UK)
+- English
 - French
 - German
 - Hebrew
@@ -256,9 +255,9 @@ AndroidRate currently supports the following languages:
 - Korean
 - Persian
 - Polish
-- Portuguese (pt-PT, pt-BR)
+- Portuguese
 - Russian
-- Spanish (es-ES, es-419)
+- Spanish
 - Turkish
 - Ukrainian
 - Vietnamese
