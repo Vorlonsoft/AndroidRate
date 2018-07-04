@@ -33,8 +33,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundImage" value="C:\Users\Alexander Savin\Desktop\background.png" />
-                                      <entry key="foregroundImage" value="C:\Users\Alexander Savin\Desktop\logo.png" />
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="foregroundImage" value="C:\AndroidStudioProjects\AndroidRate\Materials\logo.png" />
                                       <entry key="generateRoundIcon" value="false" />
                                       <entry key="legacyIconShape" value="CIRCLE" />
                                       <entry key="previewDensity" value="XXXHIGH" />

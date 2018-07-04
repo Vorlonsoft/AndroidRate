@@ -58,7 +58,7 @@ obj/
 .idea/**/workspace.xml
 .idea/dictionaries
 ## Sensitive or high-churn files
-.idea/**/build_file_checksums.ser
+.idea/**/caches/
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
@@ -75,3 +75,6 @@ obj/
 *.iml
 ## File-based project format
 *.iws
+
+# Other
+Materials/
