@@ -1,11 +1,11 @@
-![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/192px.png)
+![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)
 
 AndroidRate
 ============
 
 AndroidRate is a library to help you promote your android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
 
-![screen shot](http://i.gyazo.com/286342ba215a515f2f443a7ce996cc92.gif)
+![AndroidRate animated screenshots](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/screenshots/screenshots_360x640.gif)
 
 ## Install
 

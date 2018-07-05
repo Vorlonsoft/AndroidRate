@@ -2,7 +2,7 @@ AndroidRate library
 
 Copyright 2017 - 2018 Vorlonsoft LLC
 
-All image files (including *.png and *.webp) are licensed under the
+All image files (including *.gif, *.png and *.webp) are licensed under the
 Creative Commons Attribution 4.0 International (CC BY 4.0) License
 (http://creativecommons.org/licenses/by/4.0/). All other files are
 licensed under The MIT License (MIT).
@@ -13,9 +13,9 @@ Shintaro Katafuchi (https://github.com/hotchemi).
 92px.png, 152px.png and 192px.png files developed by Hafiz Ahmed
 (https://github.com/hafizahmmed)
 
-ic_launcher_background.png files developed by Vorlonsoft LLC
-(author: Alexander Savin)
-
 ic_launcher.png and ic_launcher_foreground.png files developed by
 Hafiz Ahmed (https://github.com/hafizahmmed) and modified by
 Vorlonsoft LLC (author of modification: Alexander Savin)
+
+screenshots_360x640.gif and screenshots_720x1280.gif files developed by Vorlonsoft LLC
+(author: Alexander Savin)
