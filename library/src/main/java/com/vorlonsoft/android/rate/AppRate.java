@@ -61,6 +61,7 @@ public final class AppRate {
      * Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period
      */
     private short dialogLaunchTimes = Short.MAX_VALUE;
+    private Dialog dialog = null;
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
     {
@@ -325,8 +326,9 @@ public final class AppRate {
 
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
+        dismissRateDialog();
         if (!activity.isFinishing()) {
-            Dialog dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
+            dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
             if (dialog != null) {
                 if (getDialogFirstLaunchTime(context) == 0L) {
                     setDialogFirstLaunchTime(context);
@@ -336,6 +338,16 @@ public final class AppRate {
             } else {
                 Log.w(TAG, "Failed to rate app, can't create rate dialog");
             }
+        } else {
+            Log.w(TAG, "Failed to rate app, can't create rate dialog, because activity is in the process of finishing");
+        }
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public void dismissRateDialog() {
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
         }
     }
 
