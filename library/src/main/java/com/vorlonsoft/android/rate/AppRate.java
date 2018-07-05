@@ -89,7 +89,7 @@ public final class AppRate {
 
     @SuppressWarnings("UnusedReturnValue")
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
-        boolean isMeetsConditions = (singleton.isDebug() || singleton.shouldShowRateDialog());
+        boolean isMeetsConditions = ((singleton != null) && (singleton.isDebug() || singleton.shouldShowRateDialog()));
         if (isMeetsConditions) {
             singleton.showRateDialog(activity);
         }
