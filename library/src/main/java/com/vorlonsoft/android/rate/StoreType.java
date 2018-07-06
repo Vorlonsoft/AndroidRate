@@ -13,7 +13,6 @@ import androidx.annotation.IntDef;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 public final class StoreType {
-
     @SuppressWarnings("WeakerAccess")
     public static final int AMAZON = 0;               // Amazon Appstore
     @SuppressWarnings("WeakerAccess")
