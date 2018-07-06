@@ -7,15 +7,18 @@
 package com.vorlonsoft.android.rate;
 
 import android.net.Uri;
-import android.test.AndroidTestCase;
+
+import org.junit.Test;
 
 import static com.vorlonsoft.android.rate.StoreType.CHINESESTORES;
 import static com.vorlonsoft.android.rate.StoreType.GOOGLEPLAY;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * Unit test for {@link com.vorlonsoft.android.rate.UriHelper}
  */
-public class UriHelperTest extends AndroidTestCase {
+public class UriHelperTest {
 
     private static final String CHINESE_STORES = "market://details?id=";
 
@@ -24,7 +27,8 @@ public class UriHelperTest extends AndroidTestCase {
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
 
     @SuppressWarnings({"ConstantConditions", "UnnecessaryLocalVariable"})
-    public void testGetStoreUri() {
+    @Test
+    public void getStoreUri() {
         {
             final int appStore = CHINESESTORES;
             Uri uri = UriHelper.getStoreUri(appStore, "");
@@ -60,7 +64,8 @@ public class UriHelperTest extends AndroidTestCase {
     }
 
     @SuppressWarnings({"ConstantConditions", "UnnecessaryLocalVariable"})
-    public void testGetStoreWebUri() {
+    @Test
+    public void getStoreWebUri() {
         {
             final int appStore = CHINESESTORES;
             Uri uri = UriHelper.getStoreWebUri(appStore, "");

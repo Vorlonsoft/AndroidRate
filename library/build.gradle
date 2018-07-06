@@ -7,14 +7,15 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '28.0.1'
     defaultConfig {
         //noinspection MinSdkTooLow
         minSdkVersion 9
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 41
         versionName '1.1.7'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -45,5 +46,6 @@ android {
 }
 dependencies {
     compileOnly 'androidx.annotation:annotation:1.0.0-beta01'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
 }
 apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
