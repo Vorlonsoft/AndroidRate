@@ -19,13 +19,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
+
 final class Utils {
-
-    static final long DAY_IN_MILLIS = 86400000L;
-
-    static final short YEAR_IN_DAYS = (short) 365;
-
-    static final String TAG = "ANDROIDRATE";
 
     private Utils() {
         throw new AssertionError();

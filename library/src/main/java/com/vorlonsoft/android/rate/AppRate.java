@@ -22,6 +22,8 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 
+import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
+import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
@@ -41,8 +43,6 @@ import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
 import static com.vorlonsoft.android.rate.StoreType.INTENT;
 import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
-import static com.vorlonsoft.android.rate.Utils.DAY_IN_MILLIS;
-import static com.vorlonsoft.android.rate.Utils.TAG;
 
 public final class AppRate {
 

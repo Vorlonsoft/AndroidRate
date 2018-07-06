@@ -11,8 +11,8 @@ import android.content.SharedPreferences;
 
 import java.util.Date;
 
-import static com.vorlonsoft.android.rate.Utils.DAY_IN_MILLIS;
-import static com.vorlonsoft.android.rate.Utils.YEAR_IN_DAYS;
+import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
+import static com.vorlonsoft.android.rate.Constants.Date.YEAR_IN_DAYS;
 
 final class PreferenceHelper {
 

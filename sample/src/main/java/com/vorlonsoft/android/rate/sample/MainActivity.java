@@ -12,13 +12,11 @@ import android.app.Activity;
 //import android.content.res.Resources;
 //import android.os.Build;
 /* uncomment to test other locales - end */
-
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-
 import com.vorlonsoft.android.rate.AppRate;
 import com.vorlonsoft.android.rate.StoreType;
 

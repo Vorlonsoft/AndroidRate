@@ -17,6 +17,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
@@ -33,7 +34,6 @@ import static com.vorlonsoft.android.rate.StoreType.SAMSUNG;
 import static com.vorlonsoft.android.rate.StoreType.SLIDEME;
 import static com.vorlonsoft.android.rate.StoreType.TENCENT;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
-import static com.vorlonsoft.android.rate.Utils.TAG;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 
 public class DefaultDialogManager implements DialogManager {
