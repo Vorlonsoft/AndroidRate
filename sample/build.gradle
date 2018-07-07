@@ -13,8 +13,8 @@ android {
         applicationId 'com.vorlonsoft.android.rate.sample'
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 13
-        versionName '1.1.11'
+        versionCode 14
+        versionName '1.1.12'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
