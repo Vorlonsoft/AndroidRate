@@ -1,5 +1,35 @@
 # CHANGELOG
 
+## 1.1.8 (released 07.07.2018)
+
+- LIBcc30706
+- LIBcc20706
+- LIBcc10706
+- LIBbb10705
+- LIBff10705 dismissRateDialog() added
+- LIBcc20705 Animated screenshots update
+- LIBcc10705
+- LIBcc10623 Sample launcher icon update
+- LIBcc30622
+- LIBcc20622 README.md update
+- LIBcc10622
+- LIBcc10621
+- LIBff10524 Merge pull request #3 (Add logo) from hafizahmmed/master
+- LIBff30521
+- LIBcc20521
+- LIBcc10521
+- LIBff10518
+- LIBcc10518
+- LIBcc10517
+- LIBff10516
+- LIBcc10516
+- LIBcc10515
+- LIBcc20514
+- LIBcc10514 AndroidX refactoring
+- LIBcc10511
+- LIBff10508
+- LIBbb10508
+
 ## 1.1.7 (released 08.05.2018)
 
 - LIBcc10508
