@@ -48,4 +48,4 @@ dependencies {
     compileOnly 'androidx.annotation:annotation:1.0.0-beta01'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
 }
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply from: 'https://raw.github.com/Vorlonsoft/GradleMavenPush/master/maven-push.gradle'
