@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Értékelése</string>
+    <string name="rate_dialog_message">Ha az alkalmazás elnyerte tetszését, akkor kérjük értékelje azt. Köszönjük a támogatást!</string>
+    <string name="rate_dialog_ok">Értékelje most</string>
+    <string name="rate_dialog_cancel">Később</string>
+    <string name="rate_dialog_no">Nem, köszönöm</string>
+</resources>
