@@ -41,5 +41,11 @@
     <string name="rate_dialog_cancel_zh_tw" translatable="false">稍候提醒我</string>
     <string name="rate_dialog_no_zh_tw" translatable="false">不，謝謝</string>
 
+    <string name="rate_dialog_title_he_iw" translatable="false">דרגו את האפלקציה</string>
+    <string name="rate_dialog_message_he_iw" translatable="false">אם אתם נהנים מהשימוש באפליקציה, מה דעתכם לדרג אותה? זה לא ייקח יותר מדקה. תודה על התמיכה!</string>
+    <string name="rate_dialog_ok_he_iw" translatable="false">דרגו כעת</string>
+    <string name="rate_dialog_cancel_he_iw" translatable="false">אחר כך</string>
+    <string name="rate_dialog_no_he_iw" translatable="false">לא תודה</string>
+
     <string name="app_name" translatable="false">AndroidRate</string>
 </resources>
