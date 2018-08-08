@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Оцени</string>
+    <string name="rate_dialog_message">Ако вам се свиђе ова апликација, молим вас одвојите мало времена да је оцените. Хвала на подршци!</string>
+    <string name="rate_dialog_ok">Оцени сада</string>
+    <string name="rate_dialog_cancel">Касније</string>
+    <string name="rate_dialog_no">Не, хвала</string>
+</resources>
