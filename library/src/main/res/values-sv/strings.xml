@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Betygsätt</string>
+    <string name="rate_dialog_message">Om du gillar den här appen, betygsätt den gärna. Tack för din support!</string>
+    <string name="rate_dialog_ok">Betygsätt nu</string>
+    <string name="rate_dialog_cancel">Senare</string>
+    <string name="rate_dialog_no">Nej tack</string>
+</resources>
