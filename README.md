@@ -239,6 +239,7 @@ AppRate.with(this).set365DayPeriodMaxNumberDialogLaunchTimes(short);
 
 AndroidRate currently supports the following languages:
 
+- Albanian
 - Arabic
 - Basque
 - Benqali
