@@ -247,6 +247,7 @@ AndroidRate currently supports the following languages:
 - Chinese (zh-CN, zh-TW)
 - Croatian
 - Czech
+- Dutch
 - English
 - French
 - German
