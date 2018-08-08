@@ -8,12 +8,12 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.1'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         //noinspection MinSdkTooLow
         minSdkVersion 9
         targetSdkVersion 28
-        versionCode VERSION_CODE.toInteger()
+        versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,6 +46,6 @@ android {
 }
 dependencies {
     compileOnly 'androidx.annotation:annotation:1.0.0-beta01'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha3'
+    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
 }
-apply from: 'https://raw.github.com/Vorlonsoft/GradleMavenPush/master/maven-push.gradle'
+apply from: 'C:/AndroidStudioProjects/GradleMavenPush/maven-push.gradle'
