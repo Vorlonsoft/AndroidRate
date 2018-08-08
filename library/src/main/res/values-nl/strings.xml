@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Beoordelen</string>
+    <string name="rate_dialog_message">Als je van deze app geniet, neem dan even tijd om te beoordelen. Bedankt voor uw steun!</string>
+    <string name="rate_dialog_ok">Nu Beoordelen</string>
+    <string name="rate_dialog_cancel">Later</string>
+    <string name="rate_dialog_no">Nee bedankt</string>
+</resources>
