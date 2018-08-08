@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Vlerëso</string>
+    <string name="rate_dialog_message">Nqs po ju pëlqen ky program, ju lutemi vlerësojeni me një koment. Faleminderit për suportin tuaj!</string>
+    <string name="rate_dialog_ok">Vlerëso Tani</string>
+    <string name="rate_dialog_cancel">Më Vonë</string>
+    <string name="rate_dialog_no">Jo Faleminderit</string>
+</resources>
