@@ -261,6 +261,7 @@ AndroidRate currently supports the following languages:
 - Polish
 - Portuguese
 - Russian
+- Slovak
 - Spanish
 - Turkish
 - Ukrainian
