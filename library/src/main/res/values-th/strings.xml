@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">ให้คะแนน</string>
+    <string name="rate_dialog_message">ถ้าคุณคิดว่าแอพนี้มันเจ๋ง ช่วยสละเวลาเพื่อให้คะแนนมันหน่อยนะ ขอบคุณมากที่ช่วยเรา</string>
+    <string name="rate_dialog_ok">ให้คะแนน</string>
+    <string name="rate_dialog_cancel">ไว้ทีหลัง</string>
+    <string name="rate_dialog_no">ไม่ละ ขอบคุณ</string>
+</resources>
