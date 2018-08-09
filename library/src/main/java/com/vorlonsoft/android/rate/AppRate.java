@@ -8,6 +8,7 @@ package com.vorlonsoft.android.rate;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -394,6 +395,20 @@ public final class AppRate {
         if (dialog != null) {
             dialog.dismiss();
             dialog = null;
+        }
+    }
+
+    /**
+     * Call this method directly to go straight to store listing for rating
+     *
+     * @param activity your activity, use "this" in most cases
+     */
+    public void rateNow(Activity activity) {
+        dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
+        if (dialog != null) {
+            ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        } else {
+            Log.w(TAG, "Failed to rate app, can't create rate dialog");
         }
     }
 
