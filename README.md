@@ -241,6 +241,7 @@ AndroidRate currently supports the following languages:
 
 - Albanian
 - Arabic
+- Azerbaijani
 - Basque
 - Benqali
 - Bulgarian
