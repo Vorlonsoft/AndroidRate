@@ -5,9 +5,9 @@
   ~ // Licensed under The MIT License (MIT)
 -->
 <resources>
-    <string name="rate_dialog_title">Ocijeni</string>
-    <string name="rate_dialog_message">Ukoliko uživate koristiti ovu aplikaciju, molim vas odvojite trenutak za ocjenjivanje. Hvala na vašoj podršci.</string>
-    <string name="rate_dialog_ok">Ocijeni sada</string>
-    <string name="rate_dialog_cancel">Kasnije</string>
-    <string name="rate_dialog_no">Ne hvala</string>
+    <string name="rate_dialog_title">Ocijeni aplikaciju</string>
+    <string name="rate_dialog_message">Ako Vam se sviđa ova aplikacija, molimo Vas da odvojite trenutak kako bi je ocijenili. Neće trajati više od minute. Hvala na vašoj podršci!</string>
+    <string name="rate_dialog_ok">Ocijeni</string>
+    <string name="rate_dialog_cancel">Podjeti me kasnije</string>
+    <string name="rate_dialog_no">Ne, hvala</string>
 </resources>
