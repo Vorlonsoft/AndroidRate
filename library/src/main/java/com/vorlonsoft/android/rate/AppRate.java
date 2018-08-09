@@ -112,7 +112,7 @@ public final class AppRate {
     }
 
     /**
-     *  Clear dialog weak reference
+     * Clear dialog weak reference
      */
     void clearDialog() {
         if (dialog != null) {
@@ -415,6 +415,7 @@ public final class AppRate {
      *
      * @param activity your activity, use "this" in most cases
      */
+    @SuppressWarnings("unused")
     public void rateNow(Activity activity) {
         if ((dialog != null) && (dialog.get() != null)) {
             Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
