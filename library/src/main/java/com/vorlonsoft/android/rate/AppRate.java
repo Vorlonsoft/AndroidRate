@@ -26,15 +26,12 @@ import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
-import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getInstallDate;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindInterval;
-import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.isFirstLaunch;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setCustomEventCount;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setFirstLaunchSharedPreferences;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
@@ -330,10 +327,6 @@ public final class AppRate {
         if (!activity.isFinishing()) {
             dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
             if (dialog != null) {
-                if (getDialogFirstLaunchTime(context) == 0L) {
-                    setDialogFirstLaunchTime(context);
-                }
-                increment365DayPeriodDialogLaunchTimes(context);
                 dialog.show();
             } else {
                 Log.w(TAG, "Failed to rate app, can't create rate dialog");

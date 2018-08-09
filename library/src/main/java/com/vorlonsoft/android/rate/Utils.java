@@ -27,12 +27,8 @@ final class Utils {
         throw new AssertionError();
     }
 
-    private static boolean isLollipop() {
+    static boolean isLollipop() {
         return ((Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) || (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1));
-    }
-
-    private static int getDialogTheme() {
-        return isLollipop() ? R.style.CustomLollipopDialogStyle : 0;
     }
 
     @SuppressLint("ObsoleteSdkInt")
@@ -45,7 +41,7 @@ final class Utils {
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             return new AlertDialog.Builder(context);
         } else {
-            return new AlertDialog.Builder(context, themeResId == 0 ? getDialogTheme() : themeResId);
+            return new AlertDialog.Builder(context, themeResId);
         }
     }
 

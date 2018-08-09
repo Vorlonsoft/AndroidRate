@@ -13,12 +13,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
+import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriodDialogLaunchTimes;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
@@ -35,6 +41,7 @@ import static com.vorlonsoft.android.rate.StoreType.SLIDEME;
 import static com.vorlonsoft.android.rate.StoreType.TENCENT;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
+import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
 public class DefaultDialogManager implements DialogManager {
 
@@ -147,6 +154,43 @@ public class DefaultDialogManager implements DialogManager {
             if (listener != null) listener.onClickButton((byte) which);
         }
     };
+    @SuppressWarnings("WeakerAccess")
+    protected final DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
+        @Override
+        public void onShow(DialogInterface dialog) {
+            if (getDialogFirstLaunchTime(context) == 0L) {
+                setDialogFirstLaunchTime(context);
+            }
+            increment365DayPeriodDialogLaunchTimes(context);
+            if (isLollipop()) {
+                try {
+                    final Button positiveButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                    if (positiveButton != null) {
+                        final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
+                        if ((linearLayout != null) && (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
+                            final Button neutralButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+                            final Button negativeButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                            linearLayout.setOrientation(LinearLayout.VERTICAL);
+                            linearLayout.setGravity(Gravity.END);
+                            if (neutralButton != null) {
+                                linearLayout.removeView(neutralButton);
+                                if (negativeButton != null) {
+                                    linearLayout.removeView(negativeButton);
+                                    linearLayout.addView(negativeButton);
+                                }
+                                linearLayout.addView(neutralButton);
+                            } else if (negativeButton != null) {
+                                linearLayout.removeView(negativeButton);
+                                linearLayout.addView(negativeButton);
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.i(TAG, "Positive button may not fits in the window, can't change layout orientation to vertical");
+                }
+            }
+        }
+    };
 
     @SuppressWarnings("WeakerAccess")
     public DefaultDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
@@ -182,7 +226,12 @@ public class DefaultDialogManager implements DialogManager {
             builder.setNegativeButton(dialogOptions.getNegativeText(context), negativeListener);
         }
 
-        return builder.create();
+        final AlertDialog alertDialog = builder.create();
+        if (alertDialog != null) {
+            alertDialog.setOnShowListener(showListener);
+        }
+
+        return alertDialog;
     }
 
     static class Factory implements DialogManager.Factory {
