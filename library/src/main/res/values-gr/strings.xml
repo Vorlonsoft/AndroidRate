@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">@string/rate_dialog_title_gr_el</string>
+    <string name="rate_dialog_message">@string/rate_dialog_message_gr_el</string>
+    <string name="rate_dialog_ok">@string/rate_dialog_ok_gr_el</string>
+    <string name="rate_dialog_cancel">@string/rate_dialog_cancel_gr_el</string>
+    <string name="rate_dialog_no">@string/rate_dialog_no_gr_el</string>
+</resources>
