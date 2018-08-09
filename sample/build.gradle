@@ -8,12 +8,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.1'
+    buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId 'com.vorlonsoft.android.rate.sample'
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode VERSION_CODE.toInteger()
+        versionCode Integer.parseInt(VERSION_CODE)
         versionName VERSION_NAME
     }
     compileOptions {
