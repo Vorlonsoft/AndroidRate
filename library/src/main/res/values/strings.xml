@@ -53,5 +53,11 @@
     <string name="rate_dialog_cancel_in_id" translatable="false">Nanti Saja</string>
     <string name="rate_dialog_no_in_id" translatable="false">Tidak</string>
 
+    <string name="rate_dialog_title_gr_el" translatable="false">Βαθμολογήστε την εφαρμογή</string>
+    <string name="rate_dialog_message_gr_el" translatable="false">Αν σας αρέσει αυτή η εφαρμογή θα θέλατε να τη βαθμολογήσετε;Δεν θα πάρει παραπάνω από ένα λεπτό.Ευχαριστώ για την υποστήριξη!</string>
+    <string name="rate_dialog_ok_gr_el" translatable="false">Βαθμολογήστε τώρα</string>
+    <string name="rate_dialog_cancel_gr_el" translatable="false">Αργότερα</string>
+    <string name="rate_dialog_no_gr_el" translatable="false">Οχι,ευχαριστώ</string>
+
     <string name="app_name" translatable="false">AndroidRate</string>
 </resources>
