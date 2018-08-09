@@ -16,7 +16,9 @@ import android.os.Build;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
+import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,7 +61,8 @@ public final class AppRate {
      * Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period
      */
     private short dialogLaunchTimes = Short.MAX_VALUE;
-    private Dialog dialog = null;
+    // Weak ref to avoid leaking the context
+    private WeakReference<Dialog> dialog = null;
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
     {
@@ -106,6 +109,15 @@ public final class AppRate {
 
     private boolean isBelow365DayPeriodMaxNumberDialogLaunchTimes() {
         return ((dialogLaunchTimes == Short.MAX_VALUE) || (get365DayPeriodDialogLaunchTimes(context) < dialogLaunchTimes));
+    }
+
+    /**
+     *  Clear dialog weak reference
+     */
+    void clearDialog() {
+        if (dialog != null) {
+            dialog.clear();
+        }
     }
 
     /**
@@ -379,9 +391,9 @@ public final class AppRate {
     public void showRateDialog(Activity activity) {
         dismissRateDialog();
         if (!activity.isFinishing()) {
-            dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
-            if (dialog != null) {
-                dialog.show();
+            dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
+            if (dialog.get() != null) {
+                dialog.get().show();
             } else {
                 Log.w(TAG, "Failed to rate app, can't create rate dialog");
             }
@@ -392,9 +404,9 @@ public final class AppRate {
 
     @SuppressWarnings("WeakerAccess")
     public void dismissRateDialog() {
-        if (dialog != null) {
-            dialog.dismiss();
-            dialog = null;
+        if ((dialog != null) && (dialog.get() != null)) {
+            dialog.get().dismiss();
+            clearDialog();
         }
     }
 
@@ -404,11 +416,22 @@ public final class AppRate {
      * @param activity your activity, use "this" in most cases
      */
     public void rateNow(Activity activity) {
-        dialog = dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog();
-        if (dialog != null) {
-            ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE).performClick();
+        if ((dialog != null) && (dialog.get() != null)) {
+            Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
+            if (positiveButton != null) {
+                positiveButton.performClick();
+            }
         } else {
-            Log.w(TAG, "Failed to rate app, can't create rate dialog");
+            dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
+            if (dialog.get() != null) {
+                Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
+                if (positiveButton != null) {
+                    positiveButton.performClick();
+                }
+                clearDialog();
+            } else {
+                Log.w(TAG, "Failed to rate app, can't create rate dialog");
+            }
         }
     }
 

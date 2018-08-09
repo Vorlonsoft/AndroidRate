@@ -191,6 +191,13 @@ public class DefaultDialogManager implements DialogManager {
             }
         }
     };
+    @SuppressWarnings("WeakerAccess")
+    protected final DialogInterface.OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
+        @Override
+        public void onDismiss(DialogInterface dialog) {
+            AppRate.with(context).clearDialog();
+        }
+    };
 
     @SuppressWarnings("WeakerAccess")
     public DefaultDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
@@ -229,6 +236,7 @@ public class DefaultDialogManager implements DialogManager {
         final AlertDialog alertDialog = builder.create();
         if (alertDialog != null) {
             alertDialog.setOnShowListener(showListener);
+            alertDialog.setOnDismissListener(dismissListener);
         }
 
         return alertDialog;
