@@ -84,6 +84,12 @@ public final class AppRate {
         return singleton;
     }
 
+    /**
+     * Call this method at the end of your onCreate() method to determine whether
+     * to show the rate dialog or not. It will show the rate dialog if conditions meets.
+     *
+     * @param activity your activity, use "this" in most cases
+     */
     @SuppressWarnings("UnusedReturnValue")
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
         boolean isMeetsConditions = ((singleton != null) && (singleton.isDebug() || singleton.shouldShowRateDialog()));
@@ -102,7 +108,10 @@ public final class AppRate {
     }
 
     /**
-     * Set Short.MAX_VALUE for unlimited occurrences of the display of the dialog within a 365-day period
+     * Sets max number occurrences of the display of the dialog within a 365-day period.
+     * Set Short.MAX_VALUE for unlimited occurrences.
+     *
+     * @param dialogLaunchTimes max number of launches within a 365-day period, default is unlimited
      */
     @SuppressWarnings({"unused"})
     public AppRate set365DayPeriodMaxNumberDialogLaunchTimes(short dialogLaunchTimes) {
@@ -110,16 +119,32 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * Sets the number of launches until the rating dialog pops up for the first time
+     *
+     * @param appLaunchTimes number of launches, default is 10
+     */
     public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte appLaunchTimes) {
         this.appLaunchTimes = appLaunchTimes;
         return this;
     }
 
+    /**
+     * Sets the number of days until the rating dialog pops up for the first time
+     *
+     * @param installDate number of days, default is 10
+     */
     public AppRate setInstallDays(@SuppressWarnings("SameParameterValue") byte installDate) {
         this.installDate = installDate;
         return this;
     }
 
+    /**
+     * Sets number of days until rating dialog pops up for next time after
+     * neutral button clicked
+     *
+     * @param remindInterval number of days, default is 1
+     */
     public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") byte remindInterval) {
         this.remindInterval = remindInterval;
         return this;
@@ -136,11 +161,21 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * Decides if Neutral button appear in the rating dialog or not
+     *
+     * @param isShowNeutralButton default is true
+     */
     public AppRate setShowLaterButton(@SuppressWarnings("SameParameterValue") boolean isShowNeutralButton) {
         dialogOptions.setShowNeutralButton(isShowNeutralButton);
         return this;
     }
 
+    /**
+     * Decides if Never button appear in the rating dialog or not
+     *
+     * @param isShowNeverButton default is true
+     */
     @SuppressWarnings("unused")
     public AppRate setShowNeverButton(boolean isShowNeverButton) {
         dialogOptions.setShowNegativeButton(isShowNeverButton);
@@ -242,6 +277,11 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * Sets whether the rating dialog is cancelable or not.
+     *
+     * @param cancelable default is true
+     */
     public AppRate setCancelable(@SuppressWarnings("SameParameterValue") boolean cancelable) {
         dialogOptions.setCancelable(cancelable);
         return this;
@@ -277,6 +317,9 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * Gets the currently set Store
+     */
     @StoreType.AnyStoreType
     public int getStoreType() {
         return storeOptions.getStoreType();
@@ -301,6 +344,11 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * Sets dialog theme. You can use a specific theme to inflate the dialog.
+     *
+     * @param themeResId theme resource ID, default is 0
+     */
     @SuppressWarnings("unused")
     public AppRate setThemeResId(int themeResId) {
         dialogOptions.setThemeResId(themeResId);
@@ -321,6 +369,11 @@ public final class AppRate {
         }
     }
 
+    /**
+     * Call this method directly if you want to force the rate dialog, useful for testing purposes
+     *
+     * @param activity your activity, use "this" in most cases
+     */
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
         dismissRateDialog();
@@ -344,6 +397,9 @@ public final class AppRate {
         }
     }
 
+    /**
+     * Call this method to determine whether conditions to show the rate dialog meets or not.
+     */
     @SuppressWarnings("WeakerAccess")
     public boolean shouldShowRateDialog() {
         return getIsAgreeShowDialog(context) &&
