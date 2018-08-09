@@ -252,6 +252,7 @@ AndroidRate currently supports the following languages:
 - Danish
 - Dutch
 - English
+- Finnish
 - French
 - German
 - Hebrew
