@@ -5,9 +5,9 @@
   ~ // Licensed under The MIT License (MIT)
 -->
 <resources>
-    <string name="rate_dialog_title">Ohodnoťte</string>
-    <string name="rate_dialog_message">Ak sa Vám aplikácia páči, venujte, prosím, chvíľu jej ohodnoteniu. Ďakujeme za Vašu podporu.</string>
+    <string name="rate_dialog_title">Ohodnotiť aplikáciu</string>
+    <string name="rate_dialog_message">Pokiaľ sa Vám aplikacia páči, radi by sme Vás poprosili o jej ohodnotenie. Nezaberie to viac než minútu. Ďakujeme za Vašu podporu!</string>
     <string name="rate_dialog_ok">Ohodnotiť teraz</string>
-    <string name="rate_dialog_cancel">Neskôr</string>
+    <string name="rate_dialog_cancel">Pripomenúť neskôr</string>
     <string name="rate_dialog_no">Nie, ďakujem</string>
 </resources>

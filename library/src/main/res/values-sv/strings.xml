@@ -5,9 +5,9 @@
   ~ // Licensed under The MIT License (MIT)
 -->
 <resources>
-    <string name="rate_dialog_title">Betygsätt</string>
-    <string name="rate_dialog_message">Om du gillar den här appen, betygsätt den gärna. Tack för din support!</string>
+    <string name="rate_dialog_title">Betygsätt appen</string>
+    <string name="rate_dialog_message">Om du gillar denna app, sätt gärna betyg på den. Det tar inte mer än ett ögonblick. Tack för ditt stöd!</string>
     <string name="rate_dialog_ok">Betygsätt nu</string>
     <string name="rate_dialog_cancel">Senare</string>
-    <string name="rate_dialog_no">Nej tack</string>
+    <string name="rate_dialog_no">Nej, tack</string>
 </resources>
