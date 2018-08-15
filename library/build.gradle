@@ -45,7 +45,8 @@ android {
     }
 }
 dependencies {
-    compileOnly 'androidx.annotation:annotation:1.0.0-beta01'
+    compileOnly 'androidx.annotation:annotation:1.0.0-rc01'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
 }
-apply from: 'C:/AndroidStudioProjects/GradleMavenPush/maven-push.gradle'
+apply from: 'https://raw.github.com/Vorlonsoft/EasyDokkaPlugin/master/dokka.gradle'
+apply from: 'https://raw.github.com/Vorlonsoft/GradleMavenPush/master/maven-push.gradle'
