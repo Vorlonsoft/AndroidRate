@@ -28,8 +28,8 @@ android {
                 removeUnusedResources false
                 obfuscate false
                 optimizeCode true
-                proguardFiles getDefaultProguardFile('proguard-defaults.txt'), 'proguard-rules.pro'
-                testProguardFile 'proguard-project-test.pro'
+                proguardFiles getDefaultProguardFile('proguard-defaults.txt'), 'project-proguard-rules.pro', 'proguard-rules.pro'
+                testProguardFile 'project-test-proguard-rules.pro'
             }
         }
         debug {
@@ -38,7 +38,7 @@ android {
                 removeUnusedResources false
                 obfuscate false
                 optimizeCode false
-                testProguardFile 'proguard-project-test.pro'
+                testProguardFile 'project-test-proguard-rules.pro'
             }
             matchingFallbacks = ['release']
         }
