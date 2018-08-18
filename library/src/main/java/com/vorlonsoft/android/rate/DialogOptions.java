@@ -14,7 +14,7 @@ import java.lang.ref.WeakReference;
 
 import androidx.annotation.Nullable;
 
-final class DialogOptions {
+public final class DialogOptions {
 
     private boolean cancelable = false;
 

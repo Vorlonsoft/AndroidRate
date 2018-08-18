@@ -6,6 +6,7 @@
 
 package com.vorlonsoft.android.rate;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -43,9 +44,24 @@ import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
-public class DefaultDialogManager implements DialogManager {
+/**
+ * <p>AndroidRate is a library to help you promote your Android app
+ * by prompting users to rate the app after using it for a few days.</p>
+ * <p>DefaultDialogManager Class - default dialog manager class implements
+ * DialogManager interface of the AndroidRate library.</p>
+ *
+ * @author   Alexander Savin
+ * @version  1.1.9
+ * @since    1.0.2
+ */
 
+public class DefaultDialogManager implements DialogManager {
+    @SuppressLint("StaticFieldLeak")
+    private static volatile DefaultDialogManager singleton = null;
     private final Context context;
+    private final DialogOptions dialogOptions;
+    private final StoreOptions storeOptions;
+    private final OnClickButtonListener listener;
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
         @Override
@@ -90,9 +106,6 @@ public class DefaultDialogManager implements DialogManager {
             AppRate.with(context).clearDialog();
         }
     };
-    private final DialogOptions dialogOptions;
-    private final StoreOptions storeOptions;
-    private final OnClickButtonListener listener;
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
@@ -200,28 +213,39 @@ public class DefaultDialogManager implements DialogManager {
     };
 
     @SuppressWarnings("WeakerAccess")
-    public DefaultDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
+    protected DefaultDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
         this.context = context;
         this.dialogOptions = dialogOptions;
         this.storeOptions = storeOptions;
         this.listener = dialogOptions.getListener();
     }
 
+    /**
+     * Create rate dialog.
+     *
+     * @return created dialog
+     */
     @Nullable
     @Override
     public Dialog createDialog() {
         AlertDialog.Builder builder = getDialogBuilder(context, dialogOptions.getThemeResId());
 
-        if (builder == null) return null;
+        if (builder == null) {
+            return null;
+        }
 
         builder.setMessage(dialogOptions.getMessageText(context));
 
-        if (dialogOptions.shouldShowTitle()) builder.setTitle(dialogOptions.getTitleText(context));
+        if (dialogOptions.shouldShowTitle()) {
+            builder.setTitle(dialogOptions.getTitleText(context));
+        }
 
         builder.setCancelable(dialogOptions.getCancelable());
 
         View view = dialogOptions.getView();
-        if (view != null) builder.setView(view);
+        if (view != null) {
+            builder.setView(view);
+        }
 
         builder.setPositiveButton(dialogOptions.getPositiveText(context), positiveListener);
 
@@ -245,7 +269,14 @@ public class DefaultDialogManager implements DialogManager {
     static class Factory implements DialogManager.Factory {
         @Override
         public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
-            return new DefaultDialogManager(context, dialogOptions, storeOptions);
+            if (singleton == null) {
+                synchronized (DefaultDialogManager.class) {
+                    if (singleton == null) {
+                        singleton = new DefaultDialogManager(context, dialogOptions, storeOptions);
+                    }
+                }
+            }
+            return singleton;
         }
     }
 
