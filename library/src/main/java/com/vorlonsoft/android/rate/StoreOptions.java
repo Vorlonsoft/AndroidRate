@@ -15,7 +15,7 @@ import static com.vorlonsoft.android.rate.StoreType.GOOGLEPLAY;
 import static com.vorlonsoft.android.rate.StoreType.INTENT;
 import static com.vorlonsoft.android.rate.StoreType.OTHER;
 
-final class StoreOptions {
+public final class StoreOptions {
 
     private int storeType = GOOGLEPLAY;
 
