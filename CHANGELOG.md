@@ -1,5 +1,40 @@
 # CHANGELOG
 
+## 1.1.9 (released 19.08.2018)
+
+LIBcc10819 Documenting
+LIBff10818 DefaultDialogManager as fast singleton implementation
+LIBcc20818 Gradle files update
+LIBcc10818 ProGuard refactoring
+LIBcc10815 build.gradle update
+LIBcc10810 Inspection
+LIBff70809 bg, hr, hu, nl, ru, sk, sv, th translations updated
+LIBff70809 Greek language added
+LIBff60809 Finnish language added
+LIBff50809 Danish language added
+LIBff40809 Azerbaijani language added
+LIBff30809 WeakReference<Dialog> to dialog implemented
+LIBff20809 rateNow(...) added, call this method directly to go straight to store
+LIBcc10809 Some methods were documented
+LIBff10809 Dialog OnShowListener added
+LIBfg40808 Thai language added
+LIBfg30808 Swedish language added
+LIBfg20808 Serbian language added
+LIBfg10808 Albanian language added
+LIBff90808 Slovenian language added
+LIBff80808 Slovak language added
+LIBff70808 Dutch language added
+LIBff60808 Hungarian language added
+LIBff50808 Croatian language added
+LIBff40808 Both in/id locale support
+LIBff30808 Both he/iw locale support
+LIBff20808 Bulgarian language added
+LIBff30719 Migrate to GradleMavenPush Release 1.1.0 https://github.com/Vorlonsoft/GradleMavenPush
+LIBcc10715
+LIBff10714 Upgrade to GradleMavenPush
+LIBcc10713
+LIBcc10708
+
 ## 1.1.8 (released 07.07.2018)
 
 - LIBcc30706
