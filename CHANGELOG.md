@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0 Yokohama (next release)
+
+- LIBcc20819 Next release
+
 ## 1.1.9 Tokyo (released 19.08.2018)
 
 - LIBcc10819 Documenting
