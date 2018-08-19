@@ -12,6 +12,17 @@ import androidx.annotation.IntDef;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
+/**
+ * <p>AndroidRate is a library to help you promote your Android app
+ * by prompting users to rate the app after using it for a few days.</p>
+ * <p>StoreType Class - store type class of the AndroidRate library.</p>
+ *
+ * @author   Alexander Savin
+ * @author   Shintaro Katafuchi
+ * @version  1.1.9
+ * @since    1.0.0
+ */
+
 public final class StoreType {
     @SuppressWarnings("WeakerAccess")
     public static final int AMAZON = 0;               // Amazon Appstore

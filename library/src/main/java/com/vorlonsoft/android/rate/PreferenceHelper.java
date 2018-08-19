@@ -14,6 +14,17 @@ import java.util.Date;
 import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
 import static com.vorlonsoft.android.rate.Constants.Date.YEAR_IN_DAYS;
 
+/**
+ * <p>AndroidRate is a library to help you promote your Android app
+ * by prompting users to rate the app after using it for a few days.</p>
+ * <p>PreferenceHelper Class - preference helper class of the AndroidRate library.</p>
+ *
+ * @author   Alexander Savin
+ * @author   Shintaro Katafuchi
+ * @version  1.1.9
+ * @since    0.1.3
+ */
+
 final class PreferenceHelper {
 
     private static final String PREF_FILE_NAME = "androidrate_pref_file";
@@ -186,6 +197,12 @@ final class PreferenceHelper {
         return getPreferences(context).getBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
     }
 
+    /**
+     * Sets number of times the app has been launched
+     *
+     * @param context AppRate.context
+     * @param launchTimes number of launch times to set
+     */
     static void setLaunchTimes(final Context context, final short launchTimes) {
         getPreferencesEditor(context)
                 .putInt(PREF_KEY_LAUNCH_TIMES, launchTimes)

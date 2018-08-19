@@ -14,6 +14,17 @@ import java.lang.ref.WeakReference;
 
 import androidx.annotation.Nullable;
 
+/**
+ * <p>AndroidRate is a library to help you promote your Android app
+ * by prompting users to rate the app after using it for a few days.</p>
+ * <p>DialogOptions Class - dialog options class of the AndroidRate library.</p>
+ *
+ * @author   Alexander Savin
+ * @author   Shintaro Katafuchi
+ * @version  1.1.9
+ * @since    0.5.1
+ */
+
 public final class DialogOptions {
 
     private boolean cancelable = false;
