@@ -44,8 +44,19 @@ import static com.vorlonsoft.android.rate.StoreType.INTENT;
 import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 
-public final class AppRate {
+/**
+ * <p>AndroidRate is a library to help you promote your Android app
+ * by prompting users to rate the app after using it for a few days.</p>
+ * <p>AppRate Class - main class of the AndroidRate library, thread-safe
+ * and a fast singleton implementation.</p>
+ *
+ * @author   Alexander Savin
+ * @author   Shintaro Katafuchi
+ * @version  1.1.9
+ * @since    0.0.4
+ */
 
+public final class AppRate {
     @SuppressLint("StaticFieldLeak")
     private static volatile AppRate singleton = null;
     private final Map<String, Short> customEventsCounts;
@@ -89,8 +100,10 @@ public final class AppRate {
     }
 
     /**
-     * Call this method at the end of your onCreate() method to determine whether
-     * to show the rate dialog or not. It will show the rate dialog if conditions meets.
+     * <p>Shows rate dialog when meets conditions.</p>
+     * <p>Call this method at the end of your onCreate() method to determine whether
+     * to show the rate dialog or not. It will check if the conditions are met and
+     * show rate dialog if yes.</p>
      *
      * @param activity your activity, use "this" in most cases
      */
@@ -293,7 +306,7 @@ public final class AppRate {
     /**
      * Sets whether the rating dialog is cancelable or not.
      *
-     * @param cancelable default is true
+     * @param cancelable default is false
      */
     public AppRate setCancelable(@SuppressWarnings("SameParameterValue") boolean cancelable) {
         dialogOptions.setCancelable(cancelable);
@@ -374,6 +387,10 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * Monitor launch times.<br />
+     * Call this method when the launcher activity's onCreate() is launched.
+     */
     public void monitor() {
         if (isFirstLaunch(context)) {
             setFirstLaunchSharedPreferences(context);
