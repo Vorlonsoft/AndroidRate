@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.1.9 (released 19.08.2018)
+## 1.1.9 Tokyo (released 19.08.2018)
 
 - LIBcc10819 Documenting
 - LIBff10818 DefaultDialogManager as fast singleton implementation
@@ -29,7 +29,7 @@
 - LIBff40808 Both in/id locale support
 - LIBff30808 Both he/iw locale support
 - LIBff20808 Bulgarian language added
-- LIBff30719 Migrate to GradleMavenPush Release 1.1.0 https://github.com/Vorlonsoft/GradleMavenPush
+- LIBff30719 Migrate to [GradleMavenPush Release 1.1.0](https://github.com/Vorlonsoft/GradleMavenPush/tree/1.1.0)
 - LIBcc10715
 - LIBff10714 Upgrade to GradleMavenPush
 - LIBcc10713
