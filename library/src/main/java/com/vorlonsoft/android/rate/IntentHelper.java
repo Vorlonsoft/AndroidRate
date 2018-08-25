@@ -31,14 +31,12 @@ import static com.vorlonsoft.android.rate.UriHelper.getStoreWebUri;
 import static com.vorlonsoft.android.rate.Utils.isPackagesExists;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>IntentHelper Class - intent helper class of the AndroidRate library.</p>
  *
+ * @since    0.5.0
+ * @version  1.1.9
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
- * @version  1.1.9
- * @since    0.5.0
  */
 
 final class IntentHelper {

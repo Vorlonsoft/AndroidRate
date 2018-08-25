@@ -21,6 +21,15 @@ import androidx.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 
+/**
+ * <p>Utils Class - utils class of the AndroidRate library.</p>
+ *
+ * @since    0.5.0
+ * @version  1.1.9
+ * @author   Alexander Savin
+ * @author   Shintaro Katafuchi
+ */
+
 final class Utils {
 
     private Utils() {

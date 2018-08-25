@@ -16,8 +16,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- * Unit test for {@link com.vorlonsoft.android.rate.UriHelper}
+ * <p>Unit test for {@link com.vorlonsoft.android.rate.UriHelper}</p>
+ *
+ * @since    0.1.3
+ * @version  1.1.9
+ * @author   Alexander Savin
+ * @author   Shintaro Katafuchi
  */
+
 public class UriHelperTest {
 
     private static final String CHINESE_STORES = "market://details?id=";

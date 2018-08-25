@@ -16,16 +16,13 @@ import static com.vorlonsoft.android.rate.StoreType.INTENT;
 import static com.vorlonsoft.android.rate.StoreType.OTHER;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>StoreOptions Class - store options class of the AndroidRate library.</p>
  *
+ * @since    1.1.7
+ * @version  1.1.9
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
- * @version  1.1.9
- * @since    1.1.7
  */
-
 
 public final class StoreOptions {
 

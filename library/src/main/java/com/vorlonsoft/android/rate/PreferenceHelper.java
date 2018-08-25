@@ -15,14 +15,12 @@ import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
 import static com.vorlonsoft.android.rate.Constants.Date.YEAR_IN_DAYS;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>PreferenceHelper Class - preference helper class of the AndroidRate library.</p>
  *
+ * @since    0.1.3
+ * @version  1.1.9
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
- * @version  1.1.9
- * @since    0.1.3
  */
 
 final class PreferenceHelper {
