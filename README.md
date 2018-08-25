@@ -1,8 +1,6 @@
 [![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#)
 
-AndroidRate
-[![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://github.com/Vorlonsoft/AndroidRate/releases)
-===========
+# AndroidRate [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://github.com/Vorlonsoft/AndroidRate/releases)
 
 AndroidRate is a library to help you promote your Android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
 
@@ -284,9 +282,11 @@ AndroidRate supports API level 9 and up.
 
 Please try to move the [sample](https://github.com/Vorlonsoft/AndroidRate/tree/master/sample).
 
-## Already in use in following apps
+## Javadoc documentation
 
-* [I Love You Pro Edition](https://play.google.com/store/apps/details?id=com.vorlonsoft.iluvu)
+See [AndroidRate documentation](https://vorlonsoft.github.io/AndroidRate/javadoc/)
+
+## Already in use in following apps
 
 * [I Love You Free Edition](https://play.google.com/store/apps/details?id=com.vorlonsoft.iloveyou)
 
@@ -301,3 +301,27 @@ Please try to move the [sample](https://github.com/Vorlonsoft/AndroidRate/tree/m
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## License
+
+    The MIT License (MIT)
+
+    Copyright (c) 2017 - 2018 Vorlonsoft LLC
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+    THE SOFTWARE.
