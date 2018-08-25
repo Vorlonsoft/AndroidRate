@@ -45,15 +45,13 @@ import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>AppRate Class - main class of the AndroidRate library, thread-safe
  * and a fast singleton implementation.</p>
  *
+ * @since    0.0.4
+ * @version  1.1.9
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
- * @version  1.1.9
- * @since    0.0.4
  */
 
 public final class AppRate {
@@ -68,11 +66,9 @@ public final class AppRate {
     private byte appLaunchTimes = (byte) 10;
     private byte remindInterval = (byte) 1;
     private byte remindLaunchTimes = (byte) 1;
-    /**
-     * Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period
-     */
+    /** Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period */
     private short dialogLaunchTimes = Short.MAX_VALUE;
-    // Weak ref to avoid leaking the context
+    // Weak reference to avoid leaking the context
     private WeakReference<Dialog> dialog = null;
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
@@ -381,8 +377,15 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * Sets DialogManager.Factory.
+     *
+     * @param dialogManagerFactory DialogManager.Factory object, default is DefaultDialogManager.Factory object
+     */
     @SuppressWarnings("unused")
     public AppRate setDialogManagerFactory(DialogManager.Factory dialogManagerFactory) {
+        dialogManagerFactory.clearDialogManager();
+        this.dialogManagerFactory.clearDialogManager();
         this.dialogManagerFactory = dialogManagerFactory;
         return this;
     }

@@ -45,8 +45,6 @@ import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>DefaultDialogManager Class - default dialog manager class implements
  * DialogManager interface of the AndroidRate library. You can extends it and use
  * {@code AppRate.with(this).setDialogManagerFactory(DialogManager.Factory)]}
@@ -54,10 +52,10 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
  * DefaultDialogManager Class is thread-safe and a fast singleton implementation
  * inside library, not outside (protected, not private constructor).</p>
  *
+ * @since    1.0.2
+ * @version  1.1.9
  * @author   Alexander Savin
  * @author   Antoine Vianey
- * @version  1.1.9
- * @since    1.0.2
  */
 
 public class DefaultDialogManager implements DialogManager {
@@ -272,20 +270,33 @@ public class DefaultDialogManager implements DialogManager {
     }
 
     /**
-     * <p>AndroidRate is a library to help you promote your Android app
-     * by prompting users to rate the app after using it for a few days.</p>
      * <p>DefaultDialogManager.Factory Class - default dialog manager factory class implements
      * DialogManager.Factory interface of the AndroidRate library. You can extends it
      * and use {@code AppRate.with(this).setDialogManagerFactory(DialogManager.Factory)]}
      * if you want to use fully custom dialog (from support library etc.)</p>
      *
+     * @since    1.0.2
+     * @version  1.1.9
      * @author   Alexander Savin
      * @author   Antoine Vianey
-     * @version  1.1.9
-     * @since    1.0.2
      */
 
     static class Factory implements DialogManager.Factory {
+
+        Factory() {
+            if (singleton != null) {
+                singleton = null;
+            }
+        }
+
+        /** Clear DefaultDialogManager singleton */
+        @Override
+        public void clearDialogManager() {
+            if (singleton != null) {
+                singleton = null;
+            }
+        }
+
         @Override
         public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
             if (singleton == null) {
@@ -298,5 +309,4 @@ public class DefaultDialogManager implements DialogManager {
             return singleton;
         }
     }
-
 }
