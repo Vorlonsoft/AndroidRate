@@ -6,6 +6,7 @@
 
 package com.vorlonsoft.android.rate;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 
 import androidx.annotation.IntDef;
@@ -13,14 +14,12 @@ import androidx.annotation.IntDef;
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>StoreType Class - store type class of the AndroidRate library.</p>
  *
+ * @since    1.0.0
+ * @version  1.1.9
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
- * @version  1.1.9
- * @since    1.0.0
  */
 
 public final class StoreType {
@@ -56,6 +55,7 @@ public final class StoreType {
     }
 
     @SuppressWarnings("WeakerAccess")
+    @Documented
     @Retention(SOURCE)
     @IntDef({
             AMAZON,
@@ -72,6 +72,7 @@ public final class StoreType {
     }
 
     @SuppressWarnings("WeakerAccess")
+    @Documented
     @Retention(SOURCE)
     @IntDef({
             APPLE,
@@ -81,6 +82,7 @@ public final class StoreType {
     }
 
     @SuppressWarnings("WeakerAccess")
+    @Documented
     @Retention(SOURCE)
     @IntDef({
             AMAZON,

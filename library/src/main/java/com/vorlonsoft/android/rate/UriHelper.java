@@ -23,14 +23,12 @@ import static com.vorlonsoft.android.rate.StoreType.TENCENT;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>UriHelper Class - uri helper class of the AndroidRate library.</p>
  *
+ * @since    0.1.3
+ * @version  1.1.9
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
- * @version  1.1.9
- * @since    0.1.3
  */
 
 final class UriHelper {

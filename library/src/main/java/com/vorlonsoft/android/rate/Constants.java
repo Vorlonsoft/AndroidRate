@@ -1,13 +1,11 @@
 package com.vorlonsoft.android.rate;
 
 /**
- * <p>AndroidRate is a library to help you promote your Android app
- * by prompting users to rate the app after using it for a few days.</p>
  * <p>Constants Class - constants class of the AndroidRate library.</p>
  *
- * @author   Alexander Savin
- * @version  1.1.9
  * @since    1.1.8
+ * @version  1.1.9
+ * @author   Alexander Savin
  */
 
 final class Constants {
@@ -17,13 +15,11 @@ final class Constants {
     }
 
     /**
-     * <p>AndroidRate is a library to help you promote your Android app
-     * by prompting users to rate the app after using it for a few days.</p>
      * <p>Constants.Date Class - date constants class of the AndroidRate library.</p>
      *
-     * @author   Alexander Savin
-     * @version  1.1.9
      * @since    1.1.8
+     * @version  1.1.9
+     * @author   Alexander Savin
      */
 
     final static class Date {
@@ -38,13 +34,11 @@ final class Constants {
     }
 
     /**
-     * <p>AndroidRate is a library to help you promote your Android app
-     * by prompting users to rate the app after using it for a few days.</p>
      * <p>Constants.Utils Class - utils constants class of the AndroidRate library.</p>
      *
-     * @author   Alexander Savin
-     * @version  1.1.9
      * @since    1.1.8
+     * @version  1.1.9
+     * @author   Alexander Savin
      */
 
     final static class Utils {
