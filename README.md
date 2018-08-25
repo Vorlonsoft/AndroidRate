@@ -1,38 +1,39 @@
-![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)
+[![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#)
 
 AndroidRate
+[![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://github.com/Vorlonsoft/AndroidRate/releases)
 ===========
 
 AndroidRate is a library to help you promote your Android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
 
-![AndroidRate animated screenshots](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/screenshots/screenshots_360x640.gif)
+[![AndroidRate animated screenshots](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/screenshots/screenshots_360x640.gif)](#)
 
 ## Install
 
-You can download from Maven Central.
+You can download library files from JCenter, Maven Central or GitHub.
 
-$latestVersion is ![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.vorlonsoft/androidrate/badge.svg?style=plastic)
+`latestVersion` is [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://github.com/Vorlonsoft/AndroidRate/releases)
 
-Gradle
+Add the following in your app's `build.gradle` file:
+
 ```groovy
 dependencies {
-  implementation 'com.vorlonsoft:androidrate:$latestVersion'
+    implementation "com.vorlonsoft:androidrate:${latestVersion}"
 }
 ```
 
 ## Usage
 
-### Simple Configuration
+### Minimal Configuration
 
 ```java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_main);
 
   AppRate.with(this)
       .setInstallDays((byte) 0)           // default 10, 0 means install day
-      .setLaunchTimes((byte) 3)           // default 10
+      .setLaunchTimes((byte) 3)           // default 10, 3 means app is launched more than 3 times
       .monitor();
 
   AppRate.showRateDialogIfMeetsConditions(this);
@@ -41,13 +42,12 @@ protected void onCreate(Bundle savedInstanceState) {
 
 ### Configuration
 
-AndroidRate provides methods to configure its behavior.
+AndroidRate library provides methods to configure its behavior.
 
 ```java
 @Override
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_main);
 
   AppRate.with(this)
       .setStoreType(StoreType.GOOGLEPLAY) /* default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
