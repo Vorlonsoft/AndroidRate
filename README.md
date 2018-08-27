@@ -1,16 +1,39 @@
-[![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#)
+[![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#) [![Get automatic notifications about new "AndroidRate library" versions](https://www.bintray.com/docs/images/bintray_badge_color.png)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate?source=watch)
 
-# AndroidRate [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://github.com/Vorlonsoft/AndroidRate/releases)
+# AndroidRate [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AndroidRate-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7084) [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate/_latestVersion)
 
 AndroidRate is a library to help you promote your Android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
 
 [![AndroidRate animated screenshots](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/screenshots/screenshots_360x640.gif)](#)
 
+## Contents
+
+* [Install](#install)
+* [Usage](#usage)
+  * [Minimal Configuration](#minimal-configuration)
+  * [Configuration](#configuration)
+  * [Custom event requirements](#optional-custom-event-requirements)
+  * [Clear show dialog flag](#clear-show-dialog-flag)
+  * [Forced Rate Dialog](#forced-display-of-the-rate-dialog)
+  * [Custom view](#set-custom-view)
+  * [Custom theme](#specific-theme)
+  * [Custom dialog labels](#custom-dialog-labels)
+  * [Appstores](#appstores)
+  * [Сustom Intents](#custom-intents)
+  * [Availability of Google Play](#check-the-availability-of-google-play)
+* [Languages](#languages)
+* [Supported APIs](#supported-apis)
+* [Sample](#sample)
+* [Javadoc documentation](#javadoc-documentation)
+* [Already in use](#already-in-use-in-following-apps)
+* [Contribute](#contribute)
+* [License](#license)
+
 ## Install
 
 You can download library files from JCenter, Maven Central or GitHub.
 
-`latestVersion` is [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://github.com/Vorlonsoft/AndroidRate/releases)
+`latestVersion` is [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate/_latestVersion)
 
 Add the following in your app's `build.gradle` file:
 
@@ -30,8 +53,9 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
 
   AppRate.with(this)
-      .setInstallDays((byte) 0)           // default 10, 0 means install day
+      .setInstallDays((byte) 0)           // default 10, 0 means install day, 10 means app is launched more than 10 days later than installation
       .setLaunchTimes((byte) 3)           // default 10, 3 means app is launched more than 3 times
+      .setRemindInterval((byte) 1)        // default 1, 1 means app is launched more than 1 day after neutral button clicked
       .monitor();
 
   AppRate.showRateDialogIfMeetsConditions(this);
@@ -59,44 +83,34 @@ protected void onCreate(Bundle savedInstanceState) {
       .setRemindInterval((byte) 2)        // default 1
       .setRemindLaunchTimes((byte) 2)     // default 1 (each launch)
       .setShowLaterButton(true)           // default true
+      .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences within a 365-day period
       .setDebug(false)                    // default false
-      /* Java 8+ start */
-      .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which)))
-      /* Java 8+ end */
-      /* Java 7- start */
-      //.setOnClickButtonListener(new OnClickButtonListener() { // callback listener.
-      //    @Override
-      //    public void onClickButton(final byte which) {
-      //        Log.d(MainActivity.class.getName(), Byte.toString(which));
-      //    }
-      //})
-      /* Java 7- end */
+      .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which))) // Java 8+, change for Java 7-
       .monitor();
 
   if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) {
-      // Check that Google Play is available
-      if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
-          // Show a dialog if meets conditions
-          AppRate.showRateDialogIfMeetsConditions(this);
+      if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) { // Check that Google Play is available
+          AppRate.showRateDialogIfMeetsConditions(this); // Show a dialog if meets conditions
       }
   } else {
-      // Show a dialog if meets conditions
-      AppRate.showRateDialogIfMeetsConditions(this);
+      AppRate.showRateDialogIfMeetsConditions(this); // Show a dialog if meets conditions
   }
 }
 ```
 
 The default conditions to show rate dialog is as below:
 
-1. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(byte)`.
-2. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
-3. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
-4. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(byte)`.
-5. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
-6. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
-7. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
+1. Google Play is launched when the positive button is pressed. Change via `AppRate#setStoreType(int)`.
+2. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(byte)`.
+3. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
+4. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
+5. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(byte)`.
+6. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
+7. Maximum number of the display of the dialog within a 365-day period is less than 3. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
+8. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
+9. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
 
-### Optional custom event requirements for showing dialog
+### Optional custom event requirements
 
 You can add additional optional requirements for showing dialog. Each requirement can be added/referenced as a unique string. You can set a minimum count for each such event (for e.g. "action_performed" 3 times, "button_clicked" 5 times, etc.)
 
@@ -114,9 +128,9 @@ When you want to show the dialog again, call `AppRate#clearAgreeShowDialog()`.
 AppRate.with(this).clearAgreeShowDialog();
 ```
 
-### When the button presses on
+### Forced display of the Rate Dialog
 
-Call `AppRate#showRateDialog(Activity)`.
+Use this method directly if you want to force display of the Rate Dialog, for example when some button presses on. Call `AppRate#showRateDialog(Activity)`.
 
 ```java
 AppRate.with(this).showRateDialog(this);
@@ -140,7 +154,7 @@ You can use a specific theme to inflate the dialog.
 AppRate.with(this).setThemeResId(int);
 ```
 
-### Custom dialog
+### Custom dialog labels
 
 If you want to use your own dialog labels, override string xml resources on your application.
 
@@ -208,7 +222,7 @@ AppRate.with(this).setStoreType(StoreType.CHINESESTORES);
 AppRate.with(this).setStoreType(String...);
 ```
 
-### Сustom Intents
+### Custom Intents
 
 You can set custom action to the Rate button. For example, you want to open your custom RateActivity when the Rate button clicked.
 
@@ -227,13 +241,7 @@ if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != C
 }
 ```
 
-### Maximum number of the display of the dialog within a 365-day period
-
-```java
-AppRate.with(this).set365DayPeriodMaxNumberDialogLaunchTimes(short);
-```
-
-## Language
+## Languages
 
 AndroidRate currently supports the following languages:
 
@@ -274,9 +282,9 @@ AndroidRate currently supports the following languages:
 - Ukrainian
 - Vietnamese
 
-## Support
+## Supported APIs
 
-AndroidRate supports API level 9 and up.
+AndroidRate library supports API level 9 and up.
 
 ## Sample
 
