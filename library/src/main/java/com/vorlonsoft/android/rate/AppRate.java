@@ -96,7 +96,7 @@ public final class AppRate {
     }
 
     /**
-     * <p>Shows rate dialog when meets conditions.</p>
+     * <p>Shows the Rate Dialog when conditions are met.</p>
      * <p>Call this method at the end of your onCreate() method to determine whether
      * to show the rate dialog or not. It will check if the conditions are met and
      * show rate dialog if yes.</p>
@@ -340,7 +340,10 @@ public final class AppRate {
     }
 
     /**
-     * Gets the currently set Store
+     * <p>Gets the app store type from library options.</p>
+     * <p>NOTE: this method doesn't get an app store type from user's device.</p>
+     *
+     * @return one of the values defined by {@link StoreType.AnyStoreType}
      */
     @StoreType.AnyStoreType
     public int getStoreType() {
@@ -391,8 +394,8 @@ public final class AppRate {
     }
 
     /**
-     * Monitor launch times.<br />
-     * Call this method when the launcher activity's onCreate() is launched.
+     * <p>Monitors app launch times.</p>
+     * <p>Call this method when the launcher activity's onCreate() is launched.</p>
      */
     public void monitor() {
         if (isFirstLaunch(context)) {
