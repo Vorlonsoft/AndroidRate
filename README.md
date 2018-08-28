@@ -1,6 +1,6 @@
 [![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#) [![Get automatic notifications about new "AndroidRate library" versions](https://www.bintray.com/docs/images/bintray_badge_color.png)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate?source=watch)
 
-# AndroidRate [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AndroidRate-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7084) [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate/_latestVersion)
+# AndroidRate [![Build Status](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/build-status_90x20.png)](#) [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate/_latestVersion) [![Supported APIs](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/api_54x20.png)](#) [![Android Arsenal](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/android-arsenal_174x20.png)](#)
 
 AndroidRate is a library to help you promote your Android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
 
@@ -10,7 +10,6 @@ AndroidRate is a library to help you promote your Android app by prompting users
 
 * [Install](#install)
 * [Usage](#usage)
-  * [Minimal Configuration](#minimal-configuration)
   * [Configuration](#configuration)
   * [Custom event requirements](#optional-custom-event-requirements)
   * [Clear show dialog flag](#clear-show-dialog-flag)
@@ -19,13 +18,12 @@ AndroidRate is a library to help you promote your Android app by prompting users
   * [Custom theme](#specific-theme)
   * [Custom dialog labels](#custom-dialog-labels)
   * [Appstores](#appstores)
-  * [Сustom Intents](#custom-intents)
-  * [Availability of Google Play](#check-the-availability-of-google-play)
-* [Languages](#languages)
-* [Supported APIs](#supported-apis)
+  * [Сustom intents](#custom-intents)
+  * [Check for Google Play](#check-for-google-play)
 * [Sample](#sample)
-* [Javadoc documentation](#javadoc-documentation)
-* [Already in use](#already-in-use-in-following-apps)
+* [Javadoc Documentation](#javadoc-documentation)
+* [Supported Languages](#supported-languages)
+* [Already in Use](#already-in-use)
 * [Contribute](#contribute)
 * [License](#license)
 
@@ -45,7 +43,27 @@ dependencies {
 
 ## Usage
 
-### Minimal Configuration
+### Configuration
+
+AndroidRate library provides methods to configure it's behavior. Select the type of configuration that best describes your needs.
+
+#### Nano configuration
+
+Uses library's defaults.
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+
+  AppRate.with(this).monitor();                  // Monitors app launch times
+  AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
+}
+```
+
+#### Micro configuration
+
+Configures basic library behavior only.
 
 ```java
 @Override
@@ -53,18 +71,17 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
 
   AppRate.with(this)
-      .setInstallDays((byte) 0)           // default 10, 0 means install day, 10 means app is launched more than 10 days later than installation
-      .setLaunchTimes((byte) 3)           // default 10, 3 means app is launched more than 3 times
-      .setRemindInterval((byte) 1)        // default 1, 1 means app is launched more than 1 day after neutral button clicked
-      .monitor();
-
-  AppRate.showRateDialogIfMeetsConditions(this);
+      .setInstallDays((byte) 0)                  // default 10, 0 means install day, 10 means app is launched more than 10 days later than installation
+      .setLaunchTimes((byte) 3)                  // default 10, 3 means app is launched after app launched 3 or more times
+      .setRemindInterval((byte) 1)               // default 1, 1 means app is launched more than 1 day after neutral button clicked
+      .monitor();                                // Monitors app launch times
+  AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
 }
 ```
 
-### Configuration
+#### Standard configuration
 
-AndroidRate library provides methods to configure its behavior.
+The choice of most corporate developers.
 
 ```java
 @Override
@@ -86,14 +103,14 @@ protected void onCreate(Bundle savedInstanceState) {
       .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences within a 365-day period
       .setDebug(false)                    // default false
       .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which))) // Java 8+, change for Java 7-
-      .monitor();
+      .monitor();                         // Monitors app launch times
 
-  if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) {
-      if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) { // Check that Google Play is available
-          AppRate.showRateDialogIfMeetsConditions(this); // Show a dialog if meets conditions
+  if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) { // Checks that current app store type from library options is StoreType.GOOGLEPLAY
+      if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) { // Checks that Google Play is available
+          AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
       }
   } else {
-      AppRate.showRateDialogIfMeetsConditions(this); // Show a dialog if meets conditions
+      AppRate.showRateDialogIfMeetsConditions(this);     // Shows the Rate Dialog when conditions are met
   }
 }
 ```
@@ -102,7 +119,7 @@ The default conditions to show rate dialog is as below:
 
 1. Google Play is launched when the positive button is pressed. Change via `AppRate#setStoreType(int)`.
 2. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(byte)`.
-3. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
+3. App launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
 4. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
 5. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(byte)`.
 6. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
@@ -222,7 +239,7 @@ AppRate.with(this).setStoreType(StoreType.CHINESESTORES);
 AppRate.with(this).setStoreType(String...);
 ```
 
-### Custom Intents
+### Custom intents
 
 You can set custom action to the Rate button. For example, you want to open your custom RateActivity when the Rate button clicked.
 
@@ -233,7 +250,9 @@ You can set custom action to the Rate button. For example, you want to open your
 AppRate.with(this).setStoreType(Intent...);
 ```
 
-### Check the availability of Google Play
+### Check for Google Play
+
+The following code checks that Google Play is available on the user's device. We recommend to use it if current app store type from library options is StoreType.GOOGLEPLAY.
 
 ```java
 if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
@@ -241,9 +260,17 @@ if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != C
 }
 ```
 
-## Languages
+## Sample
 
-AndroidRate currently supports the following languages:
+Clone this repo and check out the [sample](https://github.com/Vorlonsoft/AndroidRate/tree/master/sample) module.
+
+## Javadoc Documentation
+
+See generated javadoc [AndroidRate documentation](https://vorlonsoft.github.io/AndroidRate/javadoc/).
+
+## Supported Languages
+
+AndroidRate library currently supports the following 37 languages:
 
 - Albanian
 - Arabic
@@ -282,19 +309,9 @@ AndroidRate currently supports the following languages:
 - Ukrainian
 - Vietnamese
 
-## Supported APIs
+## Already in Use
 
-AndroidRate library supports API level 9 and up.
-
-## Sample
-
-Please try to move the [sample](https://github.com/Vorlonsoft/AndroidRate/tree/master/sample).
-
-## Javadoc documentation
-
-See [AndroidRate documentation](https://vorlonsoft.github.io/AndroidRate/javadoc/)
-
-## Already in use in following apps
+AndroidRate library already in use in following apps:
 
 * [I Love You Free Edition](https://play.google.com/store/apps/details?id=com.vorlonsoft.iloveyou)
 
@@ -304,11 +321,11 @@ See [AndroidRate documentation](https://vorlonsoft.github.io/AndroidRate/javadoc
 
 ## Contribute
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Added some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1. Fork it.
+2. Create your feature branch (`git checkout -b my-new-feature`).
+3. Commit your changes (`git commit -am 'Added some feature'`).
+4. Push to the branch (`git push origin my-new-feature`).
+5. Create new Pull Request.
 
 ## License
 
