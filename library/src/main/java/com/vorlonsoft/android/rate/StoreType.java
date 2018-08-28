@@ -22,33 +22,46 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * @author   Shintaro Katafuchi
  */
 
-public final class StoreType {
+public class StoreType {
+    /** Amazon Appstore */
     @SuppressWarnings("WeakerAccess")
-    public static final int AMAZON = 0;               // Amazon Appstore
+    public static final int AMAZON = 0;
+    /** Apple App Store */
     @SuppressWarnings("WeakerAccess")
-    public static final int APPLE = 1;                // Apple App Store
+    public static final int APPLE = 1;
+    /** Cafe Bazaar */
     @SuppressWarnings("WeakerAccess")
-    public static final int BAZAAR = 2;               // Cafe Bazaar
+    public static final int BAZAAR = 2;
+    /** BlackBerry World */
     @SuppressWarnings("WeakerAccess")
-    public static final int BLACKBERRY = 3;           // BlackBerry World
+    public static final int BLACKBERRY = 3;
+    /** 19 chinese app stores */
     @SuppressWarnings("WeakerAccess")
-    public static final int CHINESESTORES = 4;        // 19 chinese app stores
+    public static final int CHINESESTORES = 4;
+    /** Google Play */
     @SuppressWarnings("WeakerAccess")
-    public static final int GOOGLEPLAY = 5;           // Google Play
+    public static final int GOOGLEPLAY = 5;
+    /** Mi Appstore (Xiaomi Market) */
     @SuppressWarnings("WeakerAccess")
-    public static final int MI = 6;                   // Mi Appstore (Xiaomi Market)
+    public static final int MI = 6;
+    /** Samsung Galaxy Apps */
     @SuppressWarnings("WeakerAccess")
-    public static final int SAMSUNG = 7;              // Samsung Galaxy Apps
+    public static final int SAMSUNG = 7;
+    /** SlideME Marketplace */
     @SuppressWarnings("WeakerAccess")
-    public static final int SLIDEME = 8;              // SlideME Marketplace
+    public static final int SLIDEME = 8;
+    /** Tencent App Store */
     @SuppressWarnings("WeakerAccess")
-    public static final int TENCENT = 9;              // Tencent App Store
+    public static final int TENCENT = 9;
+    /** Yandex.Store */
     @SuppressWarnings("WeakerAccess")
-    public static final int YANDEX = 10;              // Yandex.Store
+    public static final int YANDEX = 10;
+    /** Any custom intents */
     @SuppressWarnings("WeakerAccess")
-    public static final int INTENT = 11;              // Any custom intents
+    public static final int INTENT = 11;
+    /** Any Other Store */
     @SuppressWarnings("WeakerAccess")
-    public static final int OTHER = 12;               // Any Other Store
+    public static final int OTHER = 12;
 
     private StoreType() {
         throw new AssertionError();
