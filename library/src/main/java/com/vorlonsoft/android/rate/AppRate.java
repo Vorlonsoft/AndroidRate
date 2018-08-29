@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.HashMap;
@@ -68,8 +69,7 @@ public final class AppRate {
     private byte selectedAppLaunches = (byte) 1;
     /** Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period */
     private short dialogLaunchTimes = Short.MAX_VALUE;
-    // Weak reference to avoid leaking the context
-    private WeakReference<Dialog> dialog = null;
+    private Reference<Dialog> dialog = null;
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
     {
@@ -121,9 +121,13 @@ public final class AppRate {
     }
 
     /**
-     * Clear dialog weak reference
+     * <p>Clears weak reference dialog object. Invoking this method will not cause this
+     * object to be enqueued.</p>
+     *
+     * <p>This method is invoked only by Java code; when the garbage collector
+     * clears references it does so directly, without invoking this method.</p>
      */
-    void clearDialog() {
+    void clearRateDialog() {
         if (dialog != null) {
             dialog.clear();
         }
@@ -479,39 +483,45 @@ public final class AppRate {
     }
 
     /**
-     * Call this method directly if you want to force the rate dialog, useful for testing purposes
+     * <p>Call this method directly if you want to force display of the Rate Dialog.</p>
+     * <p>Call it when some button presses on. Method also useful for testing purposes.</p>
      *
      * @param activity your activity, use "this" in most cases
      */
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
         dismissRateDialog();
-        if (!activity.isFinishing()) {
-            dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
-            if (dialog.get() != null) {
-                try {
+        dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
+        if (dialog.get() != null) {
+            try {
+                if (!activity.isFinishing()) {
                     dialog.get().show();
-                } catch(Exception e){
-                    Log.w(TAG, "Failed to rate app, can't show rate dialog");
+                } else {
+                    Log.w(TAG, "Failed to rate app, can't show rate dialog, because activity is in the process of finishing");
                 }
-            } else {
-                Log.w(TAG, "Failed to rate app, can't create rate dialog");
+            } catch(Exception e){
+                Log.w(TAG, "Failed to rate app, can't show rate dialog, because unpredictable exception", e);
             }
         } else {
-            Log.w(TAG, "Failed to rate app, can't create rate dialog, because activity is in the process of finishing");
-        }
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public void dismissRateDialog() {
-        if ((dialog != null) && (dialog.get() != null)) {
-            dialog.get().dismiss();
-            clearDialog();
+            Log.w(TAG, "Failed to rate app, can't create rate dialog");
         }
     }
 
     /**
-     * Call this method directly to go straight to store listing for rating
+     * <p>Dismisses Rate Dialog, removing it from the screen, and
+     * clears weak reference dialog object.</p>
+     * <p>This method can be invoked safely from any thread.</p>
+     */
+    @SuppressWarnings("WeakerAccess")
+    public void dismissRateDialog() {
+        if ((dialog != null) && (dialog.get() != null)) {
+            dialog.get().dismiss();
+        }
+        clearRateDialog();
+    }
+
+    /**
+     * <p>Call this method directly if you want to send a user to rate your app right in the app store.</p>
      *
      * @param activity your activity, use "this" in most cases
      */
@@ -521,18 +531,24 @@ public final class AppRate {
             Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
             if (positiveButton != null) {
                 positiveButton.performClick();
+                dismissRateDialog();
+            } else {
+                Log.w(TAG, "Failed to rate app, can't get dialog positive button");
             }
         } else {
+            clearRateDialog();
             dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
             if (dialog.get() != null) {
                 Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
                 if (positiveButton != null) {
                     positiveButton.performClick();
+                } else {
+                    Log.w(TAG, "Failed to rate app, can't get dialog positive button");
                 }
-                clearDialog();
             } else {
                 Log.w(TAG, "Failed to rate app, can't create rate dialog");
             }
+            clearRateDialog();
         }
     }
 
