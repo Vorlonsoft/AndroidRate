@@ -19,6 +19,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+
 import androidx.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
@@ -59,8 +62,7 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
  */
 
 public class DefaultDialogManager implements DialogManager {
-    @SuppressLint("StaticFieldLeak")
-    private static volatile DefaultDialogManager singleton = null;
+    private static volatile Reference<DefaultDialogManager> singleton = null;
     private final Context context;
     private final DialogOptions dialogOptions;
     private final StoreOptions storeOptions;
@@ -285,7 +287,7 @@ public class DefaultDialogManager implements DialogManager {
 
         Factory() {
             if (singleton != null) {
-                singleton = null;
+                singleton.clear();
             }
         }
 
@@ -293,20 +295,23 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void clearDialogManager() {
             if (singleton != null) {
-                singleton = null;
+                singleton.clear();
             }
         }
 
         @Override
         public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
-            if (singleton == null) {
+            if ((singleton == null) || (singleton.get() == null)) {
                 synchronized (DefaultDialogManager.class) {
-                    if (singleton == null) {
-                        singleton = new DefaultDialogManager(context, dialogOptions, storeOptions);
+                    if ((singleton == null) || (singleton.get() == null)) {
+                        if (singleton != null) {
+                            singleton.clear();
+                        }
+                        singleton = new WeakReference<>(new DefaultDialogManager(context, dialogOptions, storeOptions));
                     }
                 }
             }
-            return singleton;
+            return singleton.get();
         }
     }
 }
