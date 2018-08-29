@@ -14,6 +14,7 @@ AndroidRate is a library to help you promote your Android app by prompting users
   * [Custom event requirements](#optional-custom-event-requirements)
   * [Clear show dialog flag](#clear-show-dialog-flag)
   * [Forced Rate Dialog](#forced-display-of-the-rate-dialog)
+  * [Forced dismiss of the Dialog](#forced-dismiss-of-the-rate-dialog)
   * [Custom view](#set-custom-view)
   * [Custom theme](#specific-theme)
   * [Custom dialog labels](#custom-dialog-labels)
@@ -71,9 +72,9 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
 
   AppRate.with(this)
-      .setInstallDays((byte) 0)                  // default is 10, 0 means install day, 10 means app is launched more than 10 days later than installation
-      .setLaunchTimes((byte) 3)                  // default is 10, 3 means app is launched after app launched 3 or more times
-      .setRemindInterval((byte) 1)               // default is 1, 1 means app is launched more than 1 day after neutral button clicked
+      .setInstallDays((byte) 0)                  // default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
+      .setLaunchTimes((byte) 3)                  // default is 10, 3 means app is launched 3 or more times
+      .setRemindInterval((byte) 1)               // default is 1, 1 means app is launched 1 or more days after neutral button clicked
       .monitor();                                // Monitors app launch times
   AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
 }
@@ -96,9 +97,9 @@ protected void onCreate(Bundle savedInstanceState) {
                                            *         setStoreType(APPLE, long) (Apple App Store, long - your application ID),
                                            *         setStoreType(String...) (Any other store/stores, String... - an URI or array of URIs to your app) and
                                            *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
-      .setInstallDays((byte) 0)           // default is 10, 0 means install day, 10 means app is launched more than 10 days later than installation
-      .setLaunchTimes((byte) 3)           // default is 10, 3 means app is launched more than 3 times
-      .setRemindInterval((byte) 1)        // default is 1, 1 means app is launched more than 1 day after neutral button clicked
+      .setInstallDays((byte) 0)           // default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
+      .setLaunchTimes((byte) 3)           // default is 10, 3 means app is launched 3 or more times
+      .setRemindInterval((byte) 1)        // default is 1, 1 means app is launched 1 or more days after neutral button clicked
       .setRemindLaunchTimes((byte) 1)     // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
       .setShowLaterButton(true)           // default is true
       .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences within a 365-day period
@@ -119,9 +120,9 @@ protected void onCreate(Bundle savedInstanceState) {
 Default options of the Rate Dialog are as below:
 
 1. Google Play launches when you press the positive button. Change via `AppRate#setStoreType(int)`, `AppRate#setStoreType(int, long)`, `AppRate#setStoreType(String...)` or `AppRate#setStoreType(Intent...)`.
-2. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(byte)`.
-3. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
-4. App is launched more than 1 day after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
+2. App is launched 10 or more days later than installation. Change via `AppRate#setInstallDays(byte)`.
+3. App is launched 10 or more times. Change via `AppRate#setLaunchTimes(byte)`.
+4. App is launched 1 or more days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
 5. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setRemindLaunchTimes(byte)`.
 6. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
 7. Maximum number of the display of the dialog within a 365-day period is less than 3. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
@@ -148,10 +149,18 @@ AppRate.with(this).clearAgreeShowDialog();
 
 ### Forced display of the Rate Dialog
 
-Use this method directly if you want to force display of the Rate Dialog, for example when some button presses on. Call `AppRate#showRateDialog(Activity)`.
+Use this method directly if you want to force display of the Rate Dialog. Call it when some button presses on. Method also useful for testing purposes. Call `AppRate#showRateDialog(Activity)`.
 
 ```java
 AppRate.with(this).showRateDialog(this);
+```
+
+### Forced dismiss of the Rate Dialog
+
+Use this method directly if you want to remove the Rate Dialog from the screen. Call `AppRate#dismissRateDialog()`.
+
+```java
+AppRate.with(this).dismissRateDialog();
 ```
 
 ### Set custom view
