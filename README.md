@@ -71,9 +71,9 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
 
   AppRate.with(this)
-      .setInstallDays((byte) 0)                  // default 10, 0 means install day, 10 means app is launched more than 10 days later than installation
-      .setLaunchTimes((byte) 3)                  // default 10, 3 means app is launched after app launched 3 or more times
-      .setRemindInterval((byte) 1)               // default 1, 1 means app is launched more than 1 day after neutral button clicked
+      .setInstallDays((byte) 0)                  // default is 10, 0 means install day, 10 means app is launched more than 10 days later than installation
+      .setLaunchTimes((byte) 3)                  // default is 10, 3 means app is launched after app launched 3 or more times
+      .setRemindInterval((byte) 1)               // default is 1, 1 means app is launched more than 1 day after neutral button clicked
       .monitor();                                // Monitors app launch times
   AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
 }
@@ -89,19 +89,20 @@ protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
 
   AppRate.with(this)
-      .setStoreType(StoreType.GOOGLEPLAY) /* default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
+      .setStoreType(StoreType.GOOGLEPLAY) /* default is GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
                                            *         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
                                            *         SLIDEME (SlideME Marketplace), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
                                            *         setStoreType(BLACKBERRY, long) (BlackBerry World, long - your application ID),
-                                           *         setStoreType(APPLE, long) (Apple App Store, long - your application ID) and
-                                           *         setStoreType(String) (Any other store, String - a full URI to your app) */
-      .setInstallDays((byte) 0)           // default 10, 0 means install day
-      .setLaunchTimes((byte) 3)           // default 10
-      .setRemindInterval((byte) 2)        // default 1
-      .setRemindLaunchTimes((byte) 2)     // default 1 (each launch)
-      .setShowLaterButton(true)           // default true
-      .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences within a 365-day period
-      .setDebug(false)                    // default false
+                                           *         setStoreType(APPLE, long) (Apple App Store, long - your application ID),
+                                           *         setStoreType(String...) (Any other store/stores, String... - an URI or array of URIs to your app) and
+                                           *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
+      .setInstallDays((byte) 0)           // default is 10, 0 means install day, 10 means app is launched more than 10 days later than installation
+      .setLaunchTimes((byte) 3)           // default is 10, 3 means app is launched more than 3 times
+      .setRemindInterval((byte) 1)        // default is 1, 1 means app is launched more than 1 day after neutral button clicked
+      .setRemindLaunchTimes((byte) 1)     // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
+      .setShowLaterButton(true)           // default is true
+      .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences within a 365-day period
+      .setDebug(false)                    // default is false
       .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which))) // Java 8+, change for Java 7-
       .monitor();                         // Monitors app launch times
 
@@ -115,13 +116,13 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-The default conditions to show rate dialog is as below:
+Default options of the Rate Dialog are as below:
 
-1. Google Play is launched when the positive button is pressed. Change via `AppRate#setStoreType(int)`.
+1. Google Play launches when you press the positive button. Change via `AppRate#setStoreType(int)`, `AppRate#setStoreType(int, long)`, `AppRate#setStoreType(String...)` or `AppRate#setStoreType(Intent...)`.
 2. App is launched more than 10 days later than installation. Change via `AppRate#setInstallDays(byte)`.
-3. App launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
-4. App is launched more than 1 days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
-5. App is launched X times and X % 1 = 0. Change via `AppRate#setRemindLaunchTimes(byte)`.
+3. App is launched more than 10 times. Change via `AppRate#setLaunchTimes(byte)`.
+4. App is launched more than 1 day after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
+5. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setRemindLaunchTimes(byte)`.
 6. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
 7. Maximum number of the display of the dialog within a 365-day period is less than 3. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
 8. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
@@ -241,10 +242,10 @@ AppRate.with(this).setStoreType(String...);
 
 ### Custom intents
 
-You can set custom action to the Rate button. For example, you want to open your custom RateActivity when the Rate button clicked.
+You can set custom action to the Positive button. For example, you want to open your custom RateActivity when the Rate button clicked.
 
 ```java
-/* Any custom intents, Intent... - intent or array of intents,
+/* Any custom intent/intents, Intent... - an intent or array of intents,
  * first will be executed (startActivity(intents[0])), if first fails,
  * second will be executed (startActivity(intents[1])), etc. */
 AppRate.with(this).setStoreType(Intent...);
