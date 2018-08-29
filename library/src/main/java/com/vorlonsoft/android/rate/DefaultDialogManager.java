@@ -108,7 +108,7 @@ public class DefaultDialogManager implements DialogManager {
     protected final DialogInterface.OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
         @Override
         public void onDismiss(DialogInterface dialog) {
-            AppRate.with(context).clearDialog();
+            AppRate.with(context).clearRateDialog();
         }
     };
     @SuppressWarnings("WeakerAccess")
