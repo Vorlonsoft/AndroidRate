@@ -146,9 +146,9 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimum number of launches until the rating dialog pops up for the first time</p>
+     * <p>Sets the minimum number of launches until the rating dialog pops up for the first time.</p>
      *
-     * @param appLaunchTimes number of launches, default is 10, 3 means app is launched more than 3 times
+     * @param appLaunchTimes number of launches, default is 10, 3 means app is launched 3 or more times
      * @return AppRate singleton object
      */
     public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte appLaunchTimes) {
@@ -159,7 +159,7 @@ public final class AppRate {
     /**
      * <p>Sets the minimum number of days until the Rating Dialog pops up for the first time.</p>
      *
-     * @param installDate number of days, default is 10, 0 means install day, 10 means app is launched more than 10 days later than installation
+     * @param installDate number of days, default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
      * @return AppRate singleton object
      */
     public AppRate setInstallDays(@SuppressWarnings("SameParameterValue") byte installDate) {
@@ -168,10 +168,10 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets number of days until the Rating Dialog pops up for the next time after
-     * neutral button clicked</p>
+     * <p>Sets minimal number of days until the Rating Dialog pops up for the next time after
+     * neutral button clicked.</p>
      *
-     * @param remindInterval number of days, default is 1, 1 means app is launched more than 1 day after neutral button clicked
+     * @param remindInterval number of days, default is 1, 1 means app is launched 1 or more days after neutral button clicked
      * @return AppRate singleton object
      */
     public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") byte remindInterval) {
@@ -205,7 +205,7 @@ public final class AppRate {
      *
      * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
      * @return AppRate singleton object
-     * @deprecated since 1.2.0, use {@link #setSelectedAppLaunches(byte)} instead
+     * @deprecated since 1.2.0, use {@link #setSelectedAppLaunches(byte)} with the same {@code param} instead
      * @see #setSelectedAppLaunches(byte)
      */
     public AppRate setRemindLaunchTimes(@SuppressWarnings("SameParameterValue") byte selectedAppLaunches) {
