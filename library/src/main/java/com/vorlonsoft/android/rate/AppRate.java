@@ -489,7 +489,11 @@ public final class AppRate {
         if (!activity.isFinishing()) {
             dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
             if (dialog.get() != null) {
-                dialog.get().show();
+                try {
+                    dialog.get().show();
+                } catch(Exception e){
+                    Log.w(TAG, "Failed to rate app, can't show rate dialog");
+                }
             } else {
                 Log.w(TAG, "Failed to rate app, can't create rate dialog");
             }
