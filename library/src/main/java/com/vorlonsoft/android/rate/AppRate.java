@@ -508,6 +508,15 @@ public final class AppRate {
     }
 
     /**
+     * <p>Checks whether the Rate Dialog is currently showing.</p>
+     *
+     * @return true if the Rate Dialog is currently showing, false otherwise.
+     */
+    public boolean isShowingRateDialog() {
+        return ((dialog != null) && (dialog.get() != null)) && dialog.get().isShowing();
+    }
+
+    /**
      * <p>Dismisses Rate Dialog, removing it from the screen, and
      * clears weak reference dialog object.</p>
      * <p>This method can be invoked safely from any thread.</p>
