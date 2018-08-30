@@ -1,4 +1,4 @@
-[![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#) [![Get automatic notifications about new "AndroidRate library" versions](https://www.bintray.com/docs/images/bintray_badge_color.png)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate?source=watch)
+[![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#)
 
 # AndroidRate [![Build Status](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/build-status_90x20.png)](#) [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate/_latestVersion) [![Supported APIs](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/api_54x20.png)](#) [![Android Arsenal](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/android-arsenal_174x20.png)](#)
 
@@ -101,8 +101,8 @@ protected void onCreate(Bundle savedInstanceState) {
       .setLaunchTimes((byte) 3)           // default is 10, 3 means app is launched 3 or more times
       .setRemindInterval((byte) 1)        // default is 1, 1 means app is launched 1 or more days after neutral button clicked
       .setRemindLaunchTimes((byte) 1)     // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
-      .setShowLaterButton(true)           // default is true
-      .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences within a 365-day period
+      .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
+      .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences of the display of the Rate Dialog within a 365-day period
       .setDebug(false)                    // default is false
       .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which))) // Java 8+, change for Java 7-
       .monitor();                         // Monitors app launch times
@@ -124,8 +124,8 @@ Default options of the Rate Dialog are as below:
 3. App is launched 10 or more times. Change via `AppRate#setLaunchTimes(byte)`.
 4. App is launched 1 or more days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
 5. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setRemindLaunchTimes(byte)`.
-6. App shows neutral dialog (Remind me later) by default. Change via `setShowLaterButton(boolean)`.
-7. Maximum number of the display of the dialog within a 365-day period is less than 3. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
+6. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
+7. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
 8. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
 9. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
 
