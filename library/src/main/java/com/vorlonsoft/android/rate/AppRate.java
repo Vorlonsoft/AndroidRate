@@ -67,7 +67,7 @@ public final class AppRate {
     private byte appLaunchTimes = (byte) 10;
     private byte remindInterval = (byte) 1;
     private byte selectedAppLaunches = (byte) 1;
-    /** Short.MAX_VALUE - unlimited occurrences of the display of the dialog within a 365-day period */
+    /** Short.MAX_VALUE means unlimited occurrences of the display of the dialog within a 365-day period */
     private short dialogLaunchTimes = Short.MAX_VALUE;
     private Reference<Dialog> dialog = null;
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
@@ -134,10 +134,13 @@ public final class AppRate {
     }
 
     /**
-     * Sets max number occurrences of the display of the dialog within a 365-day period.
-     * Set Short.MAX_VALUE for unlimited occurrences.
+     * <p>Sets the max number of occurrences of the display of the Rate Dialog within a 365-day
+     * period.</p>
      *
-     * @param dialogLaunchTimes max number of launches within a 365-day period, default is unlimited
+     * @param dialogLaunchTimes the max number of the display of the Rate Dialog within a 365-day
+     *                          period, default is {@code Short.MAX_VALUE}, {@code Short.MAX_VALUE}
+     *                          means unlimited occurrences
+     * @return AppRate singleton object
      */
     @SuppressWarnings({"unused"})
     public AppRate set365DayPeriodMaxNumberDialogLaunchTimes(short dialogLaunchTimes) {
@@ -146,9 +149,11 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimum number of launches until the rating dialog pops up for the first time.</p>
+     * <p>Sets the minimum number of launches until the rating dialog pops up for
+     * the first time.</p>
      *
-     * @param appLaunchTimes number of launches, default is 10, 3 means app is launched 3 or more times
+     * @param appLaunchTimes number of launches, default is 10, 3 means app is launched 3 or
+     *                       more times
      * @return AppRate singleton object
      */
     public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte appLaunchTimes) {
@@ -159,7 +164,8 @@ public final class AppRate {
     /**
      * <p>Sets the minimum number of days until the Rating Dialog pops up for the first time.</p>
      *
-     * @param installDate number of days, default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
+     * @param installDate number of days, default is 10, 0 means install day, 10 means app is
+     *                    launched 10 or more days later than installation
      * @return AppRate singleton object
      */
     public AppRate setInstallDays(@SuppressWarnings("SameParameterValue") byte installDate) {
@@ -171,7 +177,8 @@ public final class AppRate {
      * <p>Sets minimal number of days until the Rating Dialog pops up for the next time after
      * neutral button clicked.</p>
      *
-     * @param remindInterval number of days, default is 1, 1 means app is launched 1 or more days after neutral button clicked
+     * @param remindInterval number of days, default is 1, 1 means app is launched 1 or more days
+     *                       after neutral button clicked
      * @return AppRate singleton object
      */
     public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") byte remindInterval) {
@@ -188,9 +195,11 @@ public final class AppRate {
     //TODO update README.md when 1.2.0 released
     /**
      * <p>Selects App launches.</p>
-     * <p>Method sets divisor for division of app launches with a remainder. This condition is satisfied if {@code appLaunches % divisorAppLaunches == 0}</p>
+     * <p>Method sets divisor for division of app launches with a remainder. This condition is
+     * satisfied if {@code appLaunches % divisorAppLaunches == 0}</p>
      *
-     * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
+     * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch,
+     *                            3 means every 3rd launch, etc
      * @return AppRate singleton object
      * @since 1.2.0
      */
@@ -201,9 +210,11 @@ public final class AppRate {
 
     /**
      * <p>Selects App launches.</p>
-     * <p>Method sets divisor for division of app launches with a remainder. This condition is satisfied if {@code appLaunches % divisorAppLaunches == 0}</p>
+     * <p>Method sets divisor for division of app launches with a remainder. This condition is
+     * satisfied if {@code appLaunches % divisorAppLaunches == 0}</p>
      *
-     * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
+     * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch,
+     *                            3 means every 3rd launch, etc
      * @return AppRate singleton object
      * @deprecated since 1.2.0, use {@link #setSelectedAppLaunches(byte)} with the same {@code param} instead
      * @see #setSelectedAppLaunches(byte)
@@ -213,9 +224,10 @@ public final class AppRate {
     }
 
     /**
-     * Decides if Neutral button appear in the rating dialog or not
+     * <p>Decides whether the Neutral button ("Remind me later") appears in the Rating Dialog or
+     * not.</p>
      *
-     * @param isShowNeutralButton default is true
+     * @param isShowNeutralButton default is true, true means to show the Neutral button
      * @return AppRate singleton object
      */
     public AppRate setShowLaterButton(@SuppressWarnings("SameParameterValue") boolean isShowNeutralButton) {
@@ -340,7 +352,8 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets one of the app stores defined by {@link StoreType.StoreWithoutApplicationId} to the Positive button.</p>
+     * <p>Sets one of the app stores defined by {@link StoreType.StoreWithoutApplicationId} to
+     * the Positive button.</p>
      *
      * @param storeType one of the values defined by {@link StoreType.StoreWithoutApplicationId}
      * @return AppRate singleton object
@@ -360,7 +373,8 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets one of the app stores defined by {@link StoreType.StoreWithApplicationId} to the Positive button.</p>
+     * <p>Sets one of the app stores defined by {@link StoreType.StoreWithApplicationId} to
+     * the Positive button.</p>
      *
      * @param storeType one of the values defined by {@link StoreType.StoreWithApplicationId}
      * @param applicationId application ID in the {@code storeType} app store
@@ -460,7 +474,8 @@ public final class AppRate {
     /**
      * Sets DialogManager.Factory.
      *
-     * @param dialogManagerFactory DialogManager.Factory object, default is DefaultDialogManager.Factory object
+     * @param dialogManagerFactory DialogManager.Factory object, default is
+     *                             DefaultDialogManager.Factory object
      */
     @SuppressWarnings("unused")
     public AppRate setDialogManagerFactory(DialogManager.Factory dialogManagerFactory) {
@@ -530,7 +545,8 @@ public final class AppRate {
     }
 
     /**
-     * <p>Call this method directly if you want to send a user to rate your app right in the app store.</p>
+     * <p>Call this method directly if you want to send a user to rate your app right in the app
+     * store.</p>
      *
      * @param activity your activity, use "this" in most cases
      */
