@@ -62,12 +62,13 @@ final class PreferenceHelper {
                                                        final byte currentYear,
                                                        final short currentDay,
                                                        final short currentDayCount) {
+        // since 3rd year deletes data for the current day that older than 2 years
         if (currentYear > 1) {
             for (byte b = 0; b < currentYear - 1; b++) {
                 dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + b + "-[0-9][0-9]*:", ":");
             }
         }
-        dialogLaunchTimes = dialogLaunchTimes + currentDay + "y" + currentYear + "-" + currentDayCount + ":";
+        dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + currentYear + "-[0-9][0-9]*:", ":" + currentDay + "y" + currentYear + "-" + currentDayCount + ":");
 
         getPreferencesEditor(context)
                 .putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, dialogLaunchTimes)
