@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * <p>StoreType Class - store type class of the AndroidRate library.</p>
  *
  * @since    1.0.0
- * @version  1.1.9
+ * @version  1.2.0
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

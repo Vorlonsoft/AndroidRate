@@ -15,7 +15,7 @@ package com.vorlonsoft.android.rate;
  * will be passed in the argument of {@link OnClickButtonListener#onClickButton}.</p>
  *
  * @since    0.2.0
- * @version  1.1.9
+ * @version  1.2.0
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

@@ -56,7 +56,7 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
  * inside library, not outside (protected, not private constructor).</p>
  *
  * @since    1.0.2
- * @version  1.1.9
+ * @version  1.2.0
  * @author   Alexander Savin
  * @author   Antoine Vianey
  */
@@ -282,7 +282,7 @@ public class DefaultDialogManager implements DialogManager {
      * if you want to use fully custom dialog (from support library etc.)</p>
      *
      * @since    1.0.2
-     * @version  1.1.9
+     * @version  1.2.0
      * @author   Alexander Savin
      * @author   Antoine Vianey
      */

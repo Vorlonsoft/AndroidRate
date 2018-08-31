@@ -50,7 +50,7 @@ import static com.vorlonsoft.android.rate.StoreType.YANDEX;
  * and a fast singleton implementation.</p>
  *
  * @since    0.0.4
- * @version  1.1.9
+ * @version  1.2.0
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */
@@ -192,7 +192,6 @@ public final class AppRate {
         return this;
     }
 
-    //TODO update README.md when 1.2.0 released
     /**
      * <p>Selects App launches.</p>
      * <p>Method sets divisor for division of app launches with a remainder. This condition is
