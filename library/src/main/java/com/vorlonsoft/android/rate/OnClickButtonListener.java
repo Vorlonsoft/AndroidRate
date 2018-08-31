@@ -8,8 +8,8 @@ package com.vorlonsoft.android.rate;
 
 /**
  * <p>OnClickButtonListener Interface -  on click button listener interface
- * of the AndroidRate library. You can implements it and use
- * {@code AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)]}
+ * of the AndroidRate library. You can implement it and use
+ * {@code AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)}
  * to specify the callback when the button is pressed. The same value as the
  * second argument of {@link android.content.DialogInterface.OnClickListener#onClick}
  * will be passed in the argument of {@link OnClickButtonListener#onClickButton}.</p>
