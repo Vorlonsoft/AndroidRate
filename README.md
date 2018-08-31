@@ -1,6 +1,6 @@
 [![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#)
 
-# AndroidRate [![Build Status](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/build-status_90x20.png)](#) [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate/_latestVersion) [![Supported APIs](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/api_54x20.png)](#) [![Android Arsenal](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/android-arsenal_174x20.png)](#)
+# AndroidRate [![Build Status](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/build-status_90x20.png)](#) [![Latest Version](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/latest-version_104x20.png)](https://github.com/Vorlonsoft/AndroidRate/releases) [![Supported APIs](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/api_54x20.png)](#) [![Android Arsenal](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/android-arsenal_174x20.png)](#)
 
 AndroidRate is a library to help you promote your Android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
 
@@ -11,6 +11,7 @@ AndroidRate is a library to help you promote your Android app by prompting users
 * [Install](#install)
 * [Usage](#usage)
   * [Configuration](#configuration)
+  * [OnClickButtonListener Interface](#onclickbuttonlistener-interface)
   * [Custom event requirements](#optional-custom-event-requirements)
   * [Clear show dialog flag](#clear-show-dialog-flag)
   * [Forced Rate Dialog](#forced-display-of-the-rate-dialog)
@@ -32,7 +33,7 @@ AndroidRate is a library to help you promote your Android app by prompting users
 
 You can download library files from JCenter, Maven Central or GitHub.
 
-`latestVersion` is [![Latest Version](https://api.bintray.com/packages/bintray/jcenter/com.vorlonsoft%3Aandroidrate/images/download.svg)](https://bintray.com/bintray/jcenter/com.vorlonsoft%3Aandroidrate/_latestVersion)
+`latestVersion` is [![Latest Version](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/latest-version_104x20.png)](https://github.com/Vorlonsoft/AndroidRate/releases)
 
 Add the following in your app's `build.gradle` file:
 
@@ -102,10 +103,10 @@ protected void onCreate(Bundle savedInstanceState) {
       .setRemindInterval((byte) 1)        // default is 1, 1 means app is launched 1 or more days after neutral button clicked
       .setRemindLaunchTimes((byte) 1)     // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
       .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
-      .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is Short.MAX_VALUE, Short.MAX_VALUE means unlimited occurrences of the display of the Rate Dialog within a 365-day period
-      .setDebug(false)                    // default is false
-      .setOnClickButtonListener(which -> Log.d(MainActivity.class.getName(), Byte.toString(which))) // Java 8+, change for Java 7-
-      .monitor();                         // Monitors app launch times
+      .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is unlimited, 3 means 3 or less occurrences of the display of the Rate Dialog within a 365-day period
+      .setDebug(false)                    // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
+      .setOnClickButtonListener(which -> Log.d(this.getLocalClassName(), Byte.toString(which))) // Java 8+, change for Java 7-
+      .monitor();                         // Monitors the app launch times
 
   if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) { // Checks that current app store type from library options is StoreType.GOOGLEPLAY
       if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) { // Checks that Google Play is available
@@ -126,8 +127,28 @@ Default options of the Rate Dialog are as below:
 5. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setRemindLaunchTimes(byte)`.
 6. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
 7. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
-8. Setting `AppRate#setDebug(boolean)` will ensure that the rating request is shown each time the app is launched. **This feature is only for development!**.
-9. To specify the callback when the button is pressed. The same value as the second argument of `DialogInterface.OnClickListener#onClick` will be passed in the argument of `onClickButton`.
+8. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
+9. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
+
+### OnClickButtonListener Interface
+
+You can implement OnClickButtonListener Interface and use `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)` to specify the callback when the button of Rate Dialog is pressed. `DialogInterface.BUTTON_POSITIVE`, `DialogInterface.BUTTON_NEUTRAL` or `DialogInterface.BUTTON_NEGATIVE` will be passed in the argument of `OnClickButtonListener#onClickButton`.
+
+```java
+// Java 7- start
+AppRate.with(this).setOnClickButtonListener(new OnClickButtonListener() {
+    @Override
+    public void onClickButton(final byte which) {
+        // Do something
+    }
+})
+// Java 7- end
+// Java 8+ start
+AppRate.with(this).setOnClickButtonListener(which -> {
+    // Do something
+})
+// Java 8+ end
+```
 
 ### Optional custom event requirements
 
