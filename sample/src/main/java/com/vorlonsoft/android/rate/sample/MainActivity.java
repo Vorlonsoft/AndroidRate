@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
                 .setInstallDays((byte) 3)           // default 10, 0 means install day.
                 .setLaunchTimes((byte) 10)          // default 10 times.
                 .setRemindInterval((byte) 2)        // default 1 day.
-                .setRemindLaunchTimes((byte) 4)     // default 1 (each launch).
+                .setSelectedAppLaunches((byte) 4)     // default 1 (each launch).
                 .setShowLaterButton(true)           // default true.
                 .setDebug(true)                     // default false.
                 .setCancelable(false)               // default false.

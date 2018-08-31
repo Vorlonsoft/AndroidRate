@@ -1,7 +1,33 @@
 # CHANGELOG
 
-## 1.2.0 Yokohama (next release)
+## 1.2.0 Yokohama (released 31.08.2018)
 
+- LIBcc40831 javadoc comments updated
+- LIBcc30831 Section "OnClickButtonListener Interface" added to README.md
+- LIBbb20831 Singleton DialogManager break the library ([Issue #6](https://github.com/Vorlonsoft/AndroidRate/issues/6) and [Issue #5](https://github.com/Vorlonsoft/AndroidRate/issues/5))
+- LIBbb10831 setCurrentDayDialogLaunchTimes(...) fixed
+- LIBcc20831 README.md updated
+- LIBcc10831 javadoc comments updated
+- LIBff20830 public boolean isShowingRateDialog() added
+- LIBcc30830 build.gradle and .idea files updated
+- LIBcc20830 README.md and javadocs updated
+- LIBcc10830 clearRateDialog(), showRateDialog(Activity), dismissRateDialog(), rateNow(Activity) methods updated
+- LIBff10830 WeekReference to DefaultDialogManager singleton
+- LIBbb10829 Fix for [dialog error](https://github.com/Vorlonsoft/AndroidRate/issues/5)
+- LIBcc20829 javadoc documentation updated
+- LIBcc10829 README.md updated
+- LIBff10829 setRemindLaunchTimes(byte) updated, setSelectedAppLaunches(byte) added, some methods documented
+- LIBcc30828 README.md updated
+- LIBcc20828 javadoc documentation updated
+- LIBcc10828 javadoc comments updated
+- LIBff10828 final modifier removed from StoreType class
+- LIBcc30827 README.md updated
+- LIBff20825 javadoc documentation added
+Set theme jekyll-theme-minimal
+- LIBcc20825 javadoc comments updated
+- LIBff10825 Clear DialogManager singleton method added
+- LIBcc10825 README.md updated
+- LIBff10823 package-info.java added
 - LIBcc20819 Next release
 
 ## 1.1.9 Tokyo (released 19.08.2018)
