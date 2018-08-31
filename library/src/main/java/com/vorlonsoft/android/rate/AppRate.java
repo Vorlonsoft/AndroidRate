@@ -239,6 +239,7 @@ public final class AppRate {
      * Decides if Never button appear in the rating dialog or not
      *
      * @param isShowNeverButton default is true
+     * @return AppRate singleton object
      */
     @SuppressWarnings("unused")
     public AppRate setShowNeverButton(boolean isShowNeverButton) {
@@ -345,6 +346,7 @@ public final class AppRate {
      * Sets whether the rating dialog is cancelable or not.
      *
      * @param cancelable default is false
+     * @return AppRate singleton object
      */
     public AppRate setCancelable(@SuppressWarnings("SameParameterValue") boolean cancelable) {
         dialogOptions.setCancelable(cancelable);
@@ -464,6 +466,7 @@ public final class AppRate {
      * Sets dialog theme. You can use a specific theme to inflate the dialog.
      *
      * @param themeResId theme resource ID, default is 0
+     * @return AppRate singleton object
      */
     @SuppressWarnings("unused")
     public AppRate setThemeResId(int themeResId) {
@@ -476,6 +479,7 @@ public final class AppRate {
      *
      * @param dialogManagerFactory DialogManager.Factory object, default is
      *                             DefaultDialogManager.Factory object
+     * @return AppRate singleton object
      */
     @SuppressWarnings("unused")
     public AppRate setDialogManagerFactory(DialogManager.Factory dialogManagerFactory) {
@@ -486,8 +490,8 @@ public final class AppRate {
     }
 
     /**
-     * <p>Monitors app launch times.</p>
-     * <p>Call this method when the launcher activity's onCreate() is launched.</p>
+     * <p>Monitors launches of the application.</p>
+     * <p>Call this method when the {@code onCreate()} of the app's launcher activity is launched.</p>     *
      */
     public void monitor() {
         if (isFirstLaunch(context)) {
@@ -622,11 +626,25 @@ public final class AppRate {
         }
     }
 
+    /**
+     * <p>Checks if the library is in Debug mode. <b>For development only!</b></p>
+     *
+     * @return true if the library is in Debug mode, false otherwise
+     */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public boolean isDebug() {
         return isDebug;
     }
 
+    /**
+     * <p>Debug mode. <b>For development only!</b></p>
+     * <p>Setting the library to Debug mode ensures that the Rate Dialog will be shown each time
+     * the app is launched.</p>
+     *
+     * @param isDebug default is false, true ensures that the Rate Dialog will be shown each time
+     *                the app is launched
+     * @return AppRate singleton object
+     */
     public AppRate setDebug(@SuppressWarnings("SameParameterValue") boolean isDebug) {
         this.isDebug = isDebug;
         return this;
