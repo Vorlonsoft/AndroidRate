@@ -63,7 +63,7 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
 public class DefaultDialogManager implements DialogManager {
     private static volatile Reference<DefaultDialogManager> singleton = null;
-    private final Context context;
+    private Context context = null;
     private final DialogOptions dialogOptions;
     private final StoreOptions storeOptions;
     private final OnClickButtonListener listener;
@@ -225,6 +225,10 @@ public class DefaultDialogManager implements DialogManager {
         this.listener = dialogOptions.getListener();
     }
 
+    private void setContext(Context context){
+        this.context = context;
+    }
+
     /**
      * Create rate dialog.
      *
@@ -310,6 +314,8 @@ public class DefaultDialogManager implements DialogManager {
                         singleton = new WeakReference<>(new DefaultDialogManager(context, dialogOptions, storeOptions));
                     }
                 }
+            } else {
+                singleton.get().setContext(context);
             }
             return singleton.get();
         }
