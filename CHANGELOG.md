@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.1 Osaka (next release)
+
+- LIBcc50831 Next release
+
 ## 1.2.0 Yokohama (released 31.08.2018)
 
 - LIBcc40831 javadoc comments updated
