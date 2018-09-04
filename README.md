@@ -11,7 +11,7 @@ AndroidRate is a library to help you promote your Android app by prompting users
 * [Install](#install)
 * [Usage](#usage)
   * [Configuration](#configuration)
-  * [OnClickButtonListener Interface](#onclickbuttonlistener-interface)
+  * [OnClickButtonListener interface](#onclickbuttonlistener-interface)
   * [Custom event requirements](#optional-custom-event-requirements)
   * [Clear show dialog flag](#clear-show-dialog-flag)
   * [Forced Rate Dialog](#forced-display-of-the-rate-dialog)
@@ -31,7 +31,7 @@ AndroidRate is a library to help you promote your Android app by prompting users
 
 ## Install
 
-You can download library files from JCenter, Maven Central or GitHub.
+You can download library files from JCenter, Maven Central, JFrog Bintray, **GitHub (updated more often)**, GitLab or SourceForge.
 
 `latestVersion` is [![Latest Version](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/latest-version_104x20.png)](https://github.com/Vorlonsoft/AndroidRate/releases)
 
@@ -130,7 +130,7 @@ Default options of the Rate Dialog are as below:
 8. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
 9. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
 
-### OnClickButtonListener Interface
+### OnClickButtonListener interface
 
 You can implement OnClickButtonListener Interface and use `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)` to specify the callback when the button of Rate Dialog is pressed. `DialogInterface.BUTTON_POSITIVE`, `DialogInterface.BUTTON_NEUTRAL` or `DialogInterface.BUTTON_NEGATIVE` will be passed in the argument of `OnClickButtonListener#onClickButton`.
 

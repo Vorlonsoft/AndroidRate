@@ -276,6 +276,12 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * <p>Specifies the callback when the button of Rate Dialog is pressed.</p>
+     *
+     * @param listener implemented {@link OnClickButtonListener} Interface
+     * @return AppRate singleton object
+     */
     public AppRate setOnClickButtonListener(OnClickButtonListener listener) {
         dialogOptions.setListener(listener);
         return this;

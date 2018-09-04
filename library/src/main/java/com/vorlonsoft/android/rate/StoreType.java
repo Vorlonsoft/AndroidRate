@@ -59,7 +59,7 @@ public class StoreType {
     /** Any custom intents */
     @SuppressWarnings("WeakerAccess")
     public static final int INTENT = 11;
-    /** Any Other Store */
+    /** Any other Store */
     @SuppressWarnings("WeakerAccess")
     public static final int OTHER = 12;
 
@@ -67,6 +67,12 @@ public class StoreType {
         throw new AssertionError();
     }
 
+    /**
+     * <p>Annotates element of integer type.</p>
+     * <p>Annotated element, represents a logical type and its value should be one of the following
+     * constants: AMAZON, BAZAAR, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT,
+     * YANDEX.</p>
+     */
     @SuppressWarnings("WeakerAccess")
     @Documented
     @Retention(SOURCE)
@@ -84,6 +90,11 @@ public class StoreType {
     public @interface StoreWithoutApplicationId {
     }
 
+    /**
+     * <p>Annotates element of integer type.</p>
+     * <p>Annotated element, represents a logical type and its value should be one of the following
+     * constants: APPLE, BLACKBERRY.</p>
+     */
     @SuppressWarnings("WeakerAccess")
     @Documented
     @Retention(SOURCE)
@@ -94,6 +105,12 @@ public class StoreType {
     public @interface StoreWithApplicationId {
     }
 
+    /**
+     * <p>Annotates element of integer type.</p>
+     * <p>Annotated element, represents a logical type and its value should be one of the following
+     * constants: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, INTENT, MI, OTHER,
+     * SAMSUNG, SLIDEME, TENCENT, YANDEX.</p>
+     */
     @SuppressWarnings("WeakerAccess")
     @Documented
     @Retention(SOURCE)
