@@ -16,8 +16,8 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 /**
  * <p>DialogType Class - dialog type class of the AndroidRate library.</p>
  *
- * @since    1.2.0
- * @version  1.2.0
+ * @since    1.2.1
+ * @version  1.2.1
  * @author   Alexander Savin
  */
 
