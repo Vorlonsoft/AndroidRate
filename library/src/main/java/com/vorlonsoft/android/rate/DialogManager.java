@@ -10,38 +10,54 @@ import android.app.Dialog;
 import android.content.Context;
 
 /**
- * <p>DialogManager Interface - dialog manager interface of
- * the AndroidRate library. You can implements it and use
- * {@code AppRate.with(this).setDialogManagerFactory(DialogManager.Factory)]}
- * if you want to use fully custom dialog (from support library etc.)</p>
+ * <p>DialogManager Interface - dialog manager interface of the AndroidRate library.</p>
+ * <p>You can implement DialogManager Interface and use
+ * {@link AppRate#setDialogManagerFactory(DialogManager.Factory)} if you want to use fully custom
+ * dialog (from v7 AppCompat library etc.).</p>
  *
  * @since    1.0.2
  * @version  1.2.0
  * @author   Alexander Savin
  * @author   Antoine Vianey
+ * @see DialogManager.Factory
  */
 
 public interface DialogManager {
 
+    /**
+     * <p>Creates Rate Dialog.</p>
+     *
+     * @return created dialog
+     */
     Dialog createDialog();
 
     /**
-     * <p>DialogManager.Factory Interface - dialog manager factory interface
-     * of the AndroidRate library. You can implements it and use
-     * {@code AppRate.with(this).setDialogManagerFactory(DialogManager.Factory)]}
-     * if you want to use fully custom dialog (from support library etc.)</p>
+     * <p>DialogManager.Factory Interface - dialog manager factory interface of the AndroidRate
+     * library.</p>
+     * <p>You can implement DialogManager.Factory Interface and use
+     * {@link AppRate#setDialogManagerFactory(DialogManager.Factory)} if you want to use fully
+     * custom dialog (from v7 AppCompat library etc.).</p>
      *
      * @since    1.0.2
      * @version  1.2.0
      * @author   Alexander Savin
      * @author   Antoine Vianey
+     * @see DialogManager
      */
 
     interface Factory {
 
-        /** Clear DialogManager singleton */
+        /** <p>Clears {@link DialogManager} implementation singleton.</p> */
         void clearDialogManager();
 
+        /**
+         * <p>Creates {@link DialogManager} implementation singleton object.</p>
+         *
+         * @param context context
+         * @param dialogOptions Rate Dialog options
+         * @param storeOptions App store options
+         * @return {@link DialogManager} implementation singleton object
+         */
         DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions);
     }
 }

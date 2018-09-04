@@ -18,13 +18,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
@@ -69,7 +69,7 @@ public final class AppRate {
     private byte selectedAppLaunches = (byte) 1;
     /** Short.MAX_VALUE means unlimited occurrences of the display of the dialog within a 365-day period */
     private short dialogLaunchTimes = Short.MAX_VALUE;
-    private Reference<Dialog> dialog = null;
+    private WeakReference<Dialog> dialog = null;
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
     {
@@ -474,17 +474,23 @@ public final class AppRate {
     }
 
     /**
-     * Sets DialogManager.Factory.
+     * <p>Sets {@link DialogManager.Factory} implementation.</p>
+     * <p>Call {@code AppRate.with(this).setDialogManagerFactory(null)} to set
+     * {@link DefaultDialogManager.Factory} implementation.</p>
      *
-     * @param dialogManagerFactory DialogManager.Factory object, default is
-     *                             DefaultDialogManager.Factory object
+     * @param dialogManagerFactory object of class that implements {@link DialogManager.Factory},
+     *                             default is {@link DefaultDialogManager.Factory} class object
      * @return AppRate singleton object
      */
     @SuppressWarnings("unused")
-    public AppRate setDialogManagerFactory(DialogManager.Factory dialogManagerFactory) {
-        dialogManagerFactory.clearDialogManager();
+    public AppRate setDialogManagerFactory(@Nullable DialogManager.Factory dialogManagerFactory) {
         this.dialogManagerFactory.clearDialogManager();
-        this.dialogManagerFactory = dialogManagerFactory;
+        if (dialogManagerFactory == null) {
+            this.dialogManagerFactory = new DefaultDialogManager.Factory();
+        } else {
+            dialogManagerFactory.clearDialogManager();
+            this.dialogManagerFactory = dialogManagerFactory;
+        }
         return this;
     }
 

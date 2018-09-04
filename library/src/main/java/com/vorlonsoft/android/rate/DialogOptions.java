@@ -9,7 +9,6 @@ package com.vorlonsoft.android.rate;
 import android.content.Context;
 import android.view.View;
 
-import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
 import androidx.annotation.Nullable;
@@ -57,12 +56,12 @@ public final class DialogOptions {
 
     private View view = null;
 
-    private Reference<OnClickButtonListener> listener = null;
+    private WeakReference<OnClickButtonListener> listener = null;
 
     DialogOptions() {
     }
 
-    boolean shouldShowNeutralButton() {
+    public boolean shouldShowNeutralButton() {
         return showNeutralButton;
     }
 
@@ -70,7 +69,7 @@ public final class DialogOptions {
         this.showNeutralButton = showNeutralButton;
     }
 
-    boolean shouldShowNegativeButton() {
+    public boolean shouldShowNegativeButton() {
         return showNegativeButton;
     }
 
@@ -78,7 +77,7 @@ public final class DialogOptions {
         this.showNegativeButton = showNegativeButton;
     }
 
-    boolean shouldShowTitle() {
+    public boolean shouldShowTitle() {
         return showTitle;
     }
 
@@ -86,7 +85,7 @@ public final class DialogOptions {
         this.showTitle = showTitle;
     }
 
-    boolean getCancelable() {
+    public boolean getCancelable() {
         return cancelable;
     }
 
@@ -139,7 +138,7 @@ public final class DialogOptions {
         this.textNegativeResId = textNegativeResId;
     }
 
-    View getView() {
+    public View getView() {
         return view;
     }
 
@@ -156,7 +155,7 @@ public final class DialogOptions {
         this.listener = new WeakReference<>(listener);
     }
 
-    String getTitleText(Context context) {
+    public String getTitleText(Context context) {
         if (titleText == null) {
             return context.getString(textTitleResId);
         }
@@ -167,7 +166,7 @@ public final class DialogOptions {
         this.titleText = titleText;
     }
 
-    String getMessageText(Context context) {
+    public String getMessageText(Context context) {
         if (messageText == null) {
             return context.getString(textMessageResId);
         }
@@ -178,7 +177,7 @@ public final class DialogOptions {
         this.messageText = messageText;
     }
 
-    String getPositiveText(Context context) {
+    public String getPositiveText(Context context) {
         if (positiveText == null) {
             return context.getString(textPositiveResId);
         }
@@ -189,7 +188,7 @@ public final class DialogOptions {
         this.positiveText = positiveText;
     }
 
-    String getNeutralText(Context context) {
+    public String getNeutralText(Context context) {
         if (neutralText == null) {
             return context.getString(textNeutralResId);
         }
@@ -200,7 +199,7 @@ public final class DialogOptions {
         this.neutralText = neutralText;
     }
 
-    String getNegativeText(Context context) {
+    public String getNegativeText(Context context) {
         if (negativeText == null) {
             return context.getString(textNegativeResId);
         }
@@ -211,7 +210,7 @@ public final class DialogOptions {
         this.negativeText = negativeText;
     }
 
-    int getThemeResId() {
+    public int getThemeResId() {
         return themeResId;
     }
 

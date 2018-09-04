@@ -6,7 +6,6 @@
 
 package com.vorlonsoft.android.rate;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 
 import androidx.annotation.Nullable;
@@ -48,25 +46,28 @@ import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
 /**
- * <p>DefaultDialogManager Class - default dialog manager class implements
- * DialogManager interface of the AndroidRate library. You can extends it and use
- * {@code AppRate.with(this).setDialogManagerFactory(DialogManager.Factory)]}
- * if you want to use fully custom dialog (from support library etc.).
- * DefaultDialogManager Class is thread-safe and a fast singleton implementation
- * inside library, not outside (protected, not private constructor).</p>
+ * <p>DefaultDialogManager Class - default dialog manager class implements {@link DialogManager}
+ * interface of the AndroidRate library.</p>
+ * <p>You can extend DefaultDialogManager Class and use
+ * {@link AppRate#setDialogManagerFactory(DialogManager.Factory)} if you want to use fully custom
+ * dialog (from v7 AppCompat library etc.). DefaultDialogManager Class is thread-safe and a fast
+ * singleton implementation inside library, not outside (protected, not private constructor).</p>
  *
  * @since    1.0.2
  * @version  1.2.0
  * @author   Alexander Savin
  * @author   Antoine Vianey
+ * @see DefaultDialogManager.Factory
+ * @see DialogManager
  */
 
 public class DefaultDialogManager implements DialogManager {
-    private static volatile Reference<DefaultDialogManager> singleton = null;
-    private Context context = null;
-    private final DialogOptions dialogOptions;
+    private static volatile WeakReference<DefaultDialogManager> singleton = null;
     private final StoreOptions storeOptions;
     private final OnClickButtonListener listener;
+    @SuppressWarnings("WeakerAccess")
+    protected final DialogOptions dialogOptions;
+    protected Context context = null;
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
         @Override
@@ -225,12 +226,12 @@ public class DefaultDialogManager implements DialogManager {
         this.listener = dialogOptions.getListener();
     }
 
-    private void setContext(Context context){
+    protected void setContext(Context context){
         this.context = context;
     }
 
     /**
-     * Create rate dialog.
+     * <p>Creates Rate Dialog.</p>
      *
      * @return created dialog
      */
@@ -277,14 +278,16 @@ public class DefaultDialogManager implements DialogManager {
 
     /**
      * <p>DefaultDialogManager.Factory Class - default dialog manager factory class implements
-     * DialogManager.Factory interface of the AndroidRate library. You can extends it
-     * and use {@code AppRate.with(this).setDialogManagerFactory(DialogManager.Factory)]}
-     * if you want to use fully custom dialog (from support library etc.)</p>
+     * {@link DialogManager.Factory} interface of the AndroidRate library.</p>
+     * <p>You can extend DefaultDialogManager.Factory Class and use
+     * {@link AppRate#setDialogManagerFactory(DialogManager.Factory)} if you want to use fully
+     * custom dialog (from v7 AppCompat library etc.).</p>
      *
      * @since    1.0.2
      * @version  1.2.0
      * @author   Alexander Savin
      * @author   Antoine Vianey
+     * @see DialogManager.Factory
      */
 
     static class Factory implements DialogManager.Factory {
@@ -295,7 +298,7 @@ public class DefaultDialogManager implements DialogManager {
             }
         }
 
-        /** Clear DefaultDialogManager singleton */
+        /** Clear {@link DefaultDialogManager} singleton */
         @Override
         public void clearDialogManager() {
             if (singleton != null) {
@@ -303,6 +306,14 @@ public class DefaultDialogManager implements DialogManager {
             }
         }
 
+        /**
+         * <p>Creates {@link DefaultDialogManager} singleton object.</p>
+         *
+         * @param context context
+         * @param dialogOptions Rate Dialog options
+         * @param storeOptions App store options
+         * @return {@link DefaultDialogManager} singleton object
+         */
         @Override
         public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
             if ((singleton == null) || (singleton.get() == null)) {
