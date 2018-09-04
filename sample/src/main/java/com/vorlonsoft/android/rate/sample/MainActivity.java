@@ -6,7 +6,6 @@
 
 package com.vorlonsoft.android.rate.sample;
 
-import android.app.Activity;
 /* uncomment to test other locales - start */
 //import android.content.res.Configuration;
 //import android.content.res.Resources;
@@ -17,13 +16,17 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.vorlonsoft.android.rate.AppCompatDialogManager;
 import com.vorlonsoft.android.rate.AppRate;
+import com.vorlonsoft.android.rate.DialogManager;
 import com.vorlonsoft.android.rate.StoreType;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /* uncomment to test other locales */
 //import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "ANDROIDRATE_SAMPLE";
 
     @Override
@@ -55,6 +58,9 @@ public class MainActivity extends Activity {
         //}
         /* uncomment to test other locales - end */
 
+        /* comment if you don't want to test AppCompatDialogManager instead DefaultDialogManager */
+        DialogManager.Factory appCompatDialogManagerFactory = new AppCompatDialogManager.Factory();
+
         AppRate.with(this)
                 .setStoreType(StoreType.GOOGLEPLAY) /* default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
                                                      *         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
@@ -70,6 +76,8 @@ public class MainActivity extends Activity {
                 .setDebug(true)                     // default false.
                 .setCancelable(false)               // default false.
                 .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which)))
+                /* uncomment to test AppCompatDialogManager instead DefaultDialogManager */
+                //.setDialogManagerFactory(appCompatDialogManagerFactory)
                 /* comment to use library strings instead app strings - start */
                 .setTitle(R.string.new_rate_dialog_title)
                 .setTextLater(R.string.new_rate_dialog_later)
