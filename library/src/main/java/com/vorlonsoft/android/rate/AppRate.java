@@ -619,7 +619,7 @@ public final class AppRate {
     }
 
     private boolean isOverRemindDate() {
-        return ((remindInterval == 0) || isOverDate(getRemindInterval(context), remindInterval));
+        return ((remindInterval == 0) || (getRemindInterval(context) == 0L) || isOverDate(getRemindInterval(context), remindInterval));
     }
 
     private boolean isOverCustomEventsRequirements() {
