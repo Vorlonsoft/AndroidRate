@@ -186,6 +186,17 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     *
+     *
+     * @return AppRate singleton object
+     */
+    @SuppressWarnings("unused")
+    public AppRate clearRemindButtonClick() {
+       // PreferenceHelper.clearRemindInterval(context);
+        return this;
+    }
+
     @SuppressWarnings("unused")
     public AppRate setMinimumEventCount(String eventName, short minimumCount) {
         this.customEventsCounts.put(eventName, minimumCount);
