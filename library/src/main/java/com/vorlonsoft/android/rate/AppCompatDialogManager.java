@@ -159,7 +159,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
         @Override
         public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
             if ((singleton == null) || (singleton.get() == null)) {
-                synchronized (DefaultDialogManager.class) {
+                synchronized (AppCompatDialogManager.class) {
                     if ((singleton == null) || (singleton.get() == null)) {
                         if (singleton != null) {
                             singleton.clear();
@@ -169,6 +169,8 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
                         } else {
                             singleton = new WeakReference<>(new DefaultDialogManager(context, dialogOptions, storeOptions));
                         }
+                    }else {
+                        ((DefaultDialogManager) singleton.get()).setContext(context);
                     }
                 }
             } else {
