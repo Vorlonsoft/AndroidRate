@@ -31,7 +31,9 @@ AndroidRate is a library to help you promote your Android app by prompting users
 
 ## Install
 
-You can download library files from JCenter, Maven Central, JFrog Bintray, **[GitHub](https://github.com/Vorlonsoft/AndroidRate) (updated more often)**, GitLab or SourceForge.
+### Latest stable version
+
+You can download library files from JCenter, Maven Central, JFrog Bintray (JCenter mirror), **[GitHub](https://github.com/Vorlonsoft/AndroidRate) (main source)**, GitLab (GitHub mirror) or SourceForge (GitHub mirror).
 
 `latestVersion` is [![Latest Version](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/latest-version_104x20.png)](https://github.com/Vorlonsoft/AndroidRate/releases)
 
@@ -43,15 +45,15 @@ dependencies {
 }
 ```
 
-### Latest snapshot (non-tested) version
+### Latest snapshot version
 
-If you don't want to wait for the next release, you can add the Sonatype's snapshots repository:
+If you don't want to wait for the next release, you can add the Sonatype's snapshots repository to your project root `build.gradle` file:
 
-    repositories {
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    }
+       repositories {
+           maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+       }
 
-And add the following dependency:
+Then add the following dependency to your relevant project modules `build.gradle` files:
 
     dependencies {
         implementation "com.vorlonsoft:androidrate:+"
