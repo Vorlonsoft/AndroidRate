@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Ranger denne appen</string>
+    <string name="rate_dialog_message">Hvis du liker å bruke denne appen, vil du ha et øyeblikk å vurdere det? Det tar ikke mer enn et minutt. Takk for støtten!</string>
+    <string name="rate_dialog_ok">Vurder nå</string>
+    <string name="rate_dialog_cancel">Seinere</string>
+    <string name="rate_dialog_no">Nei takk</string>
+</resources>
