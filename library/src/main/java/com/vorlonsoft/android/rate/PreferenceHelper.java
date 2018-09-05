@@ -222,4 +222,14 @@ final class PreferenceHelper {
         return getPreferences(context).getLong(PREF_KEY_REMIND_INTERVAL, 0L);
     }
 
+    /**
+     * <p>Clears shared preferences that were set up by clicking the Remind Button.</p>
+     *
+     * @param context context
+     */
+    static void clearRemindButtonClick(final Context context) {
+        getPreferencesEditor(context)
+                .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
+                .apply();
+    }
 }
