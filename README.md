@@ -317,7 +317,7 @@ See generated javadoc [AndroidRate documentation](https://vorlonsoft.github.io/A
 
 ## Supported Languages
 
-AndroidRate library currently supports the following 40 languages:
+AndroidRate library currently supports the following 41 languages:
 
 - Albanian
 - Arabic
@@ -348,6 +348,7 @@ AndroidRate library currently supports the following 40 languages:
 - Persian
 - Polish
 - Portuguese
+- Romanian
 - Russian
 - Serbian
 - Slovak

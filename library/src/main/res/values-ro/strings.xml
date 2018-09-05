@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Evaluează această aplicație</string>
+    <string name="rate_dialog_message">Dacă vă place să utilizați această aplicație, vă deranjează un moment pentru a evalua această aplicație? Nu va dura mai mult de un minut. Iti multumesc pentru sprijin!</string>
+    <string name="rate_dialog_ok">Evaluează acum</string>
+    <string name="rate_dialog_cancel">Amintește-mi mai târziu</string>
+    <string name="rate_dialog_no">Nu, mulțumesc</string>
+</resources>
