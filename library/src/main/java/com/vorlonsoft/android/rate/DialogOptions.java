@@ -56,7 +56,7 @@ public final class DialogOptions {
 
     private View view = null;
 
-    private WeakReference<OnClickButtonListener> listener = null;
+    private OnClickButtonListener listener = null;
 
     DialogOptions() {
     }
@@ -148,11 +148,11 @@ public final class DialogOptions {
 
     @Nullable
     OnClickButtonListener getListener() {
-        return listener != null ? listener.get() : null;
+        return listener;
     }
 
     void setListener(OnClickButtonListener listener) {
-        this.listener = new WeakReference<>(listener);
+        this.listener = listener;
     }
 
     public String getTitleText(Context context) {
