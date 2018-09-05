@@ -187,13 +187,13 @@ public final class AppRate {
     }
 
     /**
-     *
+     * <p>Clears shared preferences that were set up by clicking the Remind Button.</p>
      *
      * @return AppRate singleton object
      */
     @SuppressWarnings("unused")
     public AppRate clearRemindButtonClick() {
-       // PreferenceHelper.clearRemindInterval(context);
+        PreferenceHelper.clearRemindButtonClick(context);
         return this;
     }
 
