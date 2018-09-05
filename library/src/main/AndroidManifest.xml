@@ -4,8 +4,9 @@
   ~ //
   ~ // Licensed under The MIT License (MIT)
 -->
-<manifest package="com.vorlonsoft.android.rate">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.vorlonsoft.android.rate">
 
-    <application />
+    <application android:icon="@mipmap/ic_launcher" />
 
 </manifest>
