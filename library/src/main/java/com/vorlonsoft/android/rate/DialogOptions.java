@@ -9,7 +9,7 @@ package com.vorlonsoft.android.rate;
 import android.content.Context;
 import android.view.View;
 
-import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 
 import androidx.annotation.Nullable;
 
@@ -56,7 +56,7 @@ public final class DialogOptions {
 
     private View view = null;
 
-    private OnClickButtonListener listener = null;
+    private SoftReference<OnClickButtonListener> listener = null;
 
     DialogOptions() {
     }
@@ -148,11 +148,11 @@ public final class DialogOptions {
 
     @Nullable
     OnClickButtonListener getListener() {
-        return listener;
+        return listener != null ? listener.get() : null;
     }
 
     void setListener(OnClickButtonListener listener) {
-        this.listener = listener;
+        this.listener = new SoftReference<>(listener);
     }
 
     public String getTitleText(Context context) {
