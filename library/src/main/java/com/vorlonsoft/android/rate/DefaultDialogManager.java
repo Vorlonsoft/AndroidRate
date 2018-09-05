@@ -29,6 +29,7 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriod
 import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindLaunchesNumber;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
@@ -214,6 +215,7 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             setRemindInterval(context);
+            setRemindLaunchesNumber(context);
             if (listener != null) listener.onClickButton((byte) which);
         }
     };
