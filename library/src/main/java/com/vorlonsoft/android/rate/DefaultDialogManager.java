@@ -323,6 +323,8 @@ public class DefaultDialogManager implements DialogManager {
                             singleton.clear();
                         }
                         singleton = new WeakReference<>(new DefaultDialogManager(context, dialogOptions, storeOptions));
+                    } else {
+                        singleton.get().setContext(context);
                     }
                 }
             } else {
