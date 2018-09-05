@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <string name="rate_dialog_title">Rate aplikasi ini</string>
+    <string name="rate_dialog_message">Jika anda menikmati menggunakan Aplikasi ini, sila ambil masa untuk menilainya. Terima kasih atas sokongan anda!</string>
+    <string name="rate_dialog_ok">Kadar</string>
+    <string name="rate_dialog_cancel">Kemudian</string>
+    <string name="rate_dialog_no">Tidak pernah</string>
+</resources>
