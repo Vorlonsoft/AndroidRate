@@ -34,6 +34,7 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.getInstallDate;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindInterval;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindLaunchesNumber;
 import static com.vorlonsoft.android.rate.PreferenceHelper.isFirstLaunch;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setCustomEventCount;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setFirstLaunchSharedPreferences;
@@ -66,6 +67,7 @@ public final class AppRate {
     private byte installDate = (byte) 10;
     private byte appLaunchTimes = (byte) 10;
     private byte remindInterval = (byte) 1;
+    private byte remindLaunchesNumber = (byte) 0;
     private byte selectedAppLaunches = (byte) 1;
     /** Short.MAX_VALUE means unlimited occurrences of the display of the dialog within a 365-day period */
     private short dialogLaunchTimes = Short.MAX_VALUE;
@@ -183,6 +185,19 @@ public final class AppRate {
      */
     public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") byte remindInterval) {
         this.remindInterval = remindInterval;
+        return this;
+    }
+
+    /**
+     * <p>Sets minimal number of app launches until the Rating Dialog pops up for the next time after
+     * neutral button clicked.</p>
+     *
+     * @param remindLaunchesNumber number of app launches, default is 0, 1 means app is launched 1 or more times
+     *                             after neutral button clicked
+     * @return AppRate singleton object
+     */
+    public AppRate setRemindLaunchesNumber(@SuppressWarnings("SameParameterValue") byte remindLaunchesNumber) {
+        this.remindLaunchesNumber = remindLaunchesNumber;
         return this;
     }
 
@@ -613,6 +628,7 @@ public final class AppRate {
                 isSelectedAppLaunch() &&
                 isOverInstallDate() &&
                 isOverRemindDate() &&
+                isOverRemindLaunchesNumber() &&
                 isOverCustomEventsRequirements() &&
                 isBelow365DayPeriodMaxNumberDialogLaunchTimes();
     }
@@ -631,6 +647,10 @@ public final class AppRate {
 
     private boolean isOverRemindDate() {
         return ((remindInterval == 0) || (getRemindInterval(context) == 0L) || isOverDate(getRemindInterval(context), remindInterval));
+    }
+
+    private boolean isOverRemindLaunchesNumber() {
+        return ((remindLaunchesNumber == 0) || (getRemindLaunchesNumber(context) == 0) || (getLaunchTimes(context) - getRemindLaunchesNumber(context) >= remindLaunchesNumber));
     }
 
     private boolean isOverCustomEventsRequirements() {

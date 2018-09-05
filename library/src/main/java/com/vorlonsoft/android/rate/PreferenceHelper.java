@@ -45,6 +45,8 @@ final class PreferenceHelper {
 
     private static final String PREF_KEY_REMIND_INTERVAL = "androidrate_remind_interval";
 
+    private static final String PREF_KEY_REMIND_LAUNCHES_NUMBER = "androidrate_remind_launches_number";
+
     private PreferenceHelper() {
         throw new AssertionError();
     }
@@ -76,7 +78,7 @@ final class PreferenceHelper {
     }
 
     /**
-     * Clear data in shared preferences.<br>
+     * <p>Clears data in shared preferences.</p>
      *
      * @param context context
      */
@@ -92,14 +94,15 @@ final class PreferenceHelper {
 
     static void setFirstLaunchSharedPreferences(final Context context) {
         final SharedPreferences.Editor preferencesEditor = getPreferencesEditor(context);
-        preferencesEditor.putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0y0-0:");
-        preferencesEditor.putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, 0L);
-        preferencesEditor.putLong(PREF_KEY_INSTALL_DATE, new Date().getTime());
-        if (getIsAgreeShowDialog(context)) {                          //if (get() == true) set(true); - NOT error!
+        preferencesEditor.putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0y0-0:")
+                .putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, 0L)
+                .putLong(PREF_KEY_INSTALL_DATE, new Date().getTime())
+                .putInt(PREF_KEY_LAUNCH_TIMES, 1)
+                .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
+                .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0);
+        if (getIsAgreeShowDialog(context)) { //if (get() == true) set(true); - NOT error!
             preferencesEditor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
         }
-        preferencesEditor.putInt(PREF_KEY_LAUNCH_TIMES, 1);
-        preferencesEditor.putLong(PREF_KEY_REMIND_INTERVAL, 0L);
         preferencesEditor.apply();
     }
 
@@ -164,7 +167,6 @@ final class PreferenceHelper {
         return (short) getPreferences(context).getInt(PREF_KEY_CUSTOM_EVENT_PREFIX + eventName, 0);
     }
 
-
     static void setDialogFirstLaunchTime(final Context context) {
         getPreferencesEditor(context)
                 .putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, new Date().getTime())
@@ -180,11 +182,11 @@ final class PreferenceHelper {
     }
 
     /**
-     * Set agree flag about show dialog.<br>
-     * If it is false, rate dialog will never shown unless data is cleared.
+     * <p>Sets the Rate Dialog agree flag.</p>
+     * <p>If it is false, the Rate Dialog will never be shown until the data is cleared.</p>
      *
      * @param context context
-     * @param isAgree agree with showing rate dialog
+     * @param isAgree the Rate Dialog agree flag
      */
     static void setIsAgreeShowDialog(final Context context, final boolean isAgree) {
         getPreferencesEditor(context)
@@ -197,7 +199,7 @@ final class PreferenceHelper {
     }
 
     /**
-     * Sets number of times the app has been launched
+     * <p>Sets number of times the app has been launched</p>
      *
      * @param context AppRate.context
      * @param launchTimes number of launch times to set
@@ -223,6 +225,22 @@ final class PreferenceHelper {
     }
 
     /**
+     * <p>Sets to {@link #PREF_KEY_REMIND_LAUNCHES_NUMBER} the current number of app launches.</p>
+     * <p>The Library calls this method when the neutral button is clicked.</p>
+     *
+     * @param context context
+     */
+    static void setRemindLaunchesNumber(final Context context) {
+        getPreferencesEditor(context)
+                .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, getLaunchTimes(context))
+                .apply();
+    }
+
+    static short getRemindLaunchesNumber(final Context context) {
+        return (short) getPreferences(context).getInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0);
+    }
+
+    /**
      * <p>Clears shared preferences that were set up by clicking the Remind Button.</p>
      *
      * @param context context
@@ -230,6 +248,7 @@ final class PreferenceHelper {
     static void clearRemindButtonClick(final Context context) {
         getPreferencesEditor(context)
                 .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
+                .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0)
                 .apply();
     }
 }

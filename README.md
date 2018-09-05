@@ -92,6 +92,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .setInstallDays((byte) 0)                  // default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
       .setLaunchTimes((byte) 3)                  // default is 10, 3 means app is launched 3 or more times
       .setRemindInterval((byte) 1)               // default is 1, 1 means app is launched 1 or more days after neutral button clicked
+      // Since Release 1.2.1: .setRemindLaunchesNumber((byte) 1)         // default is 0, 1 means app is launched 1 or more times after neutral button clicked
       .monitor();                                // Monitors app launch times
   AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
 }
@@ -117,6 +118,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .setInstallDays((byte) 0)           // default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
       .setLaunchTimes((byte) 3)           // default is 10, 3 means app is launched 3 or more times
       .setRemindInterval((byte) 1)        // default is 1, 1 means app is launched 1 or more days after neutral button clicked
+      // Since Release 1.2.1: .setRemindLaunchesNumber((byte) 1)  // default is 0, 1 means app is launched 1 or more times after neutral button clicked
       .setSelectedAppLaunches((byte) 1)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
       .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
       .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is unlimited, 3 means 3 or less occurrences of the display of the Rate Dialog within a 365-day period
@@ -140,11 +142,12 @@ Default options of the Rate Dialog are as below:
 2. App is launched 10 or more days later than installation. Change via `AppRate#setInstallDays(byte)`.
 3. App is launched 10 or more times. Change via `AppRate#setLaunchTimes(byte)`.
 4. App is launched 1 or more days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
-5. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setSelectedAppLaunches(byte)`.
-6. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
-7. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
-8. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
-9. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
+Since Release 1.2.1: 5. App is launched 0 or more times after neutral button clicked. Change via `AppRate#setRemindLaunchesNumber(byte)`.
+6. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setSelectedAppLaunches(byte)`.
+7. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
+8. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
+9. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
+10. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
 
 ### OnClickButtonListener interface
 
