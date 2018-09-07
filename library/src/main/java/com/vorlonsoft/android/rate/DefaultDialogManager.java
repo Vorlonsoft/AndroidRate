@@ -118,7 +118,7 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             final Intent[] intentsToAppStores;
-            final String packageName = context.getPackageName();
+            final String packageName = AppInformation.getInstance(context).getAppPackageName();
             if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
                 switch (storeOptions.getStoreType()) {
                     case AMAZON:
