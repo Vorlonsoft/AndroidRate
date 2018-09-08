@@ -56,7 +56,7 @@ If you don't want to wait for the next release, you can add the Sonatype's snaps
 Then add the following dependency to your relevant project modules `build.gradle` files:
 
     dependencies {
-        implementation "com.vorlonsoft:androidrate:+"
+        implementation "com.vorlonsoft:androidrate:1.2.1-SNAPSHOT"
     }
 
 ## Usage
