@@ -18,6 +18,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 
@@ -40,6 +41,13 @@ final class Utils {
         return ((Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) || (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1));
     }
 
+    /**
+     * <p>Creates {@link android.app.AlertDialog.Builder}.</p>
+     *
+     * @param context activity context
+     * @param themeResId theme resource ID
+     * @return created {@link android.app.AlertDialog.Builder} object
+     */
     @SuppressLint("ObsoleteSdkInt")
     @SuppressWarnings("ConstantConditions")
     @Nullable
@@ -48,9 +56,34 @@ final class Utils {
             Log.i(TAG, "Failed to create AlertDialog.Builder");
             return null;
         } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            return new AlertDialog.Builder(context);
+            return new android.app.AlertDialog.Builder(context);
         } else {
-            return new AlertDialog.Builder(context, themeResId);
+            if (themeResId == 0) {
+                return new android.app.AlertDialog.Builder(context);
+            } else {
+                return new android.app.AlertDialog.Builder(context, themeResId);
+            }
+        }
+    }
+
+    /**
+     * <p>Creates {@link androidx.appcompat.app.AlertDialog.Builder}.</p>
+     *
+     * @param context activity context
+     * @param themeResId theme resource ID
+     * @return created {@link androidx.appcompat.app.AlertDialog.Builder} object
+     */
+    @SuppressWarnings("ConstantConditions")
+    @Nullable
+    @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    static androidx.appcompat.app.AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context, final int themeResId) {
+        if (context == null) {
+            Log.i(TAG, "Failed to create AlertDialog.Builder");
+            return null;
+        } else if (themeResId == 0) {
+            return new androidx.appcompat.app.AlertDialog.Builder(context);
+        } else {
+            return new androidx.appcompat.app.AlertDialog.Builder(context, themeResId);
         }
     }
 

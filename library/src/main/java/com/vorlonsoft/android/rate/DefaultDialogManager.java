@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 
 import java.lang.ref.WeakReference;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
@@ -43,7 +44,6 @@ import static com.vorlonsoft.android.rate.StoreType.SAMSUNG;
 import static com.vorlonsoft.android.rate.StoreType.SLIDEME;
 import static com.vorlonsoft.android.rate.StoreType.TENCENT;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
-import static com.vorlonsoft.android.rate.Utils.getDialogBuilder;
 import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
 /**
@@ -230,6 +230,19 @@ public class DefaultDialogManager implements DialogManager {
 
     protected void setContext(Context context){
         this.context = context;
+    }
+
+    /**
+     * <p>Creates {@link android.app.AlertDialog.Builder}.</p>
+     *
+     * @param context activity context
+     * @param themeResId theme resource ID
+     * @return created {@link android.app.AlertDialog.Builder} object
+     */
+    @SuppressWarnings("WeakerAccess")
+    @Nullable
+    protected AlertDialog.Builder getDialogBuilder(@NonNull final Context context, final int themeResId) {
+        return Utils.getDialogBuilder(context, themeResId);
     }
 
     /**
