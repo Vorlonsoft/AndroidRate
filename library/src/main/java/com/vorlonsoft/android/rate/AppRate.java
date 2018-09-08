@@ -82,11 +82,11 @@ public final class AppRate {
         }
     }
 
-    private AppRate(Context context) {
+    private AppRate(final Context context) {
         this.context = context.getApplicationContext();
     }
 
-    public static AppRate with(Context context) {
+    public static AppRate with(final Context context) {
         if (singleton == null) {
             synchronized (AppRate.class) {
                 if (singleton == null) {
@@ -114,7 +114,7 @@ public final class AppRate {
         return isMeetsConditions;
     }
 
-    private static boolean isOverDate(long targetDate, byte threshold) {
+    private boolean isOverDate(long targetDate, byte threshold) {
         return new Date().getTime() - targetDate >= threshold * DAY_IN_MILLIS;
     }
 
@@ -189,11 +189,11 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets minimal number of app launches until the Rating Dialog pops up for the next time after
-     * neutral button clicked.</p>
+     * <p>Sets the minimal number of app's launches after neutral button clicked until the Rating
+     * Dialog pops up next time.</p>
      *
-     * @param remindLaunchesNumber number of app launches, default is 0, 1 means app is launched 1 or more times
-     *                             after neutral button clicked
+     * @param remindLaunchesNumber number of app launches, default is 0, 1 means app is launched 1
+     *                             or more times after neutral button clicked
      * @return AppRate singleton object
      */
     public AppRate setRemindLaunchesNumber(@SuppressWarnings("SameParameterValue") byte remindLaunchesNumber) {
@@ -568,6 +568,7 @@ public final class AppRate {
      *
      * @return true if the Rate Dialog is currently showing, false otherwise.
      */
+    @SuppressWarnings("unused")
     public boolean isShowingRateDialog() {
         return ((dialog != null) && (dialog.get() != null)) && dialog.get().isShowing();
     }
