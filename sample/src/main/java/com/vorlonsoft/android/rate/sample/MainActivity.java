@@ -62,18 +62,21 @@ public class MainActivity extends AppCompatActivity {
         DialogManager.Factory appCompatDialogManagerFactory = new AppCompatDialogManager.Factory();
 
         AppRate.with(this)
-                .setStoreType(StoreType.GOOGLEPLAY) /* default GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
+                .setStoreType(StoreType.GOOGLEPLAY) /* default is GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
                                                      *         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
                                                      *         SLIDEME (SlideME Marketplace), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
                                                      *         setStoreType(BLACKBERRY, long) (BlackBerry World, long - your application ID),
-                                                     *         setStoreType(APPLE, long) (Apple App Store, long - your application ID) and
-                                                     *         setStoreType(String) (Any other store, String - a full URI to your app) */
-                .setInstallDays((byte) 3)           // default 10, 0 means install day.
-                .setLaunchTimes((byte) 10)          // default 10 times.
-                .setRemindInterval((byte) 2)        // default 1 day.
-                .setSelectedAppLaunches((byte) 4)     // default 1 (each launch).
-                .setShowLaterButton(true)           // default true.
-                .setDebug(true)                     // default false.
+                                                     *         setStoreType(APPLE, long) (Apple App Store, long - your application ID),
+                                                     *         setStoreType(String...) (Any other store/stores, String... - an URI or array of URIs to your app) and
+                                                     *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
+                .setInstallDays((byte) 3)           // default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
+                .setLaunchTimes((byte) 10)          // default is 10, 3 means app is launched 3 or more times
+                .setRemindInterval((byte) 2)        // default is 1, 1 means app is launched 1 or more days after neutral button clicked
+                .setRemindLaunchesNumber((byte) 1)  // default is 0, 1 means app is launched 1 or more times after neutral button clicked
+                .setSelectedAppLaunches((byte) 4)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
+                .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
+                .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is unlimited, 3 means 3 or less occurrences of the display of the Rate Dialog within a 365-day period
+                .setDebug(true)                    // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
                 .setCancelable(false)               // default false.
                 .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which)))
                 /* uncomment to test AppCompatDialogManager instead DefaultDialogManager */
@@ -88,17 +91,14 @@ public class MainActivity extends AppCompatActivity {
                 .setTextNever(R.string.new_rate_dialog_never)
                 .setTextRateNow(R.string.new_rate_dialog_ok)
                 /* comment to use library strings instead app strings - end */
-                .monitor();
+                .monitor();                         // Monitors the app launch times
 
-        if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) {
-            //Check that Google Play is available
-            if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
-                // Show a dialog if meets conditions
-                AppRate.showRateDialogIfMeetsConditions(this);
+        if (AppRate.with(this).getStoreType() == StoreType.GOOGLEPLAY) { // Checks that current app store type from library options is StoreType.GOOGLEPLAY
+            if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) { // Checks that Google Play is available
+                AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
             }
         } else {
-            // Show a dialog if meets conditions
-            AppRate.showRateDialogIfMeetsConditions(this);
+            AppRate.showRateDialogIfMeetsConditions(this);     // Shows the Rate Dialog when conditions are met
         }
     }
 }
