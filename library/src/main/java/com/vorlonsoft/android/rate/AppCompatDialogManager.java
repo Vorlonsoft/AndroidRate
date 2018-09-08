@@ -9,7 +9,6 @@ package com.vorlonsoft.android.rate;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 
 import java.lang.ref.WeakReference;
@@ -18,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
-
-import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 
 /**
  * <p>AppCompatDialogManager Class - v7 AppCompat library dialog manager class implements
@@ -55,18 +52,11 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      * @param themeResId theme resource ID
      * @return created {@link androidx.appcompat.app.AlertDialog.Builder} object
      */
-    @SuppressWarnings({"WeakerAccess", "ConstantConditions"})
+    @SuppressWarnings("WeakerAccess")
     @Nullable
     @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    protected static androidx.appcompat.app.AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context, final int themeResId) {
-        if (context == null) {
-            Log.i(TAG, "Failed to create AlertDialog.Builder");
-            return null;
-        } else if (themeResId == 0) {
-            return new AlertDialog.Builder(context);
-        } else {
-            return new AlertDialog.Builder(context, themeResId);
-        }
+    protected AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context, final int themeResId) {
+        return Utils.getAppCompatDialogBuilder(context, themeResId);
     }
 
     /**
