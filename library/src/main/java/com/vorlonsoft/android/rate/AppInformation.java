@@ -25,10 +25,8 @@ final class AppInformation {
 
     /** <p>The {@link AppInformation} singleton.</p> */
     private static volatile AppInformation singleton = null;
-    /** <p>The version number of app's package.</p> */
-    private final int appVersionCode;
-    /** <p>The major version number of app's package. <b>0 if API < 28.</b></p> */
-    private final int appVersionCodeMajor;
+    /** <p>The versionCode and the versionCodeMajor combined together as a single long value.</p> */
+    private final long appLongVersionCode;
     /** <p>The name of app's package.</p> */
     private final String appPackageName;
     /** <p>The version name of app's package.</p> */
@@ -48,8 +46,7 @@ final class AppInformation {
                            @NonNull final String appPackageName,
                            @NonNull final String appVersionName,
                            @Nullable final Drawable appIcon) {
-        this.appVersionCode = (int) (appLongVersionCode & 0b11111111111111111111111111111111L);
-        this.appVersionCodeMajor = (int) (appLongVersionCode >>> 32);
+        this.appLongVersionCode = appLongVersionCode;
         this.appPackageName = appPackageName;
         this.appVersionName = appVersionName;
         this.appIcon = appIcon;
@@ -112,7 +109,7 @@ final class AppInformation {
      */
     @SuppressWarnings({"WeakerAccess", "JavadocReference"})
     int getAppVersionCode() {
-        return appVersionCode;
+        return (int) (appLongVersionCode & 0b11111111111111111111111111111111L);
     }
 
     /**
@@ -125,7 +122,7 @@ final class AppInformation {
      */
     @SuppressWarnings({"WeakerAccess", "JavadocReference"})
     int getAppVersionCodeMajor() {
-        return appVersionCodeMajor;
+        return (int) (appLongVersionCode >>> 32);
     }
 
     /**
@@ -135,14 +132,13 @@ final class AppInformation {
      * <p>The {@link android.R.styleable#AndroidManifest_versionCodeMajor versionCodeMajor} is
      * placed in the upper 32 bits.</p>
      *
-     * @return versionCode and versionCodeMajor combined together as a single long value, <b>appVersionCode if
-     *         API < 28</b>
+     * @return versionCode and versionCodeMajor combined together as a single long value
      * @see #getAppVersionCode()
      * @see #getAppVersionCodeMajor()
      */
     @SuppressWarnings({"WeakerAccess", "JavadocReference"})
     long getAppLongVersionCode() {
-        return (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) ? appVersionCode : ((((long) appVersionCodeMajor) << 32) | (((long) appVersionCode) & 0b11111111111111111111111111111111L));
+        return appLongVersionCode;
     }
 
     /**
