@@ -76,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 .setSelectedAppLaunches((byte) 4)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
                 .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
                 .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is unlimited, 3 means 3 or less occurrences of the display of the Rate Dialog within a 365-day period
-                .setDebug(true)                    // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
+                .setVersionCodeCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version code is installed
+                .setVersionNameCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version name is installed
+                .setDebug(true)                     // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
                 .setCancelable(false)               // default false.
                 .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which)))
                 /* uncomment to test AppCompatDialogManager instead DefaultDialogManager */

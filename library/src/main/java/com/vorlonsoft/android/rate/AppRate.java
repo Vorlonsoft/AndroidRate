@@ -35,10 +35,14 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindInterval;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindLaunchesNumber;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getVersionCode;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getVersionName;
 import static com.vorlonsoft.android.rate.PreferenceHelper.isFirstLaunch;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setCustomEventCount;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setFirstLaunchSharedPreferences;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setVersionCode;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setVersionName;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
@@ -57,6 +61,7 @@ import static com.vorlonsoft.android.rate.StoreType.YANDEX;
  */
 
 public final class AppRate {
+    /** <p>The {@link AppRate} singleton object.</p> */
     @SuppressLint("StaticFieldLeak")
     private static volatile AppRate singleton = null;
     private final Map<String, Short> customEventsCounts;
@@ -64,6 +69,8 @@ public final class AppRate {
     private final DialogOptions dialogOptions = new DialogOptions();
     private final StoreOptions storeOptions = new StoreOptions();
     private boolean isDebug = false;
+    private boolean isVersionCodeCheck = false;
+    private boolean isVersionNameCheck = false;
     private byte installDate = (byte) 10;
     private byte appLaunchTimes = (byte) 10;
     private byte remindInterval = (byte) 1;
@@ -142,7 +149,7 @@ public final class AppRate {
      * @param dialogLaunchTimes the max number of the display of the Rate Dialog within a 365-day
      *                          period, default is {@code Short.MAX_VALUE}, {@code Short.MAX_VALUE}
      *                          means unlimited occurrences
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     @SuppressWarnings({"unused"})
     public AppRate set365DayPeriodMaxNumberDialogLaunchTimes(short dialogLaunchTimes) {
@@ -156,7 +163,7 @@ public final class AppRate {
      *
      * @param appLaunchTimes number of launches, default is 10, 3 means app is launched 3 or
      *                       more times
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setLaunchTimes(@SuppressWarnings("SameParameterValue") byte appLaunchTimes) {
         this.appLaunchTimes = appLaunchTimes;
@@ -168,7 +175,7 @@ public final class AppRate {
      *
      * @param installDate number of days, default is 10, 0 means install day, 10 means app is
      *                    launched 10 or more days later than installation
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setInstallDays(@SuppressWarnings("SameParameterValue") byte installDate) {
         this.installDate = installDate;
@@ -181,7 +188,7 @@ public final class AppRate {
      *
      * @param remindInterval number of days, default is 1, 1 means app is launched 1 or more days
      *                       after neutral button clicked
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") byte remindInterval) {
         this.remindInterval = remindInterval;
@@ -194,7 +201,7 @@ public final class AppRate {
      *
      * @param remindLaunchesNumber number of app launches, default is 0, 1 means app is launched 1
      *                             or more times after neutral button clicked
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setRemindLaunchesNumber(@SuppressWarnings("SameParameterValue") byte remindLaunchesNumber) {
         this.remindLaunchesNumber = remindLaunchesNumber;
@@ -204,7 +211,7 @@ public final class AppRate {
     /**
      * <p>Clears shared preferences that were set up by clicking the Remind Button.</p>
      *
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     @SuppressWarnings("unused")
     public AppRate clearRemindButtonClick() {
@@ -225,7 +232,7 @@ public final class AppRate {
      *
      * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch,
      *                            3 means every 3rd launch, etc
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      * @since 1.2.0
      */
     public AppRate setSelectedAppLaunches(@SuppressWarnings("SameParameterValue") byte selectedAppLaunches) {
@@ -240,7 +247,7 @@ public final class AppRate {
      *
      * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch,
      *                            3 means every 3rd launch, etc
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      * @deprecated since 1.2.0, use {@link #setSelectedAppLaunches(byte)} with the same {@code param} instead
      * @see #setSelectedAppLaunches(byte)
      */
@@ -253,7 +260,7 @@ public final class AppRate {
      * not.</p>
      *
      * @param isShowNeutralButton default is true, true means to show the Neutral button
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setShowLaterButton(@SuppressWarnings("SameParameterValue") boolean isShowNeutralButton) {
         dialogOptions.setShowNeutralButton(isShowNeutralButton);
@@ -264,7 +271,7 @@ public final class AppRate {
      * Decides if Never button appear in the rating dialog or not
      *
      * @param isShowNeverButton default is true
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     @SuppressWarnings("unused")
     public AppRate setShowNeverButton(boolean isShowNeverButton) {
@@ -306,7 +313,7 @@ public final class AppRate {
      * <p>Specifies the callback when the button of Rate Dialog is pressed.</p>
      *
      * @param listener implemented {@link OnClickButtonListener} Interface
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setOnClickButtonListener(OnClickButtonListener listener) {
         dialogOptions.setListener(listener);
@@ -377,7 +384,7 @@ public final class AppRate {
      * Sets whether the rating dialog is cancelable or not.
      *
      * @param cancelable default is false
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setCancelable(@SuppressWarnings("SameParameterValue") boolean cancelable) {
         dialogOptions.setCancelable(cancelable);
@@ -389,7 +396,7 @@ public final class AppRate {
      * the Positive button.</p>
      *
      * @param storeType one of the values defined by {@link StoreType.StoreWithoutApplicationId}
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      * @throws IllegalArgumentException if {@code storeType} isn't defined by {@link StoreType.StoreWithoutApplicationId}
      * @see #setStoreType(int, long)
      * @see #setStoreType(String...)
@@ -411,7 +418,7 @@ public final class AppRate {
      *
      * @param storeType one of the values defined by {@link StoreType.StoreWithApplicationId}
      * @param applicationId application ID in the {@code storeType} app store
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      * @throws IllegalArgumentException if {@code storeType} isn't defined by {@link StoreType.StoreWithApplicationId} or by {@link StoreType.StoreWithoutApplicationId}
      * @see #setStoreType(int)
      * @see #setStoreType(String...)
@@ -431,7 +438,7 @@ public final class AppRate {
      * @param uris an RFC 2396-compliant URI or array of URIs to your app,
      * e. g. {@code https://otherstore.com/app?id=com.yourapp}
      * or {@code otherstore://apps/com.yourapp}
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      * @throws IllegalArgumentException if {@code uris} equals null
      * @see #setStoreType(int)
      * @see #setStoreType(int, long)
@@ -468,7 +475,7 @@ public final class AppRate {
      * @param intents any custom intent or array of intents,
      * first will be executed ({@code startActivity(intents[0])}), if first fails,
      * second will be executed ({@code startActivity(intents[1])}), etc.
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      * @throws IllegalArgumentException if {@code intents} equals null
      * @see #setStoreType(int)
      * @see #setStoreType(int, long)
@@ -494,10 +501,10 @@ public final class AppRate {
     }
 
     /**
-     * Sets dialog theme. You can use a specific theme to inflate the dialog.
+     * <p>Sets dialog theme. You can use a specific theme to inflate the dialog.</p>
      *
      * @param themeResId theme resource ID, default is 0
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     @SuppressWarnings("unused")
     public AppRate setThemeResId(int themeResId) {
@@ -512,9 +519,9 @@ public final class AppRate {
      *
      * @param dialogManagerFactory object of class that implements {@link DialogManager.Factory},
      *                             default is {@link DefaultDialogManager.Factory} class object
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setDialogManagerFactory(@Nullable DialogManager.Factory dialogManagerFactory) {
         this.dialogManagerFactory.clearDialogManager();
         if (dialogManagerFactory == null) {
@@ -527,6 +534,30 @@ public final class AppRate {
     }
 
     /**
+     * <p>Sets the check whether the version code of the app is changed.</p>
+     *
+     * @param isVersionCodeCheck true means to re-enable the Rate Dialog if a new version of app
+     *                           with different version code is installed, default is false
+     * @return the {@link AppRate} singleton object
+     */
+    public AppRate setVersionCodeCheck(boolean isVersionCodeCheck) {
+        this.isVersionCodeCheck = isVersionCodeCheck;
+        return this;
+    }
+
+    /**
+     * <p>Sets the check whether the version name of the app is changed.</p>
+     *
+     * @param isVersionNameCheck true means to re-enable the Rate Dialog if a new version of app
+     *                           with different version name is installed, default is false
+     * @return the {@link AppRate} singleton object
+     */
+    public AppRate setVersionNameCheck(boolean isVersionNameCheck) {
+        this.isVersionNameCheck = isVersionNameCheck;
+        return this;
+    }
+
+    /**
      * <p>Monitors launches of the application.</p>
      * <p>Call this method when the {@code onCreate()} of the app's launcher activity is launched.</p>     *
      */
@@ -535,6 +566,18 @@ public final class AppRate {
             setFirstLaunchSharedPreferences(context);
         } else {
             PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
+            if (AppInformation.getInstance(context).getAppLongVersionCode() != getVersionCode(context)) {
+                if (isVersionCodeCheck) {
+                    setIsAgreeShowDialog(context, true);
+                }
+                setVersionCode(context);
+            }
+            if (!AppInformation.getInstance(context).getAppVersionName().equals(getVersionName(context))) {
+                if (isVersionNameCheck) {
+                    setIsAgreeShowDialog(context, true);
+                }
+                setVersionName(context);
+            }
         }
     }
 
@@ -686,7 +729,7 @@ public final class AppRate {
      *
      * @param isDebug default is false, true ensures that the Rate Dialog will be shown each time
      *                the app is launched
-     * @return AppRate singleton object
+     * @return the {@link AppRate} singleton object
      */
     public AppRate setDebug(@SuppressWarnings("SameParameterValue") boolean isDebug) {
         this.isDebug = isDebug;

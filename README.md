@@ -122,6 +122,8 @@ protected void onCreate(Bundle savedInstanceState) {
       .setSelectedAppLaunches((byte) 1)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
       .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
       .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is unlimited, 3 means 3 or less occurrences of the display of the Rate Dialog within a 365-day period
+      // Since Release 1.2.1: .setVersionCodeCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version code is installed
+      // Since Release 1.2.1: .setVersionNameCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version name is installed
       .setDebug(false)                    // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
       .setOnClickButtonListener(which -> Log.d(this.getLocalClassName(), Byte.toString(which))) // Java 8+, change for Java 7-
       .monitor();                         // Monitors the app launch times
@@ -146,8 +148,10 @@ Since Release 1.2.1: 5. App is launched 0 or more times after neutral button cli
 6. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setSelectedAppLaunches(byte)`.
 7. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
 8. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
-9. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
-10. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
+Since Release 1.2.1: 9. Don't re-enable the Rate Dialog if a new version of app with different version code is installed. Change via `AppRate#setVersionCodeCheck(boolean)`.
+Since Release 1.2.1: 10. Don't re-enable the Rate Dialog if a new version of app with different version name is installed. Change via `AppRate#setVersionNameCheck(boolean)`.
+11. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
+12. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
 
 ### OnClickButtonListener interface
 
