@@ -23,14 +23,12 @@ import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 
 final class AppInformation {
 
-    /** <p>Thread-safe and a fast {@link AppInformation} singleton implementation.</p> */
+    /** <p>The {@link AppInformation} singleton.</p> */
     private static volatile AppInformation singleton = null;
     /** <p>The version number of app's package.</p> */
     private final int appVersionCode;
     /** <p>The major version number of app's package. <b>0 if API < 28.</b></p> */
     private final int appVersionCodeMajor;
-    /** <p>The versionCode and the versionCodeMajor combined together as a single long value. <b>0 if API < 28.</b></p> */
-    private final long appLongVersionCode;
     /** <p>The name of app's package.</p> */
     private final String appPackageName;
     /** <p>The version name of app's package.</p> */
@@ -41,35 +39,31 @@ final class AppInformation {
     /**
      * <p>Constructor of AppInformation class.</p>
      *
-     * @param appVersionCode the version number of app's package
      * @param appLongVersionCode the versionCode and the versionCodeMajor combined together as a single long value
      * @param appPackageName the name of app's package
      * @param appVersionName the version name of app's package
      * @param appIcon the icon associated with an app
      */
-    private AppInformation(final int appVersionCode,
-                           final long appLongVersionCode,
+    private AppInformation(final long appLongVersionCode,
                            @NonNull final String appPackageName,
                            @NonNull final String appVersionName,
                            @Nullable final Drawable appIcon) {
-        this.appVersionCode = appVersionCode;
+        this.appVersionCode = (int) (appLongVersionCode & 0b11111111111111111111111111111111L);
         this.appVersionCodeMajor = (int) (appLongVersionCode >>> 32);
-        this.appLongVersionCode = appLongVersionCode;
         this.appPackageName = appPackageName;
         this.appVersionName = appVersionName;
         this.appIcon = appIcon;
     }
 
     /**
-     * <p>Creates thread-safe and a fast {@link AppInformation} singleton implementation.</p>
+     * <p>Creates the {@link AppInformation} singleton.</p>
      *
      * @param context context
-     * @return thread-safe and a fast {@link AppInformation} singleton implementation
+     * @return the {@link AppInformation} singleton
      */
     @NonNull
     static AppInformation getInstance(@NonNull final Context context) {
         if (singleton == null) {
-            final int appVersionCode;
             final long appLongVersionCode;
             final String appPackageName = context.getPackageName();
             final String appVersionName;
@@ -90,21 +84,18 @@ final class AppInformation {
             }
             if (packageInfo != null) {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-                    appVersionCode = packageInfo.versionCode;
-                    appLongVersionCode = 0L;
+                    appLongVersionCode = ((long) packageInfo.versionCode) & 0b11111111111111111111111111111111L;
                 } else {
                     appLongVersionCode = packageInfo.getLongVersionCode();
-                    appVersionCode = (int) (appLongVersionCode & 0b11111111111111111111111111111111L);
                 }
                 appVersionName = packageInfo.versionName;
             } else {
-                appVersionCode = 0;
                 appLongVersionCode = 0L;
                 appVersionName = "";
             }
-            synchronized (AppRate.class) {
+            synchronized (AppInformation.class) {
                 if (singleton == null) {
-                    singleton = new AppInformation(appVersionCode, appLongVersionCode, appPackageName, appVersionName, appIcon);
+                    singleton = new AppInformation(appLongVersionCode, appPackageName, appVersionName, appIcon);
                 }
             }
         }
@@ -119,7 +110,7 @@ final class AppInformation {
      * @see #getAppVersionCodeMajor()
      * @see #getAppLongVersionCode()
      */
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "JavadocReference"})
     int getAppVersionCode() {
         return appVersionCode;
     }
@@ -132,7 +123,7 @@ final class AppInformation {
      * @see #getAppVersionCode()
      * @see #getAppLongVersionCode()
      */
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "JavadocReference"})
     int getAppVersionCodeMajor() {
         return appVersionCodeMajor;
     }
@@ -144,14 +135,14 @@ final class AppInformation {
      * <p>The {@link android.R.styleable#AndroidManifest_versionCodeMajor versionCodeMajor} is
      * placed in the upper 32 bits.</p>
      *
-     * @return versionCode and versionCodeMajor combined together as a single long value, <b>0 if
+     * @return versionCode and versionCodeMajor combined together as a single long value, <b>appVersionCode if
      *         API < 28</b>
      * @see #getAppVersionCode()
      * @see #getAppVersionCodeMajor()
      */
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "JavadocReference"})
     long getAppLongVersionCode() {
-        return appLongVersionCode;
+        return (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) ? appVersionCode : ((((long) appVersionCodeMajor) << 32) | (((long) appVersionCode) & 0b11111111111111111111111111111111L));
     }
 
     /**
@@ -169,6 +160,7 @@ final class AppInformation {
      *
      * @return the version name of app's package
      */
+    @SuppressWarnings("JavadocReference")
     String getAppVersionName() {
         return appVersionName;
     }
