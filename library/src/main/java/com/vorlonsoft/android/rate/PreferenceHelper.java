@@ -28,11 +28,7 @@ final class PreferenceHelper {
     private static final String PREF_FILE_NAME = "androidrate_pref_file";
 
     private static final String PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES = "androidrate_365_day_period_dialog_launch_times";
-
-    /**
-     * The key prefix for each custom event,
-     * so that there is no clash with existing keys (PREF_KEY_INSTALL_DATE etc.)
-     */
+    /** The key prefix for each custom event, so that there is no clash with existing keys (PREF_KEY_INSTALL_DATE etc.) */
     private static final String PREF_KEY_CUSTOM_EVENT_PREFIX = "androidrate_custom_event_prefix_";
 
     private static final String PREF_KEY_DIALOG_FIRST_LAUNCH_TIME = "androidrate_dialog_first_launch_time";
@@ -46,6 +42,10 @@ final class PreferenceHelper {
     private static final String PREF_KEY_REMIND_INTERVAL = "androidrate_remind_interval";
 
     private static final String PREF_KEY_REMIND_LAUNCHES_NUMBER = "androidrate_remind_launches_number";
+
+    private static final String PREF_KEY_VERSION_CODE = "androidrate_version_code";
+
+    private static final String PREF_KEY_VERSION_NAME = "androidrate_version_name";
 
     private PreferenceHelper() {
         throw new AssertionError();
@@ -99,11 +99,13 @@ final class PreferenceHelper {
                 .putLong(PREF_KEY_INSTALL_DATE, new Date().getTime())
                 .putInt(PREF_KEY_LAUNCH_TIMES, 1)
                 .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
-                .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0);
+                .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0)
+                .putLong(PREF_KEY_VERSION_CODE, AppInformation.getInstance(context).getAppLongVersionCode())
+                .putString(PREF_KEY_VERSION_NAME, AppInformation.getInstance(context).getAppVersionName())
+                .apply();
         if (getIsAgreeShowDialog(context)) { //if (get() == true) set(true); - NOT error!
-            preferencesEditor.putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
+            setIsAgreeShowDialog(context, true);
         }
-        preferencesEditor.apply();
     }
 
     static void increment365DayPeriodDialogLaunchTimes(final Context context) {
@@ -250,5 +252,25 @@ final class PreferenceHelper {
                 .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
                 .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0)
                 .apply();
+    }
+
+    static void setVersionCode(final Context context) {
+        getPreferencesEditor(context)
+                .putLong(PREF_KEY_VERSION_CODE, AppInformation.getInstance(context).getAppLongVersionCode())
+                .apply();
+    }
+
+    static long getVersionCode(final Context context) {
+        return getPreferences(context).getLong(PREF_KEY_VERSION_CODE, 0L);
+    }
+
+    static void setVersionName(final Context context) {
+        getPreferencesEditor(context)
+                .putString(PREF_KEY_VERSION_NAME, AppInformation.getInstance(context).getAppVersionName())
+                .apply();
+    }
+
+    static String getVersionName(final Context context) {
+        return getPreferences(context).getString(PREF_KEY_VERSION_NAME, "");
     }
 }

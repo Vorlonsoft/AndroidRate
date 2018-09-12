@@ -22,8 +22,7 @@ import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
  */
 
 final class AppInformation {
-
-    /** <p>The {@link AppInformation} singleton.</p> */
+    /** <p>The {@link AppInformation} singleton object.</p> */
     private static volatile AppInformation singleton = null;
     /** <p>The versionCode and the versionCodeMajor combined together as a single long value.</p> */
     private final long appLongVersionCode;
@@ -53,10 +52,10 @@ final class AppInformation {
     }
 
     /**
-     * <p>Creates the {@link AppInformation} singleton.</p>
+     * <p>Creates the {@link AppInformation} singleton object.</p>
      *
      * @param context context
-     * @return the {@link AppInformation} singleton
+     * @return the {@link AppInformation} singleton object
      */
     @NonNull
     static AppInformation getInstance(@NonNull final Context context) {
