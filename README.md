@@ -56,7 +56,7 @@ If you don't want to wait for the next release, you can add the Sonatype's snaps
 Then add the following dependency to your relevant project modules `build.gradle` files:
 
     dependencies {
-        implementation "com.vorlonsoft:androidrate:1.2.1-SNAPSHOT"
+        implementation "com.vorlonsoft:androidrate:1.2.2-SNAPSHOT"
     }
 
 ## Usage
@@ -92,7 +92,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .setInstallDays((byte) 0)                  // default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
       .setLaunchTimes((byte) 3)                  // default is 10, 3 means app is launched 3 or more times
       .setRemindInterval((byte) 1)               // default is 1, 1 means app is launched 1 or more days after neutral button clicked
-      // Since Release 1.2.1: .setRemindLaunchesNumber((byte) 1)         // default is 0, 1 means app is launched 1 or more times after neutral button clicked
+      .setRemindLaunchesNumber((byte) 1)         // default is 0, 1 means app is launched 1 or more times after neutral button clicked
       .monitor();                                // Monitors app launch times
   AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
 }
@@ -115,15 +115,15 @@ protected void onCreate(Bundle savedInstanceState) {
                                            *         setStoreType(APPLE, long) (Apple App Store, long - your application ID),
                                            *         setStoreType(String...) (Any other store/stores, String... - an URI or array of URIs to your app) and
                                            *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
-      .setInstallDays((byte) 0)           // default is 10, 0 means install day, 10 means app is launched 10 or more days later than installation
+      .setTimeToWait(Time.DAY, (short) 0) // default is 10 days, 0 means install millisecond, 10 means app is launched 10 or more time units later than installation
       .setLaunchTimes((byte) 3)           // default is 10, 3 means app is launched 3 or more times
-      .setRemindInterval((byte) 1)        // default is 1, 1 means app is launched 1 or more days after neutral button clicked
-      // Since Release 1.2.1: .setRemindLaunchesNumber((byte) 1)  // default is 0, 1 means app is launched 1 or more times after neutral button clicked
+      .setRemindTimeToWait(Time.DAY, (short) 2) // default is 1 day, 1 means app is launched 1 or more time units after neutral button clicked
+      .setRemindLaunchesNumber((byte) 1)  // default is 0, 1 means app is launched 1 or more times after neutral button clicked
       .setSelectedAppLaunches((byte) 1)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
       .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
       .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is unlimited, 3 means 3 or less occurrences of the display of the Rate Dialog within a 365-day period
-      // Since Release 1.2.1: .setVersionCodeCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version code is installed
-      // Since Release 1.2.1: .setVersionNameCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version name is installed
+      .setVersionCodeCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version code is installed
+      .setVersionNameCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version name is installed
       .setDebug(false)                    // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
       .setOnClickButtonListener(which -> Log.d(this.getLocalClassName(), Byte.toString(which))) // Java 8+, change for Java 7-
       .monitor();                         // Monitors the app launch times
@@ -141,15 +141,15 @@ protected void onCreate(Bundle savedInstanceState) {
 Default options of the Rate Dialog are as below:
 
 1. Google Play launches when you press the positive button. Change via `AppRate#setStoreType(int)`, `AppRate#setStoreType(int, long)`, `AppRate#setStoreType(String...)` or `AppRate#setStoreType(Intent...)`.
-2. App is launched 10 or more days later than installation. Change via `AppRate#setInstallDays(byte)`.
+2. App is launched 10 or more days later than installation. Change via `AppRate#setTimeToWait(long, short)` or `AppRate#setInstallDays(byte)`.
 3. App is launched 10 or more times. Change via `AppRate#setLaunchTimes(byte)`.
-4. App is launched 1 or more days after neutral button clicked. Change via `AppRate#setRemindInterval(byte)`.
-Since Release 1.2.1: 5. App is launched 0 or more times after neutral button clicked. Change via `AppRate#setRemindLaunchesNumber(byte)`.
+4. App is launched 1 or more days after neutral button clicked. Change via `AppRate#setRemindTimeToWait(long, short)` or `AppRate#setRemindInterval(byte)`.
+5. App is launched 0 or more times after neutral button clicked. Change via `AppRate#setRemindLaunchesNumber(byte)`.
 6. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setSelectedAppLaunches(byte)`.
 7. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
 8. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
-Since Release 1.2.1: 9. Don't re-enable the Rate Dialog if a new version of app with different version code is installed. Change via `AppRate#setVersionCodeCheck(boolean)`.
-Since Release 1.2.1: 10. Don't re-enable the Rate Dialog if a new version of app with different version name is installed. Change via `AppRate#setVersionNameCheck(boolean)`.
+9. Don't re-enable the Rate Dialog if a new version of app with different version code is installed. Change via `AppRate#setVersionCodeCheck(boolean)`.
+10. Don't re-enable the Rate Dialog if a new version of app with different version name is installed. Change via `AppRate#setVersionNameCheck(boolean)`.
 11. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
 12. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
 

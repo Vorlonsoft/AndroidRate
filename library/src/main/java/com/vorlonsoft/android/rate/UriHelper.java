@@ -26,7 +26,7 @@ import static com.vorlonsoft.android.rate.StoreType.YANDEX;
  * <p>UriHelper Class - uri helper class of the AndroidRate library.</p>
  *
  * @since    0.1.3
- * @version  1.2.0
+ * @version  1.2.1
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
  * <p>DialogOptions Class - dialog options class of the AndroidRate library.</p>
  *
  * @since    0.5.1
- * @version  1.2.0
+ * @version  1.2.1
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

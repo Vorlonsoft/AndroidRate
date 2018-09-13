@@ -16,7 +16,7 @@ import android.content.Context;
  * dialog (from v7 AppCompat library etc.).</p>
  *
  * @since    1.0.2
- * @version  1.2.0
+ * @version  1.2.1
  * @author   Alexander Savin
  * @author   Antoine Vianey
  * @see DialogManager.Factory
@@ -39,7 +39,7 @@ public interface DialogManager {
      * custom dialog (from v7 AppCompat library etc.).</p>
      *
      * @since    1.0.2
-     * @version  1.2.0
+     * @version  1.2.1
      * @author   Alexander Savin
      * @author   Antoine Vianey
      * @see DialogManager
