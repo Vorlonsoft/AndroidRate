@@ -61,6 +61,7 @@ public final class DialogOptions {
     DialogOptions() {
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean shouldShowNeutralButton() {
         return showNeutralButton;
     }
@@ -69,6 +70,7 @@ public final class DialogOptions {
         this.showNeutralButton = showNeutralButton;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean shouldShowNegativeButton() {
         return showNegativeButton;
     }
@@ -77,6 +79,7 @@ public final class DialogOptions {
         this.showNegativeButton = showNegativeButton;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean shouldShowTitle() {
         return showTitle;
     }
@@ -85,6 +88,7 @@ public final class DialogOptions {
         this.showTitle = showTitle;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public boolean getCancelable() {
         return cancelable;
     }
@@ -155,6 +159,7 @@ public final class DialogOptions {
         this.listener = new SoftReference<>(listener);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getTitleText(Context context) {
         if (titleText == null) {
             return context.getString(textTitleResId);
@@ -166,6 +171,7 @@ public final class DialogOptions {
         this.titleText = titleText;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getMessageText(Context context) {
         if (messageText == null) {
             return context.getString(textMessageResId);
@@ -177,6 +183,7 @@ public final class DialogOptions {
         this.messageText = messageText;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getPositiveText(Context context) {
         if (positiveText == null) {
             return context.getString(textPositiveResId);
@@ -188,6 +195,7 @@ public final class DialogOptions {
         this.positiveText = positiveText;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getNeutralText(Context context) {
         if (neutralText == null) {
             return context.getString(textNeutralResId);
@@ -199,6 +207,7 @@ public final class DialogOptions {
         this.neutralText = neutralText;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getNegativeText(Context context) {
         if (negativeText == null) {
             return context.getString(textNegativeResId);
@@ -210,6 +219,7 @@ public final class DialogOptions {
         this.negativeText = negativeText;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public int getThemeResId() {
         return themeResId;
     }

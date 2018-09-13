@@ -21,15 +21,13 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
  * @author   Alexander Savin
  */
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class DialogType {
     /** Apple Rate Dialog */
-    @SuppressWarnings("WeakerAccess")
     public static final int APPLE = 0;
     /** Classic Rate Dialog */
-    @SuppressWarnings("WeakerAccess")
     public static final int CLASSIC = 1;
     /** Modern Rate Dialog */
-    @SuppressWarnings("WeakerAccess")
     public static final int MODERN = 2;
 
     private DialogType() {
@@ -41,7 +39,6 @@ public class DialogType {
      * <p>Annotated element, represents a logical type and its value should be one of the following
      * constants: APPLE, CLASSIC, MODERN.</p>
      */
-    @SuppressWarnings("WeakerAccess")
     @Documented
     @Retention(SOURCE)
     @IntDef({

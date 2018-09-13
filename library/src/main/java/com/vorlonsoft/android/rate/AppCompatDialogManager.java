@@ -37,6 +37,7 @@ import androidx.appcompat.app.AlertDialog;
  */
 
 public class AppCompatDialogManager extends DefaultDialogManager implements DialogManager {
+    /** <p>The WeakReference to the {@link AppCompatDialogManager} singleton object.</p> */
     private static volatile WeakReference<DialogManager> singleton = null;
 
     @SuppressWarnings("WeakerAccess")

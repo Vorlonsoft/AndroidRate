@@ -63,56 +63,50 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
  */
 
 public class DefaultDialogManager implements DialogManager {
+    /** <p>The WeakReference to the {@link DefaultDialogManager} singleton object.</p> */
     private static volatile WeakReference<DefaultDialogManager> singleton = null;
     private final StoreOptions storeOptions;
     private final OnClickButtonListener listener;
     @SuppressWarnings("WeakerAccess")
     protected final DialogOptions dialogOptions;
+    @SuppressWarnings({"WeakerAccess", "UnusedAssignment"})
     protected Context context = null;
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
-        @Override
-        public void onShow(DialogInterface dialog) {
-            if (getDialogFirstLaunchTime(context) == 0L) {
-                setDialogFirstLaunchTime(context);
-            }
-            increment365DayPeriodDialogLaunchTimes(context);
-            if (isLollipop()) {
-                try {
-                    final Button positiveButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
-                    if (positiveButton != null) {
-                        final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
-                        if ((linearLayout != null) && (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
-                            final Button neutralButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
-                            final Button negativeButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
-                            linearLayout.setOrientation(LinearLayout.VERTICAL);
-                            linearLayout.setGravity(Gravity.END);
-                            if (neutralButton != null) {
-                                linearLayout.removeView(neutralButton);
-                                if (negativeButton != null) {
-                                    linearLayout.removeView(negativeButton);
-                                    linearLayout.addView(negativeButton);
-                                }
-                                linearLayout.addView(neutralButton);
-                            } else if (negativeButton != null) {
+    protected final DialogInterface.OnShowListener showListener = dialog -> {
+        if (getDialogFirstLaunchTime(context) == 0L) {
+            setDialogFirstLaunchTime(context);
+        }
+        increment365DayPeriodDialogLaunchTimes(context);
+        if (isLollipop()) {
+            try {
+                final Button positiveButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
+                if (positiveButton != null) {
+                    final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
+                    if ((linearLayout != null) && (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
+                        final Button neutralButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
+                        final Button negativeButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
+                        linearLayout.setOrientation(LinearLayout.VERTICAL);
+                        linearLayout.setGravity(Gravity.END);
+                        if (neutralButton != null) {
+                            linearLayout.removeView(neutralButton);
+                            if (negativeButton != null) {
                                 linearLayout.removeView(negativeButton);
                                 linearLayout.addView(negativeButton);
                             }
+                            linearLayout.addView(neutralButton);
+                        } else if (negativeButton != null) {
+                            linearLayout.removeView(negativeButton);
+                            linearLayout.addView(negativeButton);
                         }
                     }
-                } catch (Exception e) {
-                    Log.i(TAG, "Positive button may not fits in the window, can't change layout orientation to vertical");
                 }
+            } catch (Exception e) {
+                Log.i(TAG, "Positive button may not fits in the window, can't change layout orientation to vertical");
             }
         }
     };
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
-        @Override
-        public void onDismiss(DialogInterface dialog) {
-            AppRate.with(context).clearRateDialog();
-        }
-    };
+    protected final DialogInterface.OnDismissListener dismissListener = dialog -> AppRate.with(context).clearRateDialog();
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
@@ -228,6 +222,7 @@ public class DefaultDialogManager implements DialogManager {
         this.listener = dialogOptions.getListener();
     }
 
+    @SuppressWarnings("WeakerAccess")
     protected void setContext(Context context){
         this.context = context;
     }

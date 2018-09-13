@@ -116,7 +116,7 @@ final class PreferenceHelper {
             currentDay = (short) (currentDay % YEAR_IN_DAYS);
         }
 
-        if (currentDialogLaunchTimes.matches("(.*):" + currentDay + "y" + currentYear + "-[0-9][0-9]*:")) {
+        if (currentDialogLaunchTimes != null && currentDialogLaunchTimes.matches("(.*):" + currentDay + "y" + currentYear + "-[0-9][0-9]*:")) {
             final short length = (short) currentDialogLaunchTimes.length();
             String currentDayCount = "" + currentDialogLaunchTimes.charAt(length - 2);
             for (short s = (short) (length - 3); s > 0; s--) {
@@ -137,7 +137,7 @@ final class PreferenceHelper {
         final byte currentYear = (byte) (currentDay / YEAR_IN_DAYS);
         String dialogLaunchTimes = getPreferences(context).getString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0y0-0:");
 
-        dialogLaunchTimes = dialogLaunchTimes.replaceAll(":[0-9][0-9]*" + "y" + currentYear + "-", ":");
+        dialogLaunchTimes = dialogLaunchTimes != null ? dialogLaunchTimes.replaceAll(":[0-9][0-9]*" + "y" + currentYear + "-", ":") : ":0y0-0:";
         if (currentYear > 0) {
             currentDay = (short) (currentDay % YEAR_IN_DAYS);
             for (short s = currentDay; s < YEAR_IN_DAYS; s++) {

@@ -177,7 +177,7 @@ public final class AppRate {
      * @return the {@link AppRate} singleton object
      * @see #setTimeToWait(long, short)
      */
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     public AppRate setInstallDays(byte installDate) {
         return setTimeToWait(Time.DAY, installDate);
     }
@@ -208,6 +208,7 @@ public final class AppRate {
      * @return the {@link AppRate} singleton object
      * @see #setRemindTimeToWait(long, short)
      */
+    @SuppressWarnings({"WeakerAccess", "unused"})
     public AppRate setRemindInterval(byte remindInterval) {
         return setRemindTimeToWait(Time.DAY, remindInterval);
     }
