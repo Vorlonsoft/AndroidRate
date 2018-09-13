@@ -26,7 +26,6 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
@@ -71,9 +70,9 @@ public final class AppRate {
     private boolean isDebug = false;
     private boolean isVersionCodeCheck = false;
     private boolean isVersionNameCheck = false;
-    private byte installDate = (byte) 10;
+    private long installDate = Time.DAY * 10L;
     private byte appLaunchTimes = (byte) 10;
-    private byte remindInterval = (byte) 1;
+    private long remindInterval = Time.DAY;
     private byte remindLaunchesNumber = (byte) 0;
     private byte selectedAppLaunches = (byte) 1;
     /** Short.MAX_VALUE means unlimited occurrences of the display of the dialog within a 365-day period */
@@ -121,8 +120,8 @@ public final class AppRate {
         return isMeetsConditions;
     }
 
-    private boolean isOverDate(long targetDate, byte threshold) {
-        return new Date().getTime() - targetDate >= threshold * DAY_IN_MILLIS;
+    private boolean isOverDate(long targetDate, long threshold) {
+        return new Date().getTime() - targetDate >= threshold;
     }
 
     private boolean isBelow365DayPeriodMaxNumberDialogLaunchTimes() {
@@ -171,27 +170,63 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimum number of days until the Rating Dialog pops up for the first time.</p>
+     * <p>Sets the minimal number of days until the Rating Dialog pops up for the first time.</p>
      *
      * @param installDate number of days, default is 10, 0 means install day, 10 means app is
      *                    launched 10 or more days later than installation
      * @return the {@link AppRate} singleton object
+     * @see #setTimeToWait(long, short)
      */
-    public AppRate setInstallDays(@SuppressWarnings("SameParameterValue") byte installDate) {
-        this.installDate = installDate;
+    @SuppressWarnings("WeakerAccess")
+    public AppRate setInstallDays(byte installDate) {
+        return setTimeToWait(Time.DAY, installDate);
+    }
+
+    /**
+     * <p>Sets the minimal number of time units until the Rating Dialog pops up for the first time.</p>
+     * <p>Default is 10 {@link Time#DAY days}, 0 means install millisecond, 10 means app is launched
+     * 10 or more time units later than installation.</p>
+     *
+     * @param timeUnit one of the values defined by {@link Time.TimeUnits}
+     * @param timeUnitsNumber time units number
+     * @return the {@link AppRate} singleton object
+     * @see #setInstallDays(byte)
+     * @see Time.TimeUnits
+     */
+    @SuppressWarnings("WeakerAccess")
+    public AppRate setTimeToWait(@Time.TimeUnits long timeUnit, short timeUnitsNumber) {
+        this.installDate = timeUnit * timeUnitsNumber;
         return this;
     }
 
     /**
-     * <p>Sets minimal number of days until the Rating Dialog pops up for the next time after
+     * <p>Sets the minimal number of days until the Rating Dialog pops up for the next time after
      * neutral button clicked.</p>
      *
      * @param remindInterval number of days, default is 1, 1 means app is launched 1 or more days
      *                       after neutral button clicked
      * @return the {@link AppRate} singleton object
+     * @see #setRemindTimeToWait(long, short)
      */
-    public AppRate setRemindInterval(@SuppressWarnings("SameParameterValue") byte remindInterval) {
-        this.remindInterval = remindInterval;
+    public AppRate setRemindInterval(byte remindInterval) {
+        return setRemindTimeToWait(Time.DAY, remindInterval);
+    }
+
+    /**
+     * <p>Sets the minimal number of time units until the Rating Dialog pops up for the next time
+     * after neutral button clicked.</p>
+     * <p>Default is 1 {@link Time#DAY day}, 1 means app is launched 1 or more time units after
+     * neutral button clicked.</p>
+     *
+     * @param timeUnit one of the values defined by {@link Time.TimeUnits}
+     * @param timeUnitsNumber time units number
+     * @return the {@link AppRate} singleton object
+     * @see #setRemindInterval(byte)
+     * @see Time.TimeUnits
+     */
+    @SuppressWarnings("WeakerAccess")
+    public AppRate setRemindTimeToWait(@Time.TimeUnits long timeUnit, short timeUnitsNumber) {
+        this.remindInterval = timeUnit * timeUnitsNumber;
         return this;
     }
 
@@ -686,11 +721,11 @@ public final class AppRate {
     }
 
     private boolean isOverInstallDate() {
-        return ((installDate == 0) || isOverDate(getInstallDate(context), installDate));
+        return ((installDate == 0L) || isOverDate(getInstallDate(context), installDate));
     }
 
     private boolean isOverRemindDate() {
-        return ((remindInterval == 0) || (getRemindInterval(context) == 0L) || isOverDate(getRemindInterval(context), remindInterval));
+        return ((remindInterval == 0L) || (getRemindInterval(context) == 0L) || isOverDate(getRemindInterval(context), remindInterval));
     }
 
     private boolean isOverRemindLaunchesNumber() {

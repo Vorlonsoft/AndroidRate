@@ -24,8 +24,6 @@ final class Constants {
 
     final static class Date {
 
-        static final long DAY_IN_MILLIS = 86400000L;
-
         static final short YEAR_IN_DAYS = (short) 365;
 
         private Date() {
