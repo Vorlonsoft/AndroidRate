@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 
 import java.util.Date;
 
-import static com.vorlonsoft.android.rate.Constants.Date.DAY_IN_MILLIS;
 import static com.vorlonsoft.android.rate.Constants.Date.YEAR_IN_DAYS;
 
 /**
@@ -109,7 +108,7 @@ final class PreferenceHelper {
     }
 
     static void increment365DayPeriodDialogLaunchTimes(final Context context) {
-        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context)) / DAY_IN_MILLIS);
+        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context)) / Time.DAY);
         final byte currentYear = (byte) (currentDay / YEAR_IN_DAYS);
         final String currentDialogLaunchTimes = getPreferences(context).getString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0y0-0:");
 
@@ -134,7 +133,7 @@ final class PreferenceHelper {
     }
 
     static short get365DayPeriodDialogLaunchTimes(final Context context) {
-        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context)) / DAY_IN_MILLIS);
+        short currentDay = (short) ((new Date().getTime() - getDialogFirstLaunchTime(context)) / Time.DAY);
         final byte currentYear = (byte) (currentDay / YEAR_IN_DAYS);
         String dialogLaunchTimes = getPreferences(context).getString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, ":0y0-0:");
 
