@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.2 Nagoya (next release)
+
+- LIBcc30913 Next release
+
 ## 1.2.1 Osaka (released 13.09.2018)
 
 - LIBcc20913 Javadoc documentation updated
