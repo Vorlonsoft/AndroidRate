@@ -10,7 +10,7 @@
  * users to rate the app after using it for a few days.</p>
  *
  * @since    0.0.4
- * @version  1.2.0
+ * @version  1.2.1
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

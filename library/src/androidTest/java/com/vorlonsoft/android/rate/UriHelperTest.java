@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNull;
  * <p>Unit test for {@link com.vorlonsoft.android.rate.UriHelper}</p>
  *
  * @since    0.1.3
- * @version  1.2.0
+ * @version  1.2.1
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

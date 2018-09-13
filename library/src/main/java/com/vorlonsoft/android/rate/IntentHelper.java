@@ -34,7 +34,7 @@ import static com.vorlonsoft.android.rate.Utils.isPackagesExists;
  * <p>IntentHelper Class - intent helper class of the AndroidRate library.</p>
  *
  * @since    0.5.0
- * @version  1.2.0
+ * @version  1.2.1
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

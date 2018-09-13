@@ -4,7 +4,7 @@ package com.vorlonsoft.android.rate;
  * <p>Constants Class - constants class of the AndroidRate library.</p>
  *
  * @since    1.1.8
- * @version  1.2.0
+ * @version  1.2.1
  * @author   Alexander Savin
  */
 
@@ -18,7 +18,7 @@ final class Constants {
      * <p>Constants.Date Class - date constants class of the AndroidRate library.</p>
      *
      * @since    1.1.8
-     * @version  1.2.0
+     * @version  1.2.1
      * @author   Alexander Savin
      */
 
@@ -35,7 +35,7 @@ final class Constants {
      * <p>Constants.Utils Class - utils constants class of the AndroidRate library.</p>
      *
      * @since    1.1.8
-     * @version  1.2.0
+     * @version  1.2.1
      * @author   Alexander Savin
      */
 

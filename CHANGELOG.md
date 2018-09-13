@@ -1,7 +1,38 @@
 # CHANGELOG
 
-## 1.2.1 Osaka (next release)
+## 1.2.1 Osaka (released 13.09.2018)
 
+- LIBcc20913 Javadoc documentation updated
+- LIBcc10913 Inspection
+- LIBff10913 .setTimeToWait(...) and .setRemindTimeToWait(...) added
+- LIBff10912 .setVersionCodeCheck(boolean) and .setVersionNameCheck(boolean) added
+- LIBcc20912 AppInformation.java refactoring
+- LIBcc10912 AppInformation.java refactoring
+- LIBcc50908 .idea files updated
+- LIBcc40908 sample app updated
+- LIBcc30908 README.md updated
+- LIBcc20908 AppRate.java inspection
+- LIBcc10908 getAppCompatDialogBuilder(...) and getDialogBuilder(...) updated
+- LIBff10908 AppInformation Class added
+- LIBff70905 AppRate#setRemindLaunchesNumber(byte) added
+- LIBff60905 clearRemindButtonClick() added
+- LIBff50905 Romanian language added
+- LIBff40905 Norwegian language added
+- LIBff30905 Malay language added
+- LIBff20905 Hindi languages added
+- LIBff10905 Android Library launcher icon added
+- LIBcc30905 README.md updated
+- LIBcc20905 Copyright corrected
+- LIBbb30905 AppCompatDialogManager and DefaultDialogManager singletons don't set context in synchronized(...){}
+- LIBbb20905 Add SoftReference to OnClickButtonListener [hotchemi/Android-Rate#79](https://github.com/hotchemi/Android-Rate/issues/79)
+- LIBbb10905 Remove WeekReference to OnClickButtonListener [hotchemi/Android-Rate#115](https://github.com/hotchemi/Android-Rate/issues/115)
+- LIBcc10905 "Latest snapshot (non-tested) version" section added
+- LIBff30904 AppCompatDialogManager example of use added
+- LIBff20904 isOverRemindDate() optimization
+- LIBcc20904 badge updated
+- LIBcc10904 javadoc and documentation updated
+- LIBff10904 AppCompatDialogManager added
+- LIBff10831 Dialog type added
 - LIBcc50831 Next release
 
 ## 1.2.0 Yokohama (released 31.08.2018)
