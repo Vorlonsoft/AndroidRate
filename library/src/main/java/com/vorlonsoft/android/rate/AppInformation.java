@@ -106,7 +106,7 @@ final class AppInformation {
      * @see #getAppVersionCodeMajor()
      * @see #getAppLongVersionCode()
      */
-    @SuppressWarnings({"WeakerAccess", "JavadocReference"})
+    @SuppressWarnings({"WeakerAccess", "JavadocReference", "unused"})
     int getAppVersionCode() {
         return (int) (appLongVersionCode & 0b11111111111111111111111111111111L);
     }
@@ -119,7 +119,7 @@ final class AppInformation {
      * @see #getAppVersionCode()
      * @see #getAppLongVersionCode()
      */
-    @SuppressWarnings({"WeakerAccess", "JavadocReference"})
+    @SuppressWarnings({"WeakerAccess", "JavadocReference", "unused"})
     int getAppVersionCodeMajor() {
         return (int) (appLongVersionCode >>> 32);
     }
@@ -166,6 +166,7 @@ final class AppInformation {
      * @return the image of the icon, or the default application icon if it could not be found.
      *         Returns null if the resources for the application could not be loaded.
      */
+    @SuppressWarnings("unused")
     @Nullable
     Drawable getAppIcon() {
         return appIcon;

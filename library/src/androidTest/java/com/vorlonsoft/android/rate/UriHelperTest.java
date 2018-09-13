@@ -24,6 +24,7 @@ import static org.junit.Assert.assertNull;
  * @author   Shintaro Katafuchi
  */
 
+@SuppressWarnings("unused")
 public class UriHelperTest {
 
     private static final String CHINESE_STORES = "market://details?id=";

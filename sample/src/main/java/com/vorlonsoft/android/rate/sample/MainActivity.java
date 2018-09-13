@@ -60,27 +60,27 @@ public class MainActivity extends AppCompatActivity {
         /* uncomment to test other locales - end */
 
         /* comment if you don't want to test AppCompatDialogManager instead DefaultDialogManager */
-        DialogManager.Factory appCompatDialogManagerFactory = new AppCompatDialogManager.Factory();
+        @SuppressWarnings("unused") DialogManager.Factory appCompatDialogManagerFactory = new AppCompatDialogManager.Factory();
 
         AppRate.with(this)
-                .setStoreType(StoreType.GOOGLEPLAY)       /* default is GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
-                                                           *         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
-                                                           *         SLIDEME (SlideME Marketplace), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
-                                                           *         setStoreType(BLACKBERRY, long) (BlackBerry World, long - your application ID),
-                                                           *         setStoreType(APPLE, long) (Apple App Store, long - your application ID),
-                                                           *         setStoreType(String...) (Any other store/stores, String... - an URI or array of URIs to your app) and
-                                                           *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
-                .setTimeToWait(Time.DAY, (short) 3)       // default is 10 days, 0 means install millisecond, 10 means app is launched 10 or more time units later than installation
-                .setLaunchTimes((byte) 10)                // default is 10, 3 means app is launched 3 or more times
+                .setStoreType(StoreType.GOOGLEPLAY) /* default is GOOGLEPLAY (Google Play), other options are AMAZON (Amazon Appstore), BAZAAR (Cafe Bazaar),
+                                                     *         CHINESESTORES (19 chinese app stores), MI (Mi Appstore (Xiaomi Market)), SAMSUNG (Samsung Galaxy Apps),
+                                                     *         SLIDEME (SlideME Marketplace), TENCENT (Tencent App Store), YANDEX (Yandex.Store),
+                                                     *         setStoreType(BLACKBERRY, long) (BlackBerry World, long - your application ID),
+                                                     *         setStoreType(APPLE, long) (Apple App Store, long - your application ID),
+                                                     *         setStoreType(String...) (Any other store/stores, String... - an URI or array of URIs to your app) and
+                                                     *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
+                .setTimeToWait(Time.DAY, (short) 3) // default is 10 days, 0 means install millisecond, 10 means app is launched 10 or more time units later than installation
+                .setLaunchTimes((byte) 10)          // default is 10, 3 means app is launched 3 or more times
                 .setRemindTimeToWait(Time.DAY, (short) 2) // default is 1 day, 1 means app is launched 1 or more time units after neutral button clicked
-                .setRemindLaunchesNumber((byte) 1)        // default is 0, 1 means app is launched 1 or more times after neutral button clicked
-                .setSelectedAppLaunches((byte) 4)         // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
-                .setShowLaterButton(true)                 // default is true, true means to show the Neutral button ("Remind me later").
+                .setRemindLaunchesNumber((byte) 1)  // default is 0, 1 means app is launched 1 or more times after neutral button clicked
+                .setSelectedAppLaunches((byte) 4)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
+                .setShowLaterButton(true)           // default is true, true means to show the Neutral button ("Remind me later").
                 .set365DayPeriodMaxNumberDialogLaunchTimes((short) 3) // default is unlimited, 3 means 3 or less occurrences of the display of the Rate Dialog within a 365-day period
-                .setVersionCodeCheck(true)                // default is false, true means to re-enable the Rate Dialog if a new version of app with different version code is installed
-                .setVersionNameCheck(true)                // default is false, true means to re-enable the Rate Dialog if a new version of app with different version name is installed
-                .setDebug(true)                           // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
-                .setCancelable(false)                     // default false.
+                .setVersionCodeCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version code is installed
+                .setVersionNameCheck(true)          // default is false, true means to re-enable the Rate Dialog if a new version of app with different version name is installed
+                .setDebug(true)                     // default is false, true is for development only, true ensures that the Rate Dialog will be shown each time the app is launched
+                .setCancelable(false)               // default false.
                 .setOnClickButtonListener(which -> Log.d(TAG, "RateButton: " + Byte.toString(which)))
                 /* uncomment to test AppCompatDialogManager instead DefaultDialogManager */
                 //.setDialogManagerFactory(appCompatDialogManagerFactory)
