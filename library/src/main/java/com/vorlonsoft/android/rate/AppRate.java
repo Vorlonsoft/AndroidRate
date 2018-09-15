@@ -322,18 +322,38 @@ public final class AppRate {
     }
 
     @SuppressWarnings("unused")
-    public AppRate clearAgreeShowDialog() {
-        setIsAgreeShowDialog(context, true);
-        return this;
-    }
-
-    @SuppressWarnings("unused")
     public AppRate clearSettingsParam() {
         PreferenceHelper.clearSharedPreferences(context);
         return this;
     }
 
+    /**
+     * <p>Clears agree to show Rate Dialog flag.</p>
+     *
+     * @return the {@link AppRate} singleton object
+     */
     @SuppressWarnings("unused")
+    public AppRate clearAgreeShowDialog() {
+        return setAgreeShowDialog(true);
+    }
+
+    /**
+     * <p>Returns agree to show Rate Dialog flag.</p>
+     *
+     * @return agree to show Rate Dialog flag value
+     */
+    @SuppressWarnings("WeakerAccess")
+    public boolean getAgreeShowDialog() {
+        return getIsAgreeShowDialog(context);
+    }
+
+    /**
+     * <p>Sets agree to show Rate Dialog flag.</p>
+     *
+     * @param isAgree agree to show Rate Dialog flag
+     * @return the {@link AppRate} singleton object
+     */
+    @SuppressWarnings("WeakerAccess")
     public AppRate setAgreeShowDialog(boolean isAgree) {
         setIsAgreeShowDialog(context, isAgree);
         return this;
@@ -604,13 +624,13 @@ public final class AppRate {
             PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
             if (AppInformation.getInstance(context).getAppLongVersionCode() != getVersionCode(context)) {
                 if (isVersionCodeCheck) {
-                    setIsAgreeShowDialog(context, true);
+                    setAgreeShowDialog(true);
                 }
                 setVersionCode(context);
             }
             if (!AppInformation.getInstance(context).getAppVersionName().equals(getVersionName(context))) {
                 if (isVersionNameCheck) {
-                    setIsAgreeShowDialog(context, true);
+                    setAgreeShowDialog(true);
                 }
                 setVersionName(context);
             }
@@ -703,7 +723,7 @@ public final class AppRate {
      */
     @SuppressWarnings("WeakerAccess")
     public boolean shouldShowRateDialog() {
-        return getIsAgreeShowDialog(context) &&
+        return getAgreeShowDialog() &&
                 isOverLaunchTimes() &&
                 isSelectedAppLaunch() &&
                 isOverInstallDate() &&
