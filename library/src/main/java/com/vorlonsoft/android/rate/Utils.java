@@ -55,10 +55,10 @@ final class Utils {
         if (context == null) {
             Log.i(TAG, "Failed to create AlertDialog.Builder");
             return null;
-        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+        } else if (themeResId == 0) {
             return new android.app.AlertDialog.Builder(context);
         } else {
-            if (themeResId == 0) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
                 return new android.app.AlertDialog.Builder(context);
             } else {
                 return new android.app.AlertDialog.Builder(context, themeResId);
