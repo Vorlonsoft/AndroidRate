@@ -79,6 +79,9 @@ public final class StoreOptions {
                     }
                 }
                 setIntents(intents);
+                break;
+            default:
+                break;
         }
     }
 

@@ -719,7 +719,9 @@ public final class AppRate {
     }
 
     /**
-     * Call this method to determine whether conditions to show the rate dialog meets or not.
+     * <p>Determines whether conditions to show the Rate Dialog meets or not.</p>
+     *
+     * @return true if the conditions to show the Rate Dialog meets, false othewise
      */
     @SuppressWarnings("WeakerAccess")
     public boolean shouldShowRateDialog() {

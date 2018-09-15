@@ -159,6 +159,7 @@ final class IntentHelper {
                 break;
             default:
                 storesPackagesNames = new String[]{GOOGLE_PLAY_PACKAGE_NAME};
+                break;
         }
 
         deviceStoresPackagesNames = storesPackagesNames == null ? null : isPackagesExists(context, storesPackagesNames);

@@ -151,6 +151,7 @@ public class DefaultDialogManager implements DialogManager {
                         break;
                     default:
                         intentsToAppStores = createIntentsForStore(context, GOOGLEPLAY, packageName);
+                        break;
                 }
                 if (intentsToAppStores == null) {
                     Log.w(TAG, "Failed to rate app, can't create intents for store");

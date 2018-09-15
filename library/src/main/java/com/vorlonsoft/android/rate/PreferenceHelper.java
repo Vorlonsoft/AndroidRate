@@ -59,20 +59,20 @@ final class PreferenceHelper {
     }
 
     private static void setCurrentDayDialogLaunchTimes(final Context context,
-                                                       String dialogLaunchTimes,
+                                                       final String dialogLaunchTimes,
                                                        final byte currentYear,
                                                        final short currentDay,
                                                        final short currentDayCount) {
+        String putDialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + currentYear + "-[0-9][0-9]*:", ":" + currentDay + "y" + currentYear + "-" + currentDayCount + ":");
         // since 3rd year deletes data for the current day that older than 2 years
         if (currentYear > 1) {
             for (byte b = 0; b < currentYear - 1; b++) {
-                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + b + "-[0-9][0-9]*:", ":");
+                putDialogLaunchTimes = putDialogLaunchTimes.replaceAll(":" + currentDay + "y" + b + "-[0-9][0-9]*:", ":");
             }
         }
-        dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + currentDay + "y" + currentYear + "-[0-9][0-9]*:", ":" + currentDay + "y" + currentYear + "-" + currentDayCount + ":");
 
         getPreferencesEditor(context)
-                .putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, dialogLaunchTimes)
+                .putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, putDialogLaunchTimes)
                 .apply();
     }
 

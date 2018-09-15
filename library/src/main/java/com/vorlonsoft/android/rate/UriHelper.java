@@ -113,6 +113,7 @@ final class UriHelper {
                     break;
                 default:
                     baseStoreUri = GOOGLE_PLAY_WEB;
+                    break;
             }
         } else {
             switch (appStore) {
@@ -147,6 +148,7 @@ final class UriHelper {
                     break;
                 default:
                     baseStoreUri = GOOGLE_PLAY;
+                    break;
             }
         }
         return Uri.parse(baseStoreUri + paramName);
