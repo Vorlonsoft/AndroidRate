@@ -7,6 +7,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file(System.getenv('STOREFILE'))
+            storePassword System.getenv('STOREPWD')
+            keyAlias 'Vorlonsoft LLC'
+            keyPassword System.getenv('KEYPWD')
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion '28.0.2'
     defaultConfig {
@@ -39,6 +47,7 @@ android {
             embedMicroApp false
         }
         release {
+            signingConfig signingConfigs.config
             applicationIdSuffix ''
             zipAlignEnabled true
             debuggable false
