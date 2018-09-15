@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1e969756a444a9884c1b697b3083fb6)](https://app.codacy.com/app/AlexanderLS/AndroidRate?utm_source=github.com&utm_medium=referral&utm_content=Vorlonsoft/AndroidRate&utm_campaign=Badge_Grade_Dashboard)
 [![AndroidRate Logo](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/logo/152px.png)](#)
 
 # AndroidRate [![Build Status](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/build-status_90x20.png)](#) [![Latest Version](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/latest-version_104x20.png)](https://github.com/Vorlonsoft/AndroidRate/releases) [![Supported APIs](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/api_54x20.png)](#) [![Android Arsenal](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/android-arsenal_174x20.png)](#)
