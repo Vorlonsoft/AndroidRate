@@ -110,6 +110,7 @@ public final class AppRate {
      * show rate dialog if yes.</p>
      *
      * @param activity your activity, use "this" in most cases
+     * @return true if the Rate Dialog is shown, false otherwise
      */
     @SuppressWarnings("UnusedReturnValue")
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
@@ -118,6 +119,22 @@ public final class AppRate {
             singleton.showRateDialog(activity);
         }
         return isMeetsConditions;
+    }
+
+    /**
+     * <p>QuickStart with the AndroidRate library's defaults.</p>
+     * <p>Monitors the app launch times and shows the Rate Dialog when <b>library's default</b>
+     * conditions are met.</p>
+     *
+     * @param activity your activity, use "this" in most cases
+     * @return true if the Rate Dialog is shown, false otherwise
+     * @see #monitor()
+     * @see #showRateDialogIfMeetsConditions(Activity)
+     */
+    @SuppressWarnings("unused")
+    public static boolean quickStart(Activity activity) {
+        with(activity).monitor();
+        return showRateDialogIfMeetsConditions(activity);
     }
 
     private boolean isOverDate(long targetDate, long threshold) {

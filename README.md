@@ -74,8 +74,7 @@ Uses library's defaults.
 protected void onCreate(Bundle savedInstanceState) {
   super.onCreate(savedInstanceState);
 
-  AppRate.with(this).monitor();                  // Monitors app launch times
-  AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
+  AppRate.quickStart(this); // Monitors the app launch times and shows the Rate Dialog when default conditions are met
 }
 ```
 
@@ -93,7 +92,7 @@ protected void onCreate(Bundle savedInstanceState) {
       .setLaunchTimes((byte) 3)                  // default is 10, 3 means app is launched 3 or more times
       .setRemindInterval((byte) 1)               // default is 1, 1 means app is launched 1 or more days after neutral button clicked
       .setRemindLaunchesNumber((byte) 1)         // default is 0, 1 means app is launched 1 or more times after neutral button clicked
-      .monitor();                                // Monitors app launch times
+      .monitor();                                // Monitors the app launch times
   AppRate.showRateDialogIfMeetsConditions(this); // Shows the Rate Dialog when conditions are met
 }
 ```
