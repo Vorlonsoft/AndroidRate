@@ -164,31 +164,31 @@ final class IntentHelper {
         final Intent[] intents;
 
         if (deviceStoresPackagesNumber > 0) {
-            intents = hasWebUriIntent ? new Intent[deviceStoresPackagesNumber + 1] : new Intent[deviceStoresPackagesNumber];
+            if (hasWebUriIntent) {
+                intents = new Intent[deviceStoresPackagesNumber + 1];
+                intents[deviceStoresPackagesNumber] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(appStore, paramName));
+            } else {
+                intents = new Intent[deviceStoresPackagesNumber];
+            }
             for (byte b = 0; b < deviceStoresPackagesNumber; b++) {
                 intents[b] = new Intent(Intent.ACTION_VIEW, getStoreUri(appStore, paramName));
                 setIntentForStore(intents[b]);
                 intents[b].setPackage(deviceStoresPackagesNames[b]);
             }
-            if (hasWebUriIntent) {
-                intents[deviceStoresPackagesNumber] = new Intent(Intent.ACTION_VIEW, getStoreWebUri(appStore, paramName));
+        } else if (!needStorePackage) {
+            intents = new Intent[]{new Intent(Intent.ACTION_VIEW, getStoreWebUri(appStore, paramName))};
+            if (appStore == APPLE) {
+                final String[] deviceBrowsersPackagesNames = isPackagesExists(context, BROWSERS_PACKAGES_NAMES);
+                if ((deviceBrowsersPackagesNames != null) && (deviceBrowsersPackagesNames.length > 0)) {
+                    intents[0].setPackage(deviceBrowsersPackagesNames[0]);
+                }
             }
         } else {
-            if (!needStorePackage) {
-                intents = new Intent[]{new Intent(Intent.ACTION_VIEW, getStoreWebUri(appStore, paramName))};
-                if (appStore == APPLE) {
-                    final String[] deviceBrowsersPackagesNames = isPackagesExists(context, BROWSERS_PACKAGES_NAMES);
-                    if ((deviceBrowsersPackagesNames != null) && (deviceBrowsersPackagesNames.length > 0)) {
-                        intents[0].setPackage(deviceBrowsersPackagesNames[0]);
-                    }
-                }
+            intents = null;
+            if (hasWebUriIntent) {
+                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and device can't start app store web (http/https) uri activity without it");
             } else {
-                if (hasWebUriIntent) {
-                    Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and device can't start app store web (http/https) uri activity without it");
-                } else {
-                    Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and app store (" + appStore + ") hasn't web (http/https) uri");
-                }
-                return null;
+                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and app store (" + appStore + ") hasn't web (http/https) uri");
             }
         }
         return intents;
