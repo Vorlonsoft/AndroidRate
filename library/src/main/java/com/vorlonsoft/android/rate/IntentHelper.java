@@ -96,6 +96,48 @@ final class IntentHelper {
         throw new AssertionError();
     }
 
+    private static boolean getHasWebUriIntentFlagForStore(final int appStore) {
+        return (appStore != CHINESESTORES);
+    }
+
+    private static boolean getNeedStorePackageFlagForStore(final int appStore) {
+        switch (appStore) {
+            case CHINESESTORES:
+            case SAMSUNG:
+            case YANDEX:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private static String[] getPackagesNamesForStore(final int appStore) {
+        switch (appStore) {
+            case AMAZON:
+                return new String[]{AMAZON_APPSTORE_PACKAGE_NAME};
+            case APPLE:
+                return null;
+            case BAZAAR:
+                return new String[]{CAFE_BAZAAR_PACKAGE_NAME};
+            case BLACKBERRY:
+                return new String[]{BLACKBERRY_WORLD_PACKAGE_NAME};
+            case CHINESESTORES:
+                return CHINESE_STORES_PACKAGES_NAMES;
+            case MI:
+                return new String[]{MI_PACKAGE_NAME};
+            case SAMSUNG:
+                return new String[]{SAMSUNG_GALAXY_APPS_PACKAGE_NAME};
+            case SLIDEME:
+                return new String[]{SLIDEME_MARKETPLACE_PACKAGE_NAME};
+            case TENCENT:
+                return new String[]{TENCENT_PACKAGE_NAME};
+            case YANDEX:
+                return new String[]{YANDEX_STORE_PACKAGE_NAME};
+            default:
+                return new String[]{GOOGLE_PLAY_PACKAGE_NAME};
+        }
+    }
+
     private static void setIntentForStore(final Intent intent) {
         // Make sure it DOESN'T open in the stack of appPackageName activity
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -114,56 +156,12 @@ final class IntentHelper {
             return null;
         }
 
-        final byte deviceStoresPackagesNumber;
-        final String[] storesPackagesNames;
-        final String[] deviceStoresPackagesNames;
+        final boolean needStorePackage = getNeedStorePackageFlagForStore(appStore);
+        final boolean hasWebUriIntent = getHasWebUriIntentFlagForStore(appStore);
+        final String[] storesPackagesNames = getPackagesNamesForStore(appStore);
+        final String[] deviceStoresPackagesNames = storesPackagesNames == null ? null : isPackagesExists(context, storesPackagesNames);
+        final byte deviceStoresPackagesNumber = deviceStoresPackagesNames == null ? 0 : (byte) deviceStoresPackagesNames.length;
         final Intent[] intents;
-
-        boolean needStorePackage = false;
-        boolean hasWebUriIntent = true;
-
-        switch (appStore) {
-            case AMAZON:
-                storesPackagesNames = new String[]{AMAZON_APPSTORE_PACKAGE_NAME};
-                break;
-            case APPLE:
-                storesPackagesNames = null;
-                break;
-            case BAZAAR:
-                storesPackagesNames = new String[]{CAFE_BAZAAR_PACKAGE_NAME};
-                break;
-            case BLACKBERRY:
-                storesPackagesNames = new String[]{BLACKBERRY_WORLD_PACKAGE_NAME};
-                break;
-            case CHINESESTORES:
-                storesPackagesNames = CHINESE_STORES_PACKAGES_NAMES;
-                needStorePackage = true;
-                hasWebUriIntent = false;
-                break;
-            case MI:
-                storesPackagesNames = new String[]{MI_PACKAGE_NAME};
-                break;
-            case SAMSUNG:
-                storesPackagesNames = new String[]{SAMSUNG_GALAXY_APPS_PACKAGE_NAME};
-                needStorePackage = true;
-                break;
-            case SLIDEME:
-                storesPackagesNames = new String[]{SLIDEME_MARKETPLACE_PACKAGE_NAME};
-                break;
-            case TENCENT:
-                storesPackagesNames = new String[]{TENCENT_PACKAGE_NAME};
-                break;
-            case YANDEX:
-                storesPackagesNames = new String[]{YANDEX_STORE_PACKAGE_NAME};
-                needStorePackage = true;
-                break;
-            default:
-                storesPackagesNames = new String[]{GOOGLE_PLAY_PACKAGE_NAME};
-                break;
-        }
-
-        deviceStoresPackagesNames = storesPackagesNames == null ? null : isPackagesExists(context, storesPackagesNames);
-        deviceStoresPackagesNumber = deviceStoresPackagesNames == null ? 0 : (byte) deviceStoresPackagesNames.length;
 
         if (deviceStoresPackagesNumber > 0) {
             intents = hasWebUriIntent ? new Intent[deviceStoresPackagesNumber + 1] : new Intent[deviceStoresPackagesNumber];

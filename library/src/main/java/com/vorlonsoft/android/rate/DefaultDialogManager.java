@@ -111,87 +111,46 @@ public class DefaultDialogManager implements DialogManager {
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
-            final Intent[] intentsToAppStores;
             final String packageName = AppInformation.getInstance(context).getAppPackageName();
             if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
-                switch (storeOptions.getStoreType()) {
-                    case AMAZON:
-                        intentsToAppStores = createIntentsForStore(context, AMAZON, packageName);
-                        break;
-                    case APPLE:
-                        intentsToAppStores = createIntentsForStore(context, APPLE, storeOptions.getApplicationId());
-                        break;
-                    case BAZAAR:
-                        intentsToAppStores = createIntentsForStore(context, BAZAAR, packageName);
-                        break;
-                    case BLACKBERRY:
-                        intentsToAppStores = createIntentsForStore(context, BLACKBERRY, storeOptions.getApplicationId());
-                        break;
-                    case CHINESESTORES:
-                        intentsToAppStores = createIntentsForStore(context, CHINESESTORES, packageName);
-                        break;
-                    case MI:
-                        intentsToAppStores = createIntentsForStore(context, MI, packageName);
-                        break;
-                    case SAMSUNG:
-                        intentsToAppStores = createIntentsForStore(context, SAMSUNG, packageName);
-                        break;
-                    case SLIDEME:
-                        intentsToAppStores = createIntentsForStore(context, SLIDEME, packageName);
-                        break;
-                    case TENCENT:
-                        intentsToAppStores = createIntentsForStore(context, TENCENT, packageName);
-                        break;
-                    case YANDEX:
-                        intentsToAppStores = createIntentsForStore(context, YANDEX, packageName);
-                        break;
-                    case INTENT:
-                    case OTHER:
-                        intentsToAppStores = storeOptions.getIntents();
-                        break;
-                    default:
-                        intentsToAppStores = createIntentsForStore(context, GOOGLEPLAY, packageName);
-                        break;
-                }
+                final Intent[] intentsToAppStores = getIntentsForStores(packageName);
                 if (intentsToAppStores == null) {
                     Log.w(TAG, "Failed to rate app, can't create intents for store");
+                } else {
+                    try {
+                        if (intentsToAppStores.length == 0) {
+                            Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
+                        } else if (intentsToAppStores[0] == null) {
+                            throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
+                        } else {
+                            context.startActivity(intentsToAppStores[0]);
+                        }
+                    } catch (ActivityNotFoundException e) {
+                        Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
+                        final byte intentsToAppStoresNumber = (byte) intentsToAppStores.length;
+                        if (intentsToAppStoresNumber > 1) {
+                            boolean isCatch;
+                            for (byte b = 1; b < intentsToAppStoresNumber; b++) { // intentsToAppStores[1] - second intent in the array
+                                try {
+                                    if (intentsToAppStores[b] == null) {
+                                        throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + b + "] == null)");
+                                    } else {
+                                        context.startActivity(intentsToAppStores[b]);
+                                    }
+                                    isCatch = false;
+                                } catch (ActivityNotFoundException ex) {
+                                    Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[b], ex);
+                                    isCatch = true;
+                                }
+                                if (!isCatch) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
                 }
             } else {
                 Log.w(TAG, "Failed to rate app, can't get app package name");
-                intentsToAppStores = null;
-            }
-            try {
-                if (intentsToAppStores != null) {
-                    if (intentsToAppStores.length == 0) {
-                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
-                    } else if (intentsToAppStores[0] == null) {
-                        throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
-                    } else {
-                        context.startActivity(intentsToAppStores[0]);
-                    }
-                }
-            } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
-                byte intentsToAppStoresNumber = (byte) intentsToAppStores.length;
-                if (intentsToAppStoresNumber > 1) {
-                    boolean isCatch;
-                    for (byte b = 1; b < intentsToAppStoresNumber; b++) { // intentsToAppStores[1] - second intent in the array
-                        try {
-                            if (intentsToAppStores[b] == null) {
-                                throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + b + "] == null)");
-                            } else {
-                                context.startActivity(intentsToAppStores[b]);
-                            }
-                            isCatch = false;
-                        } catch (ActivityNotFoundException ex) {
-                            Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[b], ex);
-                            isCatch = true;
-                        }
-                        if (!isCatch) {
-                            break;
-                        }
-                    }
-                }
             }
             setIsAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton((byte) which);
@@ -221,6 +180,37 @@ public class DefaultDialogManager implements DialogManager {
         this.dialogOptions = dialogOptions;
         this.storeOptions = storeOptions;
         this.listener = dialogOptions.getListener();
+    }
+
+    @Nullable
+    private Intent[] getIntentsForStores(@NonNull final String packageName) {
+        switch (storeOptions.getStoreType()) {
+            case AMAZON:
+                return createIntentsForStore(context, AMAZON, packageName);
+            case APPLE:
+                return createIntentsForStore(context, APPLE, storeOptions.getApplicationId());
+            case BAZAAR:
+                return createIntentsForStore(context, BAZAAR, packageName);
+            case BLACKBERRY:
+                return createIntentsForStore(context, BLACKBERRY, storeOptions.getApplicationId());
+            case CHINESESTORES:
+                return createIntentsForStore(context, CHINESESTORES, packageName);
+            case MI:
+                return createIntentsForStore(context, MI, packageName);
+            case SAMSUNG:
+                return createIntentsForStore(context, SAMSUNG, packageName);
+            case SLIDEME:
+                return createIntentsForStore(context, SLIDEME, packageName);
+            case TENCENT:
+                return createIntentsForStore(context, TENCENT, packageName);
+            case YANDEX:
+                return createIntentsForStore(context, YANDEX, packageName);
+            case INTENT:
+            case OTHER:
+                return storeOptions.getIntents();
+            default:
+                return createIntentsForStore(context, GOOGLEPLAY, packageName);
+        }
     }
 
     @SuppressWarnings("WeakerAccess")

@@ -33,6 +33,9 @@ public class UriHelperTest {
 
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
 
+    public UriHelperTest() {
+    }
+
     @SuppressWarnings({"ConstantConditions", "UnnecessaryLocalVariable"})
     @Test
     public void getStoreUri() {
