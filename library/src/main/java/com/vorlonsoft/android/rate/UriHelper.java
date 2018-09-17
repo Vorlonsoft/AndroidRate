@@ -77,92 +77,67 @@ final class UriHelper {
         throw new UnsupportedOperationException("UriHelper is a utility class and can't be instantiated!");
     }
 
-    @Nullable
-    private static Uri getStoreUri(final int appStore, final String paramName, final boolean isWebUri) {
-        final String baseStoreUri;
-        if (isWebUri) {
-            switch (appStore) {
-                case AMAZON:
-                    baseStoreUri = AMAZON_APPSTORE_WEB;
-                    break;
-                case APPLE:
-                    baseStoreUri = APPLE_APP_STORE_WEB;
-                    break;
-                case BAZAAR:
-                    baseStoreUri = CAFE_BAZAAR_WEB;
-                    break;
-                case BLACKBERRY:
-                    baseStoreUri = BLACKBERRY_WORLD_WEB;
-                    break;
-                case CHINESESTORES:
-                    return null;
-                case MI:
-                    baseStoreUri = MI_APPSTORE_WEB;
-                    break;
-                case SAMSUNG:
-                    baseStoreUri = SAMSUNG_GALAXY_APPS_WEB;
-                    break;
-                case SLIDEME:
-                    baseStoreUri = SLIDEME_MARKETPLACE_WEB;
-                    break;
-                case TENCENT:
-                    baseStoreUri = TENCENT_APP_STORE_WEB;
-                    break;
-                case YANDEX:
-                    baseStoreUri = YANDEX_STORE_WEB;
-                    break;
-                default:
-                    baseStoreUri = GOOGLE_PLAY_WEB;
-                    break;
-            }
-        } else {
-            switch (appStore) {
-                case AMAZON:
-                    baseStoreUri = AMAZON_APPSTORE;
-                    break;
-                case APPLE:
-                    return null;
-                case BAZAAR:
-                    baseStoreUri = CAFE_BAZAAR;
-                    break;
-                case BLACKBERRY:
-                    baseStoreUri = BLACKBERRY_WORLD;
-                    break;
-                case CHINESESTORES:
-                    baseStoreUri = CHINESE_STORES;
-                    break;
-                case MI:
-                    baseStoreUri = MI_APPSTORE;
-                    break;
-                case SAMSUNG:
-                    baseStoreUri = SAMSUNG_GALAXY_APPS;
-                    break;
-                case SLIDEME:
-                    baseStoreUri = SLIDEME_MARKETPLACE;
-                    break;
-                case TENCENT:
-                    baseStoreUri = TENCENT_APP_STORE;
-                    break;
-                case YANDEX:
-                    baseStoreUri = YANDEX_STORE;
-                    break;
-                default:
-                    baseStoreUri = GOOGLE_PLAY;
-                    break;
-            }
-        }
-        return Uri.parse(baseStoreUri + paramName);
-    }
-
     @SuppressWarnings("ConstantConditions")
     @Nullable
     static Uri getStoreUri(final int appStore, @NonNull final String paramName) {
-        return paramName == null ? null : getStoreUri(appStore, paramName, false);
+        if (paramName == null) {
+            return null;
+        }
+        switch (appStore) {
+            case AMAZON:
+                return Uri.parse(AMAZON_APPSTORE + paramName);
+            case APPLE:
+                return null;
+            case BAZAAR:
+                return Uri.parse(CAFE_BAZAAR + paramName);
+            case BLACKBERRY:
+                return Uri.parse(BLACKBERRY_WORLD + paramName);
+            case CHINESESTORES:
+                return Uri.parse(CHINESE_STORES + paramName);
+            case MI:
+                return Uri.parse(MI_APPSTORE + paramName);
+            case SAMSUNG:
+                return Uri.parse(SAMSUNG_GALAXY_APPS + paramName);
+            case SLIDEME:
+                return Uri.parse(SLIDEME_MARKETPLACE + paramName);
+            case TENCENT:
+                return Uri.parse(TENCENT_APP_STORE + paramName);
+            case YANDEX:
+                return Uri.parse(YANDEX_STORE + paramName);
+            default:
+                return Uri.parse(GOOGLE_PLAY + paramName);
+        }
     }
 
     @SuppressWarnings("ConstantConditions")
     @Nullable
     static Uri getStoreWebUri(final int appStore, @NonNull final String paramName) {
-        return paramName == null ? null : getStoreUri(appStore, paramName, true);
+        if (paramName == null) {
+            return null;
+        }
+        switch (appStore) {
+            case AMAZON:
+                return Uri.parse(AMAZON_APPSTORE_WEB + paramName);
+            case APPLE:
+                return Uri.parse(APPLE_APP_STORE_WEB + paramName);
+            case BAZAAR:
+                return Uri.parse(CAFE_BAZAAR_WEB + paramName);
+            case BLACKBERRY:
+                return Uri.parse(BLACKBERRY_WORLD_WEB + paramName);
+            case CHINESESTORES:
+                return null;
+            case MI:
+                return Uri.parse(MI_APPSTORE_WEB + paramName);
+            case SAMSUNG:
+                return Uri.parse(SAMSUNG_GALAXY_APPS_WEB + paramName);
+            case SLIDEME:
+                return Uri.parse(SLIDEME_MARKETPLACE_WEB + paramName);
+            case TENCENT:
+                return Uri.parse(TENCENT_APP_STORE_WEB + paramName);
+            case YANDEX:
+                return Uri.parse(YANDEX_STORE_WEB + paramName);
+            default:
+                return Uri.parse(GOOGLE_PLAY_WEB + paramName);
+        }
     }
 }
