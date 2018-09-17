@@ -74,7 +74,7 @@ final class UriHelper {
     private static final String YANDEX_STORE_WEB = "https://store.yandex.com/apps/details?id=";
 
     private UriHelper() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("UriHelper is a utility class and can't be instantiated!");
     }
 
     @Nullable

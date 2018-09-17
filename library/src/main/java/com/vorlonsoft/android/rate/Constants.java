@@ -11,7 +11,7 @@ package com.vorlonsoft.android.rate;
 final class Constants {
 
     private Constants() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("Constants is a utility class and can't be instantiated!");
     }
 
     /**
@@ -27,7 +27,7 @@ final class Constants {
         static final short YEAR_IN_DAYS = (short) 365;
 
         private Date() {
-            throw new AssertionError();
+            throw new UnsupportedOperationException("Constants.Date is a utility class and can't be instantiated!");
         }
     }
 
@@ -44,7 +44,7 @@ final class Constants {
         static final String TAG = "ANDROIDRATE";
 
         private Utils() {
-            throw new AssertionError();
+            throw new UnsupportedOperationException("Constants.Utils is a utility class and can't be instantiated!");
         }
     }
 }

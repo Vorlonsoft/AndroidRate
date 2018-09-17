@@ -41,7 +41,7 @@ public class Time {
     public static final long YEAR = DAY * 365;
 
     private Time() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("Time is a utility class and can't be instantiated!");
     }
 
     /**

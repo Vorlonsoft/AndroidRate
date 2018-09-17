@@ -93,7 +93,7 @@ final class IntentHelper {
     };
 
     private IntentHelper() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("IntentHelper is a utility class and can't be instantiated!");
     }
 
     private static boolean getHasWebUriIntentFlagForStore(final int appStore) {

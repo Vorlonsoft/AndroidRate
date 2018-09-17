@@ -31,7 +31,7 @@ public class DialogType {
     public static final int MODERN = 2;
 
     private DialogType() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("DialogType is a utility class and can't be instantiated!");
     }
 
     /**

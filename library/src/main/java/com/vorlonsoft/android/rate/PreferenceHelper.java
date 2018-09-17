@@ -47,7 +47,7 @@ final class PreferenceHelper {
     private static final String PREF_KEY_VERSION_NAME = "androidrate_version_name";
 
     private PreferenceHelper() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("PreferenceHelper is a utility class and can't be instantiated!");
     }
 
     private static SharedPreferences getPreferences(final Context context) {

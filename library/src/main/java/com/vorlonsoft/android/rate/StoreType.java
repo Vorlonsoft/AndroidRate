@@ -52,7 +52,7 @@ public class StoreType {
     public static final int OTHER = 12;
 
     private StoreType() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("StoreType is a utility class and can't be instantiated!");
     }
 
     /**

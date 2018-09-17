@@ -34,7 +34,7 @@ import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 final class Utils {
 
     private Utils() {
-        throw new AssertionError();
+        throw new UnsupportedOperationException("Utils is a utility class and can't be instantiated!");
     }
 
     static boolean isLollipop() {
