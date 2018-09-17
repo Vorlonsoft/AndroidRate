@@ -77,6 +77,18 @@ final class UriHelper {
         throw new UnsupportedOperationException("UriHelper is a utility class and can't be instantiated!");
     }
 
+    /**
+     * <p>Creates a Uri which parses the given strings.</p>
+     *
+     * @param part1 part1 of an RFC 2396-compliant, encoded URI
+     * @param part2 part2 of an RFC 2396-compliant, encoded URI
+     * @return Uri for this given uri strings
+     */
+    @NonNull
+    private static Uri formUri(@NonNull final String part1, @NonNull final String part2) {
+        return Uri.parse(part1 + part2);
+    }
+
     @SuppressWarnings("ConstantConditions")
     @Nullable
     static Uri getStoreUri(final int appStore, @NonNull final String paramName) {
@@ -85,27 +97,27 @@ final class UriHelper {
         }
         switch (appStore) {
             case AMAZON:
-                return Uri.parse(AMAZON_APPSTORE + paramName);
+                return formUri(AMAZON_APPSTORE, paramName);
             case APPLE:
                 return null;
             case BAZAAR:
-                return Uri.parse(CAFE_BAZAAR + paramName);
+                return formUri(CAFE_BAZAAR, paramName);
             case BLACKBERRY:
-                return Uri.parse(BLACKBERRY_WORLD + paramName);
+                return formUri(BLACKBERRY_WORLD, paramName);
             case CHINESESTORES:
-                return Uri.parse(CHINESE_STORES + paramName);
+                return formUri(CHINESE_STORES, paramName);
             case MI:
-                return Uri.parse(MI_APPSTORE + paramName);
+                return formUri(MI_APPSTORE, paramName);
             case SAMSUNG:
-                return Uri.parse(SAMSUNG_GALAXY_APPS + paramName);
+                return formUri(SAMSUNG_GALAXY_APPS, paramName);
             case SLIDEME:
-                return Uri.parse(SLIDEME_MARKETPLACE + paramName);
+                return formUri(SLIDEME_MARKETPLACE, paramName);
             case TENCENT:
-                return Uri.parse(TENCENT_APP_STORE + paramName);
+                return formUri(TENCENT_APP_STORE, paramName);
             case YANDEX:
-                return Uri.parse(YANDEX_STORE + paramName);
+                return formUri(YANDEX_STORE, paramName);
             default:
-                return Uri.parse(GOOGLE_PLAY + paramName);
+                return formUri(GOOGLE_PLAY, paramName);
         }
     }
 
@@ -117,27 +129,27 @@ final class UriHelper {
         }
         switch (appStore) {
             case AMAZON:
-                return Uri.parse(AMAZON_APPSTORE_WEB + paramName);
+                return formUri(AMAZON_APPSTORE_WEB, paramName);
             case APPLE:
-                return Uri.parse(APPLE_APP_STORE_WEB + paramName);
+                return formUri(APPLE_APP_STORE_WEB, paramName);
             case BAZAAR:
-                return Uri.parse(CAFE_BAZAAR_WEB + paramName);
+                return formUri(CAFE_BAZAAR_WEB, paramName);
             case BLACKBERRY:
-                return Uri.parse(BLACKBERRY_WORLD_WEB + paramName);
+                return formUri(BLACKBERRY_WORLD_WEB, paramName);
             case CHINESESTORES:
                 return null;
             case MI:
-                return Uri.parse(MI_APPSTORE_WEB + paramName);
+                return formUri(MI_APPSTORE_WEB, paramName);
             case SAMSUNG:
-                return Uri.parse(SAMSUNG_GALAXY_APPS_WEB + paramName);
+                return formUri(SAMSUNG_GALAXY_APPS_WEB, paramName);
             case SLIDEME:
-                return Uri.parse(SLIDEME_MARKETPLACE_WEB + paramName);
+                return formUri(SLIDEME_MARKETPLACE_WEB, paramName);
             case TENCENT:
-                return Uri.parse(TENCENT_APP_STORE_WEB + paramName);
+                return formUri(TENCENT_APP_STORE_WEB, paramName);
             case YANDEX:
-                return Uri.parse(YANDEX_STORE_WEB + paramName);
+                return formUri(YANDEX_STORE_WEB, paramName);
             default:
-                return Uri.parse(GOOGLE_PLAY_WEB + paramName);
+                return formUri(GOOGLE_PLAY_WEB, paramName);
         }
     }
 }
