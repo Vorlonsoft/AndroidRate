@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- * <p>Unit test for {@link com.vorlonsoft.android.rate.UriHelper}</p>
+ * <p>Unit test for {@link com.vorlonsoft.android.rate.UriHelper}.</p>
  *
  * @since    0.1.3
  * @version  1.2.1

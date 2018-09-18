@@ -149,38 +149,18 @@ protected void onCreate(Bundle savedInstanceState) {
 
 Default options of the Rate Dialog are as below:
 
-1. Google Play launches when you press the positive button. Change via
-`AppRate#setStoreType(int)`, `AppRate#setStoreType(int, long)`,
-`AppRate#setStoreType(String...)` or `AppRate#setStoreType(Intent...)`.
-2. App is launched 10 or more days later than installation. Change via
-`AppRate#setTimeToWait(long, short)` or `AppRate#setInstallDays(byte)`.
-3. App is launched 10 or more times. Change via
-`AppRate#setLaunchTimes(byte)`.
-4. App is launched 1 or more days after neutral button clicked. Change
-via `AppRate#setRemindTimeToWait(long, short)` or
-`AppRate#setRemindInterval(byte)`.
-5. App is launched 0 or more times after neutral button clicked. Change
-via `AppRate#setRemindLaunchesNumber(byte)`.
-6. Each launch (the condition is satisfied if
-appLaunches % `param` == 0). Change via
-`AppRate#setSelectedAppLaunches(byte)`.
-7. App shows the Neutral button ("Remind me later"). Change via
-`setShowLaterButton(boolean)`.
-8. Unlimited occurrences of the display of the Rate Dialog within a
-365-day period. Change via
-`AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
-9. Don't re-enable the Rate Dialog if a new version of app with
-different version code is installed. Change via
-`AppRate#setVersionCodeCheck(boolean)`.
-10. Don't re-enable the Rate Dialog if a new version of app with
-different version name is installed. Change via
-`AppRate#setVersionNameCheck(boolean)`.
-11. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate
-Dialog will be shown each time the app is launched.
-**This feature is for development only!**.
-12. There is no default callback when the button of Rate Dialog is
-pressed. Change via
-`AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
+1. Google Play launches when you press the positive button. Change via `AppRate#setStoreType(int)`, `AppRate#setStoreType(int, long)`, `AppRate#setStoreType(String...)` or `AppRate#setStoreType(Intent...)`.
+2. App is launched 10 or more days later than installation. Change via `AppRate#setTimeToWait(long, short)` or `AppRate#setInstallDays(byte)`.
+3. App is launched 10 or more times. Change via `AppRate#setLaunchTimes(byte)`.
+4. App is launched 1 or more days after neutral button clicked. Change via `AppRate#setRemindTimeToWait(long, short)` or `AppRate#setRemindInterval(byte)`.
+5. App is launched 0 or more times after neutral button clicked. Change via `AppRate#setRemindLaunchesNumber(byte)`.
+6. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setSelectedAppLaunches(byte)`.
+7. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
+8. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
+9. Don't re-enable the Rate Dialog if a new version of app with different version code is installed. Change via `AppRate#setVersionCodeCheck(boolean)`.
+10. Don't re-enable the Rate Dialog if a new version of app with different version name is installed. Change via `AppRate#setVersionNameCheck(boolean)`.
+11. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
+12. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
 
 ### OnClickButtonListener interface
 
@@ -422,9 +402,7 @@ AndroidRate library currently supports the following 41 languages:
 AndroidRate library already in use in following apps:
 
 * [I Love You Free Edition](https://play.google.com/store/apps/details?id=com.vorlonsoft.iloveyou)
-
 * [Rossiya.pro Mail](https://play.google.com/store/apps/details?id=com.vorlonsoft.rossiyapro)
-
 * ...
 
 ## Contribute

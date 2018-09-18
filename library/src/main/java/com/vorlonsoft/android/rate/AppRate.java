@@ -523,8 +523,8 @@ public final class AppRate {
      * <p>Sets any other app store/stores to the Positive button.</p>
      *
      * @param uris an RFC 2396-compliant URI or array of URIs to your app,
-     * e. g. {@code https://otherstore.com/app?id=com.yourapp}
-     * or {@code otherstore://apps/com.yourapp}
+     *             e. g. {@code https://otherstore.com/app?id=com.yourapp}
+     *             or {@code otherstore://apps/com.yourapp}
      * @return the {@link AppRate} singleton object
      * @throws IllegalArgumentException if {@code uris} equals null
      * @see #setStoreType(int)
@@ -544,8 +544,8 @@ public final class AppRate {
      * <p>For example, you can open your custom RateActivity when the Positive button clicked.</p>
      *
      * @param intents any custom intent or array of intents,
-     * first will be executed ({@code startActivity(intents[0])}), if first fails,
-     * second will be executed ({@code startActivity(intents[1])}), etc.
+     *                first will be executed ({@code startActivity(intents[0])}), if first fails,
+     *                second will be executed ({@code startActivity(intents[1])}), etc.
      * @return the {@link AppRate} singleton object
      * @throws IllegalArgumentException if {@code intents} equals null
      * @see #setStoreType(int)

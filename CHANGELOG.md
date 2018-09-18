@@ -9,16 +9,14 @@
 - LIBcc20913 Javadoc documentation updated
 - LIBcc10913 Inspection
 - LIBff10913 .setTimeToWait(...) and .setRemindTimeToWait(...) added
-- LIBff10912 .setVersionCodeCheck(boolean) and
-.setVersionNameCheck(boolean) added
+- LIBff10912 .setVersionCodeCheck(boolean) and .setVersionNameCheck(boolean) added
 - LIBcc20912 AppInformation.java refactoring
 - LIBcc10912 AppInformation.java refactoring
 - LIBcc50908 .idea files updated
 - LIBcc40908 sample app updated
 - LIBcc30908 README.md updated
 - LIBcc20908 AppRate.java inspection
-- LIBcc10908 getAppCompatDialogBuilder(...) and getDialogBuilder(...)
-updated
+- LIBcc10908 getAppCompatDialogBuilder(...) and getDialogBuilder(...) updated
 - LIBff10908 AppInformation Class added
 - LIBff70905 AppRate#setRemindLaunchesNumber(byte) added
 - LIBff60905 clearRemindButtonClick() added
@@ -29,12 +27,9 @@ updated
 - LIBff10905 Android Library launcher icon added
 - LIBcc30905 README.md updated
 - LIBcc20905 Copyright corrected
-- LIBbb30905 AppCompatDialogManager and DefaultDialogManager singletons
-don't set context in synchronized(...){}
-- LIBbb20905 Add SoftReference to OnClickButtonListener
-[hotchemi/Android-Rate#79](https://github.com/hotchemi/Android-Rate/issues/79)
-- LIBbb10905 Remove WeekReference to OnClickButtonListener
-[hotchemi/Android-Rate#115](https://github.com/hotchemi/Android-Rate/issues/115)
+- LIBbb30905 AppCompatDialogManager and DefaultDialogManager singletons don't set context in synchronized(...){}
+- LIBbb20905 Add SoftReference to OnClickButtonListener [hotchemi/Android-Rate#79](https://github.com/hotchemi/Android-Rate/issues/79)
+- LIBbb10905 Remove WeekReference to OnClickButtonListener [hotchemi/Android-Rate#115](https://github.com/hotchemi/Android-Rate/issues/115)
 - LIBcc10905 "Latest snapshot (non-tested) version" section added
 - LIBff30904 AppCompatDialogManager example of use added
 - LIBff20904 isOverRemindDate() optimization
@@ -47,26 +42,20 @@ don't set context in synchronized(...){}
 ## 1.2.0 Yokohama (released 31.08.2018)
 
 - LIBcc40831 javadoc comments updated
-- LIBcc30831 Section "OnClickButtonListener Interface" added to
-README.md
-- LIBbb20831 Singleton DialogManager break the library
-([Issue #6](https://github.com/Vorlonsoft/AndroidRate/issues/6) and
-[Issue #5](https://github.com/Vorlonsoft/AndroidRate/issues/5))
+- LIBcc30831 Section "OnClickButtonListener Interface" added to README.md
+- LIBbb20831 Singleton DialogManager break the library ([Issue #6](https://github.com/Vorlonsoft/AndroidRate/issues/6) and [Issue #5](https://github.com/Vorlonsoft/AndroidRate/issues/5))
 - LIBbb10831 setCurrentDayDialogLaunchTimes(...) fixed
 - LIBcc20831 README.md updated
 - LIBcc10831 javadoc comments updated
 - LIBff20830 public boolean isShowingRateDialog() added
 - LIBcc30830 build.gradle and .idea files updated
 - LIBcc20830 README.md and javadocs updated
-- LIBcc10830 clearRateDialog(), showRateDialog(Activity),
-dismissRateDialog(), rateNow(Activity) methods updated
+- LIBcc10830 clearRateDialog(), showRateDialog(Activity), dismissRateDialog(), rateNow(Activity) methods updated
 - LIBff10830 WeekReference to DefaultDialogManager singleton
-- LIBbb10829 Fix for
-[dialog error](https://github.com/Vorlonsoft/AndroidRate/issues/5)
+- LIBbb10829 Fix for [dialog error](https://github.com/Vorlonsoft/AndroidRate/issues/5)
 - LIBcc20829 javadoc documentation updated
 - LIBcc10829 README.md updated
-- LIBff10829 setRemindLaunchTimes(byte) updated,
-setSelectedAppLaunches(byte) added, some methods documented
+- LIBff10829 setRemindLaunchTimes(byte) updated, setSelectedAppLaunches(byte) added, some methods documented
 - LIBcc30828 README.md updated
 - LIBcc20828 javadoc documentation updated
 - LIBcc10828 javadoc comments updated
@@ -93,9 +82,8 @@ setSelectedAppLaunches(byte) added, some methods documented
 - LIBff60809 Finnish language added
 - LIBff50809 Danish language added
 - LIBff40809 Azerbaijani language added
-- LIBff30809 WeakReference<Dialog> to dialog implemented
-- LIBff20809 rateNow(...) added, call this method directly to go
-straight to store
+- LIBff30809 `WeakReference<Dialog>` to dialog implemented
+- LIBff20809 rateNow(...) added, call this method directly to go straight to store
 - LIBcc10809 Some methods were documented
 - LIBff10809 Dialog OnShowListener added
 - LIBfg40808 Thai language added
@@ -110,8 +98,7 @@ straight to store
 - LIBff40808 Both in/id locale support
 - LIBff30808 Both he/iw locale support
 - LIBff20808 Bulgarian language added
-- LIBff30719 Migrate to
-[GradleMavenPush Release 1.1.0](https://github.com/Vorlonsoft/GradleMavenPush/tree/1.1.0)
+- LIBff30719 Migrate to [GradleMavenPush Release 1.1.0](https://github.com/Vorlonsoft/GradleMavenPush/tree/1.1.0)
 - LIBcc10715
 - LIBff10714 Upgrade to GradleMavenPush
 - LIBcc10713
@@ -150,8 +137,7 @@ straight to store
 ## 1.1.7 (released 08.05.2018)
 
 - LIBcc10508
-- LIBff10507 Ability to limit the display of the dialog within a
-365-day period
+- LIBff10507 Ability to limit the display of the dialog within a 365-day period
 - LIBcc10503
 - LIBff10503
 - LIBff10501
@@ -218,8 +204,7 @@ straight to store
 ## 1.0.9 (released 09.03.2018)
 
 - LIBcc10307 Copyright update
-- LIBbb10309 If setRemindInterval is set to 25 or more, the number of
-days is not set correctly
+- LIBbb10309 If setRemindInterval is set to 25 or more, the number of days is not set correctly
 - LIBcc10309
 - LIBcc20307 CODE_OF_CONDUCT.md
 - LIBff20307 Bengali translation

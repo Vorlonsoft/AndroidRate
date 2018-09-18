@@ -7,13 +7,10 @@ developers!
 If you would like to contribute to the project, it's really great. You
 can contribute in a variety of ways:
 
-* Help us with test cases and examples for the Wiki (and kindly follow
-our [Coding Standards](#coding-standards))
-* If you have a good idea/patch for the project, create a
-[pull request](#pull-requests)
+* Help us with test cases and examples for the Wiki (and kindly follow our [Coding Standards](#coding-standards))
+* If you have a good idea/patch for the project, create a [pull request](#pull-requests)
 * Found a bug? You're more than welcome to [submit an issue](#issues)
-* Help other fellow developers solve their problems, you're welcome to
-do so in issues
+* Help other fellow developers solve their problems, you're welcome to do so in issues
 
 We do require certain guidelines to be followed so that the quality of
 the project remains top-notch:
@@ -48,15 +45,9 @@ cannot replace the developer and we certainly do not see what you're
 seeing. So when you come to report an issue, follow these simple rules:
 
 * Report bugs in the English language only
-* Use Markdown to format your issue in a fashionable way (easier to
-read):
-[Writing on GitHub](https://help.github.com/articles/github-flavored-markdown)
-* If the issue is due to a crash, include the stack trace --
-`throwable.printStackTrace()` -- and any other detail that will shed
-light on the problem
-* We need to see the source code (minus certain details that you think
-are confidential) that caused the problem in the first place, so
-include it too
+* Use Markdown to format your issue in a fashionable way (easier to read): [Writing on GitHub](https://help.github.com/articles/github-flavored-markdown)
+* If the issue is due to a crash, include the stack trace -- `throwable.printStackTrace()` -- and any other detail that will shed light on the problem
+* We need to see the source code (minus certain details that you think are confidential) that caused the problem in the first place, so include it too
 
 Opening issues without providing us with the information necessary to
 debug and fix it is useless; so we will close such issues within 7 days
@@ -71,14 +62,9 @@ to and we require that you do so as well:
 
 * Do not use the Tab character (it's in first place for a reason)
 * Indentation is 4 spaces
-* Include the copyright info (as in other files) at the top of the
-class file
-* You must provide proper Javadoc, including description, in English
-for both public and protected methods, classes and properties
-* Group packages that belong to the same top-level package together,
-followed by an empty line
-* Add an empty line after and before class/interface declarations,
-methods and constructors
+* Include the copyright info (as in other files) at the top of the class file
+* You must provide proper Javadoc, including description, in English for both public and protected methods, classes and properties
+* Group packages that belong to the same top-level package together, followed by an empty line
+* Add an empty line after and before class/interface declarations, methods and constructors
 * Add an empty line before and after a group of properties
-* Do not catch generic Exception/Throwable errors, but always catch the
-most specific type of the exception/error
+* Do not catch generic Exception/Throwable errors, but always catch the most specific type of the exception/error
