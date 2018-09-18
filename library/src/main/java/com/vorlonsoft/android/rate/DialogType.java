@@ -12,7 +12,7 @@ import java.lang.annotation.Retention;
 import androidx.annotation.IntDef;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
-import static java.lang.annotation.RetentionPolicy.CLASS;
+import static java.lang.annotation.RetentionPolicy.SOURCE;
 
 /**
  * <p>DialogType Class - dialog type class of the AndroidRate library.</p>
@@ -41,7 +41,7 @@ public class DialogType {
      * constants: APPLE, CLASSIC, MODERN.</p>
      */
     @Documented
-    @Retention(CLASS)
+    @Retention(SOURCE)
     @IntDef({
             APPLE,
             CLASSIC,
