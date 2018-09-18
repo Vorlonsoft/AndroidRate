@@ -40,7 +40,8 @@ final class Utils {
     }
 
     static boolean isLollipop() {
-        return ((Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) || (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1));
+        return ((Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP) ||
+                (Build.VERSION.SDK_INT == Build.VERSION_CODES.LOLLIPOP_MR1));
     }
 
     /**

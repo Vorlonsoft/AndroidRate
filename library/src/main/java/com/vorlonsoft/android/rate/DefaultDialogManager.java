@@ -116,37 +116,33 @@ public class DefaultDialogManager implements DialogManager {
             final String packageName = AppInformation.getInstance(context).getAppPackageName();
             if ((packageName != null) && (packageName.hashCode() != EMPTY_STRING.hashCode())) {
                 final Intent[] intentsToAppStores = getIntentsForStores(packageName);
-                if (intentsToAppStores == null) {
-                    Log.w(TAG, "Failed to rate app, can't create intents for store");
-                } else {
-                    try {
-                        if (intentsToAppStores.length == 0) {
-                            Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
-                        } else if (intentsToAppStores[0] == null) {
-                            throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
-                        } else {
-                            context.startActivity(intentsToAppStores[0]);
-                        }
-                    } catch (ActivityNotFoundException e) {
-                        Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
-                        final byte intentsToAppStoresNumber = (byte) intentsToAppStores.length;
-                        if (intentsToAppStoresNumber > 1) {
-                            boolean isCatch;
-                            for (byte b = 1; b < intentsToAppStoresNumber; b++) { // intentsToAppStores[1] - second intent in the array
-                                try {
-                                    if (intentsToAppStores[b] == null) {
-                                        throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + b + "] == null)");
-                                    } else {
-                                        context.startActivity(intentsToAppStores[b]);
-                                    }
-                                    isCatch = false;
-                                } catch (ActivityNotFoundException ex) {
-                                    Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[b], ex);
-                                    isCatch = true;
+                try {
+                    if (intentsToAppStores.length == 0) {
+                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
+                    } else if (intentsToAppStores[0] == null) {
+                        throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
+                    } else {
+                        context.startActivity(intentsToAppStores[0]);
+                    }
+                } catch (ActivityNotFoundException e) {
+                    Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
+                    final byte intentsToAppStoresNumber = (byte) intentsToAppStores.length;
+                    if (intentsToAppStoresNumber > 1) {
+                        boolean isCatch;
+                        for (byte b = 1; b < intentsToAppStoresNumber; b++) { // intentsToAppStores[1] - second intent in the array
+                            try {
+                                if (intentsToAppStores[b] == null) {
+                                    throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + b + "] == null)");
+                                } else {
+                                    context.startActivity(intentsToAppStores[b]);
                                 }
-                                if (!isCatch) {
-                                    break;
-                                }
+                                isCatch = false;
+                            } catch (ActivityNotFoundException ex) {
+                                Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[b], ex);
+                                isCatch = true;
+                            }
+                            if (!isCatch) {
+                                break;
                             }
                         }
                     }
@@ -184,7 +180,7 @@ public class DefaultDialogManager implements DialogManager {
         this.listener = dialogOptions.getListener();
     }
 
-    @Nullable
+    @NonNull
     private Intent[] getIntentsForStores(@NonNull final String packageName) {
         switch (storeOptions.getStoreType()) {
             case AMAZON:

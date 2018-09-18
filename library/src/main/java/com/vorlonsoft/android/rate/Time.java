@@ -23,21 +23,21 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
 
 @SuppressWarnings("WeakerAccess")
 public class Time {
-    /** Constant for unit of duration in milliseconds: millisecond */
+    /** <p>Constant for unit of duration in milliseconds: millisecond.</p> */
     public static final long MILLISECOND = 1;
-    /** Constant for unit of duration in milliseconds: second */
+    /** <p>Constant for unit of duration in milliseconds: second.</p> */
     public static final long SECOND = MILLISECOND * 1000;
-    /** Constant for unit of duration in milliseconds: minute */
+    /** <p>Constant for unit of duration in milliseconds: minute.</p> */
     public static final long MINUTE = SECOND * 60;
-    /** Constant for unit of duration in milliseconds: hour */
+    /** <p>Constant for unit of duration in milliseconds: hour.</p> */
     public static final long HOUR = MINUTE * 60;
-    /** Constant for unit of duration in milliseconds: day */
+    /** <p>Constant for unit of duration in milliseconds: day.</p> */
     public static final long DAY = HOUR * 24;
-    /** Constant for unit of duration in milliseconds: week */
+    /** <p>Constant for unit of duration in milliseconds: week.</p> */
     public static final long WEEK = DAY * 7;
-    /** Constant for unit of duration in milliseconds: month */
+    /** <p>Constant for unit of duration in milliseconds: month.</p> */
     public static final long MONTH = DAY * 30;
-    /** Constant for unit of duration in milliseconds: year */
+    /** <p>Constant for unit of duration in milliseconds: year.</p> */
     public static final long YEAR = DAY * 365;
 
     private Time() {

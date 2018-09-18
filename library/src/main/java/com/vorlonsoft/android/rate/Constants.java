@@ -22,7 +22,7 @@ final class Constants {
      * @author   Alexander Savin
      */
 
-    final static class Date {
+    static final class Date {
 
         static final short YEAR_IN_DAYS = (short) 365;
 
@@ -39,7 +39,7 @@ final class Constants {
      * @author   Alexander Savin
      */
 
-    final static class Utils {
+    static final class Utils {
 
         static final String EMPTY_STRING = "";
 

@@ -24,31 +24,31 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
 
 @SuppressWarnings("WeakerAccess")
 public class StoreType {
-    /** Amazon Appstore */
+    /** <p>Amazon Appstore.</p> */
     public static final int AMAZON = 0;
-    /** Apple App Store */
+    /** <p>Apple App Store.</p> */
     public static final int APPLE = 1;
-    /** Cafe Bazaar */
+    /** <p>Cafe Bazaar.</p> */
     public static final int BAZAAR = 2;
-    /** BlackBerry World */
+    /** <p>BlackBerry World.</p> */
     public static final int BLACKBERRY = 3;
-    /** 19 chinese app stores */
+    /** <p>19 chinese app stores.</p> */
     public static final int CHINESESTORES = 4;
-    /** Google Play */
+    /** <p>Google Play.</p> */
     public static final int GOOGLEPLAY = 5;
-    /** Mi Appstore (Xiaomi Market) */
+    /** <p>Mi Appstore (Xiaomi Market).</p> */
     public static final int MI = 6;
-    /** Samsung Galaxy Apps */
+    /** <p>Samsung Galaxy Apps.</p> */
     public static final int SAMSUNG = 7;
-    /** SlideME Marketplace */
+    /** <p>SlideME Marketplace.</p> */
     public static final int SLIDEME = 8;
-    /** Tencent App Store */
+    /** <p>Tencent App Store.</p> */
     public static final int TENCENT = 9;
-    /** Yandex.Store */
+    /** <p>Yandex.Store.</p> */
     public static final int YANDEX = 10;
-    /** Any custom intents */
+    /** <p>Any custom intents.</p> */
     public static final int INTENT = 11;
-    /** Any other Store */
+    /** <p>Any other Store.</p> */
     public static final int OTHER = 12;
 
     private StoreType() {

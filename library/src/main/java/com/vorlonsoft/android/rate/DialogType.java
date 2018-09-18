@@ -23,11 +23,11 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class DialogType {
-    /** Apple Rate Dialog */
+    /** <p>Apple Rate Dialog.</p> */
     public static final int APPLE = 0;
-    /** Classic Rate Dialog */
+    /** <p>Classic Rate Dialog.</p> */
     public static final int CLASSIC = 1;
-    /** Modern Rate Dialog */
+    /** <p>Modern Rate Dialog.</p> */
     public static final int MODERN = 2;
 
     private DialogType() {

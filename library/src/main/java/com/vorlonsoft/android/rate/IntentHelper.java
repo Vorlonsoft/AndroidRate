@@ -13,7 +13,6 @@ import android.util.Log;
 import java.util.Arrays;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
@@ -150,12 +149,17 @@ final class IntentHelper {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     }
 
-    @Nullable
+    @NonNull
     static Intent[] createIntentsForStore(@NonNull final Context context, final int appStore, @NonNull final String paramName) {
-
         //noinspection ConstantConditions
         if ((context == null) || (paramName == null)) {
-            return null;
+            if (context == null) {
+                Log.w(TAG, "Failed to rate app, can't check the availability of stores packages on the user device (context == null)");
+            }
+            if (paramName == null) {
+                Log.w(TAG, "Failed to rate app, can't get store Uri/WebUri (paramName == null)");
+            }
+            return new Intent[0];
         }
 
         final boolean needStorePackage = getNeedStorePackageFlagForStore(appStore);
@@ -186,11 +190,11 @@ final class IntentHelper {
                 }
             }
         } else {
-            intents = null;
+            intents = new Intent[0];
             if (hasWebUriIntent) {
-                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and device can't start app store web (http/https) uri activity without it");
+                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on the user device and the user device can't start the app store (" + appStore + ") web (http/https) uri activity without it");
             } else {
-                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on device and app store (" + appStore + ") hasn't web (http/https) uri");
+                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on the user device and the app store (" + appStore + ") hasn't web (http/https) uri");
             }
         }
         return intents;
