@@ -23,6 +23,7 @@ import java.lang.ref.WeakReference;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
@@ -87,12 +88,13 @@ public class DefaultDialogManager implements DialogManager {
                         final Button negativeButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
                         linearLayout.setOrientation(LinearLayout.VERTICAL);
                         linearLayout.setGravity(Gravity.END);
-                        if (neutralButton != null) {
+                        if ((neutralButton != null) && (negativeButton != null)) {
                             linearLayout.removeView(neutralButton);
-                            if (negativeButton != null) {
-                                linearLayout.removeView(negativeButton);
-                                linearLayout.addView(negativeButton);
-                            }
+                            linearLayout.removeView(negativeButton);
+                            linearLayout.addView(negativeButton);
+                            linearLayout.addView(neutralButton);
+                        } else if (neutralButton != null) {
+                            linearLayout.removeView(neutralButton);
                             linearLayout.addView(neutralButton);
                         } else if (negativeButton != null) {
                             linearLayout.removeView(negativeButton);
@@ -112,7 +114,7 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             final String packageName = AppInformation.getInstance(context).getAppPackageName();
-            if ((packageName != null) && (packageName.hashCode() != "".hashCode())) {
+            if ((packageName != null) && (packageName.hashCode() != EMPTY_STRING.hashCode())) {
                 final Intent[] intentsToAppStores = getIntentsForStores(packageName);
                 if (intentsToAppStores == null) {
                     Log.w(TAG, "Failed to rate app, can't create intents for store");

@@ -11,7 +11,7 @@ import java.lang.annotation.Retention;
 
 import androidx.annotation.IntDef;
 
-import static java.lang.annotation.RetentionPolicy.SOURCE;
+import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
  * <p>StoreType Class - store type class of the AndroidRate library.</p>
@@ -62,7 +62,7 @@ public class StoreType {
      * YANDEX.</p>
      */
     @Documented
-    @Retention(SOURCE)
+    @Retention(CLASS)
     @IntDef({
             AMAZON,
             BAZAAR,
@@ -83,7 +83,7 @@ public class StoreType {
      * constants: APPLE, BLACKBERRY.</p>
      */
     @Documented
-    @Retention(SOURCE)
+    @Retention(CLASS)
     @IntDef({
             APPLE,
             BLACKBERRY
@@ -98,7 +98,7 @@ public class StoreType {
      * SAMSUNG, SLIDEME, TENCENT, YANDEX.</p>
      */
     @Documented
-    @Retention(SOURCE)
+    @Retention(CLASS)
     @IntDef({
             AMAZON,
             APPLE,

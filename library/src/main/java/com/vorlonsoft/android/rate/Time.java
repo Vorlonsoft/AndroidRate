@@ -11,7 +11,7 @@ import java.lang.annotation.Retention;
 
 import androidx.annotation.LongDef;
 
-import static java.lang.annotation.RetentionPolicy.SOURCE;
+import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
  * <p>Time Class - time units class of the AndroidRate library.</p>
@@ -50,7 +50,7 @@ public class Time {
      * constants: MILLISECOND, SECOND, MINUTE, HOUR, DAY, WEEK, MONTH, YEAR.</p>
      */
     @Documented
-    @Retention(SOURCE)
+    @Retention(CLASS)
     @LongDef({
             MILLISECOND,
             SECOND,

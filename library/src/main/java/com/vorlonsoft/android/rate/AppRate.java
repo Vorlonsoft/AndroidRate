@@ -304,6 +304,7 @@ public final class AppRate {
      * @deprecated since 1.2.0, use {@link #setSelectedAppLaunches(byte)} with the same {@code param} instead
      * @see #setSelectedAppLaunches(byte)
      */
+    @Deprecated
     public AppRate setRemindLaunchTimes(@SuppressWarnings("SameParameterValue") byte selectedAppLaunches) {
         return setSelectedAppLaunches(selectedAppLaunches);
     }

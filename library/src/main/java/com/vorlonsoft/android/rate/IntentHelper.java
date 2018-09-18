@@ -15,6 +15,7 @@ import java.util.Arrays;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
@@ -111,12 +112,13 @@ final class IntentHelper {
         }
     }
 
+    @NonNull
     private static String[] getPackagesNamesForStore(final int appStore) {
         switch (appStore) {
             case AMAZON:
                 return new String[]{AMAZON_APPSTORE_PACKAGE_NAME};
             case APPLE:
-                return null;
+                return EMPTY_STRING_ARRAY;
             case BAZAAR:
                 return new String[]{CAFE_BAZAAR_PACKAGE_NAME};
             case BLACKBERRY:
@@ -159,8 +161,8 @@ final class IntentHelper {
         final boolean needStorePackage = getNeedStorePackageFlagForStore(appStore);
         final boolean hasWebUriIntent = getHasWebUriIntentFlagForStore(appStore);
         final String[] storesPackagesNames = getPackagesNamesForStore(appStore);
-        final String[] deviceStoresPackagesNames = storesPackagesNames == null ? null : isPackagesExists(context, storesPackagesNames);
-        final byte deviceStoresPackagesNumber = deviceStoresPackagesNames == null ? 0 : (byte) deviceStoresPackagesNames.length;
+        final String[] deviceStoresPackagesNames = isPackagesExists(context, storesPackagesNames);
+        final byte deviceStoresPackagesNumber = (byte) deviceStoresPackagesNames.length;
         final Intent[] intents;
 
         if (deviceStoresPackagesNumber > 0) {
@@ -179,7 +181,7 @@ final class IntentHelper {
             intents = new Intent[]{new Intent(Intent.ACTION_VIEW, getStoreWebUri(appStore, paramName))};
             if (appStore == APPLE) {
                 final String[] deviceBrowsersPackagesNames = isPackagesExists(context, BROWSERS_PACKAGES_NAMES);
-                if ((deviceBrowsersPackagesNames != null) && (deviceBrowsersPackagesNames.length > 0)) {
+                if (deviceBrowsersPackagesNames.length > 0) {
                     intents[0].setPackage(deviceBrowsersPackagesNames[0]);
                 }
             }

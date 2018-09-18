@@ -33,6 +33,8 @@ import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 
 final class UriHelper {
 
+    private static final String DEFAULT_STORE_URI = "market://details?id=";
+
     private static final String AMAZON_APPSTORE = "amzn://apps/android?p=";
 
     private static final String AMAZON_APPSTORE_WEB = "https://www.amazon.com/gp/mas/dl/android?p=";
@@ -47,13 +49,13 @@ final class UriHelper {
 
     private static final String CAFE_BAZAAR_WEB = "https://cafebazaar.ir/app/";
 
-    private static final String CHINESE_STORES = "market://details?id=";
+    private static final String CHINESE_STORES = DEFAULT_STORE_URI;
 
-    private static final String GOOGLE_PLAY = "market://details?id=";
+    private static final String GOOGLE_PLAY = DEFAULT_STORE_URI;
 
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
 
-    private static final String MI_APPSTORE = "market://details?id=";
+    private static final String MI_APPSTORE = DEFAULT_STORE_URI;
 
     private static final String MI_APPSTORE_WEB = "http://app.xiaomi.com/details?id=";
 
@@ -65,7 +67,7 @@ final class UriHelper {
 
     private static final String SLIDEME_MARKETPLACE_WEB = "http://slideme.org/app/";
 
-    private static final String TENCENT_APP_STORE = "market://details?id=";
+    private static final String TENCENT_APP_STORE = DEFAULT_STORE_URI;
 
     private static final String TENCENT_APP_STORE_WEB = "http://a.app.qq.com/o/simple.jsp?pkgname=";
 

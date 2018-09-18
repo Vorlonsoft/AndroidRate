@@ -33,7 +33,7 @@ public class UriHelperTest {
 
     private static final String GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id=";
 
-    public UriHelperTest() {
+    public UriHelperTest() { // empty constructor of unit test for UriHelper class
     }
 
     @SuppressWarnings({"ConstantConditions", "UnnecessaryLocalVariable"})

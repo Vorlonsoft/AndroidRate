@@ -10,6 +10,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 
 /**
@@ -87,7 +88,7 @@ final class AppInformation {
                 appVersionName = packageInfo.versionName;
             } else {
                 appLongVersionCode = 0L;
-                appVersionName = "";
+                appVersionName = EMPTY_STRING;
             }
             synchronized (AppInformation.class) {
                 if (singleton == null) {

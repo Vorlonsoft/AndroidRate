@@ -68,17 +68,17 @@ public final class StoreOptions {
                 setIntents(intentParam);
                 break;
             case OTHER:
-                final Intent[] intents;
+                final Intent[] otherIntents;
                 if (stringParam == null) {
-                    intents = null;
+                    otherIntents = null;
                 } else {
                     final int length = stringParam.length;
-                    intents = new Intent[length];
+                    otherIntents = new Intent[length];
                     for (int i = 0; i < length; i++) {
-                        intents[i] = new Intent(Intent.ACTION_VIEW, Uri.parse(stringParam[i]));
+                        otherIntents[i] = new Intent(Intent.ACTION_VIEW, Uri.parse(stringParam[i]));
                     }
                 }
-                setIntents(intents);
+                setIntents(otherIntents);
                 break;
             default:
                 break;

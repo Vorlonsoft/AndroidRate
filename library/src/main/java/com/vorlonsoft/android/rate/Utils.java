@@ -20,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
+import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 
 /**
@@ -88,18 +90,15 @@ final class Utils {
     }
 
     @SuppressWarnings("ConstantConditions")
-    @Nullable
+    @NonNull
     static String[] isPackagesExists(@NonNull final Context context, @NonNull final String[] targetPackages) {
-        final String[] EMPTY_STRING_ARRAY = new String[0];
-        final String EMPTY_STRING = "";
-
-        if (context == null) {
-            Log.i(TAG, "Failed to get installed applications");
-            return null;
-        } else if (targetPackages == null) {
-            Log.i(TAG, "Null pointer to an array of target packages");
-            return null;
-        } else if (targetPackages.length == 0) {
+        if ((context == null) || (targetPackages == null) || (targetPackages.length == 0)) {
+            if (context == null) {
+                Log.i(TAG, "Failed to get installed applications");
+            }
+            if (targetPackages == null) {
+                Log.i(TAG, "Null pointer to an array of target packages");
+            }
             return EMPTY_STRING_ARRAY;
         }
 
