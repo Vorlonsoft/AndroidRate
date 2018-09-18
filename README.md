@@ -2,7 +2,10 @@
 
 # AndroidRate [![Build Status](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/build-status_90x20.png)](#) [![Latest Version](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/latest-version_104x20.png)](https://github.com/Vorlonsoft/AndroidRate/releases) [![Supported APIs](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/api_54x20.png)](#) [![Android Arsenal](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/android-arsenal_174x20.png)](#) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c1691c3e199c45e9834f880b70823d4a)](https://www.codacy.com/app/Vorlonsoft/AndroidRate?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Vorlonsoft/AndroidRate&amp;utm_campaign=Badge_Grade)
 
-AndroidRate is a library to help you promote your Android app by prompting users to rate the app after using it for a few days. Project based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by Shintaro Katafuchi.
+AndroidRate is a library to help you promote your Android app by
+prompting users to rate the app after using it for a few days. Project
+based on [Android-Rate](https://github.com/hotchemi/Android-Rate) by
+Shintaro Katafuchi.
 
 [![AndroidRate animated screenshots](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/screenshots/screenshots_360x640.gif)](#)
 
@@ -33,7 +36,10 @@ AndroidRate is a library to help you promote your Android app by prompting users
 
 ### Latest stable version
 
-You can download library files from JCenter, Maven Central, JFrog Bintray (JCenter mirror), **[GitHub](https://github.com/Vorlonsoft/AndroidRate) (main source)**, GitLab (GitHub mirror) or SourceForge (GitHub mirror).
+You can download library files from JCenter, Maven Central, JFrog
+Bintray (JCenter mirror),
+**[GitHub](https://github.com/Vorlonsoft/AndroidRate) (main source)**,
+GitLab (GitHub mirror) or SourceForge (GitHub mirror).
 
 `latestVersion` is [![Latest Version](https://raw.githubusercontent.com/Vorlonsoft/AndroidRate/master/badges/latest-version_104x20.png)](https://github.com/Vorlonsoft/AndroidRate/releases)
 
@@ -47,13 +53,16 @@ dependencies {
 
 ### Latest snapshot version
 
-If you don't want to wait for the next release, you can add the Sonatype's snapshots repository to your project root `build.gradle` file:
+If you don't want to wait for the next release, you can add the
+Sonatype's snapshots repository to your project root `build.gradle`
+file:
 
        repositories {
            maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
        }
 
-Then add the following dependency to your relevant project modules `build.gradle` files:
+Then add the following dependency to your relevant project modules
+`build.gradle` files:
 
     dependencies {
         implementation "com.vorlonsoft:androidrate:1.2.2-SNAPSHOT"
@@ -63,7 +72,8 @@ Then add the following dependency to your relevant project modules `build.gradle
 
 ### Configuration
 
-AndroidRate library provides methods to configure it's behavior. Select the type of configuration that best describes your needs.
+AndroidRate library provides methods to configure it's behavior. Select
+the type of configuration that best describes your needs.
 
 #### Nano configuration
 
@@ -139,22 +149,47 @@ protected void onCreate(Bundle savedInstanceState) {
 
 Default options of the Rate Dialog are as below:
 
-1. Google Play launches when you press the positive button. Change via `AppRate#setStoreType(int)`, `AppRate#setStoreType(int, long)`, `AppRate#setStoreType(String...)` or `AppRate#setStoreType(Intent...)`.
-2. App is launched 10 or more days later than installation. Change via `AppRate#setTimeToWait(long, short)` or `AppRate#setInstallDays(byte)`.
-3. App is launched 10 or more times. Change via `AppRate#setLaunchTimes(byte)`.
-4. App is launched 1 or more days after neutral button clicked. Change via `AppRate#setRemindTimeToWait(long, short)` or `AppRate#setRemindInterval(byte)`.
-5. App is launched 0 or more times after neutral button clicked. Change via `AppRate#setRemindLaunchesNumber(byte)`.
-6. Each launch (the condition is satisfied if appLaunches % `param` == 0). Change via `AppRate#setSelectedAppLaunches(byte)`.
-7. App shows the Neutral button ("Remind me later"). Change via `setShowLaterButton(boolean)`.
-8. Unlimited occurrences of the display of the Rate Dialog within a 365-day period. Change via `AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
-9. Don't re-enable the Rate Dialog if a new version of app with different version code is installed. Change via `AppRate#setVersionCodeCheck(boolean)`.
-10. Don't re-enable the Rate Dialog if a new version of app with different version name is installed. Change via `AppRate#setVersionNameCheck(boolean)`.
-11. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
-12. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
+1. Google Play launches when you press the positive button. Change via
+`AppRate#setStoreType(int)`, `AppRate#setStoreType(int, long)`,
+`AppRate#setStoreType(String...)` or `AppRate#setStoreType(Intent...)`.
+2. App is launched 10 or more days later than installation. Change via
+`AppRate#setTimeToWait(long, short)` or `AppRate#setInstallDays(byte)`.
+3. App is launched 10 or more times. Change via
+`AppRate#setLaunchTimes(byte)`.
+4. App is launched 1 or more days after neutral button clicked. Change
+via `AppRate#setRemindTimeToWait(long, short)` or
+`AppRate#setRemindInterval(byte)`.
+5. App is launched 0 or more times after neutral button clicked. Change
+via `AppRate#setRemindLaunchesNumber(byte)`.
+6. Each launch (the condition is satisfied if
+appLaunches % `param` == 0). Change via
+`AppRate#setSelectedAppLaunches(byte)`.
+7. App shows the Neutral button ("Remind me later"). Change via
+`setShowLaterButton(boolean)`.
+8. Unlimited occurrences of the display of the Rate Dialog within a
+365-day period. Change via
+`AppRate#set365DayPeriodMaxNumberDialogLaunchTimes(short)`.
+9. Don't re-enable the Rate Dialog if a new version of app with
+different version code is installed. Change via
+`AppRate#setVersionCodeCheck(boolean)`.
+10. Don't re-enable the Rate Dialog if a new version of app with
+different version name is installed. Change via
+`AppRate#setVersionNameCheck(boolean)`.
+11. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate
+Dialog will be shown each time the app is launched.
+**This feature is for development only!**.
+12. There is no default callback when the button of Rate Dialog is
+pressed. Change via
+`AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
 
 ### OnClickButtonListener interface
 
-You can implement OnClickButtonListener Interface and use `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)` to specify the callback when the button of Rate Dialog is pressed. `DialogInterface.BUTTON_POSITIVE`, `DialogInterface.BUTTON_NEUTRAL` or `DialogInterface.BUTTON_NEGATIVE` will be passed in the argument of `OnClickButtonListener#onClickButton`.
+You can implement OnClickButtonListener Interface and use
+`AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)` to
+specify the callback when the button of Rate Dialog is pressed.
+`DialogInterface.BUTTON_POSITIVE`, `DialogInterface.BUTTON_NEUTRAL` or
+`DialogInterface.BUTTON_NEGATIVE` will be passed in the argument of
+`OnClickButtonListener#onClickButton`.
 
 ```java
 // Java 7- start
@@ -174,7 +209,10 @@ AppRate.with(this).setOnClickButtonListener(which -> {
 
 ### Optional custom event requirements
 
-You can add additional optional requirements for showing dialog. Each requirement can be added/referenced as a unique string. You can set a minimum count for each such event (for e.g. "action_performed" 3 times, "button_clicked" 5 times, etc.)
+You can add additional optional requirements for showing dialog. Each
+requirement can be added/referenced as a unique string. You can set a
+minimum count for each such event (for e.g. "action_performed" 3 times,
+"button_clicked" 5 times, etc.)
 
 ```java
 AppRate.with(this).setMinimumEventCount(String, short);
@@ -184,7 +222,8 @@ AppRate.with(this).setEventCountValue(String, short);
 
 ### Clear show dialog flag
 
-When you want to show the dialog again, call `AppRate#clearAgreeShowDialog()`.
+When you want to show the dialog again, call
+`AppRate#clearAgreeShowDialog()`.
 
 ```java
 AppRate.with(this).clearAgreeShowDialog();
@@ -192,7 +231,9 @@ AppRate.with(this).clearAgreeShowDialog();
 
 ### Forced display of the Rate Dialog
 
-Use this method directly if you want to force display of the Rate Dialog. Call it when some button presses on. Method also useful for testing purposes. Call `AppRate#showRateDialog(Activity)`.
+Use this method directly if you want to force display of the Rate
+Dialog. Call it when some button presses on. Method also useful for
+testing purposes. Call `AppRate#showRateDialog(Activity)`.
 
 ```java
 AppRate.with(this).showRateDialog(this);
@@ -200,7 +241,8 @@ AppRate.with(this).showRateDialog(this);
 
 ### Forced dismiss of the Rate Dialog
 
-Use this method directly if you want to remove the Rate Dialog from the screen. Call `AppRate#dismissRateDialog()`.
+Use this method directly if you want to remove the Rate Dialog from the
+screen. Call `AppRate#dismissRateDialog()`.
 
 ```java
 AppRate.with(this).dismissRateDialog();
@@ -226,7 +268,8 @@ AppRate.with(this).setThemeResId(int);
 
 ### Custom dialog labels
 
-If you want to use your own dialog labels, override string xml resources on your application.
+If you want to use your own dialog labels, override string xml resources
+on your application.
 
 ```xml
 <resources>
@@ -273,7 +316,9 @@ AppRate.with(this).setStoreType(StoreType.BLACKBERRY, long);
 
 #### Chinese app stores
 
-The first Chinese app store found on the user device will be used, if first fails, second will be used, etc. The Library doesn't check the availability of your application on the app store.
+The first Chinese app store found on the user device will be used, if
+first fails, second will be used, etc. The Library doesn't check the
+availability of your application on the app store.
 
 ```java
 /* 19 chinese app stores: 腾讯应用宝, 360手机助手, 小米应用商店, 华为应用商店, 百度手机助手,
@@ -294,7 +339,8 @@ AppRate.with(this).setStoreType(String...);
 
 ### Custom intents
 
-You can set custom action to the Positive button. For example, you want to open your custom RateActivity when the Rate button clicked.
+You can set custom action to the Positive button. For example, you want
+to open your custom RateActivity when the Rate button clicked.
 
 ```java
 /* Any custom intent/intents, Intent... - an intent or array of intents,
@@ -305,7 +351,9 @@ AppRate.with(this).setStoreType(Intent...);
 
 ### Check for Google Play
 
-The following code checks that Google Play is available on the user's device. We recommend to use it if current app store type from library options is StoreType.GOOGLEPLAY.
+The following code checks that Google Play is available on the user's
+device. We recommend to use it if current app store type from library
+options is StoreType.GOOGLEPLAY.
 
 ```java
 if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != ConnectionResult.SERVICE_MISSING) {
@@ -315,56 +363,59 @@ if (GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this) != C
 
 ## Sample
 
-Clone this repo and check out the [sample](https://github.com/Vorlonsoft/AndroidRate/tree/master/sample) module.
+Clone this repo and check out the
+[sample](https://github.com/Vorlonsoft/AndroidRate/tree/master/sample)
+module.
 
 ## Javadoc Documentation
 
-See generated javadoc [AndroidRate documentation](https://vorlonsoft.github.io/AndroidRate/javadoc/).
+See generated javadoc
+[AndroidRate documentation](https://vorlonsoft.github.io/AndroidRate/javadoc/).
 
 ## Supported Languages
 
 AndroidRate library currently supports the following 41 languages:
 
-- Albanian
-- Arabic
-- Azerbaijani
-- Basque
-- Benqali
-- Bulgarian
-- Catalan
-- Chinese (zh-CN, zh-TW)
-- Croatian
-- Czech
-- Danish
-- Dutch
-- English
-- Finnish
-- French
-- German
-- Greek
-- Hebrew
-- Hindi
-- Hungarian
-- Indonesian
-- Italy
-- Japanese
-- Korean
-- Malay
-- Norwegian
-- Persian
-- Polish
-- Portuguese
-- Romanian
-- Russian
-- Serbian
-- Slovak
-- Slovenian
-- Spanish
-- Swedish
-- Thai
-- Turkish
-- Ukrainian
-- Vietnamese
+* Albanian
+* Arabic
+* Azerbaijani
+* Basque
+* Benqali
+* Bulgarian
+* Catalan
+* Chinese (zh-CN, zh-TW)
+* Croatian
+* Czech
+* Danish
+* Dutch
+* English
+* Finnish
+* French
+* German
+* Greek
+* Hebrew
+* Hindi
+* Hungarian
+* Indonesian
+* Italy
+* Japanese
+* Korean
+* Malay
+* Norwegian
+* Persian
+* Polish
+* Portuguese
+* Romanian
+* Russian
+* Serbian
+* Slovak
+* Slovenian
+* Spanish
+* Swedish
+* Thai
+* Turkish
+* Ukrainian
+* Vietnamese
 
 ## Already in Use
 

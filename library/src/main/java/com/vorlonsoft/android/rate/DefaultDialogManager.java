@@ -160,7 +160,9 @@ public class DefaultDialogManager implements DialogManager {
                 Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get app package name");
             }
             setIsAgreeShowDialog(context, false);
-            if (listener != null) listener.onClickButton((byte) which);
+            if (listener != null) {
+                listener.onClickButton((byte) which);
+            }
         }
     };
     @SuppressWarnings("WeakerAccess")
@@ -168,7 +170,9 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onClick(final DialogInterface dialog, final int which) {
             setIsAgreeShowDialog(context, false);
-            if (listener != null) listener.onClickButton((byte) which);
+            if (listener != null) {
+                listener.onClickButton((byte) which);
+            }
         }
     };
     @SuppressWarnings("WeakerAccess")
@@ -177,7 +181,9 @@ public class DefaultDialogManager implements DialogManager {
         public void onClick(final DialogInterface dialog, final int which) {
             setRemindInterval(context);
             setRemindLaunchesNumber(context);
-            if (listener != null) listener.onClickButton((byte) which);
+            if (listener != null) {
+                listener.onClickButton((byte) which);
+            }
         }
     };
 
@@ -307,7 +313,9 @@ public class DefaultDialogManager implements DialogManager {
             }
         }
 
-        /** Clear {@link DefaultDialogManager} singleton */
+        /**
+         * <p>Clears {@link DefaultDialogManager} singleton.</p>
+         */
         @Override
         public void clearDialogManager() {
             if (singleton != null) {

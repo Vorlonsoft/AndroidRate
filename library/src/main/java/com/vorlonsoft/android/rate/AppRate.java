@@ -326,7 +326,7 @@ public final class AppRate {
     }
 
     /**
-     * Decides if Never button appear in the rating dialog or not
+     * <p>Decides if Never button appear in the rating dialog or not.</p>
      *
      * @param isShowNeverButton default is true
      * @return the {@link AppRate} singleton object
@@ -539,24 +539,6 @@ public final class AppRate {
         return setStoreType(OTHER, uris, null);
     }
 
-    private AppRate setStoreType(final int storeType,
-                                 final String[] stringParam,
-                                 final Intent[] intentParaam) {
-        storeOptions.setStoreType(storeType, stringParam, intentParaam);
-        return this;
-    }
-
-    /**
-     * <p>Gets the app store type from library options.</p>
-     * <p>NOTE: this method doesn't get an app store type from user's device.</p>
-     *
-     * @return one of the values defined by {@link StoreType.AnyStoreType}
-     */
-    @StoreType.AnyStoreType
-    public int getStoreType() {
-        return storeOptions.getStoreType();
-    }
-
     /**
      * <p>Sets custom action to the Positive button.</p>
      * <p>For example, you can open your custom RateActivity when the Positive button clicked.</p>
@@ -576,6 +558,24 @@ public final class AppRate {
             throw new IllegalArgumentException("setStoreType(Intent... intents): 'intents' must be != null");
         }
         return setStoreType(INTENT, null, intents);
+    }
+
+    private AppRate setStoreType(final int storeType,
+                                 final String[] stringParam,
+                                 final Intent[] intentParaam) {
+        storeOptions.setStoreType(storeType, stringParam, intentParaam);
+        return this;
+    }
+
+    /**
+     * <p>Gets the app store type from library options.</p>
+     * <p>NOTE: this method doesn't get an app store type from user's device.</p>
+     *
+     * @return one of the values defined by {@link StoreType.AnyStoreType}
+     */
+    @StoreType.AnyStoreType
+    public int getStoreType() {
+        return storeOptions.getStoreType();
     }
 
     @SuppressWarnings("unused")

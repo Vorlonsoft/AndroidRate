@@ -143,9 +143,11 @@ final class PreferenceHelper {
                     break;
                 }
             }
-            setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentYear, currentDay, (short) (Short.valueOf(currentDayCount) + 1));
+            setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentYear,
+                                           currentDay, (short) (Short.valueOf(currentDayCount) + 1));
         } else {
-            setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentYear, currentDay, (short) 1);
+            setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentYear,
+                                           currentDay, (short) 1);
         }
     }
 
@@ -222,7 +224,7 @@ final class PreferenceHelper {
     }
 
     /**
-     * <p>Sets number of times the app has been launched</p>
+     * <p>Sets number of times the app has been launched.</p>
      *
      * @param context AppRate.context
      * @param launchTimes number of launch times to set
