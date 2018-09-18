@@ -23,6 +23,7 @@ import androidx.annotation.RequiresApi;
 import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
 import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
+import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
 
 /**
  * <p>Utils Class - utils class of the AndroidRate library.</p>
@@ -36,7 +37,7 @@ import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 final class Utils {
 
     private Utils() {
-        throw new UnsupportedOperationException("Utils is a utility class and can't be instantiated!");
+        throw new UnsupportedOperationException("Utils" + UTILITY_CLASS_MESSAGE);
     }
 
     static boolean isLollipop() {
@@ -60,12 +61,10 @@ final class Utils {
             return null;
         } else if (themeResId == 0) {
             return new AlertDialog.Builder(context);
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            return new AlertDialog.Builder(context);
         } else {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                return new AlertDialog.Builder(context);
-            } else {
-                return new AlertDialog.Builder(context, themeResId);
-            }
+            return new AlertDialog.Builder(context, themeResId);
         }
     }
 
@@ -79,7 +78,8 @@ final class Utils {
     @SuppressWarnings("ConstantConditions")
     @Nullable
     @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    static androidx.appcompat.app.AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context, final int themeResId) {
+    static androidx.appcompat.app.AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context,
+                                                                                final int themeResId) {
         if (context == null) {
             Log.i(TAG, "Failed to create AlertDialog.Builder");
             return null;

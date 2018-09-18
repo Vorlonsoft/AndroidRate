@@ -11,6 +11,7 @@ import java.lang.annotation.Retention;
 
 import androidx.annotation.IntDef;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
@@ -52,7 +53,7 @@ public class StoreType {
     public static final int OTHER = 12;
 
     private StoreType() {
-        throw new UnsupportedOperationException("StoreType is a utility class and can't be instantiated!");
+        throw new UnsupportedOperationException("StoreType" + UTILITY_CLASS_MESSAGE);
     }
 
     /**

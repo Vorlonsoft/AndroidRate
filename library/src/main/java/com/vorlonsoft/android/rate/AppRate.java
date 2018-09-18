@@ -26,6 +26,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
@@ -114,7 +115,8 @@ public final class AppRate {
      */
     @SuppressWarnings("UnusedReturnValue")
     public static boolean showRateDialogIfMeetsConditions(Activity activity) {
-        boolean isMeetsConditions = ((singleton != null) && (singleton.isDebug() || singleton.shouldShowRateDialog()));
+        final boolean isMeetsConditions = ((singleton != null) &&
+                                           (singleton.isDebug() || singleton.shouldShowRateDialog()));
         if (isMeetsConditions) {
             singleton.showRateDialog(activity);
         }
@@ -142,7 +144,8 @@ public final class AppRate {
     }
 
     private boolean isBelow365DayPeriodMaxNumberDialogLaunchTimes() {
-        return ((dialogLaunchTimes == Short.MAX_VALUE) || (get365DayPeriodDialogLaunchTimes(context) < dialogLaunchTimes));
+        return ((dialogLaunchTimes == Short.MAX_VALUE) ||
+                (get365DayPeriodDialogLaunchTimes(context) < dialogLaunchTimes));
     }
 
     /**
@@ -301,7 +304,8 @@ public final class AppRate {
      * @param selectedAppLaunches default is 1, 1 means each launch, 2 means every 2nd launch,
      *                            3 means every 3rd launch, etc
      * @return the {@link AppRate} singleton object
-     * @deprecated since 1.2.0, use {@link #setSelectedAppLaunches(byte)} with the same {@code param} instead
+     * @deprecated since 1.2.0, use {@link #setSelectedAppLaunches(byte)} with the same
+     *             {@code param} instead
      * @see #setSelectedAppLaunches(byte)
      */
     @Deprecated
@@ -471,7 +475,8 @@ public final class AppRate {
      *
      * @param storeType one of the values defined by {@link StoreType.StoreWithoutApplicationId}
      * @return the {@link AppRate} singleton object
-     * @throws IllegalArgumentException if {@code storeType} isn't defined by {@link StoreType.StoreWithoutApplicationId}
+     * @throws IllegalArgumentException if {@code storeType} isn't defined by
+     *         {@link StoreType.StoreWithoutApplicationId}
      * @see #setStoreType(int, long)
      * @see #setStoreType(String...)
      * @see #setStoreType(Intent...)
@@ -479,9 +484,11 @@ public final class AppRate {
     @SuppressWarnings("WeakerAccess")
     public AppRate setStoreType(@StoreType.StoreWithoutApplicationId final int storeType) throws IllegalArgumentException {
         if ((storeType == APPLE) || (storeType == BLACKBERRY)) {
-            throw new IllegalArgumentException("For StoreType.APPLE/StoreType.BLACKBERRY you must use setStoreType(StoreType.APPLE/StoreType.BLACKBERRY, long applicationId)");
+            throw new IllegalArgumentException("For StoreType.APPLE/StoreType.BLACKBERRY you must " +
+                    "use setStoreType(StoreType.APPLE/StoreType.BLACKBERRY, long applicationId)");
         } else if ((storeType < AMAZON) || (storeType > YANDEX)) {
-            throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
+            throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, " +
+                    "BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
         }
         return setStoreType(storeType, null, null);
     }
@@ -493,17 +500,23 @@ public final class AppRate {
      * @param storeType one of the values defined by {@link StoreType.StoreWithApplicationId}
      * @param applicationId application ID in the {@code storeType} app store
      * @return the {@link AppRate} singleton object
-     * @throws IllegalArgumentException if {@code storeType} isn't defined by {@link StoreType.StoreWithApplicationId} or by {@link StoreType.StoreWithoutApplicationId}
+     * @throws IllegalArgumentException if {@code storeType} isn't defined by
+     *         {@link StoreType.StoreWithApplicationId} or by
+     *         {@link StoreType.StoreWithoutApplicationId}
      * @see #setStoreType(int)
      * @see #setStoreType(String...)
      * @see #setStoreType(Intent...)
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
-    public AppRate setStoreType(@StoreType.StoreWithApplicationId final int storeType, final long applicationId) throws IllegalArgumentException {
+    public AppRate setStoreType(@StoreType.StoreWithApplicationId final int storeType,
+                                final long applicationId) throws IllegalArgumentException {
         if ((storeType < AMAZON) || (storeType > YANDEX)) {
-            throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
+            throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, " +
+                    "BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
         }
-        return ((storeType != APPLE) && (storeType != BLACKBERRY)) ? setStoreType(storeType, null, null) : setStoreType(storeType, new String[]{String.valueOf(applicationId)}, null);
+        return ((storeType != APPLE) && (storeType != BLACKBERRY)) ?
+                setStoreType(storeType, null, null) :
+                setStoreType(storeType, new String[]{String.valueOf(applicationId)}, null);
     }
 
     /**
@@ -526,7 +539,9 @@ public final class AppRate {
         return setStoreType(OTHER, uris, null);
     }
 
-    private AppRate setStoreType(final int storeType, final String[] stringParam, final Intent[] intentParaam) {
+    private AppRate setStoreType(final int storeType,
+                                 final String[] stringParam,
+                                 final Intent[] intentParaam) {
         storeOptions.setStoreType(storeType, stringParam, intentParaam);
         return this;
     }
@@ -633,7 +648,8 @@ public final class AppRate {
 
     /**
      * <p>Monitors launches of the application.</p>
-     * <p>Call this method when the {@code onCreate()} of the app's launcher activity is launched.</p>     *
+     * <p>Call this method when the {@code onCreate()} of the app's launcher activity is
+     * launched.</p>
      */
     public void monitor() {
         if (isFirstLaunch(context)) {
@@ -670,13 +686,15 @@ public final class AppRate {
                 if (!activity.isFinishing()) {
                     dialog.get().show();
                 } else {
-                    Log.w(TAG, "Failed to rate app, can't show rate dialog, because activity is in the process of finishing");
+                    Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
+                            "activity is in the process of finishing");
                 }
             } catch(Exception e){
-                Log.w(TAG, "Failed to rate app, can't show rate dialog, because unpredictable exception", e);
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
+                        "unpredictable exception", e);
             }
         } else {
-            Log.w(TAG, "Failed to rate app, can't create rate dialog");
+            Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog");
         }
     }
 
@@ -717,7 +735,7 @@ public final class AppRate {
                 positiveButton.performClick();
                 dismissRateDialog();
             } else {
-                Log.w(TAG, "Failed to rate app, can't get dialog positive button");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button");
             }
         } else {
             clearRateDialog();
@@ -727,10 +745,10 @@ public final class AppRate {
                 if (positiveButton != null) {
                     positiveButton.performClick();
                 } else {
-                    Log.w(TAG, "Failed to rate app, can't get dialog positive button");
+                    Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button");
                 }
             } else {
-                Log.w(TAG, "Failed to rate app, can't create rate dialog");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog");
             }
             clearRateDialog();
         }
@@ -758,7 +776,8 @@ public final class AppRate {
     }
 
     private boolean isSelectedAppLaunch() {
-        return ((selectedAppLaunches == 1) || ((selectedAppLaunches != 0) && ((getLaunchTimes(context) % selectedAppLaunches) == 0)));
+        return ((selectedAppLaunches == 1) ||
+                ((selectedAppLaunches != 0) && ((getLaunchTimes(context) % selectedAppLaunches) == 0)));
     }
 
     private boolean isOverInstallDate() {
@@ -766,11 +785,15 @@ public final class AppRate {
     }
 
     private boolean isOverRemindDate() {
-        return ((remindInterval == 0L) || (getRemindInterval(context) == 0L) || isOverDate(getRemindInterval(context), remindInterval));
+        return ((remindInterval == 0L) ||
+                (getRemindInterval(context) == 0L) ||
+                isOverDate(getRemindInterval(context), remindInterval));
     }
 
     private boolean isOverRemindLaunchesNumber() {
-        return ((remindLaunchesNumber == 0) || (getRemindLaunchesNumber(context) == 0) || (getLaunchTimes(context) - getRemindLaunchesNumber(context) >= remindLaunchesNumber));
+        return ((remindLaunchesNumber == 0) ||
+                (getRemindLaunchesNumber(context) == 0) ||
+                (getLaunchTimes(context) - getRemindLaunchesNumber(context) >= remindLaunchesNumber));
     }
 
     private boolean isOverCustomEventsRequirements() {
@@ -811,5 +834,4 @@ public final class AppRate {
         this.isDebug = isDebug;
         return this;
     }
-
 }

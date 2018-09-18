@@ -11,6 +11,7 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
@@ -76,7 +77,7 @@ final class UriHelper {
     private static final String YANDEX_STORE_WEB = "https://store.yandex.com/apps/details?id=";
 
     private UriHelper() {
-        throw new UnsupportedOperationException("UriHelper is a utility class and can't be instantiated!");
+        throw new UnsupportedOperationException("UriHelper" + UTILITY_CLASS_MESSAGE);
     }
 
     /**

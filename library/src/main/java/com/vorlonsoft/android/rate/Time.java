@@ -11,6 +11,7 @@ import java.lang.annotation.Retention;
 
 import androidx.annotation.LongDef;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
@@ -41,7 +42,7 @@ public class Time {
     public static final long YEAR = DAY * 365;
 
     private Time() {
-        throw new UnsupportedOperationException("Time is a utility class and can't be instantiated!");
+        throw new UnsupportedOperationException("Time" + UTILITY_CLASS_MESSAGE);
     }
 
     /**

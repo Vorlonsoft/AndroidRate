@@ -37,7 +37,8 @@ final class AppInformation {
     /**
      * <p>Constructor of AppInformation class.</p>
      *
-     * @param appLongVersionCode the versionCode and the versionCodeMajor combined together as a single long value
+     * @param appLongVersionCode the versionCode and the versionCodeMajor combined together as a
+     *                           single long value
      * @param appPackageName the name of app's package
      * @param appVersionName the version name of app's package
      * @param appIcon the icon associated with an app
@@ -81,7 +82,8 @@ final class AppInformation {
             }
             if (packageInfo != null) {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-                    appLongVersionCode = ((long) packageInfo.versionCode) & 0b11111111111111111111111111111111L;
+                    appLongVersionCode = ((long) packageInfo.versionCode) &
+                                         0b11111111111111111111111111111111L;
                 } else {
                     appLongVersionCode = packageInfo.getLongVersionCode();
                 }
@@ -113,8 +115,9 @@ final class AppInformation {
     }
 
     /**
-     * <p>Returns the major version number of app's package, as specified by the &lt;manifest&gt; tag's
-     * {@link android.R.styleable#AndroidManifest_versionCodeMajor versionCodeMajor} attribute.</p>
+     * <p>Returns the major version number of app's package, as specified by the &lt;manifest&gt;
+     * tag's {@link android.R.styleable#AndroidManifest_versionCodeMajor versionCodeMajor}
+     * attribute.</p>
      *
      * @return the major version number of app's package, <b>0 if API < 28</b>
      * @see #getAppVersionCode()

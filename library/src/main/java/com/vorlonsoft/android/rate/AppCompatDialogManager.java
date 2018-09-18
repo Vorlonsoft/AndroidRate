@@ -22,7 +22,8 @@ import androidx.appcompat.app.AlertDialog;
  * <p>AppCompatDialogManager Class - v7 AppCompat library dialog manager class implements
  * {@link DialogManager} interface of the AndroidRate library. <b>DefaultDialogManager Class will be
  * used for API levels below 14 instead, see
- * {@link AppCompatDialogManager.Factory#createDialogManager(Context, DialogOptions, StoreOptions)}.</b></p>
+ * {@link AppCompatDialogManager.Factory#createDialogManager(Context, DialogOptions, StoreOptions)}
+ * .</b></p>
  * <p>You can extend AppCompatDialogManager Class and use
  * {@link AppRate#setDialogManagerFactory(DialogManager.Factory)} if you want to use fully custom
  * dialog (from v7 AppCompat library). AppCompatDialogManager Class is thread-safe and a fast
@@ -42,7 +43,8 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
 
     @SuppressWarnings("WeakerAccess")
     @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    protected AppCompatDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
+    protected AppCompatDialogManager(final Context context, final DialogOptions dialogOptions,
+                                     final StoreOptions storeOptions) {
         super(context, dialogOptions, storeOptions);
     }
 
@@ -56,7 +58,8 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
     @SuppressWarnings("WeakerAccess")
     @Nullable
     @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    protected AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context, final int themeResId) {
+    protected AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context,
+                                                            final int themeResId) {
         return Utils.getAppCompatDialogBuilder(context, themeResId);
     }
 
@@ -148,7 +151,9 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
          * <b>{@link DefaultDialogManager} singleton object for API levels 13 and below</b>
          */
         @Override
-        public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
+        public DialogManager createDialogManager(final Context context,
+                                                 final DialogOptions dialogOptions,
+                                                 final StoreOptions storeOptions) {
             if ((singleton == null) || (singleton.get() == null)) {
                 synchronized (AppCompatDialogManager.class) {
                     if ((singleton == null) || (singleton.get() == null)) {

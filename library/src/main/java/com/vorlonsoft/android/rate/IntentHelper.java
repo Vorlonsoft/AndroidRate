@@ -15,7 +15,9 @@ import java.util.Arrays;
 import androidx.annotation.NonNull;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY;
+import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
+import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
@@ -93,7 +95,7 @@ final class IntentHelper {
     };
 
     private IntentHelper() {
-        throw new UnsupportedOperationException("IntentHelper is a utility class and can't be instantiated!");
+        throw new UnsupportedOperationException("IntentHelper" + UTILITY_CLASS_MESSAGE);
     }
 
     private static boolean getHasWebUriIntentFlagForStore(final int appStore) {
@@ -150,14 +152,16 @@ final class IntentHelper {
     }
 
     @NonNull
-    static Intent[] createIntentsForStore(@NonNull final Context context, final int appStore, @NonNull final String paramName) {
+    static Intent[] createIntentsForStore(@NonNull final Context context, final int appStore,
+                                          @NonNull final String paramName) {
         //noinspection ConstantConditions
         if ((context == null) || (paramName == null)) {
             if (context == null) {
-                Log.w(TAG, "Failed to rate app, can't check the availability of stores packages on the user device (context == null)");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't check the availability of stores packages" +
+                                                    " on the user device (context == null)");
             }
             if (paramName == null) {
-                Log.w(TAG, "Failed to rate app, can't get store Uri/WebUri (paramName == null)");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get store Uri/WebUri (paramName == null)");
             }
             return new Intent[0];
         }
@@ -192,9 +196,13 @@ final class IntentHelper {
         } else {
             intents = new Intent[0];
             if (hasWebUriIntent) {
-                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on the user device and the user device can't start the app store (" + appStore + ") web (http/https) uri activity without it");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + Arrays.toString(storesPackagesNames) + " not " +
+                        "exist on the user device and the user device can't start the app store (" +
+                        appStore + ") web (http/https) uri activity without it");
             } else {
-                Log.w(TAG, "Failed to rate app, " + Arrays.toString(storesPackagesNames) + " not exist on the user device and the app store (" + appStore + ") hasn't web (http/https) uri");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + Arrays.toString(storesPackagesNames) + " not " +
+                        "exist on the user device and the app store (" + appStore +
+                        ") hasn't web (http/https) uri");
             }
         }
         return intents;

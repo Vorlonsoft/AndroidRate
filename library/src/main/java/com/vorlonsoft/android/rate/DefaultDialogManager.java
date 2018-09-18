@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
+import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
@@ -83,7 +84,8 @@ public class DefaultDialogManager implements DialogManager {
                 final Button positiveButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE);
                 if (positiveButton != null) {
                     final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
-                    if ((linearLayout != null) && (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
+                    if ((linearLayout != null) &&
+                        (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
                         final Button neutralButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEUTRAL);
                         final Button negativeButton = ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_NEGATIVE);
                         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -103,12 +105,14 @@ public class DefaultDialogManager implements DialogManager {
                     }
                 }
             } catch (Exception e) {
-                Log.i(TAG, "Positive button may not fits in the window, can't change layout orientation to vertical");
+                Log.i(TAG, "Positive button may not fits in the window, can't change layout " +
+                           "orientation to vertical");
             }
         }
     };
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnDismissListener dismissListener = dialog -> AppRate.with(context).clearRateDialog();
+    protected final DialogInterface.OnDismissListener dismissListener = dialog ->
+            AppRate.with(context).clearRateDialog();
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
         @Override
@@ -118,27 +122,32 @@ public class DefaultDialogManager implements DialogManager {
                 final Intent[] intentsToAppStores = getIntentsForStores(packageName);
                 try {
                     if (intentsToAppStores.length == 0) {
-                        Log.w(TAG, "Failed to rate app, no intent found for startActivity (intentsToAppStores.length == 0)");
+                        Log.w(TAG, LOG_MESSAGE_PART_1 + "no intent found for startActivity " +
+                                   "(intentsToAppStores.length == 0)");
                     } else if (intentsToAppStores[0] == null) {
-                        throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[0] == null)");
+                        throw new ActivityNotFoundException(LOG_MESSAGE_PART_1 + "no intent found" +
+                                " for startActivity (intentsToAppStores[0] == null)");
                     } else {
                         context.startActivity(intentsToAppStores[0]);
                     }
                 } catch (ActivityNotFoundException e) {
-                    Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[0], e);
+                    Log.w(TAG, LOG_MESSAGE_PART_1 + "no activity found for " + intentsToAppStores[0], e);
                     final byte intentsToAppStoresNumber = (byte) intentsToAppStores.length;
                     if (intentsToAppStoresNumber > 1) {
                         boolean isCatch;
                         for (byte b = 1; b < intentsToAppStoresNumber; b++) { // intentsToAppStores[1] - second intent in the array
                             try {
                                 if (intentsToAppStores[b] == null) {
-                                    throw new ActivityNotFoundException("Failed to rate app, no intent found for startActivity (intentsToAppStores[" + b + "] == null)");
+                                    throw new ActivityNotFoundException(LOG_MESSAGE_PART_1 +
+                                            "no intent found for startActivity (intentsToAppStores["
+                                            + b + "] == null)");
                                 } else {
                                     context.startActivity(intentsToAppStores[b]);
                                 }
                                 isCatch = false;
                             } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, "Failed to rate app, no activity found for " + intentsToAppStores[b], ex);
+                                Log.w(TAG, LOG_MESSAGE_PART_1 + "no activity found for " +
+                                        intentsToAppStores[b], ex);
                                 isCatch = true;
                             }
                             if (!isCatch) {
@@ -148,7 +157,7 @@ public class DefaultDialogManager implements DialogManager {
                     }
                 }
             } else {
-                Log.w(TAG, "Failed to rate app, can't get app package name");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get app package name");
             }
             setIsAgreeShowDialog(context, false);
             if (listener != null) listener.onClickButton((byte) which);
@@ -173,7 +182,8 @@ public class DefaultDialogManager implements DialogManager {
     };
 
     @SuppressWarnings("WeakerAccess")
-    protected DefaultDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
+    protected DefaultDialogManager(final Context context, final DialogOptions dialogOptions,
+                                   final StoreOptions storeOptions) {
         this.context = context;
         this.dialogOptions = dialogOptions;
         this.storeOptions = storeOptions;
@@ -314,7 +324,9 @@ public class DefaultDialogManager implements DialogManager {
          * @return {@link DefaultDialogManager} singleton object
          */
         @Override
-        public DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions) {
+        public DialogManager createDialogManager(final Context context,
+                                                 final DialogOptions dialogOptions,
+                                                 final StoreOptions storeOptions) {
             if ((singleton == null) || (singleton.get() == null)) {
                 synchronized (DefaultDialogManager.class) {
                     if ((singleton == null) || (singleton.get() == null)) {

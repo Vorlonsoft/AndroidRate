@@ -1,5 +1,7 @@
 package com.vorlonsoft.android.rate;
 
+import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
+
 /**
  * <p>Constants Class - constants class of the AndroidRate library.</p>
  *
@@ -11,7 +13,7 @@ package com.vorlonsoft.android.rate;
 final class Constants {
 
     private Constants() {
-        throw new UnsupportedOperationException("Constants is a utility class and can't be instantiated!");
+        throw new UnsupportedOperationException("Constants" + UTILITY_CLASS_MESSAGE);
     }
 
     /**
@@ -27,7 +29,7 @@ final class Constants {
         static final short YEAR_IN_DAYS = (short) 365;
 
         private Date() {
-            throw new UnsupportedOperationException("Constants.Date is a utility class and can't be instantiated!");
+            throw new UnsupportedOperationException("Constants.Date" + UTILITY_CLASS_MESSAGE);
         }
     }
 
@@ -45,10 +47,14 @@ final class Constants {
 
         static final String[] EMPTY_STRING_ARRAY = new String[0];
 
+        static final String LOG_MESSAGE_PART_1 = "Failed to rate app, ";
+
         static final String TAG = "ANDROIDRATE";
 
+        static final String UTILITY_CLASS_MESSAGE = " is a utility class and can't be instantiated!";
+
         private Utils() {
-            throw new UnsupportedOperationException("Constants.Utils is a utility class and can't be instantiated!");
+            throw new UnsupportedOperationException("Constants.Utils" + UTILITY_CLASS_MESSAGE);
         }
     }
 }

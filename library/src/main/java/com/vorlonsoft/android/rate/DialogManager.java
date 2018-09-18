@@ -58,6 +58,7 @@ public interface DialogManager {
          * @param storeOptions App store options
          * @return {@link DialogManager} implementation singleton object
          */
-        DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions, final StoreOptions storeOptions);
+        DialogManager createDialogManager(final Context context, final DialogOptions dialogOptions,
+                                          final StoreOptions storeOptions);
     }
 }
