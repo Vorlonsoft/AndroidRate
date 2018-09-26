@@ -2,25 +2,30 @@
 #
 # Licensed under The MIT License (MIT)
 
+# Android Studio
+.navigation/
+captures/
+output.json
+
 # Built application files
-*.ap_
 *.aab
+*.ap_
 *.apk
 
 # Built library files
 *.aar
+*.apklib
 *.jar
+*.var
 
 # Built native files
-*.o
+*~
+*.[ao]
 *.so
 
 # Files for the Dalvik/Android Runtime (ART)
 *.dex
 *.odex
-
-# Java class files
-*.class
 
 # Generated files
 bin/
@@ -31,50 +36,52 @@ out/
 .gradle/
 build/
 
-# Local configuration file (sdk/ndk path, etc)
-local.properties
-
-# Windows thumbnail cache
-Thumbs.db
-
-# macOS
-.DS_Store/
-
-# Log Files
-*.log
-
-# Android Studio
-.navigation/
-captures/
-output.json
-
-# NDK
-.externalNativeBuild/
-obj/
-
 # IntelliJ
-## User-specific stuff
-.idea/**/tasks.xml
-.idea/**/workspace.xml
-.idea/dictionaries
+## File-based project format
+*.iws
+## Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+.idea/**/modules.xml
+## Markdown
+.idea/**/markdown-navigator.xml
+## Module files
+*.iml
 ## Sensitive or high-churn files
 .idea/**/caches/
 .idea/**/dataSources/
 .idea/**/dataSources.ids
 .idea/**/dataSources.local.xml
 .idea/**/dynamic.xml
+.idea/**/misc.xml
 .idea/**/sqlDataSources.xml
 .idea/**/uiDesigner.xml
-## Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
-.idea/**/modules.xml
+## User-specific stuff
+.idea/**/assetWizardSettings.xml
+.idea/**/dictionaries
+.idea/**/tasks.xml
+.idea/**/workspace.xml
 ## VCS
 .idea/**/vcs.xml
-## Module files
-*.iml
-## File-based project format
-*.iws
+
+# Java class files
+*.class
+
+# Local configuration file (sdk/ndk path, etc)
+local.properties
+
+# Log Files
+*.log
+
+# macOS
+.DS_Store/
+
+# NDK
+.externalNativeBuild/
+obj/
+
+# Windows thumbnail cache
+Thumbs.db
 
 # Other
 Materials/
