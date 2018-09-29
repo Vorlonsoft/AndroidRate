@@ -8,13 +8,13 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
     defaultConfig {
         //noinspection MinSdkTooLow
         minSdkVersion 9
         targetSdkVersion 28
-        versionCode Integer.parseInt(VERSION_CODE)
-        versionName VERSION_NAME
+        versionCode projectVersionCode
+        versionName version
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
