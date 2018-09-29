@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base Apple and Modern types Rate Dialog theme. -->
+    <style name="TransparentTheme">
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:backgroundDimAmount">0.4</item>
+        <item name="android:windowBackground">@color/colorTransparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowTitleStyle">@null</item>
+    </style>
+
+</resources>

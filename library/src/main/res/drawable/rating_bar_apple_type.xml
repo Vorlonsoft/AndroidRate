@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- The drawable object that manages the array of Apple type RatingBar drawables. -->
+    <item
+        android:id="@android:id/background"
+        android:drawable="@drawable/star_unfilled"/>
+    <item
+        android:id="@android:id/secondaryProgress"
+        android:drawable="@drawable/star_unfilled"/>
+    <item
+        android:id="@android:id/progress"
+        android:drawable="@drawable/star_filled"/>
+
+</layer-list>

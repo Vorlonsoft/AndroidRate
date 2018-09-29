@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+
+    <!-- XML resources that carries a color value (a hexadecimal color). -->
+    <color name="colorApplePrimary">#FF007AFF</color>
+    <color name="colorBackground">#EBFFFFFF</color>
+    <color name="colorBackgroundPressed">#D7FFFFFF</color>
+    <color name="colorBlack">#FF000000</color>
+    <color name="colorTransparent">#00000000</color>
+
+</resources>
