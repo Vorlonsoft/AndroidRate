@@ -9,14 +9,11 @@ output.json
 
 # Built application files
 *.aab
-*.ap_
-*.apk
+*.ap[_k]
 
 # Built library files
-*.aar
+*.[ajv]ar
 *.apklib
-*.jar
-*.var
 
 # Built native files
 *~
