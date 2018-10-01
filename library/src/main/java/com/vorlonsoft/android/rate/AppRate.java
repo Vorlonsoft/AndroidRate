@@ -357,6 +357,20 @@ public final class AppRate {
     }
 
     /**
+     * <p>Sets whether the Rate Dialog should show the message.</p>
+     *
+     * @param isShowMessage true to show the message, false otherwise
+     * @return the {@link AppRate} singleton object
+     * @see #setMessage(int)
+     * @see #setMessage(String)
+     */
+    @SuppressWarnings("unused")
+    public AppRate setShowMessage(boolean isShowMessage) {
+        dialogOptions.setShowMessage(isShowMessage);
+        return this;
+    }
+
+    /**
      * <p>Sets whether the Rate Dialog should show the icon.</p>
      *
      * @param isShowDialogIcon true to show the icon, false otherwise, default values are false for
@@ -492,6 +506,7 @@ public final class AppRate {
      * @param resourceId the Rate Dialog message text resource ID
      * @return the {@link AppRate} singleton object
      * @see #setMessage(String)
+     * @see #setShowMessage(boolean)
      */
     @SuppressWarnings("unused")
     public AppRate setMessage(int resourceId) {
@@ -506,6 +521,7 @@ public final class AppRate {
      * @param message the Rate Dialog message text
      * @return the {@link AppRate} singleton object
      * @see #setMessage(int)
+     * @see #setShowMessage(boolean)
      */
     @SuppressWarnings("unused")
     public AppRate setMessage(String message) {

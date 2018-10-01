@@ -83,7 +83,6 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
 
         builder
                 .setCancelable(dialogOptions.getCancelable())
-                .setMessage(dialogOptions.getMessageText(context))
                 .setPositiveButton(dialogOptions.getPositiveText(context), positiveListener)
                 .setView(dialogOptions.getView());
 
@@ -93,6 +92,10 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
 
         if (dialogOptions.shouldShowTitle()) {
             builder.setTitle(dialogOptions.getTitleText(context));
+        }
+
+        if (dialogOptions.shouldShowMessage()) {
+            builder.setMessage(dialogOptions.getMessageText(context));
         }
 
         if (dialogOptions.shouldShowNeutralButton()) {

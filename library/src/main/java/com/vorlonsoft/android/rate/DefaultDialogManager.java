@@ -267,7 +267,6 @@ public class DefaultDialogManager implements DialogManager {
 
         builder
                 .setCancelable(dialogOptions.getCancelable())
-                .setMessage(dialogOptions.getMessageText(context))
                 .setPositiveButton(dialogOptions.getPositiveText(context), positiveListener)
                 .setView(dialogOptions.getView());
 
@@ -277,6 +276,10 @@ public class DefaultDialogManager implements DialogManager {
 
         if (dialogOptions.shouldShowTitle()) {
             builder.setTitle(dialogOptions.getTitleText(context));
+        }
+
+        if (dialogOptions.shouldShowMessage()) {
+            builder.setMessage(dialogOptions.getMessageText(context));
         }
 
         if (dialogOptions.shouldShowNeutralButton()) {

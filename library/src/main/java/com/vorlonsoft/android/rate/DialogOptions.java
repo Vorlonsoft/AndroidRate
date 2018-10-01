@@ -31,6 +31,8 @@ public final class DialogOptions {
 
     private boolean cancelable = false;
 
+    private boolean showMessage = true;
+
     private boolean showNegativeButton = true;
 
     private boolean showNeutralButton = true;
@@ -72,6 +74,15 @@ public final class DialogOptions {
     private SoftReference<OnClickButtonListener> listener = null;
 
     DialogOptions() {
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public boolean shouldShowMessage() {
+        return showMessage;
+    }
+
+    void setShowMessage(boolean showMessage) {
+        this.showMessage = showMessage;
     }
 
     @SuppressWarnings("WeakerAccess")
