@@ -12,9 +12,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -253,26 +253,31 @@ public class DefaultDialogManager implements DialogManager {
     @Nullable
     @Override
     public Dialog createDialog() {
-        AlertDialog.Builder builder = getDialogBuilder(context, dialogOptions.getThemeResId());
+
+        final AlertDialog.Builder builder = getDialogBuilder(context, dialogOptions.getThemeResId());
+        final Context dialogContext;
 
         if (builder == null) {
             return null;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            dialogContext = builder.getContext();
+        } else {
+            dialogContext = context;
         }
 
-        builder.setMessage(dialogOptions.getMessageText(context));
+        builder
+                .setCancelable(dialogOptions.getCancelable())
+                .setMessage(dialogOptions.getMessageText(context))
+                .setPositiveButton(dialogOptions.getPositiveText(context), positiveListener)
+                .setView(dialogOptions.getView());
+
+        if (dialogOptions.shouldShowDialogIcon()) {
+            builder.setIcon(dialogOptions.getDialogIcon(dialogContext));
+        }
 
         if (dialogOptions.shouldShowTitle()) {
             builder.setTitle(dialogOptions.getTitleText(context));
         }
-
-        builder.setCancelable(dialogOptions.getCancelable());
-
-        View view = dialogOptions.getView();
-        if (view != null) {
-            builder.setView(view);
-        }
-
-        builder.setPositiveButton(dialogOptions.getPositiveText(context), positiveListener);
 
         if (dialogOptions.shouldShowNeutralButton()) {
             builder.setNeutralButton(dialogOptions.getNeutralText(context), neutralListener);

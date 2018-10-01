@@ -12,6 +12,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -319,6 +320,8 @@ public final class AppRate {
      *
      * @param isShowNeutralButton default is true, true means to show the Neutral button
      * @return the {@link AppRate} singleton object
+     * @see #setTextLater(int)
+     * @see #setTextLater(String)
      */
     public AppRate setShowLaterButton(@SuppressWarnings("SameParameterValue") boolean isShowNeutralButton) {
         dialogOptions.setShowNeutralButton(isShowNeutralButton);
@@ -330,6 +333,8 @@ public final class AppRate {
      *
      * @param isShowNeverButton default is true
      * @return the {@link AppRate} singleton object
+     * @see #setTextNever(int)
+     * @see #setTextNever(String)
      */
     @SuppressWarnings("unused")
     public AppRate setShowNeverButton(boolean isShowNeverButton) {
@@ -337,9 +342,34 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * <p>Sets whether the Rate Dialog should show the title.</p>
+     *
+     * @param isShowTitle true to show the title, false otherwise
+     * @return the {@link AppRate} singleton object
+     * @see #setTitle(int)
+     * @see #setTitle(String)
+     */
     @SuppressWarnings("unused")
     public AppRate setShowTitle(boolean isShowTitle) {
         dialogOptions.setShowTitle(isShowTitle);
+        return this;
+    }
+
+    /**
+     * <p>Sets whether the Rate Dialog should show the icon.</p>
+     *
+     * @param isShowDialogIcon true to show the icon, false otherwise, default values are false for
+     *                         {@link DialogType#CLASSIC DialogType.CLASSIC} and true for
+     *                         {@link DialogType#APPLE DialogType.APPLE} and
+     *                         {@link DialogType#MODERN DialogType.MODERN}
+     * @return the {@link AppRate} singleton object
+     * @see #setDialogIcon(int)
+     * @see #setDialogIcon(Drawable)
+     */
+    @SuppressWarnings("unused")
+    public AppRate setShowDialogIcon(boolean isShowDialogIcon) {
+        dialogOptions.setShowDialogIcon(isShowDialogIcon);
         return this;
     }
 
@@ -398,60 +428,170 @@ public final class AppRate {
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog icon.</p>
+     * <p>Takes precedence over values set using {@link #setDialogIcon(Drawable)}.</p>
+     *
+     * @param resourceId the Rate Dialog icon resource ID
+     * @return the {@link AppRate} singleton object
+     * @see #setDialogIcon(Drawable)
+     * @see #setShowDialogIcon(boolean)
+     */
+    @SuppressWarnings("unused")
+    public AppRate setDialogIcon(int resourceId) {
+        dialogOptions.setDialogIconResId(resourceId);
+        return this;
+    }
+
+    /**
+     * <p>Sets the Rate Dialog icon.</p>
+     *
+     * @param dialogIcon the Rate Dialog icon Drawable
+     * @return the {@link AppRate} singleton object
+     * @see #setDialogIcon(int)
+     * @see #setShowDialogIcon(boolean)
+     */
+    @SuppressWarnings("unused")
+    public AppRate setDialogIcon(Drawable dialogIcon) {
+        dialogOptions.setDialogIcon(dialogIcon);
+        return this;
+    }
+
+    /**
+     * <p>Sets the Rate Dialog title text.</p>
+     *
+     * @param resourceId the Rate Dialog title text resource ID
+     * @return the {@link AppRate} singleton object
+     * @see #setTitle(String)
+     * @see #setShowTitle(boolean)
+     */
     @SuppressWarnings("unused")
     public AppRate setTitle(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTitleResId(resourceId);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog title text.</p>
+     * <p>Takes precedence over values set using {@link #setTitle(int)}.</p>
+     *
+     * @param title the Rate Dialog title text
+     * @return the {@link AppRate} singleton object
+     * @see #setTitle(int)
+     * @see #setShowTitle(boolean)
+     */
     @SuppressWarnings("unused")
     public AppRate setTitle(String title) {
         dialogOptions.setTitleText(title);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog message text.</p>
+     *
+     * @param resourceId the Rate Dialog message text resource ID
+     * @return the {@link AppRate} singleton object
+     * @see #setMessage(String)
+     */
     @SuppressWarnings("unused")
     public AppRate setMessage(int resourceId) {
         dialogOptions.setMessageResId(resourceId);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog message text.</p>
+     * <p>Takes precedence over values set using {@link #setMessage(int)}.</p>
+     *
+     * @param message the Rate Dialog message text
+     * @return the {@link AppRate} singleton object
+     * @see #setMessage(int)
+     */
     @SuppressWarnings("unused")
     public AppRate setMessage(String message) {
         dialogOptions.setMessageText(message);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog positive button text.</p>
+     *
+     * @param resourceId the Rate Dialog positive button text resource ID
+     * @return the {@link AppRate} singleton object
+     * @see #setTextRateNow(String)
+     */
     @SuppressWarnings("unused")
     public AppRate setTextRateNow(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTextPositiveResId(resourceId);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog positive button text.</p>
+     * <p>Takes precedence over values set using {@link #setTextRateNow(int)}.</p>
+     *
+     * @param positiveText the Rate Dialog positive button text
+     * @return the {@link AppRate} singleton object
+     * @see #setTextRateNow(int)
+     */
     @SuppressWarnings("unused")
     public AppRate setTextRateNow(String positiveText) {
         dialogOptions.setPositiveText(positiveText);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog neutral button text.</p>
+     *
+     * @param resourceId the Rate Dialog neutral button text resource ID
+     * @return the {@link AppRate} singleton object
+     * @see #setTextLater(String)
+     * @see #setShowLaterButton(boolean)
+     */
     @SuppressWarnings("unused")
     public AppRate setTextLater(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTextNeutralResId(resourceId);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog neutral button text.</p>
+     * <p>Takes precedence over values set using {@link #setTextLater(int)}.</p>
+     *
+     * @param neutralText the Rate Dialog neutral button text
+     * @return the {@link AppRate} singleton object
+     * @see #setTextLater(int)
+     * @see #setShowLaterButton(boolean)
+     */
     @SuppressWarnings("unused")
     public AppRate setTextLater(String neutralText) {
         dialogOptions.setNeutralText(neutralText);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog negative button text.</p>
+     *
+     * @param resourceId the Rate Dialog negative button text resource ID
+     * @return the {@link AppRate} singleton object
+     * @see #setTextNever(String)
+     * @see #setShowNeverButton(boolean)
+     */
     @SuppressWarnings("unused")
     public AppRate setTextNever(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTextNegativeResId(resourceId);
         return this;
     }
 
+    /**
+     * <p>Sets the Rate Dialog negative button text.</p>
+     * <p>Takes precedence over values set using {@link #setTextNever(int)}.</p>
+     *
+     * @param negativeText the Rate Dialog negative button text
+     * @return the {@link AppRate} singleton object
+     * @see #setTextNever(int)
+     * @see #setShowNeverButton(boolean)
+     */
     @SuppressWarnings("unused")
     public AppRate setTextNever(String negativeText) {
         dialogOptions.setNegativeText(negativeText);
@@ -595,7 +735,7 @@ public final class AppRate {
      * @param themeResId theme resource ID, default is 0
      * @return the {@link AppRate} singleton object
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "UnusedReturnValue", "WeakerAccess"})
     public AppRate setThemeResId(int themeResId) {
         dialogOptions.setThemeResId(themeResId);
         return this;

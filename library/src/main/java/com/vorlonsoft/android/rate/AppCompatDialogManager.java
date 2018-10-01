@@ -9,7 +9,6 @@ package com.vorlonsoft.android.rate;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
-import android.view.View;
 
 import java.lang.ref.WeakReference;
 
@@ -72,26 +71,29 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
     @Override
     @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public Dialog createDialog() {
-        AlertDialog.Builder builder = getAppCompatDialogBuilder(context, dialogOptions.getThemeResId());
+
+        final AlertDialog.Builder builder = getAppCompatDialogBuilder(context, dialogOptions.getThemeResId());
+        final Context dialogContext;
 
         if (builder == null) {
             return null;
+        } else {
+            dialogContext = builder.getContext();
         }
 
-        builder.setMessage(dialogOptions.getMessageText(context));
+        builder
+                .setCancelable(dialogOptions.getCancelable())
+                .setMessage(dialogOptions.getMessageText(context))
+                .setPositiveButton(dialogOptions.getPositiveText(context), positiveListener)
+                .setView(dialogOptions.getView());
+
+        if (dialogOptions.shouldShowDialogIcon()) {
+            builder.setIcon(dialogOptions.getDialogIcon(dialogContext));
+        }
 
         if (dialogOptions.shouldShowTitle()) {
             builder.setTitle(dialogOptions.getTitleText(context));
         }
-
-        builder.setCancelable(dialogOptions.getCancelable());
-
-        View view = dialogOptions.getView();
-        if (view != null) {
-            builder.setView(view);
-        }
-
-        builder.setPositiveButton(dialogOptions.getPositiveText(context), positiveListener);
 
         if (dialogOptions.shouldShowNeutralButton()) {
             builder.setNeutralButton(dialogOptions.getNeutralText(context), neutralListener);

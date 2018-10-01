@@ -7,11 +7,16 @@
 package com.vorlonsoft.android.rate;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.util.Log;
 import android.view.View;
 
 import java.lang.ref.SoftReference;
 
 import androidx.annotation.Nullable;
+
+import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 
 /**
  * <p>DialogOptions Class - dialog options class of the AndroidRate library.</p>
@@ -31,6 +36,12 @@ public final class DialogOptions {
     private boolean showNeutralButton = true;
 
     private boolean showTitle = true;
+    /** Default value is null. */
+    private Boolean showDialogIcon = null;
+
+    private int dialogType = DialogType.CLASSIC;
+
+    private int dialogIconResId = 0;
 
     private int textMessageResId = R.string.rate_dialog_message;
 
@@ -53,6 +64,8 @@ public final class DialogOptions {
     private String positiveText = null;
 
     private String titleText = null;
+
+    private Drawable dialogIcon = null;
 
     private View view = null;
 
@@ -88,6 +101,15 @@ public final class DialogOptions {
         this.showTitle = showTitle;
     }
 
+    public boolean shouldShowDialogIcon() {
+        return (showDialogIcon == null) ? ((dialogType == DialogType.APPLE) ||
+                                           (dialogType == DialogType.MODERN)) : showDialogIcon;
+    }
+
+    void setShowDialogIcon(boolean showDialogIcon) {
+        this.showDialogIcon = showDialogIcon;
+    }
+
     @SuppressWarnings("WeakerAccess")
     public boolean getCancelable() {
         return cancelable;
@@ -95,6 +117,15 @@ public final class DialogOptions {
 
     void setCancelable(boolean cancelable) {
         this.cancelable = cancelable;
+    }
+
+    @SuppressWarnings("unused")
+    int getDialogIconResId() {
+        return dialogIconResId;
+    }
+
+    void setDialogIconResId(int dialogIconResId) {
+        this.dialogIconResId = dialogIconResId;
     }
 
     @SuppressWarnings("unused")
@@ -217,6 +248,28 @@ public final class DialogOptions {
 
     void setNegativeText(String negativeText) {
         this.negativeText = negativeText;
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    @Nullable
+    public Drawable getDialogIcon(Context context) {
+        if (dialogIconResId != 0) {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    return context.getDrawable(dialogIconResId);
+                } else {
+                    //noinspection deprecation
+                    return context.getResources().getDrawable(dialogIconResId);
+                }
+            } catch (android.content.res.Resources.NotFoundException e) {
+                Log.i(TAG, "Dialog icon with the given ResId doesn't exist.");
+            }
+        }
+        return (dialogIcon != null) ? dialogIcon : AppInformation.getInstance(context).getAppIcon();
+    }
+
+    void setDialogIcon(Drawable dialogIcon) {
+        this.dialogIcon = dialogIcon;
     }
 
     @SuppressWarnings("WeakerAccess")
