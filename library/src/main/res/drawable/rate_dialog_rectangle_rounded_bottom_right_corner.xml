@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    android:tint="@color/rate_dialog_background">
+
+    <!-- Rectangle with a rounded bottom right corner. -->
+    <corners
+        android:radius="20dp"
+        android:topLeftRadius="0dp"
+        android:topRightRadius="0dp"
+        android:bottomLeftRadius="0dp" />
+
+</shape>

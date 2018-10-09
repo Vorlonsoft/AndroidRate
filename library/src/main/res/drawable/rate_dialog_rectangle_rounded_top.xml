@@ -4,13 +4,15 @@
   ~ //
   ~ // Licensed under The MIT License (MIT)
 -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    android:tint="@color/rate_dialog_background">
 
     <!-- Rectangle with a rounded top. -->
     <corners
         android:radius="20dp"
         android:bottomLeftRadius="0dp"
         android:bottomRightRadius="0dp" />
-    <solid android:color="@color/colorBackground" />
 
 </shape>

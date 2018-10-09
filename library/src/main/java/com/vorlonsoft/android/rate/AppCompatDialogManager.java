@@ -6,9 +6,11 @@
 
 package com.vorlonsoft.android.rate;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;
+import android.view.View;
 
 import java.lang.ref.WeakReference;
 
@@ -16,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
+
+import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
 
 /**
  * <p>AppCompatDialogManager Class - v7 AppCompat library dialog manager class implements
@@ -53,6 +57,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      * @param context activity context
      * @param themeResId theme resource ID
      * @return created {@link androidx.appcompat.app.AlertDialog.Builder} object
+     * @see DefaultDialogManager#getDialogBuilder(Context, int)
      */
     @SuppressWarnings("WeakerAccess")
     @Nullable
@@ -60,6 +65,35 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
     protected AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context,
                                                             final int themeResId) {
         return Utils.getAppCompatDialogBuilder(context, themeResId);
+    }
+
+    /**
+     * <p>Supplies the arguments to the {@link DialogType#CLASSIC CLASSIC} Rate Dialog
+     * {@link androidx.appcompat.app.AlertDialog.Builder}.</p>
+     *
+     * @param builder the {@link DialogType#CLASSIC CLASSIC} Rate Dialog
+     *                {@link androidx.appcompat.app.AlertDialog.Builder}
+     * @param dialogContext a Context for Rate Dialogs created by this Builder
+     * @see DefaultDialogManager#supplyClassicDialogArguments(android.app.AlertDialog.Builder, Context)
+     */
+    @SuppressWarnings("WeakerAccess")
+    protected void supplyAppCompatClassicDialogArguments(@NonNull AlertDialog.Builder builder, @NonNull Context dialogContext) {
+        if (dialogOptions.shouldShowDialogIcon()) {
+            builder.setIcon(dialogOptions.getDialogIcon(dialogContext));
+        }
+        if (dialogOptions.shouldShowTitle()) {
+            builder.setTitle(dialogOptions.getTitleText(context));
+        }
+        if (dialogOptions.shouldShowMessage()) {
+            builder.setMessage(dialogOptions.getMessageText(context));
+        }
+        if (dialogOptions.shouldShowNeutralButton()) {
+            builder.setNeutralButton(dialogOptions.getNeutralText(context), neutralListener);
+        }
+        if (dialogOptions.shouldShowNegativeButton()) {
+            builder.setNegativeButton(dialogOptions.getNegativeText(context), negativeListener);
+        }
+        builder.setPositiveButton(dialogOptions.getPositiveText(context), positiveListener);
     }
 
     /**
@@ -81,36 +115,21 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
             dialogContext = builder.getContext();
         }
 
-        builder
+        final View view = dialogOptions.getView(dialogContext);
+
+        if ((dialogOptions.getDialogType() == CLASSIC) || (view == null)) {
+            supplyAppCompatClassicDialogArguments(builder, dialogContext);
+        } else {
+            supplyNonClassicDialogArguments(view, dialogContext);
+        }
+
+        final AlertDialog alertDialog = builder
                 .setCancelable(dialogOptions.getCancelable())
-                .setPositiveButton(dialogOptions.getPositiveText(context), positiveListener)
-                .setView(dialogOptions.getView());
+                .setView(view)
+                .create();
 
-        if (dialogOptions.shouldShowDialogIcon()) {
-            builder.setIcon(dialogOptions.getDialogIcon(dialogContext));
-        }
-
-        if (dialogOptions.shouldShowTitle()) {
-            builder.setTitle(dialogOptions.getTitleText(context));
-        }
-
-        if (dialogOptions.shouldShowMessage()) {
-            builder.setMessage(dialogOptions.getMessageText(context));
-        }
-
-        if (dialogOptions.shouldShowNeutralButton()) {
-            builder.setNeutralButton(dialogOptions.getNeutralText(context), neutralListener);
-        }
-
-        if (dialogOptions.shouldShowNegativeButton()) {
-            builder.setNegativeButton(dialogOptions.getNegativeText(context), negativeListener);
-        }
-
-        final AlertDialog alertDialog = builder.create();
-        if (alertDialog != null) {
-            alertDialog.setOnShowListener(showListener);
-            alertDialog.setOnDismissListener(dismissListener);
-        }
+        alertDialog.setOnShowListener(showListener);
+        alertDialog.setOnDismissListener(dismissListener);
 
         return alertDialog;
     }

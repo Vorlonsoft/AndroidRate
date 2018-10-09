@@ -26,6 +26,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
@@ -66,6 +67,7 @@ public final class AppRate {
     @SuppressLint("StaticFieldLeak")
     private static volatile AppRate singleton = null;
     private final Map<String, Short> customEventsCounts;
+    /** <p>The context of the single, global Application object of the current process.</p> */
     private final Context context;
     private final DialogOptions dialogOptions = new DialogOptions();
     private final StoreOptions storeOptions = new StoreOptions();
@@ -152,7 +154,6 @@ public final class AppRate {
     /**
      * <p>Clears weak reference dialog object. Invoking this method will not cause this
      * object to be enqueued.</p>
-     *
      * <p>This method is invoked only by Java code; when the garbage collector
      * clears references it does so directly, without invoking this method.</p>
      */
@@ -178,7 +179,7 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimum number of launches until the rating dialog pops up for
+     * <p>Sets the minimum number of launches until the Rate Dialog pops up for
      * the first time.</p>
      *
      * @param appLaunchTimes number of launches, default is 10, 3 means app is launched 3 or
@@ -191,7 +192,7 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimal number of days until the Rating Dialog pops up for the first time.</p>
+     * <p>Sets the minimal number of days until the Rate Dialog pops up for the first time.</p>
      *
      * @param installDate number of days, default is 10, 0 means install day, 10 means app is
      *                    launched 10 or more days later than installation
@@ -204,7 +205,7 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimal number of time units until the Rating Dialog pops up for the first time.</p>
+     * <p>Sets the minimal number of time units until the Rate Dialog pops up for the first time.</p>
      * <p>Default is 10 {@link Time#DAY days}, 0 means install millisecond, 10 means app is launched
      * 10 or more time units later than installation.</p>
      *
@@ -221,7 +222,7 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimal number of days until the Rating Dialog pops up for the next time after
+     * <p>Sets the minimal number of days until the Rate Dialog pops up for the next time after
      * neutral button clicked.</p>
      *
      * @param remindInterval number of days, default is 1, 1 means app is launched 1 or more days
@@ -235,7 +236,7 @@ public final class AppRate {
     }
 
     /**
-     * <p>Sets the minimal number of time units until the Rating Dialog pops up for the next time
+     * <p>Sets the minimal number of time units until the Rate Dialog pops up for the next time
      * after neutral button clicked.</p>
      * <p>Default is 1 {@link Time#DAY day}, 1 means app is launched 1 or more time units after
      * neutral button clicked.</p>
@@ -315,7 +316,7 @@ public final class AppRate {
     }
 
     /**
-     * <p>Decides whether the Neutral button ("Remind me later") appears in the Rating Dialog or
+     * <p>Decides whether the Neutral button ("Remind Me Later") appears in the Rate Dialog or
      * not.</p>
      *
      * @param isShowNeutralButton default is true, true means to show the Neutral button
@@ -329,14 +330,14 @@ public final class AppRate {
     }
 
     /**
-     * <p>Decides if Never button appear in the rating dialog or not.</p>
+     * <p>Decides if the Negative button appears in the Rate Dialog or not.</p>
      *
-     * @param isShowNeverButton default is true
+     * @param isShowNeverButton default is true, true means to show the Negative button
      * @return the {@link AppRate} singleton object
      * @see #setTextNever(int)
      * @see #setTextNever(String)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setShowNeverButton(boolean isShowNeverButton) {
         dialogOptions.setShowNegativeButton(isShowNeverButton);
         return this;
@@ -364,7 +365,7 @@ public final class AppRate {
      * @see #setMessage(int)
      * @see #setMessage(String)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setShowMessage(boolean isShowMessage) {
         dialogOptions.setShowMessage(isShowMessage);
         return this;
@@ -381,7 +382,7 @@ public final class AppRate {
      * @see #setDialogIcon(int)
      * @see #setDialogIcon(Drawable)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setShowDialogIcon(boolean isShowDialogIcon) {
         dialogOptions.setShowDialogIcon(isShowDialogIcon);
         return this;
@@ -426,7 +427,7 @@ public final class AppRate {
     }
 
     @SuppressWarnings("unused")
-    public AppRate setView(View view) {
+    public AppRate setView(@Nullable View view) {
         dialogOptions.setView(view);
         return this;
     }
@@ -451,7 +452,7 @@ public final class AppRate {
      * @see #setDialogIcon(Drawable)
      * @see #setShowDialogIcon(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setDialogIcon(int resourceId) {
         dialogOptions.setDialogIconResId(resourceId);
         return this;
@@ -465,7 +466,7 @@ public final class AppRate {
      * @see #setDialogIcon(int)
      * @see #setShowDialogIcon(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setDialogIcon(Drawable dialogIcon) {
         dialogOptions.setDialogIcon(dialogIcon);
         return this;
@@ -550,7 +551,7 @@ public final class AppRate {
      * @return the {@link AppRate} singleton object
      * @see #setTextRateNow(int)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextRateNow(String positiveText) {
         dialogOptions.setPositiveText(positiveText);
         return this;
@@ -579,7 +580,7 @@ public final class AppRate {
      * @see #setTextLater(int)
      * @see #setShowLaterButton(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextLater(String neutralText) {
         dialogOptions.setNeutralText(neutralText);
         return this;
@@ -608,20 +609,32 @@ public final class AppRate {
      * @see #setTextNever(int)
      * @see #setShowNeverButton(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextNever(String negativeText) {
         dialogOptions.setNegativeText(negativeText);
         return this;
     }
 
     /**
-     * Sets whether the rating dialog is cancelable or not.
+     * <p>Sets whether the Rate Dialog is cancelable or not.</p>
      *
      * @param cancelable default is false
      * @return the {@link AppRate} singleton object
      */
     public AppRate setCancelable(@SuppressWarnings("SameParameterValue") boolean cancelable) {
         dialogOptions.setCancelable(cancelable);
+        return this;
+    }
+
+    /**
+     * <p>Sets the Rate Dialog type.</p>
+     *
+     * @param dialogType one of the values defined by {@link DialogType.AnyDialogType}
+     * @return the {@link AppRate} singleton object
+     */
+    @SuppressWarnings("WeakerAccess")
+    public AppRate setDialogType(@DialogType.AnyDialogType final int dialogType) {
+        dialogOptions.setDialogType(dialogType);
         return this;
     }
 
@@ -640,11 +653,11 @@ public final class AppRate {
     @SuppressWarnings("WeakerAccess")
     public AppRate setStoreType(@StoreType.StoreWithoutApplicationId final int storeType) throws IllegalArgumentException {
         if ((storeType == APPLE) || (storeType == BLACKBERRY)) {
-            throw new IllegalArgumentException("For StoreType.APPLE/StoreType.BLACKBERRY you must " +
-                    "use setStoreType(StoreType.APPLE/StoreType.BLACKBERRY, long applicationId)");
+            throw new IllegalArgumentException("For StoreType.APPLE/StoreType.BLACKBERRY you must" +
+                     " use setStoreType(StoreType.APPLE/StoreType.BLACKBERRY, long applicationId).");
         } else if ((storeType < AMAZON) || (storeType > YANDEX)) {
             throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, " +
-                    "BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
+                    "BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX.");
         }
         return setStoreType(storeType, null, null);
     }
@@ -668,7 +681,7 @@ public final class AppRate {
                                 final long applicationId) throws IllegalArgumentException {
         if ((storeType < AMAZON) || (storeType > YANDEX)) {
             throw new IllegalArgumentException("StoreType must be one of: AMAZON, APPLE, BAZAAR, " +
-                    "BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX");
+                    "BLACKBERRY, CHINESESTORES, GOOGLEPLAY, MI, SAMSUNG, SLIDEME, TENCENT, YANDEX.");
         }
         return ((storeType != APPLE) && (storeType != BLACKBERRY)) ?
                 setStoreType(storeType, null, null) :
@@ -690,7 +703,7 @@ public final class AppRate {
     @SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
     public AppRate setStoreType(@NonNull final String... uris) throws IllegalArgumentException {
         if (uris == null) {
-            throw new IllegalArgumentException("setStoreType(String... uris): 'uris' must be != null");
+            throw new IllegalArgumentException("setStoreType(String... uris): 'uris' must be != null.");
         }
         return setStoreType(OTHER, uris, null);
     }
@@ -711,12 +724,12 @@ public final class AppRate {
     @SuppressWarnings({"ConstantConditions", "WeakerAccess", "unused"})
     public AppRate setStoreType(@NonNull final Intent... intents) throws IllegalArgumentException {
         if (intents == null) {
-            throw new IllegalArgumentException("setStoreType(Intent... intents): 'intents' must be != null");
+            throw new IllegalArgumentException("setStoreType(Intent... intents): 'intents' must be != null.");
         }
         return setStoreType(INTENT, null, intents);
     }
 
-    private AppRate setStoreType(final int storeType,
+    private AppRate setStoreType(@StoreType.AnyStoreType final int storeType,
                                  final String[] stringParam,
                                  final Intent[] intentParaam) {
         storeOptions.setStoreType(storeType, stringParam, intentParaam);
@@ -752,7 +765,7 @@ public final class AppRate {
      * @return the {@link AppRate} singleton object
      */
     @SuppressWarnings({"unused", "UnusedReturnValue", "WeakerAccess"})
-    public AppRate setThemeResId(int themeResId) {
+    public AppRate setThemeResId(@StyleRes int themeResId) {
         dialogOptions.setThemeResId(themeResId);
         return this;
     }
@@ -843,14 +856,14 @@ public final class AppRate {
                     dialog.get().show();
                 } else {
                     Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
-                            "activity is in the process of finishing");
+                            "activity is in the process of finishing.");
                 }
             } catch(Exception e){
                 Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
-                        "unpredictable exception", e);
+                        "unpredictable exception.", e);
             }
         } else {
-            Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog");
+            Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog.");
         }
     }
 
@@ -891,7 +904,7 @@ public final class AppRate {
                 positiveButton.performClick();
                 dismissRateDialog();
             } else {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button.");
             }
         } else {
             clearRateDialog();
@@ -901,10 +914,10 @@ public final class AppRate {
                 if (positiveButton != null) {
                     positiveButton.performClick();
                 } else {
-                    Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button");
+                    Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button.");
                 }
             } else {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog.");
             }
             clearRateDialog();
         }

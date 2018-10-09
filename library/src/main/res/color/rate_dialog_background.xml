@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Color state list XML resource. -->
+    <item
+        android:state_pressed="true"
+        android:color="@color/rateDialogColorBackgroundPressed"/> <!-- pressed -->
+    <item android:color="@color/rateDialogColorBackground"/>      <!-- default -->
+
+</selector>

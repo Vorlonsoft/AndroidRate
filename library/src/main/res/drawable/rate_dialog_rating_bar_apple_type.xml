@@ -9,12 +9,11 @@
     <!-- The drawable object that manages the array of Apple type RatingBar drawables. -->
     <item
         android:id="@android:id/background"
-        android:drawable="@drawable/star_unfilled"/>
-    <item
-        android:id="@android:id/secondaryProgress"
-        android:drawable="@drawable/star_unfilled"/>
+        android:drawable="@drawable/rate_dialog_star_unfilled"/> <!-- unfilled -->
+    <!-- @android:id/secondaryProgress should not be modified by the client as it is used internally
+         as the background for a fractionally filled star. -->
     <item
         android:id="@android:id/progress"
-        android:drawable="@drawable/star_filled"/>
+        android:drawable="@drawable/rate_dialog_star_filled"/>   <!-- filled -->
 
 </layer-list>

@@ -6,20 +6,14 @@
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_root"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="0dp"
-    android:layout_marginLeft="0dp"
-    android:layout_marginTop="0dp"
-    android:layout_marginBottom="0dp"
-    android:layout_marginRight="0dp"
-    android:layout_marginEnd="0dp"
+    android:id="@+id/rate_dialog_layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:paddingLeft="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp"
     android:paddingRight="0dp"
-    android:background="@color/colorTransparent">
+    android:background="@color/rateDialogColorTransparent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,11 +28,11 @@
         android:paddingTop="0dp"
         android:paddingBottom="0dp"
         android:paddingRight="0dp"
-        android:background="@color/colorTransparent"
+        android:background="@color/rateDialogColorTransparent"
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/layout_head"
+            android:id="@+id/rate_dialog_layout_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -48,20 +42,20 @@
             android:layout_marginRight="0dp"
             android:layout_marginEnd="0dp"
             android:paddingLeft="0dp"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="9dp"
             android:paddingRight="0dp"
-            android:background="@drawable/rectangle_rounded_top"
+            android:background="@drawable/rate_dialog_rectangle_rounded_top"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/icon_app_launcher"
+                android:id="@+id/rate_dialog_icon"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
                 android:layout_marginRight="0dp"
                 android:layout_marginEnd="0dp"
@@ -69,11 +63,12 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingRight="0dp"
+                android:background="@color/rateDialogColorTransparent"
                 android:contentDescription="@string/rate_dialog_ic_launcher_description"
                 android:src="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/text_dialog_title"
+                android:id="@+id/rate_dialog_text_dialog_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -87,14 +82,15 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingRight="0dp"
+                android:background="@color/rateDialogColorTransparent"
                 android:gravity="center"
                 android:text="@string/rate_dialog_title"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/rateDialogColorBlack"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/text_dialog_message"
+                android:id="@+id/rate_dialog_text_dialog_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -102,39 +98,40 @@
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginBottom="0dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginEnd="1dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginEnd="0dp"
                 android:paddingLeft="20dp"
                 android:paddingTop="0dp"
-                android:paddingBottom="9dp"
+                android:paddingBottom="0dp"
                 android:paddingRight="20dp"
+                android:background="@color/rateDialogColorTransparent"
                 android:gravity="center"
                 android:text="@string/rate_dialog_message"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/rateDialogColorBlack"
                 android:textSize="16sp"
                 android:textStyle="normal" />
 
         </LinearLayout>
 
         <FrameLayout
-            android:id="@+id/layout_rating_bar"
+            android:id="@+id/rate_dialog_layout_rating_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layout_head"
+            android:layout_below="@id/rate_dialog_layout_head"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
             android:layout_marginTop="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginEnd="0dp"
             android:paddingLeft="0dp"
             android:paddingTop="0dp"
             android:paddingBottom="0dp"
             android:paddingRight="0dp"
-            android:background="@color/colorBackground">
+            android:background="@color/rateDialogColorBackground">
 
             <RatingBar
-                android:id="@+id/rating_bar"
+                android:id="@+id/rate_dialog_rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:layout_gravity="center_horizontal"
@@ -148,25 +145,25 @@
                 android:paddingTop="7dp"
                 android:paddingBottom="0dp"
                 android:paddingRight="0dp"
-                android:background="@color/colorTransparent"
+                android:background="@color/rateDialogColorTransparent"
                 android:clickable="true"
                 android:focusable="true"
                 android:isIndicator="false"
                 android:numStars="5"
-                android:progressDrawable="@drawable/rating_bar_apple_type"
+                android:progressDrawable="@drawable/rate_dialog_rating_bar_apple_type"
                 android:rating="0"
                 android:stepSize="1" />
 
         </FrameLayout>
 
         <LinearLayout
-            android:id="@+id/layout_buttons"
+            android:id="@+id/rate_dialog_layout_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layout_rating_bar"
+            android:layout_below="@id/rate_dialog_layout_rating_bar"
             android:layout_marginStart="0dp"
             android:layout_marginLeft="0dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="1dp"
             android:layout_marginBottom="0dp"
             android:layout_marginRight="0dp"
             android:layout_marginEnd="0dp"
@@ -175,12 +172,12 @@
             android:paddingBottom="0dp"
             android:paddingRight="0dp"
             android:animateLayoutChanges="true"
-            android:background="@color/colorTransparent"
+            android:background="@color/rateDialogColorTransparent"
             android:orientation="horizontal"
             tools:ignore="UnusedAttribute">
 
             <Button
-                android:id="@+id/button_negative"
+                android:id="@+id/rate_dialog_button_negative"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -194,45 +191,45 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingRight="0dp"
-                android:background="@drawable/button_rounded_bottom_left_corner"
+                android:background="@drawable/rate_dialog_rectangle_rounded_bottom_left_corner"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
                 android:text="@string/rate_dialog_no"
-
-                android:textColor="@color/colorApplePrimary"
+                android:textAllCaps="false"
+                android:textColor="@color/rateDialogColorApplePrimary"
                 android:textSize="20sp"
                 android:textStyle="normal"
                 android:visibility="gone" />
 
             <Button
-                android:id="@+id/button_neutral"
+                android:id="@+id/rate_dialog_button_neutral"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginRight="0dp"
                 android:layout_marginBottom="0dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_rounded_bottom"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
                 android:paddingLeft="0dp"
                 android:paddingTop="0dp"
                 android:paddingRight="0dp"
                 android:paddingBottom="0dp"
+                android:background="@drawable/rate_dialog_rectangle_rounded_bottom"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
                 android:text="@string/rate_dialog_cancel"
-
-                android:textColor="@color/colorApplePrimary"
+                android:textAllCaps="false"
+                android:textColor="@color/rateDialogColorApplePrimary"
                 android:textSize="20sp"
                 android:textStyle="normal"
                 android:visibility="visible" />
 
             <Button
-                android:id="@+id/button_positive"
+                android:id="@+id/rate_dialog_button_positive"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -246,13 +243,13 @@
                 android:paddingTop="0dp"
                 android:paddingBottom="0dp"
                 android:paddingRight="0dp"
-                android:background="@drawable/button_rounded_bottom_right_corner"
+                android:background="@drawable/rate_dialog_rectangle_rounded_bottom_right_corner"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
                 android:text="@string/rate_dialog_ok"
-
-                android:textColor="@color/colorApplePrimary"
+                android:textAllCaps="false"
+                android:textColor="@color/rateDialogColorApplePrimary"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
