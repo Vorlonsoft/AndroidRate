@@ -47,7 +47,7 @@ android {
 dependencies {
     compileOnly 'androidx.annotation:annotation:1.0.0'
     api 'androidx.appcompat:appcompat:1.0.0'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta01'
 }
 apply from: 'https://raw.github.com/Vorlonsoft/EasyDokkaPlugin/master/dokka.gradle'
 apply from: 'https://raw.github.com/Vorlonsoft/GradleMavenPush/master/maven-push.gradle'

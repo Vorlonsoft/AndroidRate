@@ -5,13 +5,13 @@
  */
 
 buildscript {
-    ext.projectVersionCode = 47
+    ext.projectVersionCode = 48
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0-alpha12'
+        classpath 'com.android.tools.build:gradle:3.3.0-alpha13'
     }
 }
 
