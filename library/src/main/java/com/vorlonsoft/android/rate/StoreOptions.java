@@ -6,6 +6,7 @@
 
 package com.vorlonsoft.android.rate;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -25,7 +26,8 @@ import static com.vorlonsoft.android.rate.StoreType.OTHER;
  */
 
 public final class StoreOptions {
-
+    /** <p>One of the app stores defined by {@link StoreType.AnyStoreType}.</p> */
+    @StoreType.AnyStoreType
     private int storeType = GOOGLEPLAY;
 
     private String applicationId = null;
@@ -39,8 +41,7 @@ public final class StoreOptions {
         return applicationId;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    void setApplicationId(String applicationId) {
+    private void setApplicationId(String applicationId) {
         this.applicationId = applicationId;
     }
 
@@ -48,16 +49,35 @@ public final class StoreOptions {
         return intents;
     }
 
-    @SuppressWarnings("WeakerAccess")
-    void setIntents(Intent[] intents) {
+    private void setIntents(Intent[] intents) {
         this.intents = intents;
     }
 
+    /**
+     * <p>Gets the app store type from library options.</p>
+     * <p>NOTE: this method doesn't get an app store type from user's device.</p>
+     *
+     * @return one of the values defined by {@link StoreType.AnyStoreType}
+     */
+    @StoreType.AnyStoreType
     int getStoreType() {
         return storeType;
     }
 
-    void setStoreType(final int storeType, final String[] stringParam, final Intent[] intentParam) {
+    /**
+     * <p>Sets one of the app stores defined by {@link StoreType.AnyStoreType} to the
+     * Positive button.</p>
+     *
+     * @param storeType one of the values defined by {@link StoreType.AnyStoreType}
+     * @param stringParam array of string params
+     * @param intentParam array of intent params
+     * @see AppRate#setStoreType(int)
+     * @see AppRate#setStoreType(int,long)
+     * @see AppRate#setStoreType(String...)
+     * @see AppRate#setStoreType(Intent...)
+     */
+    @SuppressLint("SwitchIntDef")
+    void setStoreType(@StoreType.AnyStoreType final int storeType, final String[] stringParam, final Intent[] intentParam) {
         this.storeType = storeType;
         switch (storeType) {
             case APPLE:

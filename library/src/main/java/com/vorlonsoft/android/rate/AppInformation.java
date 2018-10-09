@@ -71,13 +71,13 @@ final class AppInformation {
             try {
                 appIcon = pm.getApplicationIcon(appPackageName);
             } catch (PackageManager.NameNotFoundException e) {
-                Log.i(TAG, "Failed to get app icon", e);
+                Log.i(TAG, "Failed to get app icon.", e);
                 appIcon = null;
             }
             try {
                 packageInfo = pm.getPackageInfo(appPackageName, 0);
             } catch (PackageManager.NameNotFoundException e) {
-                Log.i(TAG, "Failed to get app package info", e);
+                Log.i(TAG, "Failed to get app package info.", e);
                 packageInfo = null;
             }
             if (packageInfo != null) {

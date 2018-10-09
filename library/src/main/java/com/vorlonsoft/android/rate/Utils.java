@@ -57,7 +57,7 @@ final class Utils {
     @Nullable
     static AlertDialog.Builder getDialogBuilder(@NonNull final Context context, final int themeResId) {
         if (context == null) {
-            Log.i(TAG, "Failed to create AlertDialog.Builder");
+            Log.i(TAG, "Failed to create AlertDialog.Builder.");
             return null;
         } else if (themeResId == 0) {
             return new AlertDialog.Builder(context);
@@ -81,7 +81,7 @@ final class Utils {
     static androidx.appcompat.app.AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context,
                                                                                 final int themeResId) {
         if (context == null) {
-            Log.i(TAG, "Failed to create AlertDialog.Builder");
+            Log.i(TAG, "Failed to create AlertDialog.Builder.");
             return null;
         } else if (themeResId == 0) {
             return new androidx.appcompat.app.AlertDialog.Builder(context);
@@ -95,10 +95,10 @@ final class Utils {
     static String[] isPackagesExists(@NonNull final Context context, @NonNull final String[] targetPackages) {
         if ((context == null) || (targetPackages == null) || (targetPackages.length == 0)) {
             if (context == null) {
-                Log.i(TAG, "Failed to get installed applications");
+                Log.i(TAG, "Failed to get installed applications.");
             }
             if (targetPackages == null) {
-                Log.i(TAG, "Null pointer to an array of target packages");
+                Log.i(TAG, "Null pointer to an array of target packages.");
             }
             return EMPTY_STRING_ARRAY;
         }

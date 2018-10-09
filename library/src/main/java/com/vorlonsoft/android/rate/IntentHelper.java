@@ -158,10 +158,10 @@ final class IntentHelper {
         if ((context == null) || (paramName == null)) {
             if (context == null) {
                 Log.w(TAG, LOG_MESSAGE_PART_1 + "can't check the availability of stores packages" +
-                                                    " on the user device (context == null)");
+                                                    " on the user device (context == null).");
             }
             if (paramName == null) {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get store Uri/WebUri (paramName == null)");
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get store Uri/WebUri (paramName == null).");
             }
             return new Intent[0];
         }
@@ -198,11 +198,11 @@ final class IntentHelper {
             if (hasWebUriIntent) {
                 Log.w(TAG, LOG_MESSAGE_PART_1 + Arrays.toString(storesPackagesNames) + " not " +
                         "exist on the user device and the user device can't start the app store (" +
-                        appStore + ") web (http/https) uri activity without it");
+                        appStore + ") web (http/https) uri activity without it.");
             } else {
                 Log.w(TAG, LOG_MESSAGE_PART_1 + Arrays.toString(storesPackagesNames) + " not " +
                         "exist on the user device and the app store (" + appStore +
-                        ") hasn't web (http/https) uri");
+                        ") hasn't web (http/https) uri.");
             }
         }
         return intents;
