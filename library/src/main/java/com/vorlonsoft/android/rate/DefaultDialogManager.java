@@ -33,6 +33,7 @@ import static android.content.DialogInterface.BUTTON_NEUTRAL;
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static android.widget.LinearLayout.VERTICAL;
 import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
 import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
@@ -109,34 +110,33 @@ public class DefaultDialogManager implements DialogManager {
                 }
                 increment365DayPeriodDialogLaunchTimes(context);
             }
-            if (isLollipop() && (dialogOptions.getDialogType() == CLASSIC)) {
+            if (isLollipop() && (dialogOptions.getDialogType() == CLASSIC) &&
+                (dialog instanceof android.app.AlertDialog)) {
                 try {
                     final Button positiveButton = ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
-                    if (positiveButton != null) {
-                        final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
-                        if ((linearLayout != null) &&
-                                (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
-                            final Button neutralButton = ((AlertDialog) dialog).getButton(BUTTON_NEUTRAL);
-                            final Button negativeButton = ((AlertDialog) dialog).getButton(BUTTON_NEGATIVE);
-                            linearLayout.setOrientation(LinearLayout.VERTICAL);
-                            linearLayout.setGravity(Gravity.END);
-                            if ((neutralButton != null) && (negativeButton != null)) {
-                                linearLayout.removeView(neutralButton);
-                                linearLayout.removeView(negativeButton);
-                                linearLayout.addView(negativeButton);
-                                linearLayout.addView(neutralButton);
-                            } else if (neutralButton != null) {
-                                linearLayout.removeView(neutralButton);
-                                linearLayout.addView(neutralButton);
-                            } else if (negativeButton != null) {
-                                linearLayout.removeView(negativeButton);
-                                linearLayout.addView(negativeButton);
-                            }
+                    final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
+                    if ((linearLayout.getOrientation() != VERTICAL) &&
+                        (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
+                        final Button neutralButton = ((AlertDialog) dialog).getButton(BUTTON_NEUTRAL);
+                        final Button negativeButton = ((AlertDialog) dialog).getButton(BUTTON_NEGATIVE);
+                        linearLayout.setOrientation(VERTICAL);
+                        linearLayout.setGravity(Gravity.END);
+                        if ((neutralButton != null) && (negativeButton != null)) {
+                            linearLayout.removeView(neutralButton);
+                            linearLayout.removeView(negativeButton);
+                            linearLayout.addView(negativeButton);
+                            linearLayout.addView(neutralButton);
+                        } else if (neutralButton != null) {
+                            linearLayout.removeView(neutralButton);
+                            linearLayout.addView(neutralButton);
+                        } else if (negativeButton != null) {
+                            linearLayout.removeView(negativeButton);
+                            linearLayout.addView(negativeButton);
                         }
                     }
                 } catch (Exception e) {
-                    Log.i(TAG, "Positive button may not fits in the window, can't change layout " +
-                            "orientation to vertical.");
+                    Log.i(TAG, "Positive button may not fits in the window, can't change " +
+                               "layout orientation to vertical.");
                 }
             }
         }
