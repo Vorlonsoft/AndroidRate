@@ -226,7 +226,7 @@ final class PreferenceHelper {
     /**
      * <p>Sets number of times the app has been launched.</p>
      *
-     * @param context AppRate.context
+     * @param context context
      * @param launchTimes number of launch times to set
      */
     static void setLaunchTimes(final Context context, final short launchTimes) {

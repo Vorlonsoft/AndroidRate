@@ -135,8 +135,8 @@ public class DefaultDialogManager implements DialogManager {
                         }
                     }
                 } catch (Exception e) {
-                    Log.i(TAG, "Positive button may not fits in the window, can't change " +
-                               "layout orientation to vertical.");
+                    Log.i(TAG, "The Positive button may not fit in the window, can't check " +
+                               "it and/or change the layout orientation to vertical if needed.");
                 }
             }
         }

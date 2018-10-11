@@ -6,7 +6,6 @@
 
 package com.vorlonsoft.android.rate;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Build;

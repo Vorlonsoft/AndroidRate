@@ -291,7 +291,7 @@ public final class DialogOptions {
      *
      * @param dialogIconResId the Rate Dialog icon resource ID
      * @see AppRate#setDialogIcon(int)
-     * @see AppRate##setShowDialogIcon(boolean)
+     * @see AppRate#setShowDialogIcon(boolean)
      */
     void setDialogIconResId(final int dialogIconResId) {
         this.dialogIconResId = dialogIconResId;

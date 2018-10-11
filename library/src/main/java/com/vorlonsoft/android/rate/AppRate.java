@@ -8,7 +8,6 @@ package com.vorlonsoft.android.rate;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +16,6 @@ import android.os.Build;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import java.lang.ref.WeakReference;
 import java.util.Date;
@@ -28,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
+import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
@@ -547,7 +546,7 @@ public final class AppRate {
      * @return the {@link AppRate} singleton object
      * @see #setTextRateNow(String)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextRateNow(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTextPositiveResId(resourceId);
         return this;
@@ -575,7 +574,7 @@ public final class AppRate {
      * @see #setTextLater(String)
      * @see #setShowLaterButton(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextLater(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTextNeutralResId(resourceId);
         return this;
@@ -604,7 +603,7 @@ public final class AppRate {
      * @see #setTextNever(String)
      * @see #setShowNeverButton(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextNever(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTextNegativeResId(resourceId);
         return this;
@@ -642,7 +641,7 @@ public final class AppRate {
      * @param dialogType one of the values defined by {@link DialogType.AnyDialogType}
      * @return the {@link AppRate} singleton object
      */
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "unused"})
     public AppRate setDialogType(@DialogType.AnyDialogType final int dialogType) {
         dialogOptions.setDialogType(dialogType);
         return this;
@@ -911,7 +910,7 @@ public final class AppRate {
     public void rateNow(Activity activity) {
         ((DefaultDialogManager) dialogManagerFactory
                 .createDialogManager(activity, dialogOptions, storeOptions))
-                .positiveListener.onClick(null, AlertDialog.BUTTON_POSITIVE);
+                .positiveListener.onClick((dialog != null) ? dialog.get() : null, BUTTON_POSITIVE);
         dismissRateDialog();
     }
 
