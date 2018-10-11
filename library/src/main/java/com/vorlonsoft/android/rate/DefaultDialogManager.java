@@ -17,6 +17,7 @@ import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -449,8 +450,17 @@ public class DefaultDialogManager implements DialogManager {
 
         if (showDialogIcon) {
             ((ImageView) icon).setImageDrawable(dialogOptions.getDialogIcon(dialogContext));
-        } else if (icon != null) {
-            icon.setVisibility(GONE);
+        } else {
+            if (icon != null) {
+                icon.setVisibility(GONE);
+            }
+            if (showTitle) {
+                ViewGroup.LayoutParams layoutParams = textDialogTitle.getLayoutParams();
+                if (layoutParams != null) {
+                    ((LinearLayout.LayoutParams) layoutParams).setMargins(0,0,0,0);
+                    textDialogTitle.setLayoutParams(layoutParams);
+                }
+            }
         }
 
         if (showTitle) {

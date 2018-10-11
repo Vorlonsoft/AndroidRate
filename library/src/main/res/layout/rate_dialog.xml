@@ -42,7 +42,7 @@
             android:layout_marginEnd="0dp"
             android:paddingLeft="0dp"
             android:paddingTop="10dp"
-            android:paddingBottom="9dp"
+            android:paddingBottom="10dp"
             android:paddingRight="0dp"
             android:background="@drawable/rate_dialog_rectangle_rounded_top"
             android:orientation="vertical">
