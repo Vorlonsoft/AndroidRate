@@ -909,29 +909,10 @@ public final class AppRate {
      */
     @SuppressWarnings("unused")
     public void rateNow(Activity activity) {
-        if ((dialog != null) && (dialog.get() != null)) {
-            Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
-            if (positiveButton != null) {
-                positiveButton.performClick();
-                dismissRateDialog();
-            } else {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button.");
-            }
-        } else {
-            clearRateDialog();
-            setRateDialog(new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog()));
-            if (dialog.get() != null) {
-                Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
-                if (positiveButton != null) {
-                    positiveButton.performClick();
-                } else {
-                    Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get dialog positive button.");
-                }
-            } else {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog.");
-            }
-            clearRateDialog();
-        }
+        ((DefaultDialogManager) dialogManagerFactory
+                .createDialogManager(activity, dialogOptions, storeOptions))
+                .positiveListener.onClick(null, AlertDialog.BUTTON_POSITIVE);
+        dismissRateDialog();
     }
 
     /**
