@@ -97,7 +97,12 @@ public class DefaultDialogManager implements DialogManager {
             if (dialogOptions.isOrientationChanged()) {
                 AppRate.with(context).clearRateDialog();
                 AppRate.with(context).setRateDialog(new WeakReference<>((Dialog) dialog));
-                ((RatingBar) ((Dialog) dialog).findViewById(R.id.rate_dialog_rating_bar)).setRating(dialogOptions.getCurrentRating());
+                if (dialogOptions.getDialogType() != CLASSIC) {
+                    View ratingBar = ((Dialog) dialog).findViewById(R.id.rate_dialog_rating_bar);
+                    if (ratingBar != null) {
+                        ((RatingBar) ratingBar).setRating(dialogOptions.getCurrentRating());
+                    }
+                }
             } else {
                 if (getDialogFirstLaunchTime(context) == 0L) {
                     setDialogFirstLaunchTime(context);
@@ -244,7 +249,7 @@ public class DefaultDialogManager implements DialogManager {
          *              {@link DialogInterface#BUTTON_POSITIVE BUTTON_POSITIVE}) or the position
          */
         @Override
-        public void onClick(final DialogInterface dialog, final int which) {
+        public void onClick(@Nullable final DialogInterface dialog, final int which) {
             final String packageName = AppInformation.getInstance(context).getAppPackageName();
             if ((packageName != null) && (packageName.hashCode() != EMPTY_STRING.hashCode())) {
                 final Intent[] intentsToAppStores = getIntentsForStores(packageName);
@@ -304,7 +309,7 @@ public class DefaultDialogManager implements DialogManager {
          *              {@link DialogInterface#BUTTON_POSITIVE BUTTON_POSITIVE}) or the position
          */
         @Override
-        public void onClick(final DialogInterface dialog, final int which) {
+        public void onClick(@Nullable final DialogInterface dialog, final int which) {
             setIsAgreeShowDialog(context, false);
             if (listener != null) {
                 listener.onClickButton((byte) which);
@@ -322,7 +327,7 @@ public class DefaultDialogManager implements DialogManager {
          *              {@link DialogInterface#BUTTON_POSITIVE BUTTON_POSITIVE}) or the position
          */
         @Override
-        public void onClick(final DialogInterface dialog, final int which) {
+        public void onClick(@Nullable final DialogInterface dialog, final int which) {
             setRemindInterval(context);
             setRemindLaunchesNumber(context);
             if (listener != null) {
