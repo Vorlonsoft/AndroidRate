@@ -177,25 +177,27 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
         public DialogManager createDialogManager(final Context context,
                                                  final DialogOptions dialogOptions,
                                                  final StoreOptions storeOptions) {
-            if ((singleton == null) || (singleton.get() == null)) {
-                synchronized (AppCompatDialogManager.class) {
-                    if ((singleton == null) || (singleton.get() == null)) {
-                        if (singleton != null) {
-                            singleton.clear();
-                        }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                            singleton = new WeakReference<>(new AppCompatDialogManager(context, dialogOptions, storeOptions));
-                        } else {
-                            singleton = new WeakReference<>(new DefaultDialogManager(context, dialogOptions, storeOptions));
-                        }
-                    }else {
-                        ((DefaultDialogManager) singleton.get()).setContext(context);
-                    }
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
+                AppRate.with(context).setDialogManagerFactory(dialogManagerFactory);
+                return dialogManagerFactory.createDialogManager(context, dialogOptions, storeOptions);
             } else {
-                ((DefaultDialogManager) singleton.get()).setContext(context);
+                if ((singleton == null) || (singleton.get() == null)) {
+                    synchronized (AppCompatDialogManager.class) {
+                        if ((singleton == null) || (singleton.get() == null)) {
+                            if (singleton != null) {
+                                singleton.clear();
+                            }
+                            singleton = new WeakReference<>(new AppCompatDialogManager(context, dialogOptions, storeOptions));
+                        }else {
+                            ((DefaultDialogManager) singleton.get()).setContext(context);
+                        }
+                    }
+                } else {
+                    ((DefaultDialogManager) singleton.get()).setContext(context);
+                }
+                return singleton.get();
             }
-            return singleton.get();
         }
     }
 }
