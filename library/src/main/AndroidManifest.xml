@@ -5,7 +5,19 @@
   ~ // Licensed under The MIT License (MIT)
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.vorlonsoft.android.rate">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.vorlonsoft.android.rate">
+
+    <!-- Suppress for manifest merger error "uses-sdk:minSdkVersion 9 cannot be smaller than
+         version 14 declared in library as the library might be using APIs not available in 9" -->
+    <uses-sdk tools:overrideLibrary="androidx.appcompat,androidx.fragment,androidx.vectordrawable,
+    androidx.legacy.coreui,androidx.legacy.coreutils,androidx.loader,androidx.viewpager,
+    androidx.coordinatorlayout,androidx.drawerlayout,androidx.slidingpanelayout,androidx.customview,
+    androidx.swiperefreshlayout,androidx.asynclayoutinflater,androidx.core,
+    androidx.versionedparcelable,androidx.cursoradapter,androidx.lifecycle,androidx.documentfile,
+    androidx.localbroadcastmanager,androidx.print,androidx.lifecycle.viewmodel,
+    androidx.lifecycle.livedata,androidx.lifecycle.livedata.core, androidx.arch.core,
+    androidx.interpolator"/>
 
     <application android:icon="@mipmap/ic_launcher" />
 
