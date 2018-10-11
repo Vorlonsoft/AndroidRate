@@ -33,53 +33,99 @@ import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
  */
 
 public final class DialogOptions {
-
+    /** <p>Whether the Rate Dialog is cancelable.</p> */
     private boolean cancelable = false;
+    /** <p>Whether the orientation of the current Rate Dialog has changed one or more times.</p> */
+    private boolean orientationChanged = false;
     /** <p>Whether the Rate Dialog should show the message.</p> */
     private boolean showMessage = true;
-
+    /** <p>Whether the Rate Dialog should show the Negative button.</p> */
     private boolean showNegativeButton = true;
-
+    /** <p>Whether the Rate Dialog should show the Neutral button.</p> */
     private boolean showNeutralButton = true;
-
+    /** <p>Whether the Rate Dialog should show the title.</p> */
     private boolean showTitle = true;
-    /** Default value is null. */
+    /** <p>Whether the Rate Dialog should show the icon.</p><p>Default value is null.</p> */
     private Boolean showDialogIcon = null;
-
+    /** <p>The current rating set by the user, 0 means that the user hasn't yet set a rating</p> */
+    private byte currentRating = 0;
+    /** <p>The Rate Dialog type.</p>
+     *  <p>One of the dialog types defined by {@link DialogType.AnyDialogType}.</p> */
+    @DialogType.AnyDialogType private int dialogType = DialogType.CLASSIC;
+    /** <p>The Rate Dialog icon Resource ID.</p> */
     private int dialogIconResId = 0;
-    /** <p>One of the dialog types defined by {@link DialogType.AnyDialogType}.</p> */
-    @DialogType.AnyDialogType
-    private int dialogType = DialogType.CLASSIC;
-
-    private int textMessageResId = R.string.rate_dialog_message;
-
-    private int textNegativeResId = R.string.rate_dialog_no;
-
-    private int textNeutralResId = R.string.rate_dialog_cancel;
-
-    private int textPositiveResId = R.string.rate_dialog_ok;
-
+    /** <p>The Rate Dialog title text Resource ID.</p> */
     private int textTitleResId = R.string.rate_dialog_title;
-
+    /** <p>The Rate Dialog message text Resource ID.</p> */
+    private int textMessageResId = R.string.rate_dialog_message;
+    /** <p>The Rate Dialog negative text Resource ID.</p> */
+    private int textNegativeResId = R.string.rate_dialog_no;
+    /** <p>The Rate Dialog neutral text Resource ID.</p> */
+    private int textNeutralResId = R.string.rate_dialog_cancel;
+    /** <p>The Rate Dialog positive text Resource ID.</p> */
+    private int textPositiveResId = R.string.rate_dialog_ok;
+    /** <p>The Rate Dialog theme Resource ID.</p> */
     private Integer themeResId = null;
-
-    private String messageText = null;
-
-    private String negativeText = null;
-
-    private String neutralText = null;
-
-    private String positiveText = null;
-
+    /** <p>The Rate Dialog title text.</p> */
     private String titleText = null;
-
+    /** <p>The Rate Dialog message text.</p> */
+    private String messageText = null;
+    /** <p>The Rate Dialog negative text.</p> */
+    private String negativeText = null;
+    /** <p>The Rate Dialog neutral text.</p> */
+    private String neutralText = null;
+    /** <p>The Rate Dialog positive text.</p> */
+    private String positiveText = null;
+    /** <p>The Rate Dialog icon.</p> */
     private Drawable dialogIcon = null;
-
+    /** <p>The Rate Dialog view.</p> */
     private View view = null;
-
+    /** <p>The Rate Dialog SoftReference to the button lListener implemented by library user.</p> */
     private SoftReference<OnClickButtonListener> listener = null;
 
     DialogOptions() {
+    }
+
+    /**
+     * <p>Whether the Rate Dialog is cancelable or not.</p>
+     *
+     * @return true if the Rate Dialog is cancelable, false otherwise
+     */
+    @SuppressWarnings("WeakerAccess")
+    public boolean getCancelable() {
+        return cancelable;
+    }
+
+    /**
+     * <p>Sets whether the Rate Dialog is cancelable or not.</p>
+     *
+     * @param cancelable default is false, true will set the Rate Dialog cancelable
+     * @see AppRate#setCancelable(boolean)
+     */
+    void setCancelable(final boolean cancelable) {
+        this.cancelable = cancelable;
+    }
+
+    /**
+     * <p>Returns whether the orientation of the current Rate Dialog has changed one or more
+     * times.</p>
+     *
+     * @return true if the orientation has changed one or more times, false otherwise
+     */
+    @SuppressWarnings("WeakerAccess")
+    public boolean isOrientationChanged() {
+        return orientationChanged;
+    }
+
+    /**
+     * <p>Sets whether the orientation of the current Rate Dialog has changed one or more
+     * times.</p>
+     *
+     * @param orientationChanged true if the orientation has changed one or more times, false
+     *                           otherwise
+     */
+    void setOrientationChanged(final boolean orientationChanged) {
+        this.orientationChanged = orientationChanged;
     }
 
     /**
@@ -188,23 +234,26 @@ public final class DialogOptions {
     }
 
     /**
-     * <p>Whether the Rate Dialog is cancelable or not.</p>
+     * <p>Returns the current rating (number of stars filled) set by the user on the
+     * non-{@link DialogType#CLASSIC CLASSIC} Rate Dialog.</p>
      *
-     * @return true if the Rate Dialog is cancelable, false otherwise
+     * @return the current rating (number of stars filled) set by the app user, 0 means that the app
+     *         user hasn't yet set a rating
      */
-    @SuppressWarnings("WeakerAccess")
-    public boolean getCancelable() {
-        return cancelable;
+    @SuppressWarnings({"WeakerAccess", "unused"})
+    public byte getCurrentRating() {
+        return currentRating;
     }
 
     /**
-     * <p>Sets whether the Rate Dialog is cancelable or not.</p>
+     * <p>Sets the current rating (number of stars filled) set by the app user on the
+     * non-{@link DialogType#CLASSIC CLASSIC} Rate Dialog.</p>
      *
-     * @param cancelable default is false, true will set the Rate Dialog cancelable
-     * @see AppRate#setCancelable(boolean)
+     * @param currentRating the current rating (number of stars filled) set by the app user, 0 means
+     *                      that the app user hasn't yet set a rating
      */
-    void setCancelable(final boolean cancelable) {
-        this.cancelable = cancelable;
+    void setCurrentRating(final byte currentRating) {
+        this.currentRating = currentRating;
     }
 
     /**

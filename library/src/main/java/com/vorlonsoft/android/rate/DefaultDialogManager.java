@@ -80,7 +80,7 @@ public class DefaultDialogManager implements DialogManager {
     private static volatile WeakReference<DefaultDialogManager> singleton = null;
     private final StoreOptions storeOptions;
     private final OnClickButtonListener listener;
-    @SuppressWarnings("WeakerAccess")
+    @SuppressWarnings({"WeakerAccess", "UnusedAssignment"})
     protected DialogOptions dialogOptions = null;
     @SuppressWarnings({"WeakerAccess", "UnusedAssignment"})
     protected Context context = null;
@@ -94,10 +94,16 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onShow(DialogInterface dialog) {
-            if (getDialogFirstLaunchTime(context) == 0L) {
-                setDialogFirstLaunchTime(context);
+            if (dialogOptions.isOrientationChanged()) {
+                AppRate.with(context).clearRateDialog();
+                AppRate.with(context).setRateDialog(new WeakReference<>((Dialog) dialog));
+                ((RatingBar) ((Dialog) dialog).findViewById(R.id.rate_dialog_rating_bar)).setRating(dialogOptions.getCurrentRating());
+            } else {
+                if (getDialogFirstLaunchTime(context) == 0L) {
+                    setDialogFirstLaunchTime(context);
+                }
+                increment365DayPeriodDialogLaunchTimes(context);
             }
-            increment365DayPeriodDialogLaunchTimes(context);
             if (isLollipop() && (dialogOptions.getDialogType() == CLASSIC)) {
                 try {
                     final Button positiveButton = ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
@@ -140,6 +146,7 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onDismiss(DialogInterface dialog) {
+            dialogOptions.setOrientationChanged(true);
             AppRate.with(context).clearRateDialog();
         }
     };
@@ -158,44 +165,46 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+            final View view = ratingBar.getRootView();
+            final View layoutRatingBar = view.findViewById(R.id.rate_dialog_layout_rating_bar);
+            final View buttonNeutral = view.findViewById(R.id.rate_dialog_button_neutral);
+            final View buttonNegative = view.findViewById(R.id.rate_dialog_button_negative);
+            final View buttonPositive = view.findViewById(R.id.rate_dialog_button_positive);
+            final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() && (buttonNeutral != null);
+            final boolean showNegativeButton = dialogOptions.shouldShowNegativeButton() && (buttonNegative != null);
+            final boolean showPositiveButton = buttonPositive != null;
+
             if (fromUser) {
-                final View view = ratingBar.getRootView();
-                final View layoutRatingBar = view.findViewById(R.id.rate_dialog_layout_rating_bar);
-                final View buttonNeutral = view.findViewById(R.id.rate_dialog_button_neutral);
-                final View buttonNegative = view.findViewById(R.id.rate_dialog_button_negative);
-                final View buttonPositive = view.findViewById(R.id.rate_dialog_button_positive);
-                final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() && (buttonNeutral != null);
-                final boolean showNegativeButton = dialogOptions.shouldShowNegativeButton() && (buttonNegative != null);
-                final boolean showPositiveButton = buttonPositive != null;
+                dialogOptions.setCurrentRating((byte) rating);
+            }
 
-                if (!showNegativeButton && showPositiveButton) {
-                    buttonPositive.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
-                    buttonPositive.setVisibility(VISIBLE);
-                } else if (showNegativeButton && !showPositiveButton) {
-                    buttonNegative.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
-                    buttonNegative.setVisibility(VISIBLE);
-                } else if (showNegativeButton) {
-                    buttonNegative.setVisibility(VISIBLE);
-                    buttonPositive.setVisibility(VISIBLE);
-                }
-                if (showNeutralButton) {
-                    buttonNeutral.setVisibility(GONE);
-                }
+            if (!showNegativeButton && showPositiveButton) {
+                buttonPositive.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
+                buttonPositive.setVisibility(VISIBLE);
+            } else if (showNegativeButton && !showPositiveButton) {
+                buttonNegative.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
+                buttonNegative.setVisibility(VISIBLE);
+            } else if (showNegativeButton) {
+                buttonNegative.setVisibility(VISIBLE);
+                buttonPositive.setVisibility(VISIBLE);
+            }
+            if (showNeutralButton) {
+                buttonNeutral.setVisibility(GONE);
+            }
 
-                if (layoutRatingBar != null) {
-                    if ((dialogOptions.shouldShowDialogIcon() && (view.findViewById(R.id.rate_dialog_icon) != null)) ||
+            if (layoutRatingBar != null) {
+                if ((dialogOptions.shouldShowDialogIcon() && (view.findViewById(R.id.rate_dialog_icon) != null)) ||
                         (dialogOptions.shouldShowTitle() && (view.findViewById(R.id.rate_dialog_text_dialog_title) != null)) ||
                         (dialogOptions.shouldShowMessage() && (view.findViewById(R.id.rate_dialog_text_dialog_message) != null))) {
-                        if (showNeutralButton && !(showNegativeButton || showPositiveButton)) {
-                            layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
-                        } else if (!showNeutralButton && (showNegativeButton || showPositiveButton)) {
-                            layoutRatingBar.setBackgroundResource(R.color.rateDialogColorBackground);
-                        }
+                    if (showNeutralButton && !(showNegativeButton || showPositiveButton)) {
+                        layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
                     } else if (!showNeutralButton && (showNegativeButton || showPositiveButton)) {
-                        layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_top);
-                    } else if (showNeutralButton && !(showNegativeButton || showPositiveButton)) {
-                        layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded);
+                        layoutRatingBar.setBackgroundResource(R.color.rateDialogColorBackground);
                     }
+                } else if (!showNeutralButton && (showNegativeButton || showPositiveButton)) {
+                    layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_top);
+                } else if (showNeutralButton && !(showNegativeButton || showPositiveButton)) {
+                    layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded);
                 }
             }
         }
@@ -565,7 +574,7 @@ public class DefaultDialogManager implements DialogManager {
         /**
          * <p>Creates {@link DefaultDialogManager} singleton object.</p>
          *
-         * @param context context
+         * @param context activity context
          * @param dialogOptions Rate Dialog options
          * @param storeOptions App store options
          * @return {@link DefaultDialogManager} singleton object

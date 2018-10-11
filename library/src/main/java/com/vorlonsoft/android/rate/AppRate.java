@@ -81,6 +81,7 @@ public final class AppRate {
     private byte selectedAppLaunches = (byte) 1;
     /** Short.MAX_VALUE means unlimited occurrences of the display of the dialog within a 365-day period */
     private short dialogLaunchTimes = Short.MAX_VALUE;
+    /** <p>Weak reference to the dialog object.</p> */
     private WeakReference<Dialog> dialog = null;
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
@@ -149,6 +150,15 @@ public final class AppRate {
     private boolean isBelow365DayPeriodMaxNumberDialogLaunchTimes() {
         return ((dialogLaunchTimes == Short.MAX_VALUE) ||
                 (get365DayPeriodDialogLaunchTimes(context) < dialogLaunchTimes));
+    }
+
+    /**
+     * <p>Sets weak reference to the dialog object.</p>
+     *
+     * @param dialog weak reference to the dialog object
+     */
+    void setRateDialog(@NonNull WeakReference<Dialog> dialog) {
+        this.dialog = dialog;
     }
 
     /**
@@ -849,10 +859,11 @@ public final class AppRate {
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
         dismissRateDialog();
-        dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
+        setRateDialog(new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog()));
         if (dialog.get() != null) {
             try {
                 if (!activity.isFinishing()) {
+                    dialogOptions.setOrientationChanged(false);
                     dialog.get().show();
                 } else {
                     Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
@@ -908,7 +919,7 @@ public final class AppRate {
             }
         } else {
             clearRateDialog();
-            dialog = new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog());
+            setRateDialog(new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog()));
             if (dialog.get() != null) {
                 Button positiveButton = ((AlertDialog) dialog.get()).getButton(AlertDialog.BUTTON_POSITIVE);
                 if (positiveButton != null) {
