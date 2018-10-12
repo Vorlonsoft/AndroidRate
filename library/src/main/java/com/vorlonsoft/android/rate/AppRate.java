@@ -857,7 +857,6 @@ public final class AppRate {
      */
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
-        dismissRateDialog();
         setRateDialog(new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog()));
         if (dialog.get() != null) {
             try {
