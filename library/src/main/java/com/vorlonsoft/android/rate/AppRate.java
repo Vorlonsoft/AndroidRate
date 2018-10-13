@@ -857,12 +857,17 @@ public final class AppRate {
      */
     @SuppressWarnings("WeakerAccess")
     public void showRateDialog(Activity activity) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            dismissRateDialog();
+        } else {
+            clearRateDialog();
+        }
         setRateDialog(new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog()));
         if (dialog.get() != null) {
             try {
                 if (!activity.isFinishing()) {
-                    dialogOptions.setOrientationChanged(false);
                     dialog.get().show();
+                    dialogOptions.setOrientationChanged(false);
                 } else {
                     Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
                             "activity is in the process of finishing.");
@@ -873,6 +878,11 @@ public final class AppRate {
             }
         } else {
             Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog.");
+        }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            ((DefaultDialogManager) dialogManagerFactory
+                    .createDialogManager(context, dialogOptions, storeOptions))
+                    .dismissListener.onDismiss(null);
         }
     }
 

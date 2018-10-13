@@ -5,7 +5,7 @@
  */
 
 buildscript {
-    ext.projectVersionCode = 48
+    ext.projectVersionCode = 51
     repositories {
         google()
         jcenter()

@@ -97,8 +97,6 @@ public class DefaultDialogManager implements DialogManager {
         @Override
         public void onShow(DialogInterface dialog) {
             if (dialogOptions.isOrientationChanged()) {
-                AppRate.with(context).clearRateDialog();
-                AppRate.with(context).setRateDialog(new WeakReference<>((Dialog) dialog));
                 if (dialogOptions.getDialogType() != CLASSIC) {
                     View ratingBar = ((Dialog) dialog).findViewById(R.id.rate_dialog_rating_bar);
                     if (ratingBar != null) {
