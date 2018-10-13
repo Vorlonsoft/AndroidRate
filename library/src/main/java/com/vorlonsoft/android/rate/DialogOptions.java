@@ -35,8 +35,8 @@ import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
 public final class DialogOptions {
     /** <p>Whether the Rate Dialog is cancelable.</p> */
     private boolean cancelable = false;
-    /** <p>Whether the orientation of the current Rate Dialog has changed one or more times.</p> */
-    private boolean orientationChanged = false;
+    /** <p>Whether the current Rate Dialog had redrawn one or more times.</p> */
+    private boolean dialogRedrawn = false;
     /** <p>Whether the Rate Dialog should show the message.</p> */
     private boolean showMessage = true;
     /** <p>Whether the Rate Dialog should show the Negative button.</p> */
@@ -107,25 +107,23 @@ public final class DialogOptions {
     }
 
     /**
-     * <p>Returns whether the orientation of the current Rate Dialog has changed one or more
-     * times.</p>
+     * <p>Returns whether the current Rate Dialog had redrawn one or more times.</p>
      *
-     * @return true if the orientation has changed one or more times, false otherwise
+     * @return true if the current Rate Dialog had redrawn one or more times, false otherwise
      */
     @SuppressWarnings("WeakerAccess")
-    public boolean isOrientationChanged() {
-        return orientationChanged;
+    public boolean isDialogRedrawn() {
+        return dialogRedrawn;
     }
 
     /**
-     * <p>Sets whether the orientation of the current Rate Dialog has changed one or more
-     * times.</p>
+     * <p>Sets whether the current Rate Dialog had redrawn one or more times.</p>
      *
-     * @param orientationChanged true if the orientation has changed one or more times, false
-     *                           otherwise
+     * @param dialogRedrawn true if the current Rate Dialog had redrawn one or more times, false
+     *                      otherwise
      */
-    void setOrientationChanged(final boolean orientationChanged) {
-        this.orientationChanged = orientationChanged;
+    void setDialogRedrawn(final boolean dialogRedrawn) {
+        this.dialogRedrawn = dialogRedrawn;
     }
 
     /**

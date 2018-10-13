@@ -110,8 +110,8 @@ public final class AppRate {
     /**
      * <p>Shows the Rate Dialog when conditions are met.</p>
      * <p>Call this method at the end of your onCreate() method to determine whether
-     * to show the rate dialog or not. It will check if the conditions are met and
-     * show rate dialog if yes.</p>
+     * to show the Rate Dialog or not. It will check if the conditions are met and
+     * show Rate Dialog if yes.</p>
      *
      * @param activity your activity, use "this" in most cases
      * @return true if the Rate Dialog is shown, false otherwise
@@ -856,30 +856,39 @@ public final class AppRate {
      * @param activity your activity, use "this" in most cases
      */
     @SuppressWarnings("WeakerAccess")
-    public void showRateDialog(Activity activity) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2) {
+    public void showRateDialog(final Activity activity) {
+        boolean callDismissListener = false;
+        if ((dialog != null) && (dialog.get() != null)) {
+            callDismissListener = true;
+        }
+        try {
             dismissRateDialog();
-        } else {
+            callDismissListener = false;
+        } catch (Exception e) {
+            Log.i(TAG, "Can't dismiss Rate Dialog, because unpredictable exception.", e);
             clearRateDialog();
         }
-        setRateDialog(new WeakReference<>(dialogManagerFactory.createDialogManager(activity, dialogOptions, storeOptions).createDialog()));
+
+        setRateDialog(new WeakReference<>(dialogManagerFactory
+                .createDialogManager(activity, dialogOptions, storeOptions).createDialog()));
         if (dialog.get() != null) {
             try {
                 if (!activity.isFinishing()) {
                     dialog.get().show();
-                    dialogOptions.setOrientationChanged(false);
+                    dialogOptions.setDialogRedrawn(false);
                 } else {
-                    Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
+                    Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show Rate Dialog, because " +
                             "activity is in the process of finishing.");
                 }
             } catch(Exception e){
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show rate dialog, because " +
+                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show Rate Dialog, because " +
                         "unpredictable exception.", e);
             }
         } else {
-            Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create rate dialog.");
+            Log.w(TAG, LOG_MESSAGE_PART_1 + "can't create Rate Dialog.");
         }
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+
+        if (callDismissListener) {
             ((DefaultDialogManager) dialogManagerFactory
                     .createDialogManager(context, dialogOptions, storeOptions))
                     .dismissListener.onDismiss(null);

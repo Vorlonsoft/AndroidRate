@@ -96,7 +96,7 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onShow(DialogInterface dialog) {
-            if (dialogOptions.isOrientationChanged()) {
+            if (dialogOptions.isDialogRedrawn()) {
                 if (dialogOptions.getDialogType() != CLASSIC) {
                     View ratingBar = ((Dialog) dialog).findViewById(R.id.rate_dialog_rating_bar);
                     if (ratingBar != null) {
@@ -149,9 +149,8 @@ public class DefaultDialogManager implements DialogManager {
          * @param dialog the Rate Dialog that was dismissed will be passed into the method
          */
         @Override
-        public void onDismiss(DialogInterface dialog) {
-            dialogOptions.setOrientationChanged(true);
-            AppRate.with(context).clearRateDialog();
+        public void onDismiss(@Nullable DialogInterface dialog) {
+            dialogOptions.setDialogRedrawn(true);
         }
     };
     /** <p>Listener used to notify when the rating on the Rate Dialog has been changed.</p> */
