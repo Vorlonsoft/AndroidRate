@@ -13,12 +13,11 @@ import com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE
  * Time Class - the time units class of the AndroidRate library.
  *
  * @constructor Time is an utility class and it can't be instantiated.
- * @since    1.2.1
- * @version  1.2.1
- * @author   Alexander Savin
+ * @since       1.2.1
+ * @version     1.2.1
+ * @author      Alexander Savin
  */
 class Time private constructor() {
-
     /** Time Class initializer block. */
     init {
         throw UnsupportedOperationException("Time$UTILITY_CLASS_MESSAGE")
