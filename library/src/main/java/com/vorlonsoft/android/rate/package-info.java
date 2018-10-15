@@ -6,7 +6,7 @@
 
 /**
  * <p>AndroidRate Library</p>
- * <p>Library to help you promote your Android app by prompting users to rate the app after using it
+ * <p>The library to help you promote your Android app by prompting users to rate the app after using it
  * for a few days.</p>
  *
  * @since    0.0.4
