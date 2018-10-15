@@ -21,7 +21,7 @@ android {
         applicationId 'com.vorlonsoft.android.rate.sample'
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode projectVersionCode
+        versionCode version_code
         versionName version
     }
     compileOptions {
