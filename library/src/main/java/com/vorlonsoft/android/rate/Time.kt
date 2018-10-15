@@ -7,12 +7,12 @@
 package com.vorlonsoft.android.rate
 
 import androidx.annotation.LongDef
-import com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE
+import com.vorlonsoft.android.rate.Constants.Utils.Companion.UTILITY_CLASS_MESSAGE
 
 /**
  * Time Class - the time units class of the AndroidRate library.
  *
- * @constructor Time is an utility class and it can't be instantiated.
+ * @constructor Time is a utility class and it can't be instantiated.
  * @since       1.2.1
  * @version     1.2.1
  * @author      Alexander Savin

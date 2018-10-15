@@ -7,12 +7,12 @@
 package com.vorlonsoft.android.rate
 
 import androidx.annotation.IntDef
-import com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE
+import com.vorlonsoft.android.rate.Constants.Utils.Companion.UTILITY_CLASS_MESSAGE
 
 /**
  * StoreType Class - the store types class of the AndroidRate library.
  *
- * @constructor StoreType is an utility class and it can't be instantiated.
+ * @constructor StoreType is a utility class and it can't be instantiated.
  * @since       1.0.0
  * @version     1.2.1
  * @author      Alexander Savin
