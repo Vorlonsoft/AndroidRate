@@ -36,7 +36,7 @@ class DialogType private constructor() {
     @IntDef(APPLE, CLASSIC, MODERN)
     annotation class AnyDialogType
 
-    /** The singleton contains constants for dialog types. */
+    /** Contains constants for dialog types. */
     companion object {
         /** Apple Rate Dialog. */
         const val APPLE = 0

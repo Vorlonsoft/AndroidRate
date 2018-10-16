@@ -36,7 +36,7 @@ internal class Constants private constructor() {
             throw UnsupportedOperationException("Constants.Date$UTILITY_CLASS_MESSAGE")
         }
 
-        /** The singleton contains date constants. */
+        /** Contains date constants. */
         companion object {
             /** The time unit representing one year in days. */
             const val YEAR_IN_DAYS = 365.toShort()
@@ -57,7 +57,7 @@ internal class Constants private constructor() {
             throw UnsupportedOperationException("Constants.Utils$UTILITY_CLASS_MESSAGE")
         }
 
-        /** The singleton contains utils constants. */
+        /** Contains utils constants. */
         companion object {
             /** The empty String. */
             const val EMPTY_STRING = ""

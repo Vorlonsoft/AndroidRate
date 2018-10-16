@@ -67,7 +67,7 @@ class StoreType private constructor() {
             SAMSUNG, SLIDEME, TENCENT, YANDEX)
     annotation class AnyStoreType
 
-    /** The singleton contains constants for store types. */
+    /** Contains constants for store types. */
     companion object {
         /** Amazon Appstore. */
         const val AMAZON = 0

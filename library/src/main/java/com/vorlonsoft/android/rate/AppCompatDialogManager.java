@@ -28,7 +28,7 @@ import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
  * .</b></p>
  * <p>You can extend AppCompatDialogManager Class and use
  * {@link AppRate#setDialogManagerFactory(DialogManager.Factory)} if you want to use fully custom
- * dialog (from v7 AppCompat library). AppCompatDialogManager Class is thread-safe and a fast
+ * dialog (from v7 AppCompat library). AppCompatDialogManager Class is an thread-safe and fast
  * singleton implementation inside library, not outside (protected, not private constructor).</p>
  *
  * @since    1.2.1
