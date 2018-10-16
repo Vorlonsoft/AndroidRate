@@ -114,8 +114,8 @@ final class PreferenceHelper {
                 .putInt(PREF_KEY_LAUNCH_TIMES, 1)
                 .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
                 .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0)
-                .putLong(PREF_KEY_VERSION_CODE, AppInformation.getInstance(context).getAppLongVersionCode())
-                .putString(PREF_KEY_VERSION_NAME, AppInformation.getInstance(context).getAppVersionName())
+                .putLong(PREF_KEY_VERSION_CODE, AppInformation.Companion.getInstance(context).getAppLongVersionCode())
+                .putString(PREF_KEY_VERSION_NAME, AppInformation.Companion.getInstance(context).getAppVersionName())
                 .apply();
         if (getIsAgreeShowDialog(context)) { //if (get() == true) set(true); - NOT error!
             setIsAgreeShowDialog(context, true);
@@ -279,7 +279,7 @@ final class PreferenceHelper {
 
     static void setVersionCode(final Context context) {
         getPreferencesEditor(context)
-                .putLong(PREF_KEY_VERSION_CODE, AppInformation.getInstance(context).getAppLongVersionCode())
+                .putLong(PREF_KEY_VERSION_CODE, AppInformation.Companion.getInstance(context).getAppLongVersionCode())
                 .apply();
     }
 
@@ -289,7 +289,7 @@ final class PreferenceHelper {
 
     static void setVersionName(final Context context) {
         getPreferencesEditor(context)
-                .putString(PREF_KEY_VERSION_NAME, AppInformation.getInstance(context).getAppVersionName())
+                .putString(PREF_KEY_VERSION_NAME, AppInformation.Companion.getInstance(context).getAppVersionName())
                 .apply();
     }
 

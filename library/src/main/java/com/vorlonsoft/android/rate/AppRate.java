@@ -52,8 +52,8 @@ import static com.vorlonsoft.android.rate.StoreType.OTHER;
 import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 
 /**
- * <p>AppRate Class - main class of the AndroidRate library, thread-safe
- * and a fast singleton implementation.</p>
+ * <p>AppRate Class - main class of the AndroidRate library, an thread-safe and fast singleton
+ * implementation.</p>
  *
  * @since    0.0.4
  * @version  1.2.1
@@ -834,13 +834,13 @@ public final class AppRate {
             setFirstLaunchSharedPreferences(context);
         } else {
             PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
-            if (AppInformation.getInstance(context).getAppLongVersionCode() != getVersionCode(context)) {
+            if (AppInformation.Companion.getInstance(context).getAppLongVersionCode() != getVersionCode(context)) {
                 if (isVersionCodeCheck) {
                     setAgreeShowDialog(true);
                 }
                 setVersionCode(context);
             }
-            if (!AppInformation.getInstance(context).getAppVersionName().equals(getVersionName(context))) {
+            if (!AppInformation.Companion.getInstance(context).getAppVersionName().equals(getVersionName(context))) {
                 if (isVersionNameCheck) {
                     setAgreeShowDialog(true);
                 }

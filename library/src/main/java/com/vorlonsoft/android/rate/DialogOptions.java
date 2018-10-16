@@ -500,7 +500,7 @@ public final class DialogOptions {
                 Log.i(TAG, "Dialog icon with the given ResId doesn't exist.");
             }
         }
-        return (dialogIcon != null) ? dialogIcon : AppInformation.getInstance(context).getAppIcon();
+        return (dialogIcon != null) ? dialogIcon : AppInformation.Companion.getInstance(context).getAppIcon();
     }
 
     void setDialogIcon(final Drawable dialogIcon) {

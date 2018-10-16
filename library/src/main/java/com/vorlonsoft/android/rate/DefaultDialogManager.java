@@ -66,7 +66,7 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
  * interface of the AndroidRate library.</p>
  * <p>You can extend DefaultDialogManager Class and use
  * {@link AppRate#setDialogManagerFactory(DialogManager.Factory)} if you want to use fully custom
- * dialog (from v7 AppCompat library etc.). DefaultDialogManager Class is thread-safe and a fast
+ * dialog (from v7 AppCompat library etc.). DefaultDialogManager Class is an thread-safe and fast
  * singleton implementation inside library, not outside (protected, not private constructor).</p>
  *
  * @since    1.0.2
@@ -248,7 +248,7 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onClick(@Nullable final DialogInterface dialog, final int which) {
-            final String packageName = AppInformation.getInstance(context).getAppPackageName();
+            final String packageName = AppInformation.Companion.getInstance(context).getAppPackageName();
             if ((packageName != null) && (packageName.hashCode() != EMPTY_STRING.hashCode())) {
                 final Intent[] intentsToAppStores = getIntentsForStores(packageName);
                 try {
