@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.2.2 Nagoya (next release)
+## 1.2.5 Nagoya (next release)
 
 - LIBcc30913 Next release
 

@@ -65,7 +65,7 @@ Then add the following dependency to your relevant project modules
 `build.gradle` files:
 
     dependencies {
-        implementation "com.vorlonsoft:androidrate:1.2.2-SNAPSHOT"
+        implementation "com.vorlonsoft:androidrate:1.2.5-SNAPSHOT"
     }
 
 ## Usage
