@@ -7,22 +7,16 @@
 package com.vorlonsoft.android.rate
 
 import androidx.annotation.IntDef
-import com.vorlonsoft.android.rate.Constants.Utils.Companion.UTILITY_CLASS_MESSAGE
 
 /**
  * DialogType Class - the dialog types class of the AndroidRate library.
  *
- * @constructor DialogType is a utility class and it can't be instantiated.
+ * @constructor Don't create an instance of this class. Use its members directly.
  * @since       1.2.1
  * @version     1.2.1
  * @author      Alexander Savin
  */
-class DialogType private constructor() {
-    /** DialogType Class initializer block. */
-    init {
-        throw UnsupportedOperationException("DialogType$UTILITY_CLASS_MESSAGE")
-    }
-
+open class DialogType {
     /**
      * Denotes that the annotated element of the primitive type int represents a logical type and
      * that its value should be one of the following constants: [APPLE], [CLASSIC], [MODERN].

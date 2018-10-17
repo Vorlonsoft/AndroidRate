@@ -7,22 +7,16 @@
 package com.vorlonsoft.android.rate
 
 import androidx.annotation.LongDef
-import com.vorlonsoft.android.rate.Constants.Utils.Companion.UTILITY_CLASS_MESSAGE
 
 /**
  * Time Class - the time units class of the AndroidRate library.
  *
- * @constructor Time is a utility class and it can't be instantiated.
+ * @constructor Don't create an instance of this class. Use its members directly.
  * @since       1.2.1
  * @version     1.2.1
  * @author      Alexander Savin
  */
-class Time private constructor() {
-    /** Time Class initializer block. */
-    init {
-        throw UnsupportedOperationException("Time$UTILITY_CLASS_MESSAGE")
-    }
-
+open class Time {
     /**
      * Denotes that the annotated element of the primitive type long represents a logical type and
      * that its value should be one of the following constants: [MILLISECOND], [SECOND], [MINUTE],

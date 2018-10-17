@@ -11,6 +11,8 @@ import android.content.Context;
 import android.os.Build;
 import android.view.View;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.ref.WeakReference;
 
 import androidx.annotation.NonNull;
@@ -173,10 +175,11 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
          * @return {@link AppCompatDialogManager} singleton object for API levels 14 and higher,
          * <b>{@link DefaultDialogManager} singleton object for API levels 13 and below</b>
          */
+        @NotNull
         @Override
-        public DialogManager createDialogManager(final Context context,
-                                                 final DialogOptions dialogOptions,
-                                                 final StoreOptions storeOptions) {
+        public DialogManager createDialogManager(@NotNull final Context context,
+                                                 @NotNull final DialogOptions dialogOptions,
+                                                 @NotNull final StoreOptions storeOptions) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
                 DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
                 AppRate.with(context).setDialogManagerFactory(dialogManagerFactory);

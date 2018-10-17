@@ -7,23 +7,17 @@
 package com.vorlonsoft.android.rate
 
 import androidx.annotation.IntDef
-import com.vorlonsoft.android.rate.Constants.Utils.Companion.UTILITY_CLASS_MESSAGE
 
 /**
  * StoreType Class - the store types class of the AndroidRate library.
  *
- * @constructor StoreType is a utility class and it can't be instantiated.
+ * @constructor Don't create an instance of this class. Use its members directly.
  * @since       1.0.0
  * @version     1.2.1
  * @author      Alexander Savin
  * @author      Shintaro Katafuchi
  */
-class StoreType private constructor() {
-    /** StoreType Class initializer block. */
-    init {
-        throw UnsupportedOperationException("StoreType$UTILITY_CLASS_MESSAGE")
-    }
-
+open class StoreType {
     /**
      * Denotes that the annotated element of the primitive type int represents a logical type and
      * that its value should be one of the following constants: [AMAZON], [BAZAAR], [CHINESESTORES],

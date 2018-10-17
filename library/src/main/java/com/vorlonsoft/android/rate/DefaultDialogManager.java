@@ -24,6 +24,8 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.ref.WeakReference;
 
 import androidx.annotation.NonNull;
@@ -248,7 +250,8 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onClick(@Nullable final DialogInterface dialog, final int which) {
-            final String packageName = AppInformation.Companion.getInstance(context).getAppPackageName();
+            final AppInformation appInformation = AppInformation.getInstance(context);
+            final String packageName = (appInformation != null) ? appInformation.getAppPackageName() : null;
             if ((packageName != null) && (packageName.hashCode() != EMPTY_STRING.hashCode())) {
                 final Intent[] intentsToAppStores = getIntentsForStores(packageName);
                 try {
@@ -591,10 +594,11 @@ public class DefaultDialogManager implements DialogManager {
          * @param storeOptions App store options
          * @return {@link DefaultDialogManager} singleton object
          */
+        @NotNull
         @Override
-        public DialogManager createDialogManager(final Context context,
-                                                 final DialogOptions dialogOptions,
-                                                 final StoreOptions storeOptions) {
+        public DialogManager createDialogManager(@NotNull final Context context,
+                                                 @NotNull final DialogOptions dialogOptions,
+                                                 @NotNull final StoreOptions storeOptions) {
             if ((singleton == null) || (singleton.get() == null)) {
                 synchronized (DefaultDialogManager.class) {
                     if ((singleton == null) || (singleton.get() == null)) {

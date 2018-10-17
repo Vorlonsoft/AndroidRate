@@ -21,7 +21,6 @@ package com.vorlonsoft.android.rate
  * @author   Shintaro Katafuchi
  */
 interface OnClickButtonListener {
-
     /**
      * A callback when the Rate Dialog button is pressed.
      *

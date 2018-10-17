@@ -488,6 +488,7 @@ public final class DialogOptions {
     @SuppressWarnings("WeakerAccess")
     @Nullable
     public Drawable getDialogIcon(@NonNull final Context context) {
+        final AppInformation appInformation = AppInformation.getInstance(context);
         if (dialogIconResId != 0) {
             try {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -500,7 +501,8 @@ public final class DialogOptions {
                 Log.i(TAG, "Dialog icon with the given ResId doesn't exist.");
             }
         }
-        return (dialogIcon != null) ? dialogIcon : AppInformation.Companion.getInstance(context).getAppIcon();
+        return (dialogIcon != null) ? dialogIcon :
+                                    ((appInformation != null) ? appInformation.getAppIcon() : null);
     }
 
     void setDialogIcon(final Drawable dialogIcon) {

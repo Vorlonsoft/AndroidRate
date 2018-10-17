@@ -23,13 +23,12 @@ import android.content.Context
  * @see DialogManager.Factory
  */
 interface DialogManager {
-
     /**
      * Creates the Rate Dialog.
      *
      * @return created dialog
      */
-    fun createDialog(): Dialog
+    fun createDialog(): Dialog?
 
     /**
      * DialogManager.Factory Interface - the dialog manager factory interface of the AndroidRate
@@ -46,7 +45,6 @@ interface DialogManager {
      * @see DialogManager
      */
     interface Factory {
-
         /** Clears the [DialogManager] implementation singleton. */
         fun clearDialogManager()
 

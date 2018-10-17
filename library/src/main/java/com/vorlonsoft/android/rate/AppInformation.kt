@@ -12,9 +12,8 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Log
-
-import com.vorlonsoft.android.rate.Constants.Utils.Companion.EMPTY_STRING
-import com.vorlonsoft.android.rate.Constants.Utils.Companion.TAG
+import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING
+import com.vorlonsoft.android.rate.Constants.Utils.TAG
 
 /**
  * AppInformation Class - the app information class of the AndroidRate library, an thread-safe and
@@ -35,6 +34,7 @@ import com.vorlonsoft.android.rate.Constants.Utils.Companion.TAG
  * @version  1.2.1
  * @author   Alexander Savin
  */
+@Suppress("KDocUnresolvedReference")
 internal class AppInformation private constructor(
         val appLongVersionCode: Long,
         val appPackageName: String,
@@ -46,6 +46,7 @@ internal class AppInformation private constructor(
      *
      * @see appVersionCodeMajor
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     val appVersionCode: Int
         get() = (appLongVersionCode and 0b11111111_11111111_11111111_11111111L).toInt()
     /**
@@ -55,11 +56,12 @@ internal class AppInformation private constructor(
      *
      * @see appVersionCode
      */
+    @Suppress("MemberVisibilityCanBePrivate")
     val appVersionCodeMajor: Int
         get() = appLongVersionCode.ushr(32).toInt()
 
-    /** Contains the [AppInformation] singleton object and the method to get it's instance. */
-    companion object {
+    /** Contains the [AppInformation] singleton object and the function to get its instance. */
+    internal companion object {
         /** The [AppInformation] singleton object. */
         @Volatile
         private var singleton: AppInformation? = null
@@ -70,6 +72,7 @@ internal class AppInformation private constructor(
          * @param context context
          * @return the [AppInformation] singleton object
          */
+        @JvmStatic
         fun getInstance(context: Context): AppInformation? {
             if (singleton === null) {
                 val appLongVersionCode: Long
@@ -92,6 +95,7 @@ internal class AppInformation private constructor(
                 }
                 if (packageInfo !== null) {
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
+                        @Suppress("DEPRECATION")
                         appLongVersionCode = packageInfo.versionCode.toLong() and
                                              0b11111111_11111111_11111111_11111111L
                     } else {

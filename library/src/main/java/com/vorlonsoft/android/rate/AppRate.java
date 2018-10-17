@@ -156,7 +156,7 @@ public final class AppRate {
      *
      * @param dialog weak reference to the dialog object
      */
-    void setRateDialog(@NonNull WeakReference<Dialog> dialog) {
+    private void setRateDialog(@NonNull WeakReference<Dialog> dialog) {
         this.dialog = dialog;
     }
 
@@ -166,7 +166,7 @@ public final class AppRate {
      * <p>This method is invoked only by Java code; when the garbage collector
      * clears references it does so directly, without invoking this method.</p>
      */
-    void clearRateDialog() {
+    private void clearRateDialog() {
         if (dialog != null) {
             dialog.clear();
         }
@@ -270,6 +270,7 @@ public final class AppRate {
      *                             or more times after neutral button clicked
      * @return the {@link AppRate} singleton object
      */
+    @SuppressWarnings("unused")
     public AppRate setRemindLaunchesNumber(@SuppressWarnings("SameParameterValue") byte remindLaunchesNumber) {
         this.remindLaunchesNumber = remindLaunchesNumber;
         return this;
@@ -302,6 +303,7 @@ public final class AppRate {
      * @return the {@link AppRate} singleton object
      * @since 1.2.0
      */
+    @SuppressWarnings("WeakerAccess")
     public AppRate setSelectedAppLaunches(@SuppressWarnings("SameParameterValue") byte selectedAppLaunches) {
         this.selectedAppLaunches = selectedAppLaunches;
         return this;
@@ -751,6 +753,7 @@ public final class AppRate {
      *
      * @return one of the values defined by {@link StoreType.AnyStoreType}
      */
+    @SuppressWarnings("unused")
     @StoreType.AnyStoreType
     public int getStoreType() {
         return storeOptions.getStoreType();
@@ -807,6 +810,7 @@ public final class AppRate {
      *                           with different version code is installed, default is false
      * @return the {@link AppRate} singleton object
      */
+    @SuppressWarnings("unused")
     public AppRate setVersionCodeCheck(boolean isVersionCodeCheck) {
         this.isVersionCodeCheck = isVersionCodeCheck;
         return this;
@@ -819,6 +823,7 @@ public final class AppRate {
      *                           with different version name is installed, default is false
      * @return the {@link AppRate} singleton object
      */
+    @SuppressWarnings("unused")
     public AppRate setVersionNameCheck(boolean isVersionNameCheck) {
         this.isVersionNameCheck = isVersionNameCheck;
         return this;
@@ -833,14 +838,15 @@ public final class AppRate {
         if (isFirstLaunch(context)) {
             setFirstLaunchSharedPreferences(context);
         } else {
+            final AppInformation appInformation = AppInformation.getInstance(context);
             PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
-            if (AppInformation.Companion.getInstance(context).getAppLongVersionCode() != getVersionCode(context)) {
+            if ((appInformation != null) && (appInformation.getAppLongVersionCode() != getVersionCode(context))) {
                 if (isVersionCodeCheck) {
                     setAgreeShowDialog(true);
                 }
                 setVersionCode(context);
             }
-            if (!AppInformation.Companion.getInstance(context).getAppVersionName().equals(getVersionName(context))) {
+            if ((appInformation != null) && !appInformation.getAppVersionName().equals(getVersionName(context))) {
                 if (isVersionNameCheck) {
                     setAgreeShowDialog(true);
                 }
