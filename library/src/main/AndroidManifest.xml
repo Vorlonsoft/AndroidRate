@@ -17,7 +17,7 @@
     androidx.versionedparcelable,androidx.cursoradapter,androidx.lifecycle,androidx.documentfile,
     androidx.localbroadcastmanager,androidx.print,androidx.lifecycle.viewmodel,
     androidx.lifecycle.livedata,androidx.lifecycle.livedata.core, androidx.arch.core,
-    androidx.interpolator"/>
+    androidx.interpolator,androidx.test"/>
 
     <application android:icon="@mipmap/ic_launcher" />
 

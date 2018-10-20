@@ -155,14 +155,9 @@ final class IntentHelper {
     static Intent[] createIntentsForStore(@NonNull final Context context, final int appStore,
                                           @NonNull final String paramName) {
         //noinspection ConstantConditions
-        if ((context == null) || (paramName == null)) {
-            if (context == null) {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't check the availability of stores packages" +
-                                                    " on the user device (context == null).");
-            }
-            if (paramName == null) {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get store Uri/WebUri (paramName == null).");
-            }
+        if (context == null) {
+            Log.w(TAG, LOG_MESSAGE_PART_1 + "can't check the availability of stores " +
+                                                "packages on the user device (context == null).");
             return new Intent[0];
         }
 
