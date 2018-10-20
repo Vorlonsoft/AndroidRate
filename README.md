@@ -57,16 +57,20 @@ If you don't want to wait for the next release, you can add the
 Sonatype's snapshots repository to your project root `build.gradle`
 file:
 
-       repositories {
-           maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-       }
+```groovy
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+```
 
 Then add the following dependency to your relevant project modules
 `build.gradle` files:
 
-    dependencies {
-        implementation "com.vorlonsoft:androidrate:1.2.5-SNAPSHOT"
-    }
+```groovy
+dependencies {
+    implementation "com.vorlonsoft:androidrate:1.2.5-SNAPSHOT"
+}
+```
 
 ## Usage
 
