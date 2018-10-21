@@ -14,9 +14,9 @@ import org.junit.Assert.assertNull
 import org.junit.Test
 
 /**
- * Unit test for [com.vorlonsoft.android.rate.UriHelper].
+ * Unit test for [com.vorlonsoft.android.rate.UriHelper] object.
  *
- * @constructor Empty constructor of unit test for [com.vorlonsoft.android.rate.UriHelper] class.
+ * @constructor Empty constructor of unit test for [com.vorlonsoft.android.rate.UriHelper] object.
  * @since    0.1.3
  * @version  1.2.1
  * @author   Alexander Savin

@@ -61,7 +61,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      * @see DefaultDialogManager#getDialogBuilder(Context, int)
      */
     @SuppressWarnings("WeakerAccess")
-    @Nullable
+    @NonNull
     @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     protected AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context,
                                                             final int themeResId) {
@@ -108,13 +108,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
     public Dialog createDialog() {
 
         final AlertDialog.Builder builder = getAppCompatDialogBuilder(context, dialogOptions.getThemeResId());
-        final Context dialogContext;
-
-        if (builder == null) {
-            return null;
-        } else {
-            dialogContext = builder.getContext();
-        }
+        final Context dialogContext = builder.getContext();
 
         final View view = dialogOptions.getView(dialogContext);
 

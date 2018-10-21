@@ -7,7 +7,6 @@
 package com.vorlonsoft.android.rate
 
 import android.net.Uri
-
 import com.vorlonsoft.android.rate.StoreType.Companion.AMAZON
 import com.vorlonsoft.android.rate.StoreType.Companion.APPLE
 import com.vorlonsoft.android.rate.StoreType.Companion.BAZAAR

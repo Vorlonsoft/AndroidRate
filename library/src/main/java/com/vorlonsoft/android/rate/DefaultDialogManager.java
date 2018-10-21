@@ -392,7 +392,7 @@ public class DefaultDialogManager implements DialogManager {
      * @see AppCompatDialogManager#getAppCompatDialogBuilder(Context, int)
      */
     @SuppressWarnings("WeakerAccess")
-    @Nullable
+    @NonNull
     protected AlertDialog.Builder getDialogBuilder(@NonNull final Context context, final int themeResId) {
         return Utils.getDialogBuilder(context, themeResId);
     }
@@ -527,9 +527,7 @@ public class DefaultDialogManager implements DialogManager {
         final AlertDialog.Builder builder = getDialogBuilder(context, dialogOptions.getThemeResId());
         final Context dialogContext;
 
-        if (builder == null) {
-            return null;
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             dialogContext = builder.getContext();
         } else {
             dialogContext = context;
