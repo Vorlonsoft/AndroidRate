@@ -109,7 +109,8 @@ internal class AppInformation private constructor(
 
                 synchronized(AppInformation::class) {
                     if (singleton === null) {
-                        singleton = AppInformation(appLongVersionCode, appPackageName, appVersionName, appIcon)
+                        singleton = AppInformation(appLongVersionCode, appPackageName,
+                                                   appVersionName, appIcon)
                     }
                 }
             }

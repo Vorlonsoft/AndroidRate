@@ -64,7 +64,8 @@ public class DefaultDialogManager implements DialogManager {
     protected Context context = null;
     /** <p>Listener used to allow to run some code when the Rate Dialog is shown.</p> */
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnShowListener showListener = new DialogInterface.OnShowListener() {
+    protected final DialogInterface.OnShowListener showListener =
+                                                              new DialogInterface.OnShowListener() {
         /**
          * <p>This method will be invoked when the Rate Dialog is shown.</p>
          *
@@ -91,9 +92,12 @@ public class DefaultDialogManager implements DialogManager {
                     final Button positiveButton = ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
                     final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
                     if ((linearLayout.getOrientation() != VERTICAL) &&
-                        (positiveButton.getLeft() + positiveButton.getWidth() > linearLayout.getWidth())) {
-                        final Button neutralButton = ((AlertDialog) dialog).getButton(BUTTON_NEUTRAL);
-                        final Button negativeButton = ((AlertDialog) dialog).getButton(BUTTON_NEGATIVE);
+                        (positiveButton.getLeft() + positiveButton.getWidth() >
+                                                                         linearLayout.getWidth())) {
+                        final Button neutralButton = ((AlertDialog) dialog)
+                                                                         .getButton(BUTTON_NEUTRAL);
+                        final Button negativeButton = ((AlertDialog) dialog)
+                                                                        .getButton(BUTTON_NEGATIVE);
                         linearLayout.setOrientation(VERTICAL);
                         linearLayout.setGravity(Gravity.END);
                         if ((neutralButton != null) && (negativeButton != null)) {
@@ -118,7 +122,8 @@ public class DefaultDialogManager implements DialogManager {
     };
     /** <p>Listener used to allow to run some code when the Rate Dialog is dismissed.</p> */
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnDismissListener dismissListener = new DialogInterface.OnDismissListener() {
+    protected final DialogInterface.OnDismissListener dismissListener =
+                                                           new DialogInterface.OnDismissListener() {
         /**
          * <p>This method will be invoked when the Rate Dialog is dismissed.</p>
          *
@@ -131,7 +136,8 @@ public class DefaultDialogManager implements DialogManager {
     };
     /** <p>Listener used to notify when the rating on the Rate Dialog has been changed.</p> */
     @SuppressWarnings("WeakerAccess")
-    protected final RatingBar.OnRatingBarChangeListener ratingBarListener = new RatingBar.OnRatingBarChangeListener() {
+    protected final RatingBar.OnRatingBarChangeListener ratingBarListener =
+                                                         new RatingBar.OnRatingBarChangeListener() {
         /**
          * <p>Notification that the rating on the Rate Dialog has changed.</p>
          * <p>You can use the {@code fromUser} parameter to distinguish user-initiated changes from
@@ -149,8 +155,10 @@ public class DefaultDialogManager implements DialogManager {
             final View buttonNeutral = view.findViewById(R.id.rate_dialog_button_neutral);
             final View buttonNegative = view.findViewById(R.id.rate_dialog_button_negative);
             final View buttonPositive = view.findViewById(R.id.rate_dialog_button_positive);
-            final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() && (buttonNeutral != null);
-            final boolean showNegativeButton = dialogOptions.shouldShowNegativeButton() && (buttonNegative != null);
+            final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() &&
+                                                                            (buttonNeutral != null);
+            final boolean showNegativeButton = dialogOptions.shouldShowNegativeButton() &&
+                                                                           (buttonNegative != null);
             final boolean showPositiveButton = buttonPositive != null;
 
             if (fromUser) {
@@ -158,10 +166,12 @@ public class DefaultDialogManager implements DialogManager {
             }
 
             if (!showNegativeButton && showPositiveButton) {
-                buttonPositive.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
+                buttonPositive
+                            .setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
                 buttonPositive.setVisibility(VISIBLE);
             } else if (showNegativeButton && !showPositiveButton) {
-                buttonNegative.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
+                buttonNegative
+                            .setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
                 buttonNegative.setVisibility(VISIBLE);
             } else if (showNegativeButton) {
                 buttonNegative.setVisibility(VISIBLE);
@@ -172,32 +182,41 @@ public class DefaultDialogManager implements DialogManager {
             }
 
             if (layoutRatingBar != null) {
-                if ((dialogOptions.shouldShowDialogIcon() && (view.findViewById(R.id.rate_dialog_icon) != null)) ||
-                        (dialogOptions.shouldShowTitle() && (view.findViewById(R.id.rate_dialog_text_dialog_title) != null)) ||
-                        (dialogOptions.shouldShowMessage() && (view.findViewById(R.id.rate_dialog_text_dialog_message) != null))) {
+                if ((dialogOptions.shouldShowDialogIcon() &&
+                     (view.findViewById(R.id.rate_dialog_icon) != null)) ||
+                    (dialogOptions.shouldShowTitle() &&
+                     (view.findViewById(R.id.rate_dialog_text_dialog_title) != null)) ||
+                    (dialogOptions.shouldShowMessage() &&
+                     (view.findViewById(R.id.rate_dialog_text_dialog_message) != null))) {
                     if (showNeutralButton && !(showNegativeButton || showPositiveButton)) {
-                        layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
+                        layoutRatingBar
+                            .setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
                     } else if (!showNeutralButton && (showNegativeButton || showPositiveButton)) {
                         layoutRatingBar.setBackgroundResource(R.color.rateDialogColorBackground);
                     }
                 } else if (!showNeutralButton && (showNegativeButton || showPositiveButton)) {
-                    layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_top);
+                    layoutRatingBar
+                            .setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_top);
                 } else if (showNeutralButton && !(showNegativeButton || showPositiveButton)) {
                     layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded);
                 }
             }
         }
     };
-    /** <p>Listener used to allow to run some code when a button on the Rate Dialog is clicked.</p> */
+    /** <p>Listener used to allow to run some code when a button on the Rate Dialog is
+     * clicked.</p> */
     @SuppressWarnings("WeakerAccess")
     protected final View.OnClickListener buttonListener;
-    /** <p>Listener used to allow to run some code when a positive button on the Rate Dialog is clicked.</p> */
+    /** <p>Listener used to allow to run some code when a positive button on the Rate Dialog is
+     * clicked.</p> */
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener positiveListener;
-    /** <p>Listener used to allow to run some code when a negative button on the Rate Dialog is clicked.</p> */
+    /** <p>Listener used to allow to run some code when a negative button on the Rate Dialog is
+     * clicked.</p> */
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener negativeListener;
-    /** <p>Listener used to allow to run some code when a neutral button on the Rate Dialog is clicked.</p> */
+    /** <p>Listener used to allow to run some code when a neutral button on the Rate Dialog is
+     * clicked.</p> */
     @SuppressWarnings("WeakerAccess")
     protected final DialogInterface.OnClickListener neutralListener;
 
@@ -228,7 +247,8 @@ public class DefaultDialogManager implements DialogManager {
      */
     @SuppressWarnings("WeakerAccess")
     @NonNull
-    protected AlertDialog.Builder getDialogBuilder(@NonNull final Context context, final int themeResId) {
+    protected AlertDialog.Builder getDialogBuilder(@NonNull final Context context,
+                                                            final int themeResId) {
         return Utils.getDialogBuilder(context, themeResId);
     }
 
@@ -242,7 +262,8 @@ public class DefaultDialogManager implements DialogManager {
      * @see AppCompatDialogManager#supplyAppCompatClassicDialogArguments(androidx.appcompat.app.AlertDialog.Builder, Context)
      */
     @SuppressWarnings("WeakerAccess")
-    protected void supplyClassicDialogArguments(@NonNull AlertDialog.Builder builder, @NonNull Context dialogContext) {
+    protected void supplyClassicDialogArguments(@NonNull AlertDialog.Builder builder,
+                                                @NonNull Context dialogContext) {
         if (dialogOptions.shouldShowDialogIcon()) {
             builder.setIcon(dialogOptions.getDialogIcon(dialogContext));
         }
@@ -262,13 +283,15 @@ public class DefaultDialogManager implements DialogManager {
     }
 
     /**
-     * <p>Supplies the arguments to the non-{@link DialogType#CLASSIC CLASSIC} Rate Dialog Builder.</p>
+     * <p>Supplies the arguments to the non-{@link DialogType#CLASSIC CLASSIC} Rate Dialog
+     * Builder.</p>
      *
      * @param view the non-{@link DialogType#CLASSIC CLASSIC} Rate Dialog View
      * @param dialogContext a Context for Rate Dialogs created with this View
      */
     @SuppressWarnings("WeakerAccess")
-    protected void supplyNonClassicDialogArguments(@NonNull View view, @NonNull Context dialogContext) {
+    protected void supplyNonClassicDialogArguments(@NonNull View view,
+                                                   @NonNull Context dialogContext) {
         final View layoutHead = view.findViewById(R.id.rate_dialog_layout_head);
         final View icon = view.findViewById(R.id.rate_dialog_icon);
         final View textDialogTitle = view.findViewById(R.id.rate_dialog_text_dialog_title);
@@ -280,8 +303,10 @@ public class DefaultDialogManager implements DialogManager {
         final View buttonPositive = view.findViewById(R.id.rate_dialog_button_positive);
         final boolean showDialogIcon = dialogOptions.shouldShowDialogIcon() && (icon != null);
         final boolean showTitle = dialogOptions.shouldShowTitle() && (textDialogTitle != null);
-        final boolean showMessage = dialogOptions.shouldShowMessage() && (textDialogMessage != null);
-        final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() && (buttonNeutral != null);
+        final boolean showMessage = dialogOptions.shouldShowMessage() &&
+                                                                        (textDialogMessage != null);
+        final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() &&
+                                                                            (buttonNeutral != null);
 
         if (showDialogIcon) {
             ((ImageView) icon).setImageDrawable(dialogOptions.getDialogIcon(dialogContext));
@@ -335,7 +360,8 @@ public class DefaultDialogManager implements DialogManager {
 
         if (showDialogIcon || showTitle || showMessage) {
             if ((layoutRatingBar != null) && !showNeutralButton) {
-                layoutRatingBar.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
+                layoutRatingBar
+                            .setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded_bottom);
             } else if ((layoutHead != null) && !showNeutralButton) {
                 layoutHead.setBackgroundResource(R.drawable.rate_dialog_rectangle_rounded);
             }
@@ -359,7 +385,8 @@ public class DefaultDialogManager implements DialogManager {
     @Override
     public Dialog createDialog() {
 
-        final AlertDialog.Builder builder = getDialogBuilder(context, dialogOptions.getThemeResId());
+        final AlertDialog.Builder builder = getDialogBuilder(context,
+                                                             dialogOptions.getThemeResId());
         final Context dialogContext;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -437,7 +464,8 @@ public class DefaultDialogManager implements DialogManager {
                         if (singleton != null) {
                             singleton.clear();
                         }
-                        singleton = new WeakReference<>(new DefaultDialogManager(context, dialogOptions, storeOptions));
+                        singleton = new WeakReference<>(new DefaultDialogManager(context,
+                                                                      dialogOptions, storeOptions));
                     } else {
                         singleton.get().setContext(context);
                     }

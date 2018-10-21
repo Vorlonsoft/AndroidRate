@@ -490,12 +490,13 @@ public final class DialogOptions {
         final AppInformation appInformation = AppInformation.getInstance(context);
         if (dialogIconResId != 0) {
             try {
+                final Drawable dialogIcon;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    return context.getDrawable(dialogIconResId);
+                    dialogIcon = context.getDrawable(dialogIconResId);
                 } else {
-                    //noinspection deprecation
-                    return context.getResources().getDrawable(dialogIconResId);
+                    dialogIcon = context.getResources().getDrawable(dialogIconResId);
                 }
+                return dialogIcon;
             } catch (android.content.res.Resources.NotFoundException e) {
                 Log.i(TAG, "Dialog icon with the given ResId doesn't exist.");
             }
