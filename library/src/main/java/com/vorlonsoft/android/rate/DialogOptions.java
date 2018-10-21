@@ -31,7 +31,6 @@ import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */
-
 public final class DialogOptions {
     /** <p>Whether the Rate Dialog is cancelable.</p> */
     private boolean cancelable = false;

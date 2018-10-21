@@ -24,8 +24,6 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.ref.WeakReference;
 
 import androidx.annotation.NonNull;
@@ -76,9 +74,9 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
  * @author   Alexander Savin
  * @author   Antoine Vianey
  * @see DefaultDialogManager.Factory
+ * @see AppCompatDialogManager
  * @see DialogManager
  */
-
 public class DefaultDialogManager implements DialogManager {
     /** <p>The WeakReference to the {@link DefaultDialogManager} singleton object.</p> */
     private static volatile WeakReference<DefaultDialogManager> singleton = null;
@@ -565,7 +563,6 @@ public class DefaultDialogManager implements DialogManager {
      * @author   Antoine Vianey
      * @see DialogManager.Factory
      */
-
     static class Factory implements DialogManager.Factory {
 
         Factory() {
@@ -592,11 +589,11 @@ public class DefaultDialogManager implements DialogManager {
          * @param storeOptions App store options
          * @return {@link DefaultDialogManager} singleton object
          */
-        @NotNull
+        @NonNull
         @Override
-        public DialogManager createDialogManager(@NotNull final Context context,
-                                                 @NotNull final DialogOptions dialogOptions,
-                                                 @NotNull final StoreOptions storeOptions) {
+        public DialogManager createDialogManager(@NonNull final Context context,
+                                                 @NonNull final DialogOptions dialogOptions,
+                                                 @NonNull final StoreOptions storeOptions) {
             if ((singleton == null) || (singleton.get() == null)) {
                 synchronized (DefaultDialogManager.class) {
                     if ((singleton == null) || (singleton.get() == null)) {

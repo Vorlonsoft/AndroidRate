@@ -24,7 +24,6 @@ import static com.vorlonsoft.android.rate.StoreType.OTHER;
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */
-
 @SuppressWarnings("WeakerAccess")
 public final class StoreOptions {
     /** <p>One of the app stores defined by {@link StoreType.AnyStoreType}.</p> */

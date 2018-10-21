@@ -58,7 +58,8 @@ internal object UriHelper {
     /** Samsung Galaxy Apps URI. */
     private const val SAMSUNG_GALAXY_APPS = "samsungapps://ProductDetail/"
     /** Samsung Galaxy Apps web URI. */
-    private const val SAMSUNG_GALAXY_APPS_WEB = "https://apps.samsung.com/appquery/appDetail.as?appId="
+    private const val SAMSUNG_GALAXY_APPS_WEB =
+                                             "https://apps.samsung.com/appquery/appDetail.as?appId="
     /** SlideME Marketplace URI. */
     private const val SLIDEME_MARKETPLACE = "sam://details?id="
     /** SlideME Marketplace web URI. */

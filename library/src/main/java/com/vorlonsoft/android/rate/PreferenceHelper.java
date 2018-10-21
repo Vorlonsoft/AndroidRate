@@ -26,7 +26,6 @@ import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */
-
 final class PreferenceHelper {
 
     private static final String PREF_FILE_NAME = "androidrate_pref_file";

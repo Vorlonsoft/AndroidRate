@@ -60,7 +60,6 @@ import static com.vorlonsoft.android.rate.StoreType.YANDEX;
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */
-
 public final class AppRate {
     /** <p>The {@link AppRate} singleton object.</p> */
     @SuppressLint("StaticFieldLeak")

@@ -40,7 +40,6 @@ import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
  * @see DefaultDialogManager
  * @see DialogManager
  */
-
 public class AppCompatDialogManager extends DefaultDialogManager implements DialogManager {
     /** <p>The WeakReference to the {@link AppCompatDialogManager} singleton object.</p> */
     private static volatile WeakReference<DialogManager> singleton = null;
@@ -141,7 +140,6 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      * @author   Alexander Savin
      * @see DialogManager.Factory
      */
-
     public static class Factory implements DialogManager.Factory {
 
         public Factory() {

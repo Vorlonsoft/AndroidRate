@@ -40,7 +40,6 @@ import static com.vorlonsoft.android.rate.Utils.isPackagesExists;
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */
-
 final class IntentHelper {
 
     private static final String AMAZON_APPSTORE_PACKAGE_NAME = "com.amazon.venezia";

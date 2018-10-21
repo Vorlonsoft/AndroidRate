@@ -78,20 +78,20 @@ internal class AppInformation private constructor(
                 val appLongVersionCode: Long
                 val appPackageName = context.packageName
                 val appVersionName: String
-                var appIcon: Drawable?
-                var packageInfo: PackageInfo?
+                val appIcon: Drawable?
+                val packageInfo: PackageInfo?
                 val pm = context.packageManager
-                try {
-                    appIcon = pm.getApplicationIcon(appPackageName)
+                appIcon = try {
+                    pm.getApplicationIcon(appPackageName)
                 } catch (e: PackageManager.NameNotFoundException) {
                     Log.i(TAG, "Failed to get app icon.", e)
-                    appIcon = null
+                    null
                 }
-                try {
-                    packageInfo = pm.getPackageInfo(appPackageName, 0)
+                packageInfo = try {
+                    pm.getPackageInfo(appPackageName, 0)
                 } catch (e: PackageManager.NameNotFoundException) {
                     Log.i(TAG, "Failed to get app package info.", e)
-                    packageInfo = null
+                    null
                 }
                 if (packageInfo !== null) {
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
