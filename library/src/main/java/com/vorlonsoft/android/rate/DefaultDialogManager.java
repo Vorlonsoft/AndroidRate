@@ -6,13 +6,10 @@
 
 package com.vorlonsoft.android.rate;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.Gravity;
@@ -35,30 +32,11 @@ import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.LinearLayout.VERTICAL;
-import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
-import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
-import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindLaunchesNumber;
-import static com.vorlonsoft.android.rate.StoreType.AMAZON;
-import static com.vorlonsoft.android.rate.StoreType.APPLE;
-import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
-import static com.vorlonsoft.android.rate.StoreType.BLACKBERRY;
-import static com.vorlonsoft.android.rate.StoreType.CHINESESTORES;
-import static com.vorlonsoft.android.rate.StoreType.GOOGLEPLAY;
-import static com.vorlonsoft.android.rate.StoreType.INTENT;
-import static com.vorlonsoft.android.rate.StoreType.MI;
-import static com.vorlonsoft.android.rate.StoreType.OTHER;
-import static com.vorlonsoft.android.rate.StoreType.SAMSUNG;
-import static com.vorlonsoft.android.rate.StoreType.SLIDEME;
-import static com.vorlonsoft.android.rate.StoreType.TENCENT;
-import static com.vorlonsoft.android.rate.StoreType.YANDEX;
 import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
 /**
@@ -80,8 +58,6 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
 public class DefaultDialogManager implements DialogManager {
     /** <p>The WeakReference to the {@link DefaultDialogManager} singleton object.</p> */
     private static volatile WeakReference<DefaultDialogManager> singleton = null;
-    private final StoreOptions storeOptions;
-    private final OnClickButtonListener listener;
     @SuppressWarnings({"WeakerAccess", "UnusedAssignment"})
     protected DialogOptions dialogOptions = null;
     @SuppressWarnings({"WeakerAccess", "UnusedAssignment"})
@@ -214,166 +190,27 @@ public class DefaultDialogManager implements DialogManager {
     };
     /** <p>Listener used to allow to run some code when a button on the Rate Dialog is clicked.</p> */
     @SuppressWarnings("WeakerAccess")
-    protected final View.OnClickListener buttonListener = new View.OnClickListener() {
-        /**
-         * <p>Called when a button has been clicked in the non-{@link DialogType#CLASSIC CLASSIC}
-         * Rate Dialog.</p>
-         *
-         * @param button the button that was clicked.
-         */
-        @Override
-        public void onClick(final View button) {
-            final int buttonResId = button.getId();
-            if (buttonResId == R.id.rate_dialog_button_positive) {
-                positiveListener.onClick(null, BUTTON_POSITIVE);
-            } else if (buttonResId == R.id.rate_dialog_button_negative) {
-                negativeListener.onClick(null, BUTTON_NEGATIVE);
-            } else if (buttonResId == R.id.rate_dialog_button_neutral) {
-                neutralListener.onClick(null, BUTTON_NEUTRAL);
-            } else {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "dialog button with the given ResId doesn't exist.");
-            }
-            AppRate.with(context).dismissRateDialog();
-        }
-    };
+    protected final View.OnClickListener buttonListener;
     /** <p>Listener used to allow to run some code when a positive button on the Rate Dialog is clicked.</p> */
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnClickListener positiveListener = new DialogInterface.OnClickListener() {
-        /**
-         * <p>This method will be invoked when a button in the Rate Dialog is clicked.</p>
-         *
-         * @param dialog the Rate Dialog that received the click
-         * @param which the button that was clicked (ex.
-         *              {@link DialogInterface#BUTTON_POSITIVE BUTTON_POSITIVE}) or the position
-         */
-        @Override
-        public void onClick(@Nullable final DialogInterface dialog, final int which) {
-            final AppInformation appInformation = AppInformation.getInstance(context);
-            final String packageName = (appInformation != null) ? appInformation.getAppPackageName() : null;
-            if ((packageName != null) && (packageName.hashCode() != EMPTY_STRING.hashCode())) {
-                final Intent[] intentsToAppStores = getIntentsForStores(packageName);
-                try {
-                    if (intentsToAppStores.length == 0) {
-                        Log.w(TAG, LOG_MESSAGE_PART_1 + "no intent found for startActivity " +
-                                   "(intentsToAppStores.length == 0).");
-                    } else if (intentsToAppStores[0] == null) {
-                        throw new ActivityNotFoundException(LOG_MESSAGE_PART_1 + "no intent found" +
-                                " for startActivity (intentsToAppStores[0] == null).");
-                    } else {
-                        context.startActivity(intentsToAppStores[0]);
-                    }
-                } catch (ActivityNotFoundException e) {
-                    Log.w(TAG, LOG_MESSAGE_PART_1 + "no activity found for " + intentsToAppStores[0], e);
-                    final byte intentsToAppStoresNumber = (byte) intentsToAppStores.length;
-                    if (intentsToAppStoresNumber > 1) {
-                        boolean isCatch;
-                        for (byte b = 1; b < intentsToAppStoresNumber; b++) { // intentsToAppStores[1] - second intent in the array
-                            try {
-                                if (intentsToAppStores[b] == null) {
-                                    throw new ActivityNotFoundException(LOG_MESSAGE_PART_1 +
-                                            "no intent found for startActivity (intentsToAppStores["
-                                            + b + "] == null).");
-                                } else {
-                                    context.startActivity(intentsToAppStores[b]);
-                                }
-                                isCatch = false;
-                            } catch (ActivityNotFoundException ex) {
-                                Log.w(TAG, LOG_MESSAGE_PART_1 + "no activity found for " +
-                                        intentsToAppStores[b], ex);
-                                isCatch = true;
-                            }
-                            if (!isCatch) {
-                                break;
-                            }
-                        }
-                    }
-                }
-            } else {
-                Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get app package name.");
-            }
-            setIsAgreeShowDialog(context, false);
-            if (listener != null) {
-                listener.onClickButton((byte) which);
-            }
-        }
-    };
+    protected final DialogInterface.OnClickListener positiveListener;
     /** <p>Listener used to allow to run some code when a negative button on the Rate Dialog is clicked.</p> */
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnClickListener negativeListener = new DialogInterface.OnClickListener() {
-        /**
-         * <p>This method will be invoked when a button in the Rate Dialog is clicked.</p>
-         *
-         * @param dialog the Rate Dialog that received the click
-         * @param which the button that was clicked (ex.
-         *              {@link DialogInterface#BUTTON_POSITIVE BUTTON_POSITIVE}) or the position
-         */
-        @Override
-        public void onClick(@Nullable final DialogInterface dialog, final int which) {
-            setIsAgreeShowDialog(context, false);
-            if (listener != null) {
-                listener.onClickButton((byte) which);
-            }
-        }
-    };
+    protected final DialogInterface.OnClickListener negativeListener;
     /** <p>Listener used to allow to run some code when a neutral button on the Rate Dialog is clicked.</p> */
     @SuppressWarnings("WeakerAccess")
-    protected final DialogInterface.OnClickListener neutralListener = new DialogInterface.OnClickListener() {
-        /**
-         * <p>This method will be invoked when a button in the Rate Dialog is clicked.</p>
-         *
-         * @param dialog the Rate Dialog that received the click
-         * @param which the button that was clicked (ex.
-         *              {@link DialogInterface#BUTTON_POSITIVE BUTTON_POSITIVE}) or the position
-         */
-        @Override
-        public void onClick(@Nullable final DialogInterface dialog, final int which) {
-            setRemindInterval(context);
-            setRemindLaunchesNumber(context);
-            if (listener != null) {
-                listener.onClickButton((byte) which);
-            }
-        }
-    };
+    protected final DialogInterface.OnClickListener neutralListener;
 
     @SuppressWarnings("WeakerAccess")
     protected DefaultDialogManager(final Context context, final DialogOptions dialogOptions,
                                    final StoreOptions storeOptions) {
         this.context = context;
         this.dialogOptions = dialogOptions;
-        this.storeOptions = storeOptions;
-        this.listener = dialogOptions.getListener();
-    }
-
-    @SuppressLint("SwitchIntDef")
-    @NonNull
-    private Intent[] getIntentsForStores(@NonNull final String packageName) {
-        switch (storeOptions.getStoreType()) {
-            case AMAZON:
-                return createIntentsForStore(context, AMAZON, packageName);
-            case APPLE:
-                return createIntentsForStore(context, APPLE, storeOptions.getApplicationId());
-            case BAZAAR:
-                return createIntentsForStore(context, BAZAAR, packageName);
-            case BLACKBERRY:
-                return createIntentsForStore(context, BLACKBERRY, storeOptions.getApplicationId());
-            case CHINESESTORES:
-                return createIntentsForStore(context, CHINESESTORES, packageName);
-            case MI:
-                return createIntentsForStore(context, MI, packageName);
-            case SAMSUNG:
-                return createIntentsForStore(context, SAMSUNG, packageName);
-            case SLIDEME:
-                return createIntentsForStore(context, SLIDEME, packageName);
-            case TENCENT:
-                return createIntentsForStore(context, TENCENT, packageName);
-            case YANDEX:
-                return createIntentsForStore(context, YANDEX, packageName);
-            case INTENT:
-            case OTHER:
-                return storeOptions.getIntents();
-            default:
-                return createIntentsForStore(context, GOOGLEPLAY, packageName);
-        }
+        positiveListener = DefaultDialogOnClickListener.getInstance(context, storeOptions,
+                                                                       dialogOptions.getListener());
+        negativeListener = positiveListener;
+        neutralListener = positiveListener;
+        buttonListener = (View.OnClickListener) positiveListener;
     }
 
     @SuppressWarnings("WeakerAccess")
