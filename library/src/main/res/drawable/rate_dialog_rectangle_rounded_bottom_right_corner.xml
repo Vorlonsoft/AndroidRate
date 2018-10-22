@@ -11,9 +11,9 @@
 
     <!-- Rectangle with a rounded bottom right corner. -->
     <corners
-        android:radius="20dp"
-        android:topLeftRadius="0dp"
-        android:topRightRadius="0dp"
-        android:bottomLeftRadius="0dp" />
+        android:radius="@dimen/rate_dialog_corners_radius"
+        android:topLeftRadius="@dimen/rate_dialog_zero_dp"
+        android:topRightRadius="@dimen/rate_dialog_zero_dp"
+        android:bottomLeftRadius="@dimen/rate_dialog_zero_dp" />
 
 </shape>

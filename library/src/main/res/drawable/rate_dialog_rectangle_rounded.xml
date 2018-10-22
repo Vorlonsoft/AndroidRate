@@ -10,6 +10,6 @@
     android:tint="@color/rate_dialog_background">
 
     <!-- Rectangle with a rounded corners. -->
-    <corners android:radius="20dp" />
+    <corners android:radius="@dimen/rate_dialog_corners_radius" />
 
 </shape>

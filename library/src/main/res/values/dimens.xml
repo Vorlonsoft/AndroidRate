@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ // Copyright 2018 Vorlonsoft LLC
+  ~ //
+  ~ // Licensed under The MIT License (MIT)
+-->
+<resources>
+    <!-- Dimension values defined in XML. -->
+    <dimen name="rate_dialog_corners_radius">20dp</dimen>
+    <dimen name="rate_dialog_zero_dp">0dp</dimen>
+    <dimen name="rate_dialog_one_dp">1dp</dimen>
+    <dimen name="rate_dialog_ten_dp">10dp</dimen>
+    <dimen name="rate_dialog_twenty_dp">20dp</dimen>
+    <dimen name="rate_dialog_seventy_five_dp">75dp</dimen>
+</resources>
