@@ -10,6 +10,9 @@
     <item
         android:state_pressed="true"
         android:color="@color/rateDialogColorBackgroundPressed"/> <!-- pressed -->
+    <item
+        android:state_focused="true"
+        android:color="@color/rateDialogColorBackgroundPressed"/> <!-- not pressed, focused -->
     <item android:color="@color/rateDialogColorBackground"/>      <!-- default -->
 
 </selector>
