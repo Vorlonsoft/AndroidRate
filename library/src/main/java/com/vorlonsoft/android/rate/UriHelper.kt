@@ -30,48 +30,48 @@ import com.vorlonsoft.android.rate.StoreType.Companion.YANDEX
  */
 internal object UriHelper {
     /** Default store URI. */
-    private const val DEFAULT_STORE_URI = "market://details?id="
+    private const val DEFAULT_STORE_URI: String = "market://details?id="
     /** Amazon Appstore URI. */
-    private const val AMAZON_APPSTORE = "amzn://apps/android?p="
+    private const val AMAZON_APPSTORE: String = "amzn://apps/android?p="
     /** Amazon Appstore web URI. */
-    private const val AMAZON_APPSTORE_WEB = "https://www.amazon.com/gp/mas/dl/android?p="
+    private const val AMAZON_APPSTORE_WEB: String = "https://www.amazon.com/gp/mas/dl/android?p="
     /** Apple App Store web URI. */
-    private const val APPLE_APP_STORE_WEB = "https://itunes.apple.com/app/id"
+    private const val APPLE_APP_STORE_WEB: String = "https://itunes.apple.com/app/id"
     /** BlackBerry World URI. */
-    private const val BLACKBERRY_WORLD = "appworld://content/"
+    private const val BLACKBERRY_WORLD: String = "appworld://content/"
     /** BlackBerry World web URI. */
-    private const val BLACKBERRY_WORLD_WEB = "https://appworld.blackberry.com/webstore/content/"
+    private const val BLACKBERRY_WORLD_WEB: String = "https://appworld.blackberry.com/webstore/content/"
     /** Cafe Bazaar URI. */
-    private const val CAFE_BAZAAR = "bazaar://details?id="
+    private const val CAFE_BAZAAR: String = "bazaar://details?id="
     /** Cafe Bazaar web URI. */
-    private const val CAFE_BAZAAR_WEB = "https://cafebazaar.ir/app/"
+    private const val CAFE_BAZAAR_WEB: String = "https://cafebazaar.ir/app/"
     /** 19 chinese app stores URI. */
-    private const val CHINESE_STORES = DEFAULT_STORE_URI
+    private const val CHINESE_STORES: String = DEFAULT_STORE_URI
     /** Google Play URI. */
-    private const val GOOGLE_PLAY = DEFAULT_STORE_URI
+    private const val GOOGLE_PLAY: String = DEFAULT_STORE_URI
     /** Google Play web URI. */
-    private const val GOOGLE_PLAY_WEB = "https://play.google.com/store/apps/details?id="
+    private const val GOOGLE_PLAY_WEB: String = "https://play.google.com/store/apps/details?id="
     /** Mi Appstore (Xiaomi Market) URI. */
-    private const val MI_APPSTORE = DEFAULT_STORE_URI
+    private const val MI_APPSTORE: String = DEFAULT_STORE_URI
     /** Mi Appstore (Xiaomi Market) web URI. */
-    private const val MI_APPSTORE_WEB = "http://app.xiaomi.com/details?id="
+    private const val MI_APPSTORE_WEB: String = "http://app.xiaomi.com/details?id="
     /** Samsung Galaxy Apps URI. */
-    private const val SAMSUNG_GALAXY_APPS = "samsungapps://ProductDetail/"
+    private const val SAMSUNG_GALAXY_APPS: String = "samsungapps://ProductDetail/"
     /** Samsung Galaxy Apps web URI. */
-    private const val SAMSUNG_GALAXY_APPS_WEB =
+    private const val SAMSUNG_GALAXY_APPS_WEB: String =
                                              "https://apps.samsung.com/appquery/appDetail.as?appId="
     /** SlideME Marketplace URI. */
-    private const val SLIDEME_MARKETPLACE = "sam://details?id="
+    private const val SLIDEME_MARKETPLACE: String = "sam://details?id="
     /** SlideME Marketplace web URI. */
-    private const val SLIDEME_MARKETPLACE_WEB = "http://slideme.org/app/"
+    private const val SLIDEME_MARKETPLACE_WEB: String = "http://slideme.org/app/"
     /** Tencent App Store URI. */
-    private const val TENCENT_APP_STORE = DEFAULT_STORE_URI
+    private const val TENCENT_APP_STORE: String = DEFAULT_STORE_URI
     /** Tencent App Store web URI. */
-    private const val TENCENT_APP_STORE_WEB = "http://a.app.qq.com/o/simple.jsp?pkgname="
+    private const val TENCENT_APP_STORE_WEB: String = "http://a.app.qq.com/o/simple.jsp?pkgname="
     /** Yandex.Store URI. */
-    private const val YANDEX_STORE = "yastore://details?id="
+    private const val YANDEX_STORE: String = "yastore://details?id="
     /** Yandex.Store web URI. */
-    private const val YANDEX_STORE_WEB = "https://store.yandex.com/apps/details?id="
+    private const val YANDEX_STORE_WEB: String = "https://store.yandex.com/apps/details?id="
 
     /**
      * Creates an URI which parses the given encoded URI strings.

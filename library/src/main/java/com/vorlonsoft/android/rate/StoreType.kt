@@ -64,30 +64,30 @@ open class StoreType {
     /** Contains constants for store types. */
     companion object {
         /** Amazon Appstore. */
-        const val AMAZON = 0
+        const val AMAZON: Int = 0
         /** Apple App Store. */
-        const val APPLE = 1
+        const val APPLE: Int = 1
         /** Cafe Bazaar. */
-        const val BAZAAR = 2
+        const val BAZAAR: Int = 2
         /** BlackBerry World. */
-        const val BLACKBERRY = 3
+        const val BLACKBERRY: Int = 3
         /** 19 chinese app stores. */
-        const val CHINESESTORES = 4
+        const val CHINESESTORES: Int = 4
         /** Google Play. */
-        const val GOOGLEPLAY = 5
+        const val GOOGLEPLAY: Int = 5
         /** Mi Appstore (Xiaomi Market). */
-        const val MI = 6
+        const val MI: Int = 6
         /** Samsung Galaxy Apps. */
-        const val SAMSUNG = 7
+        const val SAMSUNG: Int = 7
         /** SlideME Marketplace. */
-        const val SLIDEME = 8
+        const val SLIDEME: Int = 8
         /** Tencent App Store. */
-        const val TENCENT = 9
+        const val TENCENT: Int = 9
         /** Yandex.Store. */
-        const val YANDEX = 10
+        const val YANDEX: Int = 10
         /** Any custom intents. */
-        const val INTENT = 11
+        const val INTENT: Int = 11
         /** Any other Store. */
-        const val OTHER = 12
+        const val OTHER: Int = 12
     }
 }

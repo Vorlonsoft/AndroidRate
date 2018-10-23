@@ -33,10 +33,10 @@ open class DialogType {
     /** Contains constants for dialog types. */
     companion object {
         /** Apple Rate Dialog. */
-        const val APPLE = 0
+        const val APPLE: Int = 0
         /** Classic Rate Dialog. */
-        const val CLASSIC = 1
+        const val CLASSIC: Int = 1
         /** Modern Rate Dialog. */
-        const val MODERN = 2
+        const val MODERN: Int = 2
     }
 }

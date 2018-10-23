@@ -55,6 +55,7 @@ import static com.vorlonsoft.android.rate.Utils.isLollipop;
  * @see AppCompatDialogManager
  * @see DialogManager
  */
+@SuppressWarnings("WeakerAccess")
 public class DefaultDialogManager implements DialogManager {
     /** <p>The WeakReference to the {@link DefaultDialogManager} singleton object.</p> */
     private static volatile WeakReference<DefaultDialogManager> singleton = null;
