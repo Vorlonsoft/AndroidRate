@@ -128,7 +128,7 @@
             android:paddingTop="@dimen/rate_dialog_zero_dp"
             android:paddingBottom="@dimen/rate_dialog_zero_dp"
             android:paddingRight="@dimen/rate_dialog_zero_dp"
-            android:background="@color/rateDialogColorBackground">
+            android:background="@drawable/rate_dialog_rectangle">
 
             <RatingBar
                 android:id="@+id/rate_dialog_rating_bar"
