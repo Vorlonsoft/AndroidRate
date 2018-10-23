@@ -167,10 +167,8 @@ final class DefaultDialogOnClickListener implements View.OnClickListener,
 
     /** <p>Calls when a positive button on the Rate Dialog is clicked.</p> */
     private void onPositiveButtonClick() {
-        final AppInformation appInformation = AppInformation.getInstance(context);
-        final String packageName = (appInformation != null) ? appInformation.getAppPackageName() :
-                                                              null;
-        if ((packageName != null) && (packageName.hashCode() != EMPTY_STRING.hashCode())) {
+        final String packageName = AppInformation.getPackageName(context);
+        if (packageName.hashCode() != EMPTY_STRING.hashCode()) {
             final Intent[] intentsToAppStores = getIntentsForStores(packageName);
             try {
                 if (intentsToAppStores.length == 0) {

@@ -106,7 +106,6 @@ final class PreferenceHelper {
     }
 
     static void setFirstLaunchSharedPreferences(final Context context) {
-        final AppInformation appInformation = AppInformation.getInstance(context);
         final SharedPreferences.Editor preferencesEditor = getPreferencesEditor(context);
         preferencesEditor.putString(PREF_KEY_365_DAY_PERIOD_DIALOG_LAUNCH_TIMES, DEFAULT_DIALOG_LAUNCH_TIMES)
                 .putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, 0L)
@@ -114,8 +113,8 @@ final class PreferenceHelper {
                 .putInt(PREF_KEY_LAUNCH_TIMES, 1)
                 .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
                 .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0)
-                .putLong(PREF_KEY_VERSION_CODE, (appInformation != null) ? appInformation.getAppLongVersionCode() : 0L)
-                .putString(PREF_KEY_VERSION_NAME, (appInformation != null) ? appInformation.getAppVersionName() : EMPTY_STRING)
+                .putLong(PREF_KEY_VERSION_CODE, AppInformation.getLongVersionCode(context))
+                .putString(PREF_KEY_VERSION_NAME, AppInformation.getVersionName(context))
                 .apply();
         if (getIsAgreeShowDialog(context)) { //if (get() == true) set(true); - NOT error!
             setIsAgreeShowDialog(context, true);
@@ -278,9 +277,8 @@ final class PreferenceHelper {
     }
 
     static void setVersionCode(final Context context) {
-        final AppInformation appInformation = AppInformation.getInstance(context);
         getPreferencesEditor(context)
-                .putLong(PREF_KEY_VERSION_CODE, (appInformation != null) ? appInformation.getAppLongVersionCode() : 0L)
+                .putLong(PREF_KEY_VERSION_CODE, AppInformation.getLongVersionCode(context))
                 .apply();
     }
 
@@ -289,9 +287,8 @@ final class PreferenceHelper {
     }
 
     static void setVersionName(final Context context) {
-        final AppInformation appInformation = AppInformation.getInstance(context);
         getPreferencesEditor(context)
-                .putString(PREF_KEY_VERSION_NAME, (appInformation != null) ? appInformation.getAppVersionName() : EMPTY_STRING)
+                .putString(PREF_KEY_VERSION_NAME, AppInformation.getVersionName(context))
                 .apply();
     }
 

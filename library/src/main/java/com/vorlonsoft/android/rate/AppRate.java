@@ -361,7 +361,7 @@ public final class AppRate {
      * @see #setTitle(int)
      * @see #setTitle(String)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setShowTitle(boolean isShowTitle) {
         dialogOptions.setShowTitle(isShowTitle);
         return this;
@@ -490,7 +490,7 @@ public final class AppRate {
      * @see #setTitle(String)
      * @see #setShowTitle(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTitle(@SuppressWarnings("SameParameterValue") int resourceId) {
         dialogOptions.setTitleResId(resourceId);
         return this;
@@ -505,7 +505,7 @@ public final class AppRate {
      * @see #setTitle(int)
      * @see #setShowTitle(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTitle(String title) {
         dialogOptions.setTitleText(title);
         return this;
@@ -519,7 +519,7 @@ public final class AppRate {
      * @see #setMessage(String)
      * @see #setShowMessage(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setMessage(int resourceId) {
         dialogOptions.setMessageResId(resourceId);
         return this;
@@ -534,7 +534,7 @@ public final class AppRate {
      * @see #setMessage(int)
      * @see #setShowMessage(boolean)
      */
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setMessage(String message) {
         dialogOptions.setMessageText(message);
         return this;
@@ -837,15 +837,14 @@ public final class AppRate {
         if (isFirstLaunch(context)) {
             setFirstLaunchSharedPreferences(context);
         } else {
-            final AppInformation appInformation = AppInformation.getInstance(context);
             PreferenceHelper.setLaunchTimes(context, (short) (getLaunchTimes(context) + 1));
-            if ((appInformation != null) && (appInformation.getAppLongVersionCode() != getVersionCode(context))) {
+            if (AppInformation.getLongVersionCode(context) != getVersionCode(context)) {
                 if (isVersionCodeCheck) {
                     setAgreeShowDialog(true);
                 }
                 setVersionCode(context);
             }
-            if ((appInformation != null) && !appInformation.getAppVersionName().equals(getVersionName(context))) {
+            if (!AppInformation.getVersionName(context).equals(getVersionName(context))) {
                 if (isVersionNameCheck) {
                     setAgreeShowDialog(true);
                 }

@@ -356,7 +356,7 @@ public final class DialogOptions {
      * dialogs!</b></p>
      *
      * @return Rate Dialog View
-     * @deprecated since 1.2.2 use {@link #getView(Context)} instead
+     * @deprecated since 1.2.5 use {@link #getView(Context)} instead
      * @see #getView(Context)
      */
     @SuppressWarnings("WeakerAccess")
@@ -375,7 +375,7 @@ public final class DialogOptions {
      *
      * @param dialogContext a Context with the appropriate theme for built dialogs
      * @return Rate Dialog View
-     * @since 1.2.2
+     * @since 1.2.5
      */
     @SuppressLint("InflateParams")
     @SuppressWarnings("WeakerAccess")
@@ -487,7 +487,6 @@ public final class DialogOptions {
     @SuppressWarnings("WeakerAccess")
     @Nullable
     public Drawable getDialogIcon(@NonNull final Context context) {
-        final AppInformation appInformation = AppInformation.getInstance(context);
         if (dialogIconResId != 0) {
             try {
                 final Drawable dialogIcon;
@@ -501,8 +500,7 @@ public final class DialogOptions {
                 Log.i(TAG, "Dialog icon with the given ResId doesn't exist.");
             }
         }
-        return (dialogIcon != null) ? dialogIcon :
-                                    ((appInformation != null) ? appInformation.getAppIcon() : null);
+        return (dialogIcon != null) ? dialogIcon : AppInformation.getIcon(context);
     }
 
     void setDialogIcon(final Drawable dialogIcon) {
