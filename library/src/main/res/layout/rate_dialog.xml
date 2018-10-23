@@ -50,8 +50,8 @@
 
             <ImageView
                 android:id="@+id/rate_dialog_icon"
-                android:layout_width="@dimen/rate_dialog_seventy_five_dp"
-                android:layout_height="@dimen/rate_dialog_seventy_five_dp"
+                android:layout_width="@dimen/rate_dialog_icon_dimensions"
+                android:layout_height="@dimen/rate_dialog_icon_dimensions"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/rate_dialog_zero_dp"
                 android:layout_marginLeft="@dimen/rate_dialog_zero_dp"
