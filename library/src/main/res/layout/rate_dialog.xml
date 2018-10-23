@@ -9,6 +9,7 @@
     android:id="@+id/rate_dialog_layout_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:overScrollMode="ifContentScrolls"
     android:paddingLeft="@dimen/rate_dialog_zero_dp"
     android:paddingTop="@dimen/rate_dialog_zero_dp"
     android:paddingBottom="@dimen/rate_dialog_zero_dp"
