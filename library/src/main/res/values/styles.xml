@@ -9,6 +9,7 @@
     <!-- Base Apple and Modern types Rate Dialog theme. -->
     <style name="RateDialogTransparentTheme">
         <item name="android:background">@color/rateDialogColorTransparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
         <item name="android:backgroundDimAmount">0.4</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowBackground">@color/rateDialogColorTransparent</item>
