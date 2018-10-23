@@ -6,6 +6,7 @@
 
 package com.vorlonsoft.android.rate
 
+import android.net.Uri
 import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING
 import com.vorlonsoft.android.rate.StoreType.Companion.CHINESESTORES
 import com.vorlonsoft.android.rate.StoreType.Companion.GOOGLEPLAY
@@ -27,19 +28,19 @@ internal class UriHelperTest {
     @Test
     internal fun getStoreUri() {
         run {
-            val uri = UriHelper.getStoreUri(CHINESESTORES, EMPTY_STRING)
+            val uri: Uri? = UriHelper.getStoreUri(CHINESESTORES, EMPTY_STRING)
             assertEquals(uri?.toString(), CHINESESTORES_URI)
         }
         run {
-            val uri = UriHelper.getStoreUri(GOOGLEPLAY, EMPTY_STRING)
+            val uri: Uri? = UriHelper.getStoreUri(GOOGLEPLAY, EMPTY_STRING)
             assertEquals(uri?.toString(), GOOGLEPLAY_URI)
         }
         run {
-            val uri = UriHelper.getStoreUri(CHINESESTORES, SAMPLE_APP_PACKAGE)
+            val uri: Uri? = UriHelper.getStoreUri(CHINESESTORES, SAMPLE_APP_PACKAGE)
             assertEquals(uri?.toString(), CHINESESTORES_URI + SAMPLE_APP_PACKAGE)
         }
         run {
-            val uri = UriHelper.getStoreUri(GOOGLEPLAY, SAMPLE_APP_PACKAGE)
+            val uri: Uri? = UriHelper.getStoreUri(GOOGLEPLAY, SAMPLE_APP_PACKAGE)
             assertEquals(uri?.toString(), GOOGLEPLAY_URI + SAMPLE_APP_PACKAGE)
         }
     }
@@ -48,31 +49,31 @@ internal class UriHelperTest {
     @Test
     internal fun getStoreWebUri() {
         run {
-            val uri = UriHelper.getStoreWebUri(CHINESESTORES, EMPTY_STRING)
+            val uri: Uri? = UriHelper.getStoreWebUri(CHINESESTORES, EMPTY_STRING)
             assertNull(uri)
         }
         run {
-            val uri = UriHelper.getStoreWebUri(GOOGLEPLAY, EMPTY_STRING)
+            val uri: Uri? = UriHelper.getStoreWebUri(GOOGLEPLAY, EMPTY_STRING)
             assertEquals(uri?.toString(), GOOGLEPLAY_WEB_URI)
         }
         run {
-            val uri = UriHelper.getStoreWebUri(CHINESESTORES, SAMPLE_APP_PACKAGE)
+            val uri: Uri? = UriHelper.getStoreWebUri(CHINESESTORES, SAMPLE_APP_PACKAGE)
             assertNull(uri)
         }
         run {
-            val uri = UriHelper.getStoreWebUri(GOOGLEPLAY, SAMPLE_APP_PACKAGE)
+            val uri: Uri? = UriHelper.getStoreWebUri(GOOGLEPLAY, SAMPLE_APP_PACKAGE)
             assertEquals(uri?.toString(), GOOGLEPLAY_WEB_URI + SAMPLE_APP_PACKAGE)
         }
     }
 
     private companion object {
         /** 19 chinese app stores URI. */
-        private const val CHINESESTORES_URI = "market://details?id="
+        private const val CHINESESTORES_URI: String = "market://details?id="
         /** Google Play URI. */
-        private const val GOOGLEPLAY_URI = CHINESESTORES_URI
+        private const val GOOGLEPLAY_URI: String = CHINESESTORES_URI
         /** Google Play web URI. */
-        private const val GOOGLEPLAY_WEB_URI = "https://play.google.com/store/apps/details?id="
+        private const val GOOGLEPLAY_WEB_URI: String = "https://play.google.com/store/apps/details?id="
         /** AndroidRate Sample app package. */
-        private const val SAMPLE_APP_PACKAGE = "com.vorlonsoft.android.rate.sample"
+        private const val SAMPLE_APP_PACKAGE: String = "com.vorlonsoft.android.rate.sample"
     }
 }

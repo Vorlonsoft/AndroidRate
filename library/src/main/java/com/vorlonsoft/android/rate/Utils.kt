@@ -8,6 +8,7 @@ package com.vorlonsoft.android.rate
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.pm.ApplicationInfo
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.HONEYCOMB
 import android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH
@@ -80,7 +81,8 @@ internal object Utils {
             return EMPTY_STRING_ARRAY
         }
 
-        val applicationInfo = context.packageManager.getInstalledApplications(0)
+        val applicationInfo: List<ApplicationInfo> = context.packageManager
+                                                                    .getInstalledApplications(0)
 
         if (targetPackages.size == 1) {
             if ((targetPackages[0] != null) && (targetPackages[0] != EMPTY_STRING)) {
@@ -92,7 +94,7 @@ internal object Utils {
             }
             return EMPTY_STRING_ARRAY
         } else {
-            val packageNames = ArrayList<String>()
+            val packageNames: ArrayList<String> = ArrayList()
             for (aTargetPackage in targetPackages) {
                 if ((aTargetPackage != null) && (aTargetPackage != EMPTY_STRING)) {
                     for (anApplicationInfo in applicationInfo) {
