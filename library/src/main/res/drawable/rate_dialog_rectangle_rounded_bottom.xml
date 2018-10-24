@@ -6,13 +6,13 @@
 -->
 <shape
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle"
-    android:tint="@color/rate_dialog_background">
+    android:shape="rectangle">
 
     <!-- Rectangle with a rounded bottom. -->
     <corners
         android:radius="@dimen/rate_dialog_corners_radius"
         android:topLeftRadius="@dimen/rate_dialog_zero_dp"
         android:topRightRadius="@dimen/rate_dialog_zero_dp" />
+    <solid android:color="@color/rate_dialog_background" />
 
 </shape>
