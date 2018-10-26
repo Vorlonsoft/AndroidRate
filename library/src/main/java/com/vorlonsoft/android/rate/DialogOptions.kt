@@ -39,7 +39,7 @@ class DialogOptions internal constructor() {
 
     /** Whether the Rate Dialog should show an icon. Default value is null. */
     var isShowIcon: Boolean? = null
-        get() = if (field == null) (type != CLASSIC) else field ?: (type != CLASSIC)
+        get() = if (field != null) field else (type != CLASSIC)
 
     /** Whether the Rate Dialog should show the message. */
     var isShowMessage: Boolean = true
@@ -109,9 +109,8 @@ class DialogOptions internal constructor() {
 
     /** The Rate Dialog theme resource ID. */
     var themeResId: Int? = null
-        @StyleRes get() = if (field == null) {
+        @StyleRes get() = if (field != null) field else
             if (type != CLASSIC) R.style.RateDialogTransparentTheme else 0
-        } else field ?: 0
 
     /** The Rate Dialog title text resource ID. */
     var titleTextResId: Int = R.string.rate_dialog_title
@@ -325,17 +324,13 @@ class DialogOptions internal constructor() {
     @SuppressLint("InflateParams")
     fun getView(dialogContext: Context?): View? {
         return if ((view == null) && (type != CLASSIC)) {
-            if (dialogContext != null) {
-                try {
-                    LayoutInflater.from(dialogContext).inflate(R.layout.rate_dialog, null)
-                } catch (e: AssertionError) {
-                    Log.i(TAG, "Can't inflate the R.layout.rate_dialog, layoutInflater not " +
-                                   "found, DialogType.CLASSIC dialog will be used.")
-                }
-            } else {
-                Log.w(TAG, "Can't inflate the R.layout.rate_dialog, dialogContext == null, " +
-                               "DialogType.CLASSIC dialog will be used.")
-            }
+            if (dialogContext != null) try {
+                view = LayoutInflater.from(dialogContext).inflate(R.layout.rate_dialog, null)
+            } catch (e: AssertionError) {
+                Log.i(TAG, "Can't inflate the R.layout.rate_dialog, layoutInflater not found, " +
+                                                          "DialogType.CLASSIC dialog will be used.")
+            } else Log.w(TAG, "Can't inflate the R.layout.rate_dialog, dialogContext == null, " +
+                                                          "DialogType.CLASSIC dialog will be used.")
             view
         } else view
     }
