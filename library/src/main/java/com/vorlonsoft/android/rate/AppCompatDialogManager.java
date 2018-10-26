@@ -149,6 +149,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
         }
 
         /** <p>Clear {@link AppCompatDialogManager} singleton.</p> */
+        @SuppressWarnings("unused")
         @Override
         public void clearDialogManager() {
             if (singleton != null) {
@@ -167,6 +168,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
          * @return {@link AppCompatDialogManager} singleton object for API levels 14 and higher,
          * <b>{@link DefaultDialogManager} singleton object for API levels 13 and below</b>
          */
+        @SuppressWarnings("unused")
         @NotNull
         @Override
         public DialogManager createDialogManager(@NotNull final Context context,

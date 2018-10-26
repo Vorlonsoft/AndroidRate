@@ -382,6 +382,7 @@ public class DefaultDialogManager implements DialogManager {
      *
      * @return created dialog
      */
+    @SuppressWarnings("unused")
     @Nullable
     @Override
     public Dialog createDialog() {
@@ -439,6 +440,7 @@ public class DefaultDialogManager implements DialogManager {
         /**
          * <p>Clears {@link DefaultDialogManager} singleton.</p>
          */
+        @SuppressWarnings("unused")
         @Override
         public void clearDialogManager() {
             if (singleton != null) {
@@ -454,6 +456,7 @@ public class DefaultDialogManager implements DialogManager {
          * @param storeOptions App store options
          * @return {@link DefaultDialogManager} singleton object
          */
+        @SuppressWarnings("unused")
         @NonNull
         @Override
         public DialogManager createDialogManager(@NonNull final Context context,

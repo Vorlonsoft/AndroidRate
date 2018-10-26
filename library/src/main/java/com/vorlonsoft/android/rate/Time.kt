@@ -11,6 +11,8 @@ import androidx.annotation.LongDef
 /**
  * Time Class - the time units class of the AndroidRate library.
  *
+ * Contains time units constants and [TimeUnits] annotation.
+ *
  * @constructor Don't create an instance of this class. Use its members directly.
  * @since       1.2.1
  * @version     1.2.1

@@ -11,6 +11,9 @@ import androidx.annotation.IntDef
 /**
  * StoreType Class - the store types class of the AndroidRate library.
  *
+ * Contains store types constants and [StoreWithoutApplicationId], [StoreWithApplicationId],
+ * [AnyStoreType] annotations.
+ *
  * @constructor Don't create an instance of this class. Use its members directly.
  * @since       1.0.0
  * @version     1.2.1

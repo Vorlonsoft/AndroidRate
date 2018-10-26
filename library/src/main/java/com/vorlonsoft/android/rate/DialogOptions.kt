@@ -23,6 +23,8 @@ import java.lang.ref.SoftReference
 /**
  * DialogOptions Class - dialog options class of the AndroidRate library.
  *
+ * Contains dialog properties with setters and getters.
+ *
  * @since    0.5.1
  * @version  1.2.1
  * @author   Alexander Savin

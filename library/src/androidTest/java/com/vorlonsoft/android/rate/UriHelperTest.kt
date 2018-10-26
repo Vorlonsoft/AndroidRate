@@ -23,6 +23,7 @@ import org.junit.Test
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */
+@Suppress("unused")
 internal class UriHelperTest {
     /** Test for [com.vorlonsoft.android.rate.UriHelper.getStoreUri] function. */
     @Test

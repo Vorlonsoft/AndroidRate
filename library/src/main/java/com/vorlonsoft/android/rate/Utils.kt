@@ -31,6 +31,7 @@ import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY
  */
 internal object Utils {
     /** Whether the Android Lollipop (API 21-22) is installed on the user device or not. */
+    @Suppress("ObjectPropertyName")
     @JvmStatic
     private var _isLollipop: Boolean? = null
     /** Whether the Android Lollipop (API 21-22) is installed on the user device or not. */
