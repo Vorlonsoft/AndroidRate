@@ -31,6 +31,24 @@ internal object AppInformation {
     private const val packageInfoException: String = "Failed to get app package info."
     /** The [PackageManager.getApplicationIcon] exception log message. */
     private const val applicationIconException: String = "Failed to get app icon."
+    /** The icon associated with an application. */
+    @JvmStatic
+    private var icon: Drawable? = null
+    /** The versionCode and the versionCodeMajor combined together as a single long value. */
+    @JvmStatic
+    private var longVersionCode: Long? = null
+    /** The name of the app's package. */
+    @JvmStatic
+    private var packageName: String? = null
+    /** The version number of the app's package. */
+    @JvmStatic
+    private var versionCode: Int? = null
+    /** The major version number of the app's package. */
+    @JvmStatic
+    private var versionCodeMajor: Int? = null
+    /** The version name of the app's package. */
+    @JvmStatic
+    private var versionName: String? = null
 
     /**
      * Returns the icon associated with an application.
@@ -41,12 +59,12 @@ internal object AppInformation {
      */
     @JvmStatic
     fun getIcon(context: Context): Drawable? {
-        return try {
-            context.packageManager.getApplicationIcon(getPackageName(context))
+        if (icon == null) try {
+            icon = context.packageManager.getApplicationIcon(getPackageName(context))
         } catch (e: PackageManager.NameNotFoundException) {
             Log.i(TAG, applicationIconException, e)
-            null
         }
+        return icon
     }
 
     /**
@@ -65,19 +83,17 @@ internal object AppInformation {
      */
     @JvmStatic
     fun getLongVersionCode(context: Context): Long {
-        return try {
-            if (SDK_INT < P) {
-                @Suppress("DEPRECATION")
-                context.packageManager.getPackageInfo(getPackageName(context), 0)
-                                    .versionCode.toLong() and 0b11111111_11111111_11111111_11111111L
-            } else {
-                context.packageManager.getPackageInfo(getPackageName(context), 0)
+        if (longVersionCode == null) if (SDK_INT < P) {
+            @Suppress("DEPRECATION")
+            longVersionCode = getVersionCode(context).toLong() and
+                              0b11111111_11111111_11111111_11111111L
+        } else try {
+            longVersionCode = context.packageManager.getPackageInfo(getPackageName(context), 0)
                                                                                     .longVersionCode
-            }
         } catch (e: PackageManager.NameNotFoundException) {
             Log.i(TAG, packageInfoException, e)
-            0L
         }
+        return longVersionCode ?: 0L
     }
 
     /**
@@ -88,7 +104,8 @@ internal object AppInformation {
      */
     @JvmStatic
     fun getPackageName(context: Context): String {
-        return context.packageName
+        if (packageName == null) packageName = context.packageName
+        return packageName ?: EMPTY_STRING
     }
 
     /**
@@ -102,18 +119,17 @@ internal object AppInformation {
      */
     @JvmStatic
     fun getVersionCode(context: Context): Int {
-        return try {
-            if (SDK_INT < P) {
-                @Suppress("DEPRECATION")
-                context.packageManager.getPackageInfo(getPackageName(context), 0).versionCode
-            } else {
-                (context.packageManager.getPackageInfo(getPackageName(context), 0)
-                                .longVersionCode and 0b11111111_11111111_11111111_11111111L).toInt()
-            }
+        if (versionCode == null) if (SDK_INT < P) try {
+            @Suppress("DEPRECATION")
+            versionCode = context.packageManager.getPackageInfo(getPackageName(context), 0)
+                                                                                        .versionCode
         } catch (e: PackageManager.NameNotFoundException) {
             Log.i(TAG, packageInfoException, e)
-            0
+        } else {
+            versionCode = (getLongVersionCode(context) and
+                           0b11111111_11111111_11111111_11111111L).toInt()
         }
+        return versionCode ?: 0
     }
 
     /**
@@ -128,13 +144,9 @@ internal object AppInformation {
      */
     @JvmStatic
     fun getVersionCodeMajor(context: Context): Int {
-        return if (SDK_INT < P) 0 else try {
-            context.packageManager.getPackageInfo(getPackageName(context), 0)
-                                                            .longVersionCode.ushr(32).toInt()
-        } catch (e: PackageManager.NameNotFoundException) {
-            Log.i(TAG, packageInfoException, e)
-            0
-        }
+        if (versionCodeMajor == null) versionCodeMajor = if (SDK_INT < P) 0 else
+                                                 getLongVersionCode(context).ushr(32).toInt()
+        return versionCodeMajor ?: 0
     }
 
     /**
@@ -146,11 +158,12 @@ internal object AppInformation {
      */
     @JvmStatic
     fun getVersionName(context: Context): String {
-        return try {
-            context.packageManager.getPackageInfo(getPackageName(context), 0).versionName
+        if (versionName == null) try {
+            versionName = context.packageManager.getPackageInfo(getPackageName(context), 0)
+                                                                                        .versionName
         } catch (e: PackageManager.NameNotFoundException) {
             Log.i(TAG, packageInfoException, e)
-            EMPTY_STRING
         }
+        return versionName ?: EMPTY_STRING
     }
 }
