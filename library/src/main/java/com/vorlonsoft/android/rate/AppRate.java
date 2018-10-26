@@ -394,7 +394,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setShowDialogIcon(boolean isShowDialogIcon) {
-        dialogOptions.setShowDialogIcon(isShowDialogIcon);
+        dialogOptions.setShowIcon(isShowDialogIcon);
         return this;
     }
 
@@ -449,7 +449,7 @@ public final class AppRate {
      * @return the {@link AppRate} singleton object
      */
     public AppRate setOnClickButtonListener(OnClickButtonListener listener) {
-        dialogOptions.setListener(listener);
+        dialogOptions.setButtonListener(listener);
         return this;
     }
 
@@ -464,7 +464,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setDialogIcon(int resourceId) {
-        dialogOptions.setDialogIconResId(resourceId);
+        dialogOptions.setIconResId(resourceId);
         return this;
     }
 
@@ -477,8 +477,8 @@ public final class AppRate {
      * @see #setShowDialogIcon(boolean)
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
-    public AppRate setDialogIcon(Drawable dialogIcon) {
-        dialogOptions.setDialogIcon(dialogIcon);
+    public AppRate setDialogIcon(@Nullable Drawable dialogIcon) {
+        dialogOptions.setIcon(dialogIcon);
         return this;
     }
 
@@ -492,7 +492,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTitle(@SuppressWarnings("SameParameterValue") int resourceId) {
-        dialogOptions.setTitleResId(resourceId);
+        dialogOptions.setTitleTextResId(resourceId);
         return this;
     }
 
@@ -521,7 +521,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setMessage(int resourceId) {
-        dialogOptions.setMessageResId(resourceId);
+        dialogOptions.setMessageTextResId(resourceId);
         return this;
     }
 
@@ -549,7 +549,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextRateNow(@SuppressWarnings("SameParameterValue") int resourceId) {
-        dialogOptions.setTextPositiveResId(resourceId);
+        dialogOptions.setPositiveTextResId(resourceId);
         return this;
     }
 
@@ -577,7 +577,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextLater(@SuppressWarnings("SameParameterValue") int resourceId) {
-        dialogOptions.setTextNeutralResId(resourceId);
+        dialogOptions.setNeutralTextResId(resourceId);
         return this;
     }
 
@@ -606,7 +606,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"unused", "WeakerAccess"})
     public AppRate setTextNever(@SuppressWarnings("SameParameterValue") int resourceId) {
-        dialogOptions.setTextNegativeResId(resourceId);
+        dialogOptions.setNegativeTextResId(resourceId);
         return this;
     }
 
@@ -644,7 +644,7 @@ public final class AppRate {
      */
     @SuppressWarnings({"WeakerAccess", "unused"})
     public AppRate setDialogType(@DialogType.AnyDialogType final int dialogType) {
-        dialogOptions.setDialogType(dialogType);
+        dialogOptions.setType(dialogType);
         return this;
     }
 
@@ -879,7 +879,7 @@ public final class AppRate {
             try {
                 if (!activity.isFinishing()) {
                     dialog.get().show();
-                    dialogOptions.setDialogRedrawn(false);
+                    dialogOptions.setRedrawn(false);
                 } else {
                     Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show Rate Dialog, because " +
                             "activity is in the process of finishing.");

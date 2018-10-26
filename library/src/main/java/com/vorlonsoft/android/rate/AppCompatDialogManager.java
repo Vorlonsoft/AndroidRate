@@ -78,19 +78,19 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      */
     @SuppressWarnings("WeakerAccess")
     protected void supplyAppCompatClassicDialogArguments(@NonNull AlertDialog.Builder builder, @NonNull Context dialogContext) {
-        if (dialogOptions.shouldShowDialogIcon()) {
-            builder.setIcon(dialogOptions.getDialogIcon(dialogContext));
+        if (dialogOptions.isShowIcon()) {
+            builder.setIcon(dialogOptions.getIcon(dialogContext));
         }
-        if (dialogOptions.shouldShowTitle()) {
+        if (dialogOptions.isShowTitle()) {
             builder.setTitle(dialogOptions.getTitleText(context));
         }
-        if (dialogOptions.shouldShowMessage()) {
+        if (dialogOptions.isShowMessage()) {
             builder.setMessage(dialogOptions.getMessageText(context));
         }
-        if (dialogOptions.shouldShowNeutralButton()) {
+        if (dialogOptions.isShowNeutralButton()) {
             builder.setNeutralButton(dialogOptions.getNeutralText(context), neutralListener);
         }
-        if (dialogOptions.shouldShowNegativeButton()) {
+        if (dialogOptions.isShowNegativeButton()) {
             builder.setNegativeButton(dialogOptions.getNegativeText(context), negativeListener);
         }
         builder.setPositiveButton(dialogOptions.getPositiveText(context), positiveListener);
@@ -111,7 +111,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
 
         final View view = dialogOptions.getView(dialogContext);
 
-        if ((dialogOptions.getDialogType() == CLASSIC) || (view == null)) {
+        if ((dialogOptions.getType() == CLASSIC) || (view == null)) {
             supplyAppCompatClassicDialogArguments(builder, dialogContext);
         } else {
             supplyNonClassicDialogArguments(view, dialogContext);

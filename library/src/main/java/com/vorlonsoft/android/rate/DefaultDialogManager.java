@@ -74,8 +74,8 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onShow(DialogInterface dialog) {
-            if (dialogOptions.isDialogRedrawn()) {
-                if (dialogOptions.getDialogType() != CLASSIC) {
+            if (dialogOptions.isRedrawn()) {
+                if (dialogOptions.getType() != CLASSIC) {
                     View ratingBar = ((Dialog) dialog).findViewById(R.id.rate_dialog_rating_bar);
                     if (ratingBar != null) {
                         ((RatingBar) ratingBar).setRating(dialogOptions.getCurrentRating());
@@ -87,7 +87,7 @@ public class DefaultDialogManager implements DialogManager {
                 }
                 increment365DayPeriodDialogLaunchTimes(context);
             }
-            if (isLollipop() && (dialogOptions.getDialogType() == CLASSIC) &&
+            if (isLollipop() && (dialogOptions.getType() == CLASSIC) &&
                 (dialog instanceof android.app.AlertDialog)) {
                 try {
                     final Button positiveButton = ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
@@ -132,7 +132,7 @@ public class DefaultDialogManager implements DialogManager {
          */
         @Override
         public void onDismiss(@Nullable DialogInterface dialog) {
-            dialogOptions.setDialogRedrawn(true);
+            dialogOptions.setRedrawn(true);
         }
     };
     /** <p>Listener used to notify when the rating on the Rate Dialog has been changed.</p> */
@@ -156,9 +156,9 @@ public class DefaultDialogManager implements DialogManager {
             final View buttonNeutral = view.findViewById(R.id.rate_dialog_button_neutral);
             final View buttonNegative = view.findViewById(R.id.rate_dialog_button_negative);
             final View buttonPositive = view.findViewById(R.id.rate_dialog_button_positive);
-            final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() &&
+            final boolean showNeutralButton = dialogOptions.isShowNeutralButton() &&
                                                                             (buttonNeutral != null);
-            final boolean showNegativeButton = dialogOptions.shouldShowNegativeButton() &&
+            final boolean showNegativeButton = dialogOptions.isShowNegativeButton() &&
                                                                            (buttonNegative != null);
             final boolean showPositiveButton = buttonPositive != null;
 
@@ -183,11 +183,11 @@ public class DefaultDialogManager implements DialogManager {
             }
 
             if (layoutRatingBar != null) {
-                if ((dialogOptions.shouldShowDialogIcon() &&
+                if ((dialogOptions.isShowIcon() &&
                      (view.findViewById(R.id.rate_dialog_icon) != null)) ||
-                    (dialogOptions.shouldShowTitle() &&
+                    (dialogOptions.isShowTitle() &&
                      (view.findViewById(R.id.rate_dialog_text_dialog_title) != null)) ||
-                    (dialogOptions.shouldShowMessage() &&
+                    (dialogOptions.isShowMessage() &&
                      (view.findViewById(R.id.rate_dialog_text_dialog_message) != null))) {
                     if (showNeutralButton && !(showNegativeButton || showPositiveButton)) {
                         layoutRatingBar
@@ -227,7 +227,7 @@ public class DefaultDialogManager implements DialogManager {
         this.context = context;
         this.dialogOptions = dialogOptions;
         positiveListener = DefaultDialogOnClickListener.getInstance(context, storeOptions,
-                                                                       dialogOptions.getListener());
+                                                                 dialogOptions.getButtonListener());
         negativeListener = positiveListener;
         neutralListener = positiveListener;
         buttonListener = (View.OnClickListener) positiveListener;
@@ -265,19 +265,19 @@ public class DefaultDialogManager implements DialogManager {
     @SuppressWarnings("WeakerAccess")
     protected void supplyClassicDialogArguments(@NonNull AlertDialog.Builder builder,
                                                 @NonNull Context dialogContext) {
-        if (dialogOptions.shouldShowDialogIcon()) {
-            builder.setIcon(dialogOptions.getDialogIcon(dialogContext));
+        if (dialogOptions.isShowIcon()) {
+            builder.setIcon(dialogOptions.getIcon(dialogContext));
         }
-        if (dialogOptions.shouldShowTitle()) {
+        if (dialogOptions.isShowTitle()) {
             builder.setTitle(dialogOptions.getTitleText(context));
         }
-        if (dialogOptions.shouldShowMessage()) {
+        if (dialogOptions.isShowMessage()) {
             builder.setMessage(dialogOptions.getMessageText(context));
         }
-        if (dialogOptions.shouldShowNeutralButton()) {
+        if (dialogOptions.isShowNeutralButton()) {
             builder.setNeutralButton(dialogOptions.getNeutralText(context), neutralListener);
         }
-        if (dialogOptions.shouldShowNegativeButton()) {
+        if (dialogOptions.isShowNegativeButton()) {
             builder.setNegativeButton(dialogOptions.getNegativeText(context), negativeListener);
         }
         builder.setPositiveButton(dialogOptions.getPositiveText(context), positiveListener);
@@ -302,15 +302,15 @@ public class DefaultDialogManager implements DialogManager {
         final View buttonNeutral = view.findViewById(R.id.rate_dialog_button_neutral);
         final View buttonNegative = view.findViewById(R.id.rate_dialog_button_negative);
         final View buttonPositive = view.findViewById(R.id.rate_dialog_button_positive);
-        final boolean showDialogIcon = dialogOptions.shouldShowDialogIcon() && (icon != null);
-        final boolean showTitle = dialogOptions.shouldShowTitle() && (textDialogTitle != null);
-        final boolean showMessage = dialogOptions.shouldShowMessage() &&
+        final boolean showDialogIcon = dialogOptions.isShowIcon() && (icon != null);
+        final boolean showTitle = dialogOptions.isShowTitle() && (textDialogTitle != null);
+        final boolean showMessage = dialogOptions.isShowMessage() &&
                                                                         (textDialogMessage != null);
-        final boolean showNeutralButton = dialogOptions.shouldShowNeutralButton() &&
+        final boolean showNeutralButton = dialogOptions.isShowNeutralButton() &&
                                                                             (buttonNeutral != null);
 
         if (showDialogIcon) {
-            ((ImageView) icon).setImageDrawable(dialogOptions.getDialogIcon(dialogContext));
+            ((ImageView) icon).setImageDrawable(dialogOptions.getIcon(dialogContext));
         } else {
             if (icon != null) {
                 icon.setVisibility(GONE);
@@ -347,7 +347,7 @@ public class DefaultDialogManager implements DialogManager {
             buttonNeutral.setVisibility(GONE);
         }
 
-        if (dialogOptions.shouldShowNegativeButton() && (buttonNegative != null)) {
+        if (dialogOptions.isShowNegativeButton() && (buttonNegative != null)) {
             ((Button) buttonNegative).setText(dialogOptions.getNegativeText(context));
             buttonNegative.setOnClickListener(buttonListener);
         } else if (buttonNegative != null) {
@@ -398,7 +398,7 @@ public class DefaultDialogManager implements DialogManager {
 
         final View view = dialogOptions.getView(dialogContext);
 
-        if ((dialogOptions.getDialogType() == CLASSIC) || (view == null)) {
+        if ((dialogOptions.getType() == CLASSIC) || (view == null)) {
             supplyClassicDialogArguments(builder, dialogContext);
         } else {
             supplyNonClassicDialogArguments(view, dialogContext);
