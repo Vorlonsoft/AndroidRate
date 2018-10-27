@@ -106,12 +106,16 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
     @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public Dialog createDialog() {
 
-        final AlertDialog.Builder builder = getAppCompatDialogBuilder(context, dialogOptions.getThemeResId());
-        final Context dialogContext = builder.getContext();
+        AlertDialog.Builder builder = getAppCompatDialogBuilder(context, dialogOptions.getThemeResId());
+        Context dialogContext = builder.getContext();
 
         final View view = dialogOptions.getView(dialogContext);
 
         if ((dialogOptions.getType() == CLASSIC) || (view == null)) {
+            if (dialogOptions.getType() != CLASSIC) {
+                builder = getAppCompatDialogBuilder(context, 0);
+                dialogContext = builder.getContext();
+            }
             supplyAppCompatClassicDialogArguments(builder, dialogContext);
         } else {
             supplyNonClassicDialogArguments(view, dialogContext);

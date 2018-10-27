@@ -29,6 +29,8 @@ import androidx.annotation.Nullable;
 import static android.content.DialogInterface.BUTTON_NEGATIVE;
 import static android.content.DialogInterface.BUTTON_NEUTRAL;
 import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.HONEYCOMB;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.LinearLayout.VERTICAL;
@@ -387,11 +389,10 @@ public class DefaultDialogManager implements DialogManager {
     @Override
     public Dialog createDialog() {
 
-        final AlertDialog.Builder builder = getDialogBuilder(context,
-                                                             dialogOptions.getThemeResId());
-        final Context dialogContext;
+        AlertDialog.Builder builder = getDialogBuilder(context, dialogOptions.getThemeResId());
+        Context dialogContext;
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (SDK_INT >= HONEYCOMB) {
             dialogContext = builder.getContext();
         } else {
             dialogContext = context;
@@ -400,6 +401,12 @@ public class DefaultDialogManager implements DialogManager {
         final View view = dialogOptions.getView(dialogContext);
 
         if ((dialogOptions.getType() == CLASSIC) || (view == null)) {
+            if (dialogOptions.getType() != CLASSIC) {
+                builder = getDialogBuilder(context, 0);
+                if (SDK_INT >= HONEYCOMB) {
+                    dialogContext = builder.getContext();
+                }
+            }
             supplyClassicDialogArguments(builder, dialogContext);
         } else {
             supplyNonClassicDialogArguments(view, dialogContext);
