@@ -324,14 +324,15 @@ class DialogOptions internal constructor() {
     @SuppressLint("InflateParams")
     fun getView(dialogContext: Context?): View? {
         return if ((view == null) && (type != CLASSIC)) {
+            var dialogView: View? = null
             if (dialogContext != null) try {
-                view = LayoutInflater.from(dialogContext).inflate(R.layout.rate_dialog, null)
+                dialogView = LayoutInflater.from(dialogContext).inflate(R.layout.rate_dialog, null)
             } catch (e: AssertionError) {
                 Log.i(TAG, "Can't inflate the R.layout.rate_dialog, layoutInflater not found, " +
                                                           "DialogType.CLASSIC dialog will be used.")
             } else Log.w(TAG, "Can't inflate the R.layout.rate_dialog, dialogContext == null, " +
                                                           "DialogType.CLASSIC dialog will be used.")
-            view
+            dialogView
         } else view
     }
     /**
