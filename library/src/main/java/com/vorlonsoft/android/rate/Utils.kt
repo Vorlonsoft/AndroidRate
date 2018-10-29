@@ -21,8 +21,7 @@ import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY
 /**
  * Utils Object - the utils object of the AndroidRate library.
  *
- * Contains [isLollipop] variable and [getDialogBuilder], [getAppCompatDialogBuilder],
- * [isPackagesExists] functions.
+ * Contains [getDialogBuilder], [getAppCompatDialogBuilder], [isPackagesExists] functions.
  *
  * @since    0.5.0
  * @version  1.2.1
@@ -30,20 +29,6 @@ import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY
  * @author   Shintaro Katafuchi
  */
 internal object Utils {
-    /** Whether the Android Lollipop (API 21-22) is installed on the user device or not. */
-    @Suppress("ObjectPropertyName")
-    @JvmStatic
-    private var _isLollipop: Boolean? = null
-    /** Whether the Android Lollipop (API 21-22) is installed on the user device or not. */
-    @JvmStatic
-    val isLollipop: Boolean
-        get() {
-            if (_isLollipop == null) {
-                _isLollipop = ((SDK_INT == LOLLIPOP) || (SDK_INT == LOLLIPOP_MR1))
-            }
-            return _isLollipop ?: false
-        }
-
     /**
      * Creates [android.app.AlertDialog.Builder].
      *

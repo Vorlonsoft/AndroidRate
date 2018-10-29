@@ -31,6 +31,7 @@ import static android.content.DialogInterface.BUTTON_NEUTRAL;
 import static android.content.DialogInterface.BUTTON_POSITIVE;
 import static android.os.Build.VERSION.SDK_INT;
 import static android.os.Build.VERSION_CODES.HONEYCOMB;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static android.widget.LinearLayout.VERTICAL;
@@ -39,7 +40,6 @@ import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
 import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriodDialogLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
-import static com.vorlonsoft.android.rate.Utils.isLollipop;
 
 /**
  * <p>DefaultDialogManager Class - default dialog manager class implements {@link DialogManager}
@@ -89,7 +89,7 @@ public class DefaultDialogManager implements DialogManager {
                 }
                 increment365DayPeriodDialogLaunchTimes(context);
             }
-            if (isLollipop() && (dialogOptions.getType() == CLASSIC) &&
+            if ((SDK_INT >= LOLLIPOP) && (dialogOptions.getType() == CLASSIC) &&
                 (dialog instanceof android.app.AlertDialog)) {
                 try {
                     final Button positiveButton = ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
