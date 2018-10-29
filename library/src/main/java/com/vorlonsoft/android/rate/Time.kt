@@ -36,20 +36,20 @@ open class Time {
     /** Contains constants for units of time in milliseconds. */
     companion object {
         /** Time unit representing one thousandth of a second. */
-        const val MILLISECOND: Long = 1
+        const val MILLISECOND: Long = 1L
         /** Time unit representing one second. */
-        const val SECOND: Long = MILLISECOND * 1_000
+        const val SECOND: Long = MILLISECOND * 1_000L
         /** Time unit representing sixty seconds. */
-        const val MINUTE: Long = SECOND * 60
+        const val MINUTE: Long = SECOND * 60L
         /** Time unit representing sixty minutes. */
-        const val HOUR: Long = MINUTE * 60
+        const val HOUR: Long = MINUTE * 60L
         /** Time unit representing twenty four hours. */
-        const val DAY: Long = HOUR * 24
+        const val DAY: Long = HOUR * 24L
         /** Time unit representing seven days. */
-        const val WEEK: Long = DAY * 7
+        const val WEEK: Long = DAY * 7L
         /** Time unit representing thirty days. */
-        const val MONTH: Long = DAY * 30
+        const val MONTH: Long = DAY * 30L
         /** Time unit representing three hundred and sixty five days. */
-        const val YEAR: Long = DAY * 365
+        const val YEAR: Long = DAY * 365L
     }
 }
