@@ -89,8 +89,9 @@ public class DefaultDialogManager implements DialogManager {
                 }
                 increment365DayPeriodDialogLaunchTimes(context);
             }
-            if ((SDK_INT >= LOLLIPOP) && (dialogOptions.getType() == CLASSIC) &&
-                (dialog instanceof android.app.AlertDialog)) {
+            if (((SDK_INT >= LOLLIPOP) || (dialog instanceof androidx.appcompat.app.AlertDialog)) &&
+                ((dialogOptions.getType() == CLASSIC) ||
+                 (dialogOptions.getView(context) == null))) {
                 try {
                     final Button positiveButton = ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
                     final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
