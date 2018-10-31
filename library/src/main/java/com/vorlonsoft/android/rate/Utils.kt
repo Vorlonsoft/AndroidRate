@@ -12,8 +12,6 @@ import android.content.pm.ApplicationInfo
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.HONEYCOMB
 import android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH
-import android.os.Build.VERSION_CODES.LOLLIPOP
-import android.os.Build.VERSION_CODES.LOLLIPOP_MR1
 import androidx.annotation.RequiresApi
 import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING
 import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY

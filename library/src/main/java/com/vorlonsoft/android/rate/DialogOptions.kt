@@ -109,8 +109,11 @@ class DialogOptions internal constructor() {
 
     /** The Rate Dialog theme resource ID. */
     var themeResId: Int? = null
-        @StyleRes get() = if (field != null) field else
-            if (type != CLASSIC) R.style.RateDialogTransparentTheme else 0
+        @StyleRes get() = when {
+            field != null -> field
+            type != CLASSIC -> R.style.RateDialogTransparentTheme
+            else -> 0
+        }
 
     /** The Rate Dialog title text resource ID. */
     var titleTextResId: Int = R.string.rate_dialog_title
