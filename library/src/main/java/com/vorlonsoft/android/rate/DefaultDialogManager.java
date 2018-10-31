@@ -92,15 +92,22 @@ public class DefaultDialogManager implements DialogManager {
                 ((dialogOptions.getType() == CLASSIC) ||
                  (dialogOptions.getView(context) == null))) {
                 try {
-                    final Button positiveButton = ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
+                    final Button positiveButton = (dialog
+                                                    instanceof androidx.appcompat.app.AlertDialog) ?
+                          ((androidx.appcompat.app.AlertDialog) dialog).getButton(BUTTON_POSITIVE) :
+                          ((AlertDialog) dialog).getButton(BUTTON_POSITIVE);
                     final LinearLayout linearLayout = (LinearLayout) positiveButton.getParent();
                     if ((linearLayout.getOrientation() != VERTICAL) &&
-                        (positiveButton.getLeft() + positiveButton.getWidth() >
+                        ((positiveButton.getLeft() + positiveButton.getWidth()) >
                                                                          linearLayout.getWidth())) {
-                        final Button neutralButton = ((AlertDialog) dialog)
-                                                                         .getButton(BUTTON_NEUTRAL);
-                        final Button negativeButton = ((AlertDialog) dialog)
-                                                                        .getButton(BUTTON_NEGATIVE);
+                        final Button neutralButton = (dialog
+                                                    instanceof androidx.appcompat.app.AlertDialog) ?
+                           ((androidx.appcompat.app.AlertDialog) dialog).getButton(BUTTON_NEUTRAL) :
+                           ((AlertDialog) dialog).getButton(BUTTON_NEUTRAL);
+                        final Button negativeButton = (dialog
+                                                    instanceof androidx.appcompat.app.AlertDialog) ?
+                          ((androidx.appcompat.app.AlertDialog) dialog).getButton(BUTTON_NEGATIVE) :
+                          ((AlertDialog) dialog).getButton(BUTTON_NEGATIVE);
                         linearLayout.setOrientation(VERTICAL);
                         linearLayout.setGravity(Gravity.END);
                         if ((neutralButton != null) && (negativeButton != null)) {
