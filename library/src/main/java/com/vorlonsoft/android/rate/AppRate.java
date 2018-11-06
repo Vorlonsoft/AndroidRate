@@ -925,7 +925,7 @@ public final class AppRate {
      */
     @SuppressWarnings("WeakerAccess")
     public void dismissRateDialog() {
-        if ((dialog != null) && (dialog.get() != null)) {
+        if ((dialog != null) && (dialog.get() != null) && dialog.get().isShowing()) {
             dialog.get().dismiss();
         }
         clearRateDialog();
