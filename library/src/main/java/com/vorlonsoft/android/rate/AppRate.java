@@ -27,6 +27,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 
 import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR1;
+import static android.os.Build.VERSION_CODES.KITKAT;
 import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialogLaunchTimes;
@@ -84,7 +87,7 @@ public final class AppRate {
     private DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
 
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        if (SDK_INT >= KITKAT) {
             customEventsCounts = new ArrayMap<>();
         } else {
             customEventsCounts = new HashMap<>();
@@ -878,8 +881,14 @@ public final class AppRate {
         if (dialog.get() != null) {
             try {
                 if (!activity.isFinishing()) {
-                    dialog.get().show();
-                    dialogOptions.setRedrawn(false);
+                    if (SDK_INT < JELLY_BEAN_MR1 || !activity.isDestroyed()) {
+                        dialog.get().show();
+                        dialogOptions.setRedrawn(false);
+                    } else {
+                        Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show Rate Dialog, because " +
+                                "the final #onDestroy() call has been made on the Activity, so " +
+                                "this instance is now dead.");
+                    }
                 } else {
                     Log.w(TAG, LOG_MESSAGE_PART_1 + "can't show Rate Dialog, because " +
                             "activity is in the process of finishing.");
