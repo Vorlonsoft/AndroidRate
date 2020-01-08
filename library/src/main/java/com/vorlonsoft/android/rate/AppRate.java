@@ -989,7 +989,7 @@ public final class AppRate {
             return false;
         }
 
-        return ((repromptDate == 0L)) || isOverDate(getLastAgreeShowFalseDate(context), repromptDate);
+        return (repromptDate == 0L) || isOverDate(getLastAgreeShowFalseDate(context), repromptDate);
     }
 
     private boolean isOverLaunchTimes() {
