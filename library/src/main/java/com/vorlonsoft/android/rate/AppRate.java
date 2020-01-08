@@ -12,7 +12,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +35,7 @@ import static com.vorlonsoft.android.rate.PreferenceHelper.get365DayPeriodDialog
 import static com.vorlonsoft.android.rate.PreferenceHelper.getCustomEventCount;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getInstallDate;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getIsAgreeShowDialog;
+import static com.vorlonsoft.android.rate.PreferenceHelper.getLastAgreeShowFalseDate;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getLaunchTimes;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindInterval;
 import static com.vorlonsoft.android.rate.PreferenceHelper.getRemindLaunchesNumber;
@@ -76,6 +76,8 @@ public final class AppRate {
     private boolean isVersionCodeCheck = false;
     private boolean isVersionNameCheck = false;
     private long installDate = Time.DAY * 10L;
+    private long repromptDate = Time.MONTH * 6L;
+    private boolean repromptCheck = false;
     private byte appLaunchTimes = (byte) 10;
     private long remindInterval = Time.DAY;
     private byte remindLaunchesNumber = (byte) 0;
@@ -213,6 +215,24 @@ public final class AppRate {
     @SuppressWarnings({"WeakerAccess", "unused"})
     public AppRate setInstallDays(byte installDate) {
         return setTimeToWait(Time.DAY, installDate);
+    }
+
+    /**
+     * <p>Sets the minimal number of time units until the Rate Dialog appears after it has already
+     * been actioned.</p>
+     * <p>Default is off (no check), calling this method enables the check, 0 means user
+     * accept/ignore millisecond, 10 means prompt is re-shown 10 or more time units later than the
+     * last accept/ignore.</p>
+     * @param timeUnit one of the values defined by {@link Time.TimeUnits}
+     * @param timeUnitsNumber time units number
+     * @return the {@link AppRate} singleton object
+     * @see Time.TimeUnits
+     */
+    @SuppressWarnings("unused")
+    public AppRate setTimeToReprompt(@Time.TimeUnits long timeUnit, short timeUnitsNumber) {
+        this.repromptDate = timeUnit * timeUnitsNumber;
+        this.repromptCheck = true;
+        return this;
     }
 
     /**
@@ -952,7 +972,9 @@ public final class AppRate {
      */
     @SuppressWarnings("WeakerAccess")
     public boolean shouldShowRateDialog() {
-        return getAgreeShowDialog() &&
+        // If Agree show is false (user has ignored/accepted) then return false unless it has
+        // been `repromptDate` time since the time when the user accepted/ignored the prompt
+        return (getAgreeShowDialog() || isOverLastAgreeShowFalseDate()) &&
                 isOverLaunchTimes() &&
                 isSelectedAppLaunch() &&
                 isOverInstallDate() &&
@@ -960,6 +982,14 @@ public final class AppRate {
                 isOverRemindLaunchesNumber() &&
                 isOverCustomEventsRequirements() &&
                 isBelow365DayPeriodMaxNumberDialogLaunchTimes();
+    }
+
+    private boolean isOverLastAgreeShowFalseDate() {
+        if (!repromptCheck) {
+            return false;
+        }
+
+        return ((repromptDate == 0L)) || isOverDate(getLastAgreeShowFalseDate(context), repromptDate);
     }
 
     private boolean isOverLaunchTimes() {

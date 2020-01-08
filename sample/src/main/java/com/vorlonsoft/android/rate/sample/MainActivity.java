@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                                                      *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
                 .setTimeToWait(Time.DAY, (short) 3) // default is 10 days, 0 means install millisecond, 10 means app is launched 10 or more time units later than installation
                 .setLaunchTimes((byte) 10)          // default is 10, 3 means app is launched 3 or more times
+                .setTimeToReprompt(Time.MONTH, (short) 3) // default is off, 3 means prompt is shown again 3 months after last user accept/ignore action. Setting this value enables the check.
                 .setRemindTimeToWait(Time.DAY, (short) 2) // default is 1 day, 1 means app is launched 1 or more time units after neutral button clicked
                 .setRemindLaunchesNumber((byte) 1)  // default is 0, 1 means app is launched 1 or more times after neutral button clicked
                 .setSelectedAppLaunches((byte) 4)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
