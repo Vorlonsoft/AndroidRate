@@ -130,6 +130,7 @@ protected void onCreate(Bundle savedInstanceState) {
                                            *         setStoreType(Intent...) (Any custom intent/intents, Intent... - an intent or array of intents) */
       .setTimeToWait(Time.DAY, (short) 0) // default is 10 days, 0 means install millisecond, 10 means app is launched 10 or more time units later than installation
       .setLaunchTimes((byte) 3)           // default is 10, 3 means app is launched 3 or more times
+      .setTimeToReprompt(Time.MONTH, (short) 3) // default is off, 3 means prompt is shown again 3 months after last user accept/ignore action. Setting this value enables the check.
       .setRemindTimeToWait(Time.DAY, (short) 2) // default is 1 day, 1 means app is launched 1 or more time units after neutral button clicked
       .setRemindLaunchesNumber((byte) 1)  // default is 0, 1 means app is launched 1 or more times after neutral button clicked
       .setSelectedAppLaunches((byte) 1)   // default is 1, 1 means each launch, 2 means every 2nd launch, 3 means every 3rd launch, etc
@@ -165,6 +166,7 @@ Default options of the Rate Dialog are as below:
 10. Don't re-enable the Rate Dialog if a new version of app with different version name is installed. Change via `AppRate#setVersionNameCheck(boolean)`.
 11. Setting `AppRate#setDebug(boolean)` to `true` ensures that the Rate Dialog will be shown each time the app is launched. **This feature is for development only!**.
 12. There is no default callback when the button of Rate Dialog is pressed. Change via `AppRate.with(this).setOnClickButtonListener(OnClickButtonListener)`.
+13. Prompt is not shown again after user action (accept/ignore).
 
 ### OnClickButtonListener interface
 

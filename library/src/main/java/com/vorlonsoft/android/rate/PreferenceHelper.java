@@ -40,6 +40,8 @@ final class PreferenceHelper {
 
     private static final String PREF_KEY_IS_AGREE_SHOW_DIALOG = "androidrate_is_agree_show_dialog";
 
+    private static final String PREF_KEY_LAST_AGREE_SHOW_FALSE_DATE = "androidrate_last_agree_show_false_date";
+
     private static final String PREF_KEY_LAUNCH_TIMES = "androidrate_launch_times";
 
     private static final String PREF_KEY_REMIND_INTERVAL = "androidrate_remind_interval";
@@ -216,10 +218,20 @@ final class PreferenceHelper {
         getPreferencesEditor(context)
                 .putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree)
                 .apply();
+
+        if (!isAgree) {
+            getPreferencesEditor(context)
+                    .putLong(PREF_KEY_LAST_AGREE_SHOW_FALSE_DATE, new Date().getTime())
+                    .apply();
+        }
     }
 
     static boolean getIsAgreeShowDialog(final Context context) {
         return getPreferences(context).getBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
+    }
+
+    static long getLastAgreeShowFalseDate(final Context context) {
+        return getPreferences(context).getLong(PREF_KEY_LAST_AGREE_SHOW_FALSE_DATE, 0L);
     }
 
     /**
