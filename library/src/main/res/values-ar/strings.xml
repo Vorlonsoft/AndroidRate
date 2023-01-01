@@ -7,7 +7,7 @@
 <resources>
     <!-- Tomedes - Smart Human Translations - start-->
     <string name="rate_dialog_title">قيم هذا التطبيق</string>
-    <string name="rate_dialog_message">إذا كنت تسمتع باللعب بهذا التطبيق، فما رأيك في تقييمه؟ لن يأخذ منك أكثر من دقيقة. شكرًا لك على دعمك!</string>
+    <string name="rate_dialog_message">إذا كنت تسمتع بإستخدام هذا التطبيق، فما رأيك في تقييمه؟ لن يأخذ منك أكثر من دقيقة. شكرًا لك على دعمك!</string>
     <string name="rate_dialog_ok">قيّمه الآن</string>
     <string name="rate_dialog_cancel">ذكّرنا لاحقًا</string>
     <string name="rate_dialog_no">لا، شكرًا</string>
