@@ -37,29 +37,9 @@ build/
 ## File-based project format
 *.iws
 ## Gradle
-.idea/**/gradle.xml
-.idea/**/libraries
-.idea/**/modules.xml
-## Markdown
-.idea/**/markdown-navigator.xml
+.idea/
 ## Module files
 *.iml
-## Sensitive or high-churn files
-.idea/**/caches/
-.idea/**/dataSources/
-.idea/**/dataSources.ids
-.idea/**/dataSources.local.xml
-.idea/**/dynamic.xml
-.idea/**/misc.xml
-.idea/**/sqlDataSources.xml
-.idea/**/uiDesigner.xml
-## User-specific stuff
-.idea/**/assetWizardSettings.xml
-.idea/**/dictionaries
-.idea/**/tasks.xml
-.idea/**/workspace.xml
-## VCS
-.idea/**/vcs.xml
 
 # Java class files
 *.class

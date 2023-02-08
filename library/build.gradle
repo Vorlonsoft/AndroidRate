@@ -4,24 +4,32 @@
  * Licensed under The MIT License (MIT)
  */
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+plugins {
+    id("com.android.library")
+    id("kotlin-android")
+    id("kotlin-kapt")
+}
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         //noinspection MinSdkTooLow
         minSdkVersion 9
-        targetSdkVersion 28
+        targetSdkVersion rootProject.ext.minSdkVersion
         versionCode version_code
         versionName version
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
-        sourceCompatibility java_version
-        targetCompatibility java_version
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = javaVersion
+        freeCompilerArgs += '-Xjvm-default=all'
+        freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
     }
     buildTypes {
         release {
@@ -47,10 +55,7 @@ android {
     }
 }
 dependencies {
-    compileOnly 'androidx.annotation:annotation:1.0.0'
-    api 'androidx.appcompat:appcompat:1.0.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
-    androidTestImplementation 'androidx.test:runner:1.1.0'
+    compileOnly 'androidx.annotation:annotation:1.3.0'
+    api "androidx.appcompat:appcompat:${androidx.appcompat}"
+    androidTestImplementation "androidx.test:runner:${androidxTest.runner}"
 }
-apply from: 'https://raw.github.com/Vorlonsoft/EasyDokkaPlugin/master/dokka.gradle'
-apply from: 'https://raw.github.com/Vorlonsoft/GradleMavenPush/master/maven-push.gradle'

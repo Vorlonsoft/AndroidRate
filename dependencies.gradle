@@ -1,0 +1,20 @@
+ext {
+    // build configurations
+    minSdkVersion = 23
+    compileSdkVersion = 31
+    javaVersion = JavaVersion.VERSION_1_8
+    kotlinVersion = '1.7.20'
+    buildToolsVersion = "31.0.0"
+
+    androidx = [
+            appcompat : "1.4.2"
+    ]
+
+    androidxTest = [
+            runner : "1.4.0"
+    ]
+
+    squareup = [
+            leakcanary : "2.10"
+    ]
+}
