@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.StyleRes
+import androidx.appcompat.content.res.AppCompatResources
 import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING
 import com.vorlonsoft.android.rate.Constants.Utils.TAG
 import com.vorlonsoft.android.rate.DialogType.Companion.CLASSIC
@@ -150,7 +151,7 @@ class DialogOptions internal constructor() {
      *
      * @param messageText the Rate Dialog message text
      */
-    fun setMessageText(messageText: String) {
+    fun setMessageText(messageText: String?) {
         this.messageText = messageText
     }
 
@@ -171,7 +172,7 @@ class DialogOptions internal constructor() {
      *
      * @param negativeText the Rate Dialog negative text
      */
-    fun setNegativeText(negativeText: String) {
+    fun setNegativeText(negativeText: String?) {
         this.negativeText = negativeText
     }
 
@@ -192,7 +193,7 @@ class DialogOptions internal constructor() {
      *
      * @param neutralText the Rate Dialog neutral text
      */
-    fun setNeutralText(neutralText: String) {
+    fun setNeutralText(neutralText: String?) {
         this.neutralText = neutralText
     }
 
@@ -213,7 +214,7 @@ class DialogOptions internal constructor() {
      *
      * @param positiveText the Rate Dialog positive text
      */
-    fun setPositiveText(positiveText: String) {
+    fun setPositiveText(positiveText: String?) {
         this.positiveText = positiveText
     }
 
@@ -234,28 +235,26 @@ class DialogOptions internal constructor() {
      *
      * @param titleText the Rate Dialog title text
      */
-    fun setTitleText(titleText: String) {
+    fun setTitleText(titleText: String?) {
         this.titleText = titleText
     }
 
-    /** The Rate Dialog SoftReference to the buttons listener implemented by a library user. */
-    private var buttonListener: SoftReference<OnClickButtonListener>? = null
+    /** The Rate Dialog buttons listener implemented by a library user. */
+    private var buttonListener: OnClickButtonListener? = null
     /**
      * Returns the Rate Dialog buttons on-click listener implemented by a library user.
      *
      * @return the Rate Dialog buttons on-click listener
      */
-    fun getButtonListener(): OnClickButtonListener? {
-        return buttonListener?.get()
-    }
+    fun getButtonListener(): OnClickButtonListener? = buttonListener
     /**
-     * Sets the Rate Dialog SoftReference to the buttons on-click listener implemented by a library
+     * Sets a listener on the Rate Dialog buttons implemented by a library
      * user.
      *
      * @param buttonListener the Rate Dialog buttons on-click listener
      */
-    fun setButtonListener(buttonListener: OnClickButtonListener) {
-        this.buttonListener = SoftReference(buttonListener)
+    fun setButtonListener(buttonListener: OnClickButtonListener?) {
+        this.buttonListener = buttonListener
     }
 
     /** The Rate Dialog icon. */
@@ -269,12 +268,7 @@ class DialogOptions internal constructor() {
     fun getIcon(context: Context): Drawable? {
         return when {
             (iconResId != 0) -> try {
-                if (SDK_INT >= LOLLIPOP) {
-                    context.getDrawable(iconResId)
-                } else {
-                    @Suppress("DEPRECATION")
-                    context.resources.getDrawable(iconResId)
-                }
+                AppCompatResources.getDrawable(context, iconResId)
             } catch (e: android.content.res.Resources.NotFoundException) {
                 Log.i(TAG, "Dialog icon with the given ResId doesn't exist.")
                 if (icon != null) icon else AppInformation.getIcon(context)

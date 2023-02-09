@@ -13,4 +13,5 @@
     <string name="new_rate_dialog_never" tools:ignore="MissingTranslation">Never</string>
     <string name="new_rate_dialog_later" tools:ignore="MissingTranslation">Later</string>
     <string name="new_rate_dialog_ok" tools:ignore="MissingTranslation">Rate</string>
+    <string name="in_app_review_button" translatable="false">In App Review Test</string>
 </resources>

@@ -16,10 +16,8 @@ android {
 
     defaultConfig {
         //noinspection MinSdkTooLow
-        minSdkVersion 9
-        targetSdkVersion rootProject.ext.minSdkVersion
-        versionCode version_code
-        versionName version
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.compileSdkVersion
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
@@ -53,8 +51,11 @@ android {
             matchingFallbacks = ['release']
         }
     }
+    namespace 'com.vorlonsoft.android.rate'
 }
 dependencies {
+    // Kotlin
+    implementation "androidx.core:core-ktx:${ktx.core}"
     compileOnly 'androidx.annotation:annotation:1.3.0'
     api "androidx.appcompat:appcompat:${androidx.appcompat}"
     androidTestImplementation "androidx.test:runner:${androidxTest.runner}"

@@ -1,17 +1,24 @@
 ext {
     // build configurations
-    minSdkVersion = 23
+    minSdkVersion = 20
     compileSdkVersion = 31
     javaVersion = JavaVersion.VERSION_1_8
     kotlinVersion = '1.7.20'
+    androidPluginVersion = '7.3.1'
     buildToolsVersion = "31.0.0"
 
     androidx = [
-            appcompat : "1.4.2"
+            appcompat : "1.4.2",
+            constraintlayout : '2.1.4',
     ]
 
     androidxTest = [
             runner : "1.4.0"
+    ]
+
+    ktx = [
+            // TODO: 1.9.0 Requires SDK 33
+            core : '1.8.0'
     ]
 
     squareup = [

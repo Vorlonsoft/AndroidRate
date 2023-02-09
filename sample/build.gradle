@@ -6,6 +6,8 @@
 
 plugins {
     id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -22,7 +24,7 @@ android {
 
     defaultConfig {
         applicationId 'com.vorlonsoft.android.rate.sample'
-        minSdkVersion 14
+        minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.compileSdkVersion
         versionCode version_code
         versionName version
@@ -30,6 +32,9 @@ android {
     compileOptions {
         sourceCompatibility rootProject.ext.javaVersion
         targetCompatibility rootProject.ext.javaVersion
+    }
+    kotlinOptions {
+        jvmTarget = rootProject.ext.javaVersion
     }
     bundle {
         language {
@@ -74,6 +79,7 @@ android {
             matchingFallbacks = ['release']
         }
     }
+    namespace 'com.vorlonsoft.android.rate.sample'
     applicationVariants.all { variant ->
         variant.outputs.all {
             outputFileName = "${variant.name}-${variant.versionName}.apk"
@@ -82,6 +88,7 @@ android {
 }
 dependencies {
     implementation project(':library')
+    implementation "androidx.constraintlayout:constraintlayout:${androidx.constraintlayout}"
     implementation 'com.google.android.gms:play-services-base:18.1.0'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${squareup.leakcanary}"
 }
