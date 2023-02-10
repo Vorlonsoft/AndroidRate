@@ -25,9 +25,8 @@ import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
 import static com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1;
 import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
 import static com.vorlonsoft.android.rate.IntentHelper.createIntentsForStore;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setIsAgreeShowDialog;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindInterval;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setRemindLaunchesNumber;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setReminderToShowAgain;
+import static com.vorlonsoft.android.rate.PreferenceHelper.setAgreedOrDeclined;
 import static com.vorlonsoft.android.rate.StoreType.AMAZON;
 import static com.vorlonsoft.android.rate.StoreType.APPLE;
 import static com.vorlonsoft.android.rate.StoreType.BAZAAR;
@@ -210,18 +209,17 @@ final class DefaultDialogOnClickListener implements View.OnClickListener,
         } else {
             Log.w(TAG, LOG_MESSAGE_PART_1 + "can't get app package name.");
         }
-        setIsAgreeShowDialog(context, false);
+        setAgreedOrDeclined(context, true);
     }
 
     /** <p>Calls when a negative button on the Rate Dialog is clicked.</p> */
     private void onNegativeButtonClick() {
-        setIsAgreeShowDialog(context, false);
+        setAgreedOrDeclined(context, true);
     }
 
     /** <p>Calls when a neutral button on the Rate Dialog is clicked.</p> */
     private void onNeutralButtonClick() {
-        setRemindInterval(context);
-        setRemindLaunchesNumber(context);
+        setReminderToShowAgain(context);
     }
 
     /**

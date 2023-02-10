@@ -6,21 +6,17 @@
 
 package com.vorlonsoft.android.rate;
 
+import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
+
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Build;
 import android.view.View;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.ref.WeakReference;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 
-import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * <p>AppCompatDialogManager Class - v7 AppCompat library dialog manager class implements
@@ -42,10 +38,8 @@ import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
  */
 public class AppCompatDialogManager extends DefaultDialogManager implements DialogManager {
     /** <p>The WeakReference to the {@link AppCompatDialogManager} singleton object.</p> */
-    private static volatile WeakReference<DialogManager> singleton = null;
 
     @SuppressWarnings("WeakerAccess")
-    @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     protected AppCompatDialogManager(final Context context, final DialogOptions dialogOptions,
                                      final StoreOptions storeOptions) {
         super(context, dialogOptions, storeOptions);
@@ -61,7 +55,6 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      */
     @SuppressWarnings("WeakerAccess")
     @NonNull
-    @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     protected AlertDialog.Builder getAppCompatDialogBuilder(@NonNull final Context context,
                                                             final int themeResId) {
         return Utils.getAppCompatDialogBuilder(context, themeResId);
@@ -78,7 +71,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      */
     @SuppressWarnings("WeakerAccess")
     protected void supplyAppCompatClassicDialogArguments(@NonNull AlertDialog.Builder builder, @NonNull Context dialogContext) {
-        if (dialogOptions.isShowIcon()) {
+        if (Boolean.TRUE.equals(dialogOptions.isShowIcon())) {
             builder.setIcon(dialogOptions.getIcon(dialogContext));
         }
         if (dialogOptions.isShowTitle()) {
@@ -103,7 +96,6 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      */
     @Nullable
     @Override
-    @RequiresApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     public Dialog createDialog() {
 
         AlertDialog.Builder builder = getAppCompatDialogBuilder(context, dialogOptions.getThemeResId());
@@ -146,20 +138,10 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      */
     public static class Factory implements DialogManager.Factory {
 
-        public Factory() {
-            if (singleton != null) {
-                singleton.clear();
-            }
-        }
-
         /** <p>Clear {@link AppCompatDialogManager} singleton.</p> */
         @SuppressWarnings("unused")
         @Override
-        public void clearDialogManager() {
-            if (singleton != null) {
-                singleton.clear();
-            }
-        }
+        public void clearDialogManager() { /* needed */ }
 
         /**
          * <p>Creates {@link AppCompatDialogManager} singleton object.
@@ -178,27 +160,9 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
         public DialogManager createDialogManager(@NotNull final Context context,
                                                  @NotNull final DialogOptions dialogOptions,
                                                  @NotNull final StoreOptions storeOptions) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
-                AppRate.with(context).setDialogManagerFactory(dialogManagerFactory);
-                return dialogManagerFactory.createDialogManager(context, dialogOptions, storeOptions);
-            } else {
-                if ((singleton == null) || (singleton.get() == null)) {
-                    synchronized (AppCompatDialogManager.class) {
-                        if ((singleton == null) || (singleton.get() == null)) {
-                            if (singleton != null) {
-                                singleton.clear();
-                            }
-                            singleton = new WeakReference<>(new AppCompatDialogManager(context, dialogOptions, storeOptions));
-                        }else {
-                            ((DefaultDialogManager) singleton.get()).setContext(context);
-                        }
-                    }
-                } else {
-                    ((DefaultDialogManager) singleton.get()).setContext(context);
-                }
-                return singleton.get();
-            }
+            DialogManager.Factory dialogManagerFactory = new DefaultDialogManager.Factory();
+            AppRate.with(context).setDialogManagerFactory(dialogManagerFactory);
+            return dialogManagerFactory.createDialogManager(context, dialogOptions, storeOptions);
         }
     }
 }

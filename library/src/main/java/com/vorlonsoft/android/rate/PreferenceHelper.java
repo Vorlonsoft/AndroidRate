@@ -6,17 +6,17 @@
 
 package com.vorlonsoft.android.rate;
 
+import static com.vorlonsoft.android.rate.Constants.Date.YEAR_IN_DAYS;
+import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
+import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
-
-import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static com.vorlonsoft.android.rate.Constants.Date.YEAR_IN_DAYS;
-import static com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING;
-import static com.vorlonsoft.android.rate.Constants.Utils.UTILITY_CLASS_MESSAGE;
+import java.util.Date;
 
 /**
  * <p>PreferenceHelper Class - preference helper class of the AndroidRate library.</p>
@@ -38,11 +38,11 @@ final class PreferenceHelper {
 
     private static final String PREF_KEY_INSTALL_DATE = "androidrate_install_date";
 
-    private static final String PREF_KEY_IS_AGREE_SHOW_DIALOG = "androidrate_is_agree_show_dialog";
+    private static final String PREF_KEY_AGREED_OR_DECLINED = "androidrate_agreed_or_declined";
 
     private static final String PREF_KEY_LAUNCH_TIMES = "androidrate_launch_times";
 
-    private static final String PREF_KEY_REMIND_INTERVAL = "androidrate_remind_interval";
+    private static final String PREF_KEY_LAST_TIME_SHOWN = "androidrate_last_time_shown";
 
     private static final String PREF_KEY_REMIND_LAUNCHES_NUMBER = "androidrate_remind_launches_number";
 
@@ -111,13 +111,13 @@ final class PreferenceHelper {
                 .putLong(PREF_KEY_DIALOG_FIRST_LAUNCH_TIME, 0L)
                 .putLong(PREF_KEY_INSTALL_DATE, new Date().getTime())
                 .putInt(PREF_KEY_LAUNCH_TIMES, 1)
-                .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
+                .putLong(PREF_KEY_LAST_TIME_SHOWN, 0L)
                 .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0)
                 .putLong(PREF_KEY_VERSION_CODE, AppInformation.getLongVersionCode(context))
                 .putString(PREF_KEY_VERSION_NAME, AppInformation.getVersionName(context))
                 .apply();
-        if (getIsAgreeShowDialog(context)) { //if (get() == true) set(true); - NOT error!
-            setIsAgreeShowDialog(context, true);
+        if (!getAgreedOrDeclined(context)) { //if (get() == false) set(false); - NOT error!
+            setAgreedOrDeclined(context, false);
         }
     }
 
@@ -143,7 +143,7 @@ final class PreferenceHelper {
                 }
             }
             setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentYear,
-                                           currentDay, (short) (Short.valueOf(currentDayCount) + 1));
+                                           currentDay, (short) (Short.parseShort(currentDayCount) + 1));
         } else {
             setCurrentDayDialogLaunchTimes(context, currentDialogLaunchTimes, currentYear,
                                            currentDay, (short) 1);
@@ -162,7 +162,7 @@ final class PreferenceHelper {
         if (currentYear > 0) {
             currentDay = (short) (currentDay % YEAR_IN_DAYS);
             for (short s = currentDay; s < YEAR_IN_DAYS; s++) {
-                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + s + "y" + String.valueOf(currentYear - 1) + "-",
+                dialogLaunchTimes = dialogLaunchTimes.replaceAll(":" + s + "y" + (currentYear - 1) + "-",
                                                                  ":");
             }
         }
@@ -175,7 +175,7 @@ final class PreferenceHelper {
         short dialogLaunchTimesCount = 0;
         final String[] dialogLaunchTimesSplit = dialogLaunchTimes.split(":");
         for (String aDialogLaunchTimesSplit : dialogLaunchTimesSplit) {
-            dialogLaunchTimesCount = (short) (dialogLaunchTimesCount + Short.valueOf(aDialogLaunchTimesSplit));
+            dialogLaunchTimesCount = (short) (dialogLaunchTimesCount + Short.parseShort(aDialogLaunchTimesSplit));
         }
 
         return dialogLaunchTimesCount;
@@ -206,20 +206,21 @@ final class PreferenceHelper {
     }
 
     /**
-     * <p>Sets the Rate Dialog agree flag.</p>
-     * <p>If it is false, the Rate Dialog will never be shown until the data is cleared.</p>
+     * <p>Sets the Rate Dialog agreed or declined flag.</p>
+     * <p>If true, the user has either agreed or declined to rating the app.
+     * Meaning the rating dialog shouldn't be shown again.</p>
      *
      * @param context context
-     * @param isAgree the Rate Dialog agree flag
+     * @param agreedOrDeclined the Rate Dialog agree flag
      */
-    static void setIsAgreeShowDialog(final Context context, final boolean isAgree) {
+    static void setAgreedOrDeclined(final Context context, final boolean agreedOrDeclined) {
         getPreferencesEditor(context)
-                .putBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, isAgree)
+                .putBoolean(PREF_KEY_AGREED_OR_DECLINED, agreedOrDeclined)
                 .apply();
     }
 
-    static boolean getIsAgreeShowDialog(final Context context) {
-        return getPreferences(context).getBoolean(PREF_KEY_IS_AGREE_SHOW_DIALOG, true);
+    static boolean getAgreedOrDeclined(final Context context) {
+        return getPreferences(context).getBoolean(PREF_KEY_AGREED_OR_DECLINED, false);
     }
 
     /**
@@ -238,14 +239,14 @@ final class PreferenceHelper {
         return (short) getPreferences(context).getInt(PREF_KEY_LAUNCH_TIMES, 0);
     }
 
-    static void setRemindInterval(final Context context) {
+    static void setLastTimeShown(final Context context) {
         getPreferencesEditor(context)
-                .putLong(PREF_KEY_REMIND_INTERVAL, new Date().getTime())
+                .putLong(PREF_KEY_LAST_TIME_SHOWN, new Date().getTime())
                 .apply();
     }
 
-    static long getRemindInterval(final Context context) {
-        return getPreferences(context).getLong(PREF_KEY_REMIND_INTERVAL, 0L);
+    static long getLastTimeShown(final Context context) {
+        return getPreferences(context).getLong(PREF_KEY_LAST_TIME_SHOWN, 0L);
     }
 
     /**
@@ -271,7 +272,7 @@ final class PreferenceHelper {
      */
     static void clearRemindButtonClick(final Context context) {
         getPreferencesEditor(context)
-                .putLong(PREF_KEY_REMIND_INTERVAL, 0L)
+                .putLong(PREF_KEY_LAST_TIME_SHOWN, 0L)
                 .putInt(PREF_KEY_REMIND_LAUNCHES_NUMBER, 0)
                 .apply();
     }
@@ -294,5 +295,17 @@ final class PreferenceHelper {
 
     static String getVersionName(final Context context) {
         return getPreferences(context).getString(PREF_KEY_VERSION_NAME, EMPTY_STRING);
+    }
+
+    static void dialogShown(final Context context) {
+        if (getDialogFirstLaunchTime(context) == 0L) {
+            setDialogFirstLaunchTime(context);
+        }
+        increment365DayPeriodDialogLaunchTimes(context);
+    }
+
+    static void setReminderToShowAgain(final Context context) {
+        setLastTimeShown(context);
+        setRemindLaunchesNumber(context);
     }
 }

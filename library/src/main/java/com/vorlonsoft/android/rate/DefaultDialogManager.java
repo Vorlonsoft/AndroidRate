@@ -6,6 +6,19 @@
 
 package com.vorlonsoft.android.rate;
 
+import static android.content.DialogInterface.BUTTON_NEGATIVE;
+import static android.content.DialogInterface.BUTTON_NEUTRAL;
+import static android.content.DialogInterface.BUTTON_POSITIVE;
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.HONEYCOMB;
+import static android.os.Build.VERSION_CODES.LOLLIPOP;
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+import static android.widget.LinearLayout.VERTICAL;
+import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
+import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
+import static com.vorlonsoft.android.rate.PreferenceHelper.dialogShown;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -20,25 +33,10 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import static android.content.DialogInterface.BUTTON_NEGATIVE;
-import static android.content.DialogInterface.BUTTON_NEUTRAL;
-import static android.content.DialogInterface.BUTTON_POSITIVE;
-import static android.os.Build.VERSION.SDK_INT;
-import static android.os.Build.VERSION_CODES.HONEYCOMB;
-import static android.os.Build.VERSION_CODES.LOLLIPOP;
-import static android.view.View.GONE;
-import static android.view.View.VISIBLE;
-import static android.widget.LinearLayout.VERTICAL;
-import static com.vorlonsoft.android.rate.Constants.Utils.TAG;
-import static com.vorlonsoft.android.rate.DialogType.CLASSIC;
-import static com.vorlonsoft.android.rate.PreferenceHelper.getDialogFirstLaunchTime;
-import static com.vorlonsoft.android.rate.PreferenceHelper.increment365DayPeriodDialogLaunchTimes;
-import static com.vorlonsoft.android.rate.PreferenceHelper.setDialogFirstLaunchTime;
+import java.lang.ref.WeakReference;
 
 /**
  * <p>DefaultDialogManager Class - default dialog manager class implements {@link DialogManager}
@@ -83,10 +81,7 @@ public class DefaultDialogManager implements DialogManager {
                     }
                 }
             } else {
-                if (getDialogFirstLaunchTime(context) == 0L) {
-                    setDialogFirstLaunchTime(context);
-                }
-                increment365DayPeriodDialogLaunchTimes(context);
+                dialogShown(context);
             }
             if (((SDK_INT >= LOLLIPOP) || (dialog instanceof androidx.appcompat.app.AlertDialog)) &&
                 ((dialogOptions.getType() == CLASSIC) ||

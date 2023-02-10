@@ -15,12 +15,18 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
 import androidx.annotation.StyleRes
+import com.google.android.play.core.review.ReviewException
+import com.google.android.play.core.review.ReviewInfo
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.vorlonsoft.android.rate.AppInformation.getLongVersionCode
 import com.vorlonsoft.android.rate.AppInformation.getVersionName
 import com.vorlonsoft.android.rate.Constants.Utils.LOG_MESSAGE_PART_1
 import com.vorlonsoft.android.rate.DialogType.AnyDialogType
 import com.vorlonsoft.android.rate.StoreType.*
 import com.vorlonsoft.android.rate.Time.TimeUnits
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.runBlocking
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -62,10 +68,14 @@ class AppRate private constructor(context: Context) {
          * @param activity your activity, use "this" in most cases
          * @return true if the Rate Dialog is shown, false otherwise
          */
-        fun showRateDialogIfMeetsConditions(activity: Activity): Boolean {
+        suspend fun showRateDialogIfMeetsConditions(activity: Activity): Boolean {
             INSTANCE?.let {
                 if (it.isDebug || it.shouldShowRateDialog()) {
-                    it.showRateDialog(activity)
+                    if(it.storeOptions.storeType == StoreType.GOOGLEPLAY && it.useGoogleInAppReview) {
+                        it.launchGoogleInAppReview(activity)
+                    } else {
+                        it.showRateDialog(activity)
+                    }
                     return true
                 }
             }
@@ -87,7 +97,7 @@ class AppRate private constructor(context: Context) {
         fun quickStart(activity: Activity): Boolean =
             with(activity).run {
                 this.monitor()
-                showRateDialogIfMeetsConditions(activity)
+                runBlocking { showRateDialogIfMeetsConditions(activity) }
             }
     }
 
@@ -97,6 +107,11 @@ class AppRate private constructor(context: Context) {
      * The context of the single, global Application object of the current process.
      * */
     private val context: Context
+
+    init {
+        this.context = context.applicationContext
+    }
+
     private val dialogOptions = DialogOptions()
     private val storeOptions = StoreOptions()
 
@@ -111,6 +126,9 @@ class AppRate private constructor(context: Context) {
 
     private var isVersionCodeCheck = false
     private var isVersionNameCheck = false
+    private var useGoogleInAppReview = false
+    private var deferredReviewInfo: Deferred<ReviewInfo?>? = null
+    private val reviewManager by lazy { ReviewManagerFactory.create(this@AppRate.context) }
     private var installDate = Time.DAY * 10L
     private var appLaunchTimes = 10.toByte()
     private var remindInterval = Time.DAY
@@ -120,9 +138,6 @@ class AppRate private constructor(context: Context) {
     /** Short.MAX_VALUE means unlimited occurrences of the display of the dialog within a 365-day period  */
     private var dialogLaunchTimes = Short.MAX_VALUE
 
-    init {
-        this.context = context.applicationContext
-    }
 
     /**
      * Weak reference to the dialog object.
@@ -234,7 +249,7 @@ class AppRate private constructor(context: Context) {
      * @param timeUnit one of the values defined by [Time.TimeUnits]
      * @param timeUnitsNumber time units number
      * @return the [AppRate] singleton object
-     * @see .setRemindInterval
+     * @see .setLastTimeShown
      * @see Time.TimeUnits
      */
     fun setRemindTimeToWait(@TimeUnits timeUnit: Long, timeUnitsNumber: Short): AppRate = apply {
@@ -381,26 +396,24 @@ class AppRate private constructor(context: Context) {
      * @return the [AppRate] singleton object
      */
     fun clearAgreeShowDialog(): AppRate = apply {
-        setAgreeShowDialog(true)
+        setAgreedOrDeclinedDialog(false)
     }
 
     /**
-     *
-     * Returns agree to show Rate Dialog flag.
-     *
-     * @return agree to show Rate Dialog flag value
+     * @return true if the rating dialog has been agreed to or declined.
      */
-    fun getAgreeShowDialog(): Boolean = PreferenceHelper.getIsAgreeShowDialog(context)
+    fun getAgreedOrDeclinedDialog(): Boolean = PreferenceHelper.getAgreedOrDeclined(context)
 
     /**
      *
-     * Sets agree to show Rate Dialog flag.
+     * Sets if the user has agreed or declined the dialog.
+     * If false, the user hasn't done either.
      *
-     * @param isAgree agree to show Rate Dialog flag
+     * @param agreedOrDeclined agree to show Rate Dialog flag
      * @return the [AppRate] singleton object
      */
-    fun setAgreeShowDialog(isAgree: Boolean): AppRate = apply {
-        PreferenceHelper.setIsAgreeShowDialog(context, isAgree)
+    fun setAgreedOrDeclinedDialog(agreedOrDeclined: Boolean): AppRate = apply {
+        PreferenceHelper.setAgreedOrDeclined(context, agreedOrDeclined)
     }
 
     fun setView(view: View?): AppRate = apply {
@@ -591,9 +604,8 @@ class AppRate private constructor(context: Context) {
      * @param cancelable default is false
      * @return the [AppRate] singleton object
      */
-    fun setCancelable(cancelable: Boolean): AppRate {
+    fun setCancelable(cancelable: Boolean): AppRate = apply {
         dialogOptions.cancelable = cancelable
-        return this
     }
 
     /**
@@ -603,9 +615,8 @@ class AppRate private constructor(context: Context) {
      * @param dialogType one of the values defined by [DialogType.AnyDialogType]
      * @return the [AppRate] singleton object
      */
-    fun setDialogType(@AnyDialogType dialogType: Int): AppRate {
+    fun setDialogType(@AnyDialogType dialogType: Int): AppRate = apply {
         dialogOptions.type = dialogType
-        return this
     }
 
     /**
@@ -726,6 +737,17 @@ class AppRate private constructor(context: Context) {
     @AnyStoreType
     fun getStoreType(): Int = storeOptions.storeType
 
+    /**
+     * When using [StoreType.GOOGLEPLAY], call this to trigger the in app review flow of
+     * the google play store as soon as you request to show the rating dialog.
+     */
+    fun useGoogleInAppReview() = apply {
+        useGoogleInAppReview = true
+    }
+
+    private fun isGoogleInAppReview() =
+        useGoogleInAppReview && storeOptions.storeType == StoreType.GOOGLEPLAY
+
     fun incrementEventCount(eventName: String?): AppRate {
         return setEventCountValue(
             eventName,
@@ -810,16 +832,22 @@ class AppRate private constructor(context: Context) {
             )
             if (getLongVersionCode(context) != PreferenceHelper.getVersionCode(context)) {
                 if (isVersionCodeCheck) {
-                    setAgreeShowDialog(true)
+                    setAgreedOrDeclinedDialog(false)
                 }
                 PreferenceHelper.setVersionCode(context)
             }
             if (getVersionName(context) != PreferenceHelper.getVersionName(context)) {
                 if (isVersionNameCheck) {
-                    setAgreeShowDialog(true)
+                    setAgreedOrDeclinedDialog(false)
                 }
                 PreferenceHelper.setVersionName(context)
             }
+        }
+
+        if(isGoogleInAppReview() && (shouldShowRateDialog() || isDebug)) {
+            // pre-caching ReviewInfo
+            Log.d(TAG, "Google in-app Review: Pre-caching ReviewInfo object")
+            deferredReviewInfo = createReviewInfoAsync()
         }
     }
 
@@ -944,7 +972,7 @@ class AppRate private constructor(context: Context) {
      * @return true if the conditions to show the Rate Dialog meets, false otherwise
      */
     fun shouldShowRateDialog(): Boolean {
-        return getAgreeShowDialog() &&
+        return !getAgreedOrDeclinedDialog() &&
                 isOverLaunchTimes() &&
                 isSelectedAppLaunch() &&
                 isOverInstallDate() &&
@@ -970,8 +998,8 @@ class AppRate private constructor(context: Context) {
     )
 
     private fun isOverRemindDate(): Boolean = remindInterval == 0L ||
-            PreferenceHelper.getRemindInterval(context) == 0L ||
-            isOverDate(PreferenceHelper.getRemindInterval(context), remindInterval)
+            PreferenceHelper.getLastTimeShown(context) == 0L ||
+            isOverDate(PreferenceHelper.getLastTimeShown(context), remindInterval)
 
     private fun isOverRemindLaunchesNumber(): Boolean = remindLaunchesNumber.toInt() == 0 ||
             PreferenceHelper.getRemindLaunchesNumber(context).toInt() == 0 ||
@@ -1011,5 +1039,59 @@ class AppRate private constructor(context: Context) {
      */
     fun setDebug(isDebug: Boolean): AppRate = apply {
         this.isDebug = isDebug
+    }
+
+    /**
+     * Used to pre-cache the ReviewInfo object, needed for launching the google in app review flow.
+     * Call this, as soon as it is clear, that the rating dialog should be shown.
+     */
+    private fun createReviewInfoAsync(): Deferred<ReviewInfo?> {
+        Log.d(TAG, "Google in-app Review: Getting ReviewInfo")
+
+        // starts async task, shouldn't add much runtime
+        val request = reviewManager.requestReviewFlow()
+
+        val deferred = CompletableDeferred<ReviewInfo?>()
+        request.addOnCompleteListener { task ->
+            val reviewResult = if (task.isSuccessful) {
+                Log.d(TAG, "Google in-app Review: ReviewInfo was retrieved")
+                task.result
+            } else {
+                val errorCode = (task.exception as? ReviewException)?.errorCode ?: 9999
+                Log.d(TAG, "Google in-app Review: ReviewInfo couldn't be retrieved.")
+                Log.d(TAG,"\t\tError Code: $errorCode (9999 means the error code couldn't be determined).")
+                Log.d(
+                    TAG,
+                    "\t\tVisit https://developers.google.com/android/reference/com/google/android/gms/common/api/CommonStatusCodes " +
+                        "for more details."
+                )
+                null
+            }
+
+            deferred.complete(reviewResult)
+        }
+        return deferred
+    }
+
+    private suspend fun launchGoogleInAppReview(activity: Activity) {
+        Log.d(TAG, "Google in-app review: Accessing ReviewInfo")
+        val reviewInfo = (deferredReviewInfo ?: createReviewInfoAsync()).await() ?: run {
+            deferredReviewInfo = null
+            Log.d(TAG, "Google in-app review: Failed to get ReviewInfo, retrying next launch")
+            return@launchGoogleInAppReview
+        }
+
+        Log.d(TAG, "Google in-app review: Launching flow")
+        val flow = reviewManager.launchReviewFlow(activity, reviewInfo)
+        flow.addOnCompleteListener {
+            // in app review flow finished, it is unknown whether a review was given or even
+            // if the review request was shown
+            Log.d(TAG, "Google in-app review: flow finished")
+            deferredReviewInfo = null
+            // updating launch times of dialog
+            PreferenceHelper.dialogShown(context)
+            // we don't know what the user did, always set remind values for next dialog launch
+            PreferenceHelper.setReminderToShowAgain(context)
+        }
     }
 }

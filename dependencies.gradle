@@ -8,17 +8,24 @@ ext {
     buildToolsVersion = "31.0.0"
 
     androidx = [
+            annotation : '1.3.0',
             appcompat : "1.4.2",
             constraintlayout : '2.1.4',
+            lifecycle : "2.5.1"
+    ]
+
+    google = [
+            review: "2.0.1"
     ]
 
     androidxTest = [
-            runner : "1.4.0"
+            runner : "1.5.2"
     ]
 
     ktx = [
             // TODO: 1.9.0 Requires SDK 33
-            core : '1.8.0'
+//            core : '1.8.0',
+            coroutines : '1.6.4'
     ]
 
     squareup = [
