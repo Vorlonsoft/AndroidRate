@@ -16,7 +16,7 @@ import androidx.annotation.IntDef
  *
  * @constructor Don't create an instance of this class. Use its members directly.
  * @since       1.0.0
- * @version     1.2.1
+ * @version     2.0.0
  * @author      Alexander Savin
  * @author      Shintaro Katafuchi
  */
@@ -27,7 +27,7 @@ open class StoreType {
      * [GOOGLEPLAY], [MI], [SAMSUNG], [SLIDEME], [TENCENT], [YANDEX].
      *
      * @since       1.1.6
-     * @version     1.2.1
+     * @version     2.0.0
      * @author      Alexander Savin
      */
     @MustBeDocumented
@@ -40,7 +40,7 @@ open class StoreType {
      * that its value should be one of the following constants: [APPLE], [BLACKBERRY].
      *
      * @since       1.1.6
-     * @version     1.2.1
+     * @version     2.0.0
      * @author      Alexander Savin
      */
     @MustBeDocumented
@@ -55,7 +55,7 @@ open class StoreType {
      * [TENCENT], [YANDEX].
      *
      * @since       1.1.6
-     * @version     1.2.1
+     * @version     2.0.0
      * @author      Alexander Savin
      */
     @MustBeDocumented

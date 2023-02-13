@@ -26,8 +26,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = javaVersion
-        freeCompilerArgs += '-Xjvm-default=all'
-        freeCompilerArgs += '-Xopt-in=kotlin.RequiresOptIn'
     }
     buildTypes {
         release {

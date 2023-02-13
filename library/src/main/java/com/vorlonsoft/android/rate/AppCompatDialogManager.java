@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
  * singleton implementation inside library, not outside (protected, not private constructor).</p>
  *
  * @since    1.2.1
- * @version  1.2.1
+ * @version  2.0.0
  * @author   Alexander Savin
  * @see AppCompatDialogManager.Factory
  * @see DefaultDialogManager
@@ -132,7 +132,7 @@ public class AppCompatDialogManager extends DefaultDialogManager implements Dial
      * custom dialog (from v7 AppCompat library).</p>
      *
      * @since    1.2.1
-     * @version  1.2.1
+     * @version  2.0.0
      * @author   Alexander Savin
      * @see DialogManager.Factory
      */

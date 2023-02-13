@@ -34,20 +34,19 @@ import java.util.*
  *
  * AppRate Class - main class of the AndroidRate library, an thread-safe and fast singleton
  * implementation.
+ * Improved and converted to kotlin on 13.02.2023.
  *
- * @since    0.0.4
- * @version  1.2.1
- * @author   Alexander Savin
- * @author   Shintaro Katafuchi
+ * @since   0.0.4
+ * @version 2.0.0
+ * @author  Dennis Wagner
+ * @author  Alexander Savin
+ * @author  Shintaro Katafuchi
  */
 class AppRate private constructor(context: Context) {
 
     companion object {
         private val TAG = AppRate::class.java.simpleName
 
-        /**
-         * The [AppRate] singleton object.
-         * */
         @SuppressLint("StaticFieldLeak")
         @Volatile
         private var INSTANCE: AppRate? = null

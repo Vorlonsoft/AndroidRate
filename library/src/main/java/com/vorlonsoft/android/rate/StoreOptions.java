@@ -20,7 +20,7 @@ import static com.vorlonsoft.android.rate.StoreType.OTHER;
  * <p>StoreOptions Class - store options class of the AndroidRate library.</p>
  *
  * @since    1.1.7
- * @version  1.2.1
+ * @version  2.0.0
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

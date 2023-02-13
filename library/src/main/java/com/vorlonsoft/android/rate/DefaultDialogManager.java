@@ -47,7 +47,7 @@ import java.lang.ref.WeakReference;
  * singleton implementation inside library, not outside (protected, not private constructor).</p>
  *
  * @since    1.0.2
- * @version  1.2.1
+ * @version  2.0.0
  * @author   Alexander Savin
  * @author   Antoine Vianey
  * @see DefaultDialogManager.Factory
@@ -433,7 +433,7 @@ public class DefaultDialogManager implements DialogManager {
      * custom dialog (from v7 AppCompat library etc.).</p>
      *
      * @since    1.0.2
-     * @version  1.2.1
+     * @version  2.0.0
      * @author   Alexander Savin
      * @author   Antoine Vianey
      * @see DialogManager.Factory

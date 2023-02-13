@@ -22,7 +22,7 @@ import com.vorlonsoft.android.rate.Constants.Utils.EMPTY_STRING_ARRAY
  * Contains [getDialogBuilder], [getAppCompatDialogBuilder], [isPackagesExists] functions.
  *
  * @since    0.5.0
- * @version  1.2.1
+ * @version  2.0.0
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

@@ -17,7 +17,7 @@ import android.content.Context
  * library, etc.).
  *
  * @since    1.0.2
- * @version  1.2.1
+ * @version  2.0.0
  * @author   Alexander Savin
  * @author   Antoine Vianey
  * @see DialogManager.Factory
@@ -39,7 +39,7 @@ interface DialogManager {
      * library, etc.).
      *
      * @since    1.0.2
-     * @version  1.2.1
+     * @version  2.0.0
      * @author   Alexander Savin
      * @author   Antoine Vianey
      * @see DialogManager

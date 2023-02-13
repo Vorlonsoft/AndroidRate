@@ -22,7 +22,7 @@ import com.vorlonsoft.android.rate.Constants.Utils.TAG
  * [getPackageName], [getVersionCode], [getVersionCodeMajor], [getVersionName] functions.
  *
  * @since    1.2.1
- * @version  1.2.1
+ * @version  2.0.0
  * @author   Alexander Savin
  */
 @Suppress("KDocUnresolvedReference")

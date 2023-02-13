@@ -19,7 +19,7 @@ import org.junit.Test
  *
  * @constructor Empty constructor of unit test for [com.vorlonsoft.android.rate.UriHelper] object.
  * @since    0.1.3
- * @version  1.2.1
+ * @version  2.0.0
  * @author   Alexander Savin
  * @author   Shintaro Katafuchi
  */

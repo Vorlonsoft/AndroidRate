@@ -12,7 +12,7 @@ package com.vorlonsoft.android.rate
  * Contains constants.
  *
  * @since       1.1.8
- * @version     1.2.1
+ * @version     2.0.0
  * @author      Alexander Savin
  */
 internal object Constants {
@@ -22,7 +22,7 @@ internal object Constants {
      * Contains date constants.
      *
      * @since       1.1.8
-     * @version     1.2.1
+     * @version     2.0.0
      * @author      Alexander Savin
      */
     internal object Date {
@@ -36,7 +36,7 @@ internal object Constants {
      * Contains utils constants.
      *
      * @since       1.1.8
-     * @version     1.2.1
+     * @version     2.0.0
      * @author      Alexander Savin
      */
     internal object Utils {

@@ -15,7 +15,7 @@ import androidx.annotation.IntDef
  *
  * @constructor Don't create an instance of this class. Use its members directly.
  * @since       1.2.1
- * @version     1.2.1
+ * @version     2.0.0
  * @author      Alexander Savin
  */
 open class DialogType {
@@ -24,7 +24,7 @@ open class DialogType {
      * that its value should be one of the following constants: [APPLE], [CLASSIC], [MODERN].
      *
      * @since       1.2.1
-     * @version     1.2.1
+     * @version     2.0.0
      * @author      Alexander Savin
      */
     @MustBeDocumented
